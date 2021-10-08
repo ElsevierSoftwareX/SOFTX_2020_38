@@ -48,6 +48,8 @@ How to run.
 
 ## How to test best model
 ```
+In the config file update the value of the variable useTestSet = 1
+
 How to run.
 
 ./GsgpCuda.x -test_file test.txt -trace_file trace2021-10-08.11:36:25.csv
