@@ -4,7 +4,7 @@ This  is a C/C++/CUDA implementation of a geometric semantic genetic programming
 ```
 ***
 ## Parameters:  
-```
+
 Modify the parameters accordingly to adjust to the desired evolutionary conditions
 
 | Name     								| Values   |
@@ -26,7 +26,7 @@ Modify the parameters accordingly to adjust to the desired evolutionary conditio
 |16.  trainFile                         | train_10107_
 |17.  testFile                          | test_10107_
 |18.  useTestSet                        | 0
-```
+
 ## Data Description:  
 It is important that the problem data are not separated by ",". Please separate your data by a blank space " ".
 
