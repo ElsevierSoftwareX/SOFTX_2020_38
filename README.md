@@ -58,6 +58,7 @@ How to run.
 ***
 
 ## How to run unit tests for the main GsgpCUDA kernels
+```
 How to compile for kernel unit tests that initialize the population.
 
  nvcc -std=c++11 -O0 testInitialPopulation.cu -o testInitialPopulation.x
@@ -81,6 +82,8 @@ How to compile for kernel unit tests that executes the semantic geometric mutati
 How to run.
 
 ./omsTest.x
-
+```
 ## Documentation:
+```
 The documentation of the library is a Doxygen documentation. The implementation has been done in order to use the library after a very quick reading of the documentation.
+```
