@@ -14,15 +14,15 @@ Modify the parameters accordingly to adjust to the desired evolutionary conditio
 |6.  Number of fitness features (train)	| 8
 |7.  Number of fitness cases (test)		| 309
 |8.  Number of fitness features (test)	| 8
-|11. Maximun Random Constant			| 10
-|12  getRowVarFromFile                  |0
-|13  useMultipleTrainFiles              | 1
-|14  logPath                            | log/
-|15  dataPath                           | dataTrain/
-|16  dataPathTest                       | dataTest/
-|17  trainFile                          | train_10107_
-|18  testFile                           | test_10107_
-|19  useTestSet                         | 1
+|10. Maximun Random Constant			| 10
+|11.  getRowVarFromFile                 |0
+|12.  useMultipleTrainFiles             | 1
+|13.  logPath                           | log/
+|14.  dataPath                          | dataTrain/
+|15.  dataPathTest                      | dataTest/
+|16.  trainFile                         | train_10107_
+|17.  testFile                          | test_10107_
+|18.  useTestSet                        | 0
 
 ## Data Description:  
 It is important that the problem data are not separated by ",". Please separate your data by a blank space " ".
