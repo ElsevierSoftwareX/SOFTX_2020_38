@@ -1,92 +1,141 @@
-# GsgpCuda
-
+# Geometric Semantic Genetic Programming into GPU
 This  is a C/C++/CUDA implementation of a geometric semantic genetic programming algorithm.
+***
+## Software code languajes, tools, and services used
+```
+C/C++/CUDA,CUBLAS
+```
+## Compilation requirements, operating enviroments & dependencies 
+```
+Toolkit CUDA v10.1 && v9.2, GCC v7.4.0, CUBLAS v2.0, Linux Headers, unix-like systems, Ubuntu Linux18.04
 
+How to compile.
 
-## Getting started
+nvcc -std=c++11 -O0 GsgpCuda.cu -o GsgpCuda.x  -lcublas
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+How to run.
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://gitlab.com/-/experiment/new_project_readme_content:5a602419c9d8ffcafce093512f51cfef?https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://gitlab.com/-/experiment/new_project_readme_content:5a602419c9d8ffcafce093512f51cfef?https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://gitlab.com/-/experiment/new_project_readme_content:5a602419c9d8ffcafce093512f51cfef?https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+./GsgpCuda.x
 
 ```
-cd existing_repo
-git remote add origin https://gitlab.com/Jmmc9122/gsgpcuda.git
-git branch -M main
-git push -uf origin main
+***
+## Parameters:  
+Modify the parameters accordingly to adjust to the desired evolutionary conditions
+
+| Name     								| Values   |
+| -------- 								| -------- |
+|1.  Number of runs						| 30
+|2.  Number of generations				| 1024
+|3.  Population Size					| 1024
+|4.  Maximun tree Depth					| 10
+|5.  Number of fitness cases (train)	| 720
+|6.  Number of fitness features (train)	| 8
+|7.  Number of fitness cases (test)		| 309
+|8.  Number of fitness features (test)	| 8
+|9.  -train_file [do not modify]		| train_file.txt|
+|10. -test_file [do not modify]			| test_file.txt|
+|11.  Maximun Random Constant			| 10
+
+## Data Description:  
+It is important that the problem data are not separated by ",". Please separate your data by a blank space " ".
+
+## How to test best model
 ```
+How to run.
 
-## Integrate with your tools
+./GsgpCuda.x -test_file test.txt -trace_file trace2021-10-08.11:36:25.csv
 
-- [ ] [Set up project integrations](https://gitlab.com/-/experiment/new_project_readme_content:5a602419c9d8ffcafce093512f51cfef?https://docs.gitlab.com/ee/user/project/integrations/)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://gitlab.com/-/experiment/new_project_readme_content:5a602419c9d8ffcafce093512f51cfef?https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://gitlab.com/-/experiment/new_project_readme_content:5a602419c9d8ffcafce093512f51cfef?https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://gitlab.com/-/experiment/new_project_readme_content:5a602419c9d8ffcafce093512f51cfef?https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Automatically merge when pipeline succeeds](https://gitlab.com/-/experiment/new_project_readme_content:5a602419c9d8ffcafce093512f51cfef?https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://gitlab.com/-/experiment/new_project_readme_content:5a602419c9d8ffcafce093512f51cfef?https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://gitlab.com/-/experiment/new_project_readme_content:5a602419c9d8ffcafce093512f51cfef?https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://gitlab.com/-/experiment/new_project_readme_content:5a602419c9d8ffcafce093512f51cfef?https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://gitlab.com/-/experiment/new_project_readme_content:5a602419c9d8ffcafce093512f51cfef?https://docs.gitlab.com/ee/user/clusters/agent/)
-
+```
 ***
 
-# Editing this README
+## How to run unit tests for the main GsgpCUDA kernels
+How to compile for kernel unit tests that initialize the population.
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://gitlab.com/-/experiment/new_project_readme_content:5a602419c9d8ffcafce093512f51cfef?https://www.makeareadme.com/) for this template.
+ nvcc -std=c++11 -O0 testInitialPopulation.cu -o testInitialPopulation.x
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+How to run.
 
-## Name
-Choose a self-explaining name for your project.
+./testInitialPopulation.x
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+How to compile for kernel unit tests that calculate the semantics.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+ nvcc -std=c++11 -O0 testSemantic.cu -o testSemantic.x 
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+How to run.
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+./testSemantic.x 
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+How to compile for kernel unit tests that executes the semantic geometric mutation operator.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+ nvcc -std=c++11 -O0 omsTest.cu -o omsTest.x
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+How to run.
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+./omsTest.x
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+## Documentation:
+The documentation of the library is a Doxygen documentation. The implementation has been done in order to use the library after a very quick reading of the documentation.# Geometric Semantic Genetic Programming into GPU
+This  is a C/C++/CUDA implementation of a geometric semantic genetic programming algorithm.
+***
+## Software code languajes, tools, and services used
+```
+C/C++/CUDA,CUBLAS
+```
+## Compilation requirements, operating enviroments & dependencies 
+```
+Toolkit CUDA v10.1 && v9.2, GCC v7.4.0, CUBLAS v2.0, Linux Headers, unix-like systems, Ubuntu Linux18.04
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+How to compile.
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+nvcc -std=c++11 -O0 GsgpCuda.cu -o GsgpCuda.x  -lcublas
 
-## License
-For open source projects, say how it is licensed.
+How to run.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+./GsgpCuda.x -train_file train_10107_1.txt -test_file test_10107_1.txt
 
+```
+***
+## Parameters:  
+Modify the parameters accordingly to adjust to the desired evolutionary conditions
+
+| Name                                  | Values   |
+| --------                              | -------- |
+|1.  Number of runs                     | 30
+|2.  Number of generations              | 1024
+|3.  Population Size                    | 1024
+|4.  Maximun tree Depth                 | 10
+|5.  Number of fitness cases (train)    | 720
+|6.  Number of fitness features (train) | 8
+|7.  Number of fitness cases (test)     | 309
+|8.  Number of fitness features (test)  | 8
+|9.  -train_file [do not modify]        | train_file.txt|
+|10. -test_file [do not modify]         | test_file.txt|
+|11.  Maximun Random Constant           | 10
+
+## How to run unit tests for the main GsgpCUDA kernels
+How to compile for kernel unit tests that initialize the population.
+
+ nvcc -std=c++11 -O0 testInitialPopulation.cu -o testInitialPopulation.x
+
+How to run.
+
+./testInitialPopulation.x
+
+How to compile for kernel unit tests that calculate the semantics.
+
+ nvcc -std=c++11 -O0 testSemantic.cu -o testSemantic.x 
+
+How to run.
+
+./testSemantic.x 
+
+How to compile for kernel unit tests that executes the semantic geometric mutation operator.
+
+ nvcc -std=c++11 -O0 omsTest.cu -o omsTest.x
+
+How to run.
+
+./omsTest.x
+
+## Documentation:
+The documentation of the library is a Doxygen documentation. The implementation has been done in order to use the library after a very quick reading of the documentation.
