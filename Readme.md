@@ -25,7 +25,6 @@ Modify the parameters accordingly to adjust to the desired evolutionary conditio
 |15. Data Path Test                     | dataTest/
 |16. Train File                         | train_10107_
 |17. Test File                          | test_10107_
-|18. Use Test Set                       | 0
 
 ## Data Description:  
 It is important that the problem data are not separated by ",". Please separate your data by a blank space " ".
