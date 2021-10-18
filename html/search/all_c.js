@@ -1,0 +1,8 @@
+var searchData=
+[
+  ['saveindividuals_65',['saveIndividuals',['../_gsgp_cuda_8cpp.html#a6c5d1be84ec27b9c191cd63a0ecded09',1,'saveIndividuals(std::string path, float *hInitialPopulation, std::string namePopulation, int sizeMaxDepthIndividual, int populationSize):&#160;GsgpCuda.cpp'],['../_gsgp_cuda_8h.html#a4d31979dbc400ebafec99c299db8be47',1,'saveIndividuals(std::string path, float *Individuals, std::string namePopulation, int maxDepth, int sizePopulation):&#160;GsgpCuda.cpp']]],
+  ['savetrace_66',['saveTrace',['../_gsgp_cuda_8cpp.html#ac8c2d9889099ad026ba55d1679a45714',1,'saveTrace(std::string path, entry *structSurvivor, int generation, int populationSize):&#160;GsgpCuda.cpp'],['../_gsgp_cuda_8h.html#a5c9d4e48e5ef83d4c60b1f108641260c',1,'saveTrace(std::string path, entry *x, int generation, int populationSize):&#160;GsgpCuda.cpp']]],
+  ['savetracecomplete_67',['saveTraceComplete',['../_gsgp_cuda_8cpp.html#ad48e430ba97b355354b25cc3b8c3adfe',1,'saveTraceComplete(std::string path, entry *structSurvivor, int generation, int populationSize):&#160;GsgpCuda.cpp'],['../_gsgp_cuda_8h.html#af1f98b169175a64c96985976b8a6b1cb',1,'saveTraceComplete(std::string path, entry *structSurvivor, int generation, int populationSize):&#160;GsgpCuda.cpp']]],
+  ['secondparent_68',['secondParent',['../structentry__.html#a4fec71a25ad72de29f2f028231c1be69',1,'entry_']]],
+  ['sigmoid_69',['sigmoid',['../_gsgp_cuda_8cpp.html#a86a361f9f62d54f600cebb5612b660fc',1,'sigmoid(float n):&#160;GsgpCuda.cpp'],['../_gsgp_cuda_8h.html#aac4615221ef46543cb25d4807e0b42d2',1,'sigmoid(float n):&#160;GsgpCuda.cpp']]]
+];
