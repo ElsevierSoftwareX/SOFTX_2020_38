@@ -125,7 +125,6 @@ typedef struct cfg_{
   char dataPathTest[100];
   char trainFile[100];
   char testFile[100];
-  int useTestSet;
 }cfg;
 
 /*!< struct variable containing the values of the parameters specified in the configuration.ini file */

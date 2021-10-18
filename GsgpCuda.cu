@@ -85,8 +85,8 @@ int main(int argc, char **argv){
 
     char nameRandomTrees[50] = "randomTrees"; /* name of file for save the random trees */
     
-    if (config.useTestSet==1) {
-                
+    if (argc>1) {
+    
         char path_test[50]=""; /* name of the file with test instances*/
         for (int i=1; i<argc-1; i++){
             if(strncmp(argv[i],"-test_file",10) == 0) {
@@ -100,6 +100,15 @@ int main(int argc, char **argv){
             }      
         }
 
+        char pathOutFile[50]=""; /* name of the file trace of best model*/
+        for (int i=1; i<argc-1; i++){
+            if(strncmp(argv[i],"-output_file",10) == 0) {
+                strcat(pathOutFile,argv[++i]);
+            }      
+        }
+
+        std::string outFile (pathOutFile);
+        
         int sizeDataTest = sizeof(float)*(config.nrowTest*config.nvarTest); /*!< variable that stores the size in bytes the size of the test data*/
         int sizeDataTestTarget = sizeof(float)*(config.nrowTest); /* variable that stores the size in bytes the size of the target data */
         float *unssenDataTest, *unssenDataTestTarget; /* This vector pointers to store the individuals of the test data and target data */
@@ -119,7 +128,7 @@ int main(int argc, char **argv){
         readPopulation(initPopulation, randomTress, config.populationSize, sizeMaxDepthIndividual, logPath, namePopulation, nameRandomTrees);
         
         /*Create file for saved results of best model with the unseen data*/
-        std::ofstream OUT("evaluation_on_unseen_data.txt",ios::out);
+        std::ofstream OUT(outFile,ios::out);
         
         //function to evaluate new data with the best model
         evaluate_unseen_new_data(traPath, config.maxNumberGenerations, sizeMaxDepthIndividual, initPopulation, randomTress, OUT, config.logPath, unssenDataTest, config.nrowTest, config.populationSize, config.nvarTest);

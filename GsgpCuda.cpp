@@ -588,10 +588,7 @@ __host__ void readConfigFile(cfg *config){
 
     if (strcmp(str1, "testFile")==0)
     	strcpy(config->testFile, str2);
-
-    if (strcmp(str1, "useTestSet")==0)
-      config->useTestSet=atoi(str2);
-    
+          
     k++;
   } 
     f.close();
