@@ -46,43 +46,43 @@ int main(int argc, char **argv){
         }      
     }
 
-    std::string outputNameFiles(output_model); /* name of file for save the output files */
+    std::string outputNameFiles(output_model); /* Name of file for save the output files */
 
     printf("\n Starting GsgpCuda \n\n");
     
     readConfigFile(&config); /*!< reading the parameters of the algorithm */
     
-    const int sizeMaxDepthIndividual = (int)exp2(config.maxDepth*1.0) - 1; /*!< variable that stores maximum depth for individuals */
+    const int sizeMaxDepthIndividual = (int)exp2(config.maxDepth*1.0) - 1; /*!< Variable that stores maximum depth for individuals */
     
-    int sizeMemPopulation = sizeof(float) * config.populationSize * sizeMaxDepthIndividual; /*!< variable that stores size in bytes for initial population*/
+    int sizeMemPopulation = sizeof(float) * config.populationSize * sizeMaxDepthIndividual; /*!< Variable that stores size in bytes for initial population*/
     
-    int twoSizeMemPopulation = sizeof(float) * (config.populationSize*2); /*!< variable that stores twice the size in bytes of an initial population to store random numbers*/
+    int twoSizeMemPopulation = sizeof(float) * (config.populationSize*2); /*!< Variable that stores twice the size in bytes of an initial population to store random numbers*/
     
-    int sizeMemIndividuals = sizeof(float) * config.populationSize; /*!< variable that stores size in bytes of the number of individuals in the initial population*/
+    int sizeMemIndividuals = sizeof(float) * config.populationSize; /*!< Variable that stores size in bytes of the number of individuals in the initial population*/
     
-    long int twoSizePopulation = (config.populationSize*2); /*!< variable storing twice the initial population of individuals to generate random positions*/
+    long int twoSizePopulation = (config.populationSize*2); /*!< Variable storing twice the initial population of individuals to generate random positions*/
     
-    long int sizeMemSemanticTrain = sizeof(float)*(config.populationSize*config.nrow); /*!< variable that stores the size in bytes of semantics for the entire population with training data*/
+    long int sizeMemSemanticTrain = sizeof(float)*(config.populationSize*config.nrow); /*!< Variable that stores the size in bytes of semantics for the entire population with training data*/
     
-    long int sizeMemSemanticTest = sizeof(float)*(config.populationSize*config.nrowTest); /*!< variable that stores the size in bytes of semantics for the entire population with test data*/
+    long int sizeMemSemanticTest = sizeof(float)*(config.populationSize*config.nrowTest); /*!< Variable that stores the size in bytes of semantics for the entire population with test data*/
     
-    long int sizeMemDataTrain = sizeof(float)*(config.nrow*config.nvar); /*!< variable that stores the size in bytes the size of the training data*/
+    long int sizeMemDataTrain = sizeof(float)*(config.nrow*config.nvar); /*!< Variable that stores the size in bytes the size of the training data*/
     
-    long int sizeMemDataTest = sizeof(float)*(config.nrowTest*config.nvarTest); /*!< variable that stores the size in bytes the size of the test data*/
+    long int sizeMemDataTest = sizeof(float)*(config.nrowTest*config.nvarTest); /*!< Variable that stores the size in bytes the size of the test data*/
     
-    long int sizeElementsSemanticTrain = (config.populationSize*config.nrow); /*!< variable that stores training data elements*/
+    long int sizeElementsSemanticTrain = (config.populationSize*config.nrow); /*!< Variable that stores training data elements*/
     
-    long int sizeElementsSemanticTest = (config.populationSize*config.nrowTest); /*!< variable that stores test data elements*/
+    long int sizeElementsSemanticTest = (config.populationSize*config.nrowTest); /*!< Variable that stores test data elements*/
     
-    size_t structMemMutation = (sizeof(entry_)*config.populationSize); /*!< variable that stores the size in bytes of the structure to store the mutation record*/
+    size_t structMemMutation = (sizeof(entry_)*config.populationSize); /*!< Variable that stores the size in bytes of the structure to store the mutation record*/
     
-    size_t structMemSurvivor = (sizeof(entry_)*config.maxNumberGenerations); /*!< variable that stores the size in bytes of the structure to store the survival record*/
+    size_t structMemSurvivor = (sizeof(entry_)*config.maxNumberGenerations); /*!< Variable that stores the size in bytes of the structure to store the survival record*/
     
-    long int vectorTracesMem = (sizeof(entry_)*config.maxNumberGenerations*config.populationSize); /*!< variable that stores the size in bytes of the structure to store the survival record*/
+    long int vectorTracesMem = (sizeof(entry_)*config.maxNumberGenerations*config.populationSize); /*!< Variable that stores the size in bytes of the structure to store the survival record*/
 
-    int gridSize,minGridSize,blockSize; /*!< variables that store the execution configuration for a kernel in the GPU*/
+    int gridSize,minGridSize,blockSize; /*!< Variables that store the execution configuration for a kernel in the GPU*/
     
-    int gridSizeTest,minGridSizeTest,blockSizeTest; /*!< variables that store the execution configuration for a kernel in the GPU*/
+    int gridSizeTest,minGridSizeTest,blockSizeTest; /*!< Variables that store the execution configuration for a kernel in the GPU*/
     
     std::string logPath (config.logPath); /* Path of directory for data files and log files generated in execution */
 
@@ -126,8 +126,8 @@ int main(int argc, char **argv){
 
         std::string outFile (pathOutFile);
         
-        int sizeDataTest = sizeof(float)*(config.nrowTest*config.nvarTest); /*!< variable that stores the size in bytes the size of the test data*/
-        int sizeDataTestTarget = sizeof(float)*(config.nrowTest); /*!< variable that stores the size in bytes the size of the target data */
+        int sizeDataTest = sizeof(float)*(config.nrowTest*config.nvarTest); /*!< Variable that stores the size in bytes the size of the test data*/
+        int sizeDataTestTarget = sizeof(float)*(config.nrowTest); /*!< Variable that stores the size in bytes the size of the target data */
         float *unssenDataTest, *unssenDataTestTarget; /*!< This vector pointers to store the individuals of the test data and target data */
         unssenDataTest = (float *)malloc(sizeDataTest); /*!< Reserve memory on host*/
         unssenDataTestTarget = (float *)malloc(sizeDataTestTarget); /*!< Reserve memory on host*/
@@ -163,22 +163,22 @@ int main(int argc, char **argv){
         list_dir(dataPath, config.trainFile, config.useMultipleTrainFiles, files);
         list_dir(dataPathTest, config.testFile, config.useMultipleTrainFiles, filesTest);
  
-        std::string timeExecution1 = "_processing_time"; /*!< variable name structure responsible for indicating the run*/
+        std::string timeExecution1 = "_processing_time"; /*!< Variable name structure responsible for indicating the run*/
  
-        std::string timeExecution2 = ".csv"; /*!< variable name structure responsible for indicating the file extension*/
+        std::string timeExecution2 = ".csv"; /*!< Variable name structure responsible for indicating the file extension*/
  
-        //std::string dateTime =currentDateTime(); /*!< variable name structure responsible for capturing the date and time of the run*/
+        //std::string dateTime =currentDateTime(); /*!< Variable name structure responsible for capturing the date and time of the run*/
  
-        timeExecution1 = logPath + outputNameFiles + timeExecution1 + timeExecution2; /*!< variable that stores file name matching*/
+        timeExecution1 = logPath + outputNameFiles + timeExecution1 + timeExecution2; /*!< Variable that stores file name matching*/
  
         std::ofstream times(timeExecution1,ios::out); /*!< pointer to the timeExecution1 file that contains the time consumed by the different algorithm modules*/
  
-        float executionTime = 0, initialitionTimePopulation = 0, timeComputeSemantics = 0, generationTime = 0; /*!< variables that store the time in milliseconds between the events mark1 and mark2.*/
+        float executionTime = 0, initialitionTimePopulation = 0, timeComputeSemantics = 0, generationTime = 0; /*!< Variables that store the time in milliseconds between the events mark1 and mark2.*/
 
         /*!< algorithm run cycle*/
         for (int runs_ = 0; runs_ < config.numberRuns; runs_++){
 
-            executionTime = 0, initialitionTimePopulation = 0, timeComputeSemantics = 0, generationTime = 0; /*!< variables that store the time in milliseconds between the events mark1 and mark2.*/    
+            executionTime = 0, initialitionTimePopulation = 0, timeComputeSemantics = 0, generationTime = 0; /*!< Variables that store the time in milliseconds between the events mark1 and mark2.*/    
 
             cudaEvent_t startRun, stopRun; /*!< Variable used to create a start mark and a stop mark to create events*/
  
@@ -259,12 +259,12 @@ int main(int argc, char **argv){
             int   *uPushGenes;
             checkCudaErrors(cudaMalloc((void**)&uPushGenes, sizeMemIndividuals));
             checkCudaErrors(cudaMalloc((void**)&uStackInd, sizeMemPopulation));            
-            float *tempSemantic,*tempFitnes,*tempSemanticTest,*tempFitnesTest; /*!< temporal variables to perform the movement of pointers in survival*/
+            float *tempSemantic,*tempFitnes,*tempSemanticTest,*tempFitnesTest; /*!< temporal Variables to perform the movement of pointers in survival*/
 
             readInpuData(pathTrain, pathTest, uDataTrain, uDataTest, uDataTrainTarget, uDataTestTarget, config.nrow, config.nvar, config.nrowTest, config.nvarTest); /*!< load set data train and test*/            
 
             gridSize = (config.populationSize + blockSize - 1) / blockSize; /*!< round up according to array size*/            
-            cudaEvent_t startInitialPop, stopInitialPop; /*!< this section declares and initializes the variables for the events and captures the time elapsed in the initialization of the initial population in the GPU*/
+            cudaEvent_t startInitialPop, stopInitialPop; /*!< this section declares and initializes the Variables for the events and captures the time elapsed in the initialization of the initial population in the GPU*/
             cudaEventCreate(&startInitialPop);
             cudaEventCreate(&stopInitialPop);
             cudaEventRecord(startInitialPop);    
@@ -285,7 +285,7 @@ int main(int argc, char **argv){
             ///*!<return the initial population of the device to the host*/
             cudaMemcpy(hRandomTrees, dRandomTrees,sizeMemPopulation, cudaMemcpyDeviceToHost);    
             saveIndividuals(logPath,hRandomTrees, nameRandomTrees,sizeMaxDepthIndividual,config.populationSize);  
-            cudaEvent_t startComputeSemantics, stopComputeSemantics; /*!< This section declares and initializes the variables for the events and captures the time elapsed in the interpretation of the initial population in the GPU*/
+            cudaEvent_t startComputeSemantics, stopComputeSemantics; /*!< This section declares and initializes the Variables for the events and captures the time elapsed in the interpretation of the initial population in the GPU*/
             cudaEventCreate(&startComputeSemantics);
             cudaEventCreate(&stopComputeSemantics);
             cudaEventRecord(startComputeSemantics);    
