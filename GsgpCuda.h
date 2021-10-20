@@ -123,8 +123,6 @@ typedef struct cfg_{
   char logPath[100];
   char dataPath[100];
   char dataPathTest[100];
-  char trainFile[100];
-  char testFile[100];
 }cfg;
 
 /*!< struct variable containing the values of the parameters specified in the configuration.ini file */

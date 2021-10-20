@@ -20,6 +20,7 @@
 //! \author Jose Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 //! \date   created on 25/01/2020
 #include "GsgpCuda.cpp"
+
 using namespace std;   
 
 /*!
@@ -38,20 +39,41 @@ int main(int argc, char **argv){
     srand(time(NULL)); /*!< Initialization of the seed for the generation of random numbers*/
 
     cudaSetDevice(0); /*!< Select a GPU device*/
- 
+    printf("Valor de argc %i \n", argc);
+    char trainFile[100]; /*!< Name of the train file*/
+    for (int i=1; i<argc-1; i++){
+        if(strncmp(argv[i],"-train_file",10) == 0) {
+            strcat(trainFile,argv[++i]);
+        }      
+    }
+
+    char testFile[100];
+    for (int i=1; i<argc-1; i++){
+        if(strncmp(argv[i],"-test_file",10) == 0) {
+            strcat(testFile,argv[++i]);
+        }      
+    }
+
     char output_model[50]=""; /*!< Name of output files*/
     for (int i=1; i<argc-1; i++){
         if(strncmp(argv[i],"-output_model",10) == 0) {
             strcat(output_model,argv[++i]);
         }      
     }
-
+    std::string mane(trainFile);
+    printf("nombre %s \n", mane.c_str());
     std::string outputNameFiles(output_model); ///*!< Name of file for save the output files*/
 
-    printf("\n Starting GsgpCuda \n\n");
-    
+   printf("\n Starting GsgpCuda \n\n");
+   //
     readConfigFile(&config); /*!< reading the parameters of the algorithm */
-    
+    printf("algo \n");
+    countInputFile("test.txt", config.nrow, config.nvar);
+    printf("algoDos %i \n", config.nrow);
+    countInputFile("test.txt", config.nrowTest, config.nvarTest);
+    printf("algoDos %i \n", config.nrowTest);
+    config.nvar--;
+    config.nvarTest--;
     const int sizeMaxDepthIndividual = (int)exp2(config.maxDepth*1.0) - 1; /*!< Variable that stores maximum depth for individuals */
     
     int sizeMemPopulation = sizeof(float) * config.populationSize * sizeMaxDepthIndividual; /*!< Variable that stores size in bytes for initial population*/
@@ -98,8 +120,8 @@ int main(int argc, char **argv){
 
     nameRandomTrees = outputNameFiles + nameRandomTrees;
     
-    if (argc>3) {
-
+    if (argc>7) {
+        printf("modelo \n");
         char pathTrace[50]=""; /*!< Name of the file trace of best model*/
         for (int i=1; i<argc-1; i++){
             if(strncmp(argv[i],"-model",10) == 0) {
@@ -151,6 +173,7 @@ int main(int argc, char **argv){
         free(initPopulation);
         free(randomTress);
     }else {
+        printf("evolucion \n");
         /* Check if log and data diectories exists */
         checkDirectoryPath(logPath);
         checkDirectoryPath(dataPath);
@@ -158,10 +181,10 @@ int main(int argc, char **argv){
 
         std::vector<string> files = vector<string>(); /**/
         std::vector<string> filesTest = vector<string>(); /**/
-        
+
         /* Get list of data files in data directory */
-        list_dir(dataPath, config.trainFile, config.useMultipleTrainFiles, files);
-        list_dir(dataPathTest, config.testFile, config.useMultipleTrainFiles, filesTest);
+        list_dir(dataPath, trainFile, config.useMultipleTrainFiles, files);
+        list_dir(dataPathTest, testFile, config.useMultipleTrainFiles, filesTest);
  
         std::string timeExecution1 = "_processing_time"; /*!< Variable name structure responsible for indicating the run*/
  

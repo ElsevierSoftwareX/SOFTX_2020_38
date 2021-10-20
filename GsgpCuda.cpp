@@ -20,6 +20,7 @@
 //! \date     created on 25/01/2020
 
 #include "GsgpCuda.h"
+#include <string>
 using namespace std; 
 
 /*!
@@ -493,6 +494,33 @@ __host__ void readInpuData(char *train_file, char *test_file, float *dataTrain, 
   inTest.close();
 }
 
+void countInputFile(std::string fileName, int &rows, int &cols){
+  
+  printf("%s \n", fileName.c_str());
+  std::ifstream f(fileName);
+  
+  string line;
+  std::getline(f, line);
+  cout << line << endl;         //read the first line of your file to string
+  stringstream s;
+  s << line;                   //send the line to the stringstream object...
+
+  int how_many_columns = 0;    
+  double value;
+
+  while(s >> value) how_many_columns++;  //while there's something in the line, increase the number of columns
+
+  cout << how_many_columns;
+  cols = how_many_columns;
+  int how_many_rows =1;
+  
+  while (std::getline(f, line)) how_many_rows++;
+  rows = how_many_rows;
+
+  f.close();
+
+}
+
 /*!
 * \fn        __host__ void readConfigFile(cfg *config)
 * \brief     function that reads the configuration file
@@ -541,8 +569,8 @@ __host__ void readConfigFile(cfg *config){
       }
     }
 
-    if (strcmp(str1, "numberRuns")==0)
-    	config->numberRuns = atoi(str2);
+
+    config->numberRuns = 1;
 
     if (strcmp(str1, "numberGenerations")==0)
     	config->maxNumberGenerations=atoi(str2);
@@ -582,13 +610,7 @@ __host__ void readConfigFile(cfg *config){
 
     if (strcmp(str1, "dataPathTest")==0)
       strcpy(config->dataPathTest, str2);
-
-    if (strcmp(str1, "trainFile")==0)
-    	strcpy(config->trainFile, str2);
-
-    if (strcmp(str1, "testFile")==0)
-    	strcpy(config->testFile, str2);
-          
+                
     k++;
   } 
     f.close();

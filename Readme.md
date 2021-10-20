@@ -43,7 +43,20 @@ nvcc -std=c++11 -O0 GsgpCuda.cu -o GsgpCuda.x  -lcublas
 
 To run gsgpCuda it is necessary to add a name for the output file generation, as shown in the example.
 
-./GsgpCuda.x -output_model XXX
+./GsgpCuda.x -train_data train.txt -test_data test.txt -output_model best_model
+
+train.txt: (que es este archivo)
+test.txt:  (que es este archivo)
+best_model: (Describir estructura de archivos) 
+    best_model.csv: (que es este archivo)
+    best_model_initialPopulation.csv: (que es este archivo)
+    best_model_randomTrees.csv: (que es este archivo)
+    best_model_fitnessTrain.csv: (que es este archivo)
+    best_model_fitnessTest.csv: (que es este archivo)
+    best_model_processing_time.csv: (que es este archivo)
+    
+
+
 
 ```
 ***
