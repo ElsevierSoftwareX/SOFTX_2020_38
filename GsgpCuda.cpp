@@ -650,10 +650,8 @@ static void list_dir(std::string path, std::string nameFile, int useMultipleFile
     if (dir == NULL) {
         return;
     }
-    
     while ((entry = readdir(dir)) != NULL) {
     	std::string cFile(entry->d_name);
-
 		  if (cFile.compare(0, nameFile.length(), nameFile) == 0){
 		  	files.push_back(cFile);
         }
@@ -710,12 +708,11 @@ __host__ void markTracesGeneration(entry *vectorTraces, int populationSize, int 
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cpp  
 */
-__host__ void saveTrace(std::string path, entry *structSurvivor, int generation, int populationSize){
-
-  std::string tmpT  = "trace";
+__host__ void saveTrace(std::string name, std::string path, entry *structSurvivor, int generation, int populationSize){
+  std::string tmpT = name;
   std::string tmpExt = ".csv";
-  std::string tmpTime = currentDateTime();
-  tmpT = path + tmpT + tmpTime +tmpExt;  
+  //std::string tmpTime = currentDateTime();
+  tmpT = path + tmpT  +tmpExt;  
   std::ofstream trace(tmpT,ios::out);
   int r=0;
   for(int i=0; i<generation; i++){
@@ -779,8 +776,8 @@ __host__ void saveTraceComplete(std::string path, entry *structSurvivor, int gen
 
 __host__ void saveIndividuals(std::string path, float *hInitialPopulation, std::string namePopulation ,int sizeMaxDepthIndividual, int populationSize){  
   std::string tmpExt = ".csv";
-  std::string tmpTime = currentDateTime();
-  namePopulation = path + namePopulation + tmpTime +tmpExt;       
+  //std::string tmpTime = currentDateTime();
+  namePopulation = path + namePopulation + tmpExt;       
   std::ofstream outIndividuals(namePopulation,ios::out);
   
   for (int i=0; i< (populationSize); i++){
@@ -849,11 +846,10 @@ __host__ void readInpuTestData( char *test_file, float *dataTest, float *dataTes
 */
 
 __host__ void readPopulation( float *initialPopulation, float *randomTrees, int sizePopulation, int depth, std::string log, std::string name, std::string nameR){
-  std::string tmpTime = currentDateTimeM();
+  //std::string tmpTime = currentDateTimeM();
   char tmPath[50] = "";
   strcpy(tmPath,name.c_str());
-  strcat(tmPath,tmpTime.c_str());
-  
+  //strcat(tmPath,tmpTime.c_str());
   std::vector<string> files = vector<string>();
   std::vector<string>filesRa = vector<string>();
   list_dir(log,tmPath,1,files);
@@ -867,8 +863,8 @@ __host__ void readPopulation( float *initialPopulation, float *randomTrees, int 
   
   char tmRandom[50] = "";
   strcpy(tmRandom,nameR.c_str());
-  strcat(tmRandom,tmpTime.c_str());
-  std::string t (tmRandom);
+  //strcat(tmRandom,tmpTime.c_str());
+  //std::string t (tmRandom);
   list_dir(log,tmRandom,1,filesRa);
   int tamaR = filesRa.size();
   std::string dataFileRan = (filesRa[0]);
@@ -1028,17 +1024,10 @@ __host__ void intreSemanticCPU(float *initiPop, vector<float> &OutSemantic, floa
 */
 
 __host__ void evaluate_unseen_new_data(std::string path, int generations, const int sizeMaxDepthIndividual, float *initialPopulation, float *randomTrees, std::ofstream& OUT, std::string log, float *dataTest ,int nrow, int numIndi, int nvarTest){
-
   std::vector<string>filesRa = vector<string>();
   list_dir(log,path,1,filesRa);
   int tama = filesRa.size();
-  std::string nameFile = "";
-  for (size_t i = 0; i < tama; i++){
-    if(filesRa[i]==path){
-      nameFile = filesRa[i];
-    }
-  }
-  
+  std::string nameFile = filesRa[0];
   char tracePath[50] = "";
   strcat(tracePath,log.c_str());
   strcat(tracePath,nameFile.c_str());
@@ -1056,7 +1045,7 @@ __host__ void evaluate_unseen_new_data(std::string path, int generations, const 
     }
     fstream in(tracePath,ios::in);
     if(!in.is_open()) {
-      cout<<endl<<"ERROR: FILE trace.csv NOT FOUND." << endl;
+      cout<<endl<<"ERROR: FILE MODEL NOT FOUND." << endl;
       exit(-1);
     }else{
       char str[255];
@@ -1130,5 +1119,3 @@ __host__ void evaluate_unseen_new_data(std::string path, int generations, const 
     OUT<<eval_[best]<<endl;
   }
 }
-
-

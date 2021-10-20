@@ -450,7 +450,7 @@ __host__ void saveTraceComplete(std::string path, entry *structSurvivor, int gen
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cpp  
 */
-__host__ void saveTrace(std::string path, entry *structSurvivor, int generation, int populationSize);
+__host__ void saveTrace(std::string name, std::string path, entry *structSurvivor, int generation, int populationSize);
 
 /*!
 * \fn        __host__ void readInpuTestData(char *train_file, char *test_file, float *dataTrain, float *dataTest, float *dataTrainTarget,float *dataTestTarget, int nrow, int nvar, int nrowTest, int nvarTest)

@@ -20,6 +20,7 @@
 //! \author Jose Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 //! \date   created on 25/01/2020
 #include "GsgpCuda.cpp"
+#include <cstdio>
 using namespace std;   
 
 /*!
@@ -38,6 +39,15 @@ int main(int argc, char **argv){
     srand(time(NULL)); /*!< initialization of the seed for the generation of random numbers*/
 
     cudaSetDevice(0); /*!< select a GPU device*/
+ 
+    char output_model[50]=""; /* name of the file with test instances*/
+    for (int i=1; i<argc-1; i++){
+        if(strncmp(argv[i],"-output_model",10) == 0) {
+            strcat(output_model,argv[++i]);
+        }      
+    }
+
+    std::string outputNameFiles(output_model);
 
     printf("\n Starting GsgpCuda \n\n");
     
@@ -81,28 +91,36 @@ int main(int argc, char **argv){
 
     std::string dataPathTest (config.dataPathTest); /* Path of directory for data files for test */
 
-    char namePopulation[50]= "initialPopulation"; /* Name of file for save the initial population  */
+    std::string namePopulation = "_initialPopulation"; /* Name of file for save the initial population  */
 
-    char nameRandomTrees[50] = "randomTrees"; /* name of file for save the random trees */
+    namePopulation = outputNameFiles + namePopulation;
+
+    std::string nameRandomTrees = "_randomTrees"; /* name of file for save the random trees */
+
+    nameRandomTrees = outputNameFiles + nameRandomTrees;
     
-    if (argc>1) {
-    
-        char path_test[50]=""; /* name of the file with test instances*/
-        for (int i=1; i<argc-1; i++){
-            if(strncmp(argv[i],"-test_file",10) == 0) {
-                strcat(path_test,argv[++i]);
-            }      
-        }
+    if (argc>3) {
+
         char pathTrace[50]=""; /* name of the file trace of best model*/
         for (int i=1; i<argc-1; i++){
-            if(strncmp(argv[i],"-trace_file",10) == 0) {
+            if(strncmp(argv[i],"-model",10) == 0) {
                 strcat(pathTrace,argv[++i]);
             }      
         }
+        std::string tmp(pathTrace);
+        namePopulation = tmp + namePopulation;
+        nameRandomTrees = tmp + nameRandomTrees;
+        char path_test[50]=""; /* name of the file with test instances*/
+        for (int i=1; i<argc-1; i++){
+            if(strncmp(argv[i],"-input_data",10) == 0) {
+                strcat(path_test,argv[++i]);
+            }      
+        }
+        
 
         char pathOutFile[50]=""; /* name of the file trace of best model*/
         for (int i=1; i<argc-1; i++){
-            if(strncmp(argv[i],"-output_file",10) == 0) {
+            if(strncmp(argv[i],"-prediction_output",10) == 0) {
                 strcat(pathOutFile,argv[++i]);
             }      
         }
@@ -131,7 +149,7 @@ int main(int argc, char **argv){
         std::ofstream OUT(outFile,ios::out);
         
         //function to evaluate new data with the best model
-        evaluate_unseen_new_data(traPath, config.maxNumberGenerations, sizeMaxDepthIndividual, initPopulation, randomTress, OUT, config.logPath, unssenDataTest, config.nrowTest, config.populationSize, config.nvarTest);
+        evaluate_unseen_new_data(pathTrace, config.maxNumberGenerations, sizeMaxDepthIndividual, initPopulation, randomTress, OUT, config.logPath, unssenDataTest, config.nrowTest, config.populationSize, config.nvarTest);
 	    
         free(unssenDataTest); 
         free(unssenDataTestTarget);
@@ -150,13 +168,13 @@ int main(int argc, char **argv){
         list_dir(dataPath, config.trainFile, config.useMultipleTrainFiles, files);
         list_dir(dataPathTest, config.testFile, config.useMultipleTrainFiles, filesTest);
  
-        std::string timeExecution1 = "run_"; /*!< variable name structure responsible for indicating the run*/
+        std::string timeExecution1 = "_processing_time"; /*!< variable name structure responsible for indicating the run*/
  
         std::string timeExecution2 = ".csv"; /*!< variable name structure responsible for indicating the file extension*/
  
-        std::string dateTime =currentDateTime(); /*!< variable name structure responsible for capturing the date and time of the run*/
+        //std::string dateTime =currentDateTime(); /*!< variable name structure responsible for capturing the date and time of the run*/
  
-        timeExecution1 = logPath + timeExecution1 + dateTime + timeExecution2; /*!< variable that stores file name matching*/
+        timeExecution1 = logPath + outputNameFiles + timeExecution1 + timeExecution2; /*!< variable that stores file name matching*/
  
         std::ofstream times(timeExecution1,ios::out); /*!< pointer to the timeExecution1 file that contains the time consumed by the different algorithm modules*/
  
@@ -184,17 +202,17 @@ int main(int argc, char **argv){
             init<<<gridSize, blockSize>>>(time(0), states); /*!< invoke the GPU to initialize all of the random states*/
 
             cudaEventRecord(startRun);     
-            std::string fitnessTrain  = "run_fitnestrain"; /**/
+            std::string fitnessTrain  = "_fitnestrain"; /**/
             std::string fitnessTrain2 = ".csv"; /**/
-            std::string fitnessTrain3 = currentDateTime(); /**/
-            fitnessTrain = logPath + fitnessTrain + fitnessTrain3 + fitnessTrain2; /**/
+            //std::string fitnessTrain3 = currentDateTime(); /**/
+            fitnessTrain = logPath + outputNameFiles + fitnessTrain + fitnessTrain2; /**/
 
             std::ofstream fitTraining(fitnessTrain,ios::out); /*!< pointer to the file fitnesstrain.csv containing the training fitness of the best individual at each generation*/
 
-            std::string fitnessTest  = "run_fitnestest"; /**/
+            std::string fitnessTest  = "_fitnestest"; /**/
             std::string fitnessTest2 = ".csv"; /**/
-            std::string fitnessTest3 = currentDateTime(); /**/
-            fitnessTest = logPath + fitnessTest + fitnessTest3 +fitnessTest2; /**/
+            //std::string fitnessTest3 = currentDateTime(); /**/
+            fitnessTest = logPath + outputNameFiles + fitnessTest + fitnessTest2; /**/
 
             std::ofstream fitTesting(fitnessTest,ios::out); /*!< pointer to the file fitnesstest.csv containing the test fitness of the best individual at each generation*/
 
@@ -453,11 +471,11 @@ int main(int argc, char **argv){
                 cudaEventSynchronize(stopGsgp);
                 cudaEventElapsedTime(&generationTime, startGsgp, stopGsgp);    
             }
-            saveTraceComplete(logPath, vectorTraces, config.maxNumberGenerations, config.populationSize);
+            //saveTraceComplete(logPath, vectorTraces, config.maxNumberGenerations, config.populationSize);
             
             markTracesGeneration(vectorTraces, config.populationSize, config.maxNumberGenerations,  indexBestIndividual);
 
-            saveTrace(logPath, vectorTraces, config.maxNumberGenerations, config.populationSize);
+            saveTrace(outputNameFiles,logPath, vectorTraces, config.maxNumberGenerations, config.populationSize);
             
             /*!< at the end of the execution  to deallocate memory*/
             cudaFree(indexRandomTrees);
