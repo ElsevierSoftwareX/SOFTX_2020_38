@@ -46,7 +46,7 @@ int main(int argc, char **argv){
         }      
     }
 
-    std::string outputNameFiles(output_model); /* Name of file for save the output files */
+    std::string outputNameFiles(output_model); ///*!< Name of file for save the output files*/
 
     printf("\n Starting GsgpCuda \n\n");
     
@@ -267,10 +267,12 @@ int main(int argc, char **argv){
             cudaEvent_t startInitialPop, stopInitialPop; /*!< this section declares and initializes the Variables for the events and captures the time elapsed in the initialization of the initial population in the GPU*/
             cudaEventCreate(&startInitialPop);
             cudaEventCreate(&stopInitialPop);
-            cudaEventRecord(startInitialPop);    
+            cudaEventRecord(startInitialPop);
+
             ///*!< invokes the GPU to initialize the initial population*/
             initializePopulation<<< gridSize, blockSize >>>(dInitialPopulation, config.nvar, sizeMaxDepthIndividual, states, config.maxRandomConstant,4);
-            cudaErrorCheck("initializePopulation");    
+            cudaErrorCheck("initializePopulation");
+
             cudaEventRecord(stopInitialPop);
             cudaEventSynchronize(stopInitialPop);
             cudaEventElapsedTime(&initialitionTimePopulation, startInitialPop, stopInitialPop);

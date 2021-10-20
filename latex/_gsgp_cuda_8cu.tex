@@ -31,65 +31,92 @@ created on 25/01/2020
 \doxysubsubsection{\texorpdfstring{main()}{main()}}
 {\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
 
-$<$ initialization of the seed for the generation of random numbers
+$<$ Initialization of the seed for the generation of random numbers
 
-$<$ select a G\+PU device
+$<$ Select a G\+PU device
 
-$<$ reading the parameters of the algorithm
+$<$ Name of output files
 
-$<$ variable that stores maximum depth for individuals
+$<$ Name of file for save the output files$\ast$/
 
-$<$ variable that stores size in bytes for initial population
+printf(\char`\"{}\textbackslash{}n Starting Gsgp\+Cuda \textbackslash{}n\textbackslash{}n\char`\"{});
 
-$<$ variable that stores twice the size in bytes of an initial population to store random numbers
+read\+Config\+File(\&config); /$\ast$!$<$ reading the parameters of the algorithm
 
-$<$ variable that stores size in bytes of the number of individuals in the initial population
+$<$ Variable that stores maximum depth for individuals
 
-$<$ variable storing twice the initial population of individuals to generate random positions
+$<$ Variable that stores size in bytes for initial population
 
-$<$ variable that stores the size in bytes of semantics for the entire population with training data
+$<$ Variable that stores twice the size in bytes of an initial population to store random numbers
 
-$<$ variable that stores the size in bytes of semantics for the entire population with test data
+$<$ Variable that stores size in bytes of the number of individuals in the initial population
 
-$<$ variable that stores the size in bytes the size of the training data
+$<$ Variable storing twice the initial population of individuals to generate random positions
 
-$<$ variable that stores the size in bytes the size of the test data
+$<$ Variable that stores the size in bytes of semantics for the entire population with training data
 
-$<$ variable that stores training data elements
+$<$ Variable that stores the size in bytes of semantics for the entire population with test data
 
-$<$ variable that stores test data elements
+$<$ Variable that stores the size in bytes the size of the training data
 
-$<$ variable that stores the size in bytes of the structure to store the mutation record
+$<$ Variable that stores the size in bytes the size of the test data
 
-$<$ variable that stores the size in bytes of the structure to store the survival record
+$<$ Variable that stores training data elements
 
-$<$ variable that stores the size in bytes of the structure to store the survival record
+$<$ Variable that stores test data elements
 
-$<$ variables that store the execution configuration for a kernel in the G\+PU
+$<$ Variable that stores the size in bytes of the structure to store the mutation record
 
-$<$ variables that store the execution configuration for a kernel in the G\+PU
+$<$ Variable that stores the size in bytes of the structure to store the survival record
 
-$<$ variable that stores the size in bytes the size of the test data
+$<$ Variable that stores the size in bytes of the structure to store the survival record
 
-$<$ name of the file with training instances
+$<$ Variables that store the execution configuration for a kernel in the G\+PU
 
-$<$ name of the file with training instances
+$<$ Variables that store the execution configuration for a kernel in the G\+PU
 
-$<$ variable name structure responsible for indicating the run
+$<$ Name of file for save the initial population ~\newline
 
-$<$ variable name structure responsible for indicating the file extension
 
-$<$ variable name structure responsible for capturing the date and time of the run
+$<$ name of file for save the random trees
 
-$<$ variable that stores file name matching
+$<$ Name of the file trace of best model
+
+$<$ Name of the file with test instances
+
+$<$ Name of the file to output values
+
+$<$ Variable that stores the size in bytes the size of the test data
+
+$<$ Variable that stores the size in bytes the size of the target data
+
+$<$ This vector pointers to store the individuals of the test data and target data
+
+$<$ Reserve memory on host
+
+$<$ Reserve memory on host
+
+$<$ This vector pointers to store the individuals of the initial population and random trees
+
+$<$ Variable that stores the size in bytes the initial population
+
+$<$ Variable that stores the size in bytes the initial population
+
+$<$ Create file for saved results of best model with the unseen data
+
+$<$ Variable name structure responsible for indicating the run
+
+$<$ Variable name structure responsible for indicating the file extension
+
+$<$ Variable that stores file name matching
 
 $<$ pointer to the time\+Execution1 file that contains the time consumed by the different algorithm modules
 
-$<$ variables that store the time in milliseconds between the events mark1 and mark2.
+$<$ Variables that store the time in milliseconds between the events mark1 and mark2.
 
 $<$ algorithm run cycle
 
-$<$ variables that store the time in milliseconds between the events mark1 and mark2.
+$<$ Variables that store the time in milliseconds between the events mark1 and mark2.
 
 $<$ Variable used to create a start mark and a stop mark to create events
 
@@ -133,23 +160,24 @@ $<$ pointer of vectors that contain the semantics of an individual in the popula
 
 $<$ auxiliary pointer vectors for the interpreter and calculate the semantics for the populations and assignment in the G\+PU
 
-$<$ temporal variables to perform the movement of pointers in survival
+$<$ temporal Variables to perform the movement of pointers in survival
 
 $<$ load set data train and test
 
 $<$ round up according to array size
 
-$<$ this section declares and initializes the variables for the events and captures the time elapsed in the initialization of the initial population in the G\+PU
+$<$ this section declares and initializes the Variables for the events and captures the time elapsed in the initialization of the initial population in the G\+PU
 
-$<$ invokes the G\+PU to initialize the initial population$\ast$/ initialize\+Population$<$$<$$<$ grid\+Size, block\+Size $>$$>$$>$(d\+Initial\+Population, config.\+nvar, size\+Max\+Depth\+Individual, states, config.\+max\+Random\+Constant,4); cuda\+Error\+Check(\char`\"{}initialize\+Population\char`\"{}); ~\newline
- cuda\+Event\+Record(stop\+Initial\+Pop); cuda\+Event\+Synchronize(stop\+Initial\+Pop); cuda\+Event\+Elapsed\+Time(\&initialition\+Time\+Population, start\+Initial\+Pop, stop\+Initial\+Pop); cuda\+Event\+Destroy(start\+Initial\+Pop); cuda\+Event\+Destroy(stop\+Initial\+Pop); ~\newline
+$<$ invokes the G\+PU to initialize the initial population$\ast$/ initialize\+Population$<$$<$$<$ grid\+Size, block\+Size $>$$>$$>$(d\+Initial\+Population, config.\+nvar, size\+Max\+Depth\+Individual, states, config.\+max\+Random\+Constant,4); cuda\+Error\+Check(\char`\"{}initialize\+Population\char`\"{});
+
+cuda\+Event\+Record(stop\+Initial\+Pop); cuda\+Event\+Synchronize(stop\+Initial\+Pop); cuda\+Event\+Elapsed\+Time(\&initialition\+Time\+Population, start\+Initial\+Pop, stop\+Initial\+Pop); cuda\+Event\+Destroy(start\+Initial\+Pop); cuda\+Event\+Destroy(stop\+Initial\+Pop); ~\newline
  /$\ast$!$<$return the initial population of the device to the host$\ast$/ cuda\+Memcpy(h\+Initial\+Population, d\+Initial\+Population, size\+Mem\+Population, cuda\+Memcpy\+Device\+To\+Host); ~\newline
  save\+Individuals(log\+Path,h\+Initial\+Population, name\+Population, size\+Max\+Depth\+Individual,config.\+population\+Size); ~\newline
  /$\ast$!$<$ invokes the G\+PU to initialize the random trees$\ast$/ initialize\+Population$<$$<$$<$ grid\+Size, block\+Size $>$$>$$>$(d\+Random\+Trees, config.\+nvar, size\+Max\+Depth\+Individual, states, config.\+max\+Random\+Constant,4); ~\newline
  cuda\+Error\+Check(\char`\"{}initialize\+Population\char`\"{}); ~\newline
  /$\ast$!$<$return the initial population of the device to the host$\ast$/ cuda\+Memcpy(h\+Random\+Trees, d\+Random\+Trees,size\+Mem\+Population, cuda\+Memcpy\+Device\+To\+Host); ~\newline
  save\+Individuals(log\+Path,h\+Random\+Trees, name\+Random\+Trees,size\+Max\+Depth\+Individual,config.\+population\+Size); ~\newline
- cuda\+Event\+\_\+t start\+Compute\+Semantics, stop\+Compute\+Semantics; /$\ast$!$<$ This section declares and initializes the variables for the events and captures the time elapsed in the interpretation of the initial population in the G\+PU
+ cuda\+Event\+\_\+t start\+Compute\+Semantics, stop\+Compute\+Semantics; /$\ast$!$<$ This section declares and initializes the Variables for the events and captures the time elapsed in the interpretation of the initial population in the G\+PU
 
 $<$ heuristic function used to choose a good block size is to aim at high occupancy
 
@@ -208,3 +236,6 @@ $<$ at the end of the execution to deallocate memory
 $<$ writing the time execution for stages the algorithm
 
 $<$ all device allocations are removed
+
+Definition at line 36 of file Gsgp\+Cuda.\+cu.
+

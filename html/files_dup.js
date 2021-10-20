@@ -1,5 +1,7 @@
 var files_dup =
 [
+    [ "dataTest", "dir_2ef43fa1d4f0c46066f9fe6168f4f4ea.html", null ],
+    [ "dataTrain", "dir_98c19b793d8619ebe5a16116102645e3.html", null ],
     [ "GsgpCuda.cpp", "_gsgp_cuda_8cpp.html", "_gsgp_cuda_8cpp" ],
     [ "GsgpCuda.cu", "_gsgp_cuda_8cu.html", "_gsgp_cuda_8cu" ],
     [ "GsgpCuda.h", "_gsgp_cuda_8h.html", "_gsgp_cuda_8h" ],

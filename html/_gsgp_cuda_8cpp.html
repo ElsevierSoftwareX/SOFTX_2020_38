@@ -93,7 +93,9 @@ $(document).ready(function(){initNavTree('_gsgp_cuda_8cpp.html',''); initResizab
 <p>file containing the definition of the modules (kernels) used to create the population of individuals, evaluate them, the search operator and read data  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="_gsgp_cuda_8h_source.html">GsgpCuda.h</a>&quot;</code><br />
-</div><table class="memberdecls">
+</div>
+<p><a href="_gsgp_cuda_8cpp_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a01337308d5fcaa1a12539104dbbc6177"><td class="memItemLeft" align="right" valign="top">const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#a01337308d5fcaa1a12539104dbbc6177">currentDateTimeM</a> ()</td></tr>
@@ -148,8 +150,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a4d80d77ded3c2b8b6da69e939b09ff32"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#a4d80d77ded3c2b8b6da69e939b09ff32">markTracesGeneration</a> (<a class="el" href="_gsgp_cuda_8h.html#a9d6caa62b0d171762992c07785d6f197">entry</a> *vectorTraces, int populationSize, int generationSize, int bestIndividual)</td></tr>
 <tr class="memdesc:a4d80d77ded3c2b8b6da69e939b09ff32"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function that implements the marking procedure used to store the structure of the optimal solution.  <a href="_gsgp_cuda_8cpp.html#a4d80d77ded3c2b8b6da69e939b09ff32">More...</a><br /></td></tr>
 <tr class="separator:a4d80d77ded3c2b8b6da69e939b09ff32"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8c2d9889099ad026ba55d1679a45714"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#ac8c2d9889099ad026ba55d1679a45714">saveTrace</a> (std::string path, <a class="el" href="_gsgp_cuda_8h.html#a9d6caa62b0d171762992c07785d6f197">entry</a> *structSurvivor, int generation, int populationSize)</td></tr>
-<tr class="separator:ac8c2d9889099ad026ba55d1679a45714"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d579ebd2713b78d9374006a9e27e35e"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#a9d579ebd2713b78d9374006a9e27e35e">saveTrace</a> (std::string name, std::string path, <a class="el" href="_gsgp_cuda_8h.html#a9d6caa62b0d171762992c07785d6f197">entry</a> *structSurvivor, int generation, int populationSize)</td></tr>
+<tr class="separator:a9d579ebd2713b78d9374006a9e27e35e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad48e430ba97b355354b25cc3b8c3adfe"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#ad48e430ba97b355354b25cc3b8c3adfe">saveTraceComplete</a> (std::string path, <a class="el" href="_gsgp_cuda_8h.html#a9d6caa62b0d171762992c07785d6f197">entry</a> *structSurvivor, int generation, int populationSize)</td></tr>
 <tr class="memdesc:ad48e430ba97b355354b25cc3b8c3adfe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that stores the information related to the evolutionary cycle and stores the indices of the individuals that were used in each generation to create new offspring, to later perform the reconstruction of the optimal solution in the trace.txt file.  <a href="_gsgp_cuda_8cpp.html#ad48e430ba97b355354b25cc3b8c3adfe">More...</a><br /></td></tr>
 <tr class="separator:ad48e430ba97b355354b25cc3b8c3adfe"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -175,6 +177,8 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>created on 25/01/2020</dd></dl>
 <p><br  />
  </p>
+
+<p class="definition">Definition in file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a7216d064b0d27f0203146717c1f29799"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7216d064b0d27f0203146717c1f29799">&#9670;&nbsp;</a></span>checkDirectoryPath()</h2>
@@ -191,6 +195,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00625">625</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -229,6 +235,8 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00914">914</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -276,6 +284,8 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00161">161</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -330,6 +340,8 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00343">343</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -414,6 +426,8 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00225">225</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+
 </div>
 </div>
 <a id="a0d1515a59003b1a58eedefa6dd17a995"></a>
@@ -443,6 +457,8 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00070">70</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+
 </div>
 </div>
 <a id="ac919c3950b37172c5ef02a12d27254b4"></a>
@@ -468,6 +484,8 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>25/01/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00051">51</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+
 </div>
 </div>
 <a id="a01337308d5fcaa1a12539104dbbc6177"></a>
@@ -484,6 +502,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00034">34</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -588,6 +608,8 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>05/12/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l01026">1026</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+
 </div>
 </div>
 <a id="a74f59e7ae6dd1f3464cba0f9ced82f9b"></a>
@@ -664,6 +686,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00403">403</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+
 </div>
 </div>
 <a id="a983dfdd69760a88100bc9efb04e4ac5a"></a>
@@ -705,6 +729,8 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00090">90</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+
 </div>
 </div>
 <a id="ae218d64b1ba67bb484c22c4c6ff293f5"></a>
@@ -738,6 +764,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00379">379</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -790,6 +818,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00184">184</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -855,6 +885,8 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00935">935</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+
 </div>
 </div>
 <a id="a4e8f2bcb18e95d69010cc9f82101e135"></a>
@@ -896,6 +928,8 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00141">141</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+
 </div>
 </div>
 <a id="a460f1355c37d65b336e37651f94eed1d"></a>
@@ -924,6 +958,8 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>27/02/2021 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Luis Armando Cardenas Florido, José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00611">611</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -979,6 +1015,8 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>10/02/2021 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00679">679</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+
 </div>
 </div>
 <a id="aeb41d1035545c56d8f6b46b7fd502e60"></a>
@@ -1018,6 +1056,8 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>float: returns the stackInd without the value positioned in pushGenes [tid] </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00124">124</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -1066,6 +1106,8 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00107">107</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+
 </div>
 </div>
 <a id="a3ad4f51591d12acf0b3d3fc0badfca4d"></a>
@@ -1104,6 +1146,8 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00505">505</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -1202,6 +1246,8 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00443">443</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+
 </div>
 </div>
 <a id="a7e1cf1618da4c06310df9166ea335a2e"></a>
@@ -1247,6 +1293,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00805">805</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -1323,6 +1371,8 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>8/10/2021 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00848">848</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+
 </div>
 </div>
 <a id="a6c5d1be84ec27b9c191cd63a0ecded09"></a>
@@ -1384,10 +1434,12 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00777">777</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+
 </div>
 </div>
-<a id="ac8c2d9889099ad026ba55d1679a45714"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac8c2d9889099ad026ba55d1679a45714">&#9670;&nbsp;</a></span>saveTrace()</h2>
+<a id="a9d579ebd2713b78d9374006a9e27e35e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9d579ebd2713b78d9374006a9e27e35e">&#9670;&nbsp;</a></span>saveTrace()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1395,6 +1447,12 @@ Functions</h2></td></tr>
         <tr>
           <td class="memname">__host__ void saveTrace </td>
           <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>name</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>path</em>, </td>
         </tr>
@@ -1423,6 +1481,8 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00711">711</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -1490,6 +1550,8 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>08/10/2021 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00745">745</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+
 </div>
 </div>
 <a id="a86a361f9f62d54f600cebb5612b660fc"></a>
@@ -1518,6 +1580,8 @@ Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>float n: value resulting from the function </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00364">364</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>

@@ -91,6 +91,8 @@ void \mbox{\hyperlink{_gsgp_cuda_8h_a0d1515a59003b1a58eedefa6dd17a995}{cuda\+Err
 \begin{DoxyCompactList}\small\item\em This function that implements the marking procedure used to store the structure of the optimal solution. \end{DoxyCompactList}\item 
 \+\_\+\+\_\+host\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_af1f98b169175a64c96985976b8a6b1cb}{save\+Trace\+Complete}} (std\+::string path, \mbox{\hyperlink{_gsgp_cuda_8h_a9d6caa62b0d171762992c07785d6f197}{entry}} $\ast$struct\+Survivor, int generation, int population\+Size)
 \begin{DoxyCompactList}\small\item\em Function that stores the information related to the evolutionary cycle and stores the indices of the individuals that were used in each generation to create new offspring, to later perform the reconstruction of the optimal solution in the trace.\+txt file. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+host\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_a9d579ebd2713b78d9374006a9e27e35e}{save\+Trace}} (std\+::string name, std\+::string path, \mbox{\hyperlink{_gsgp_cuda_8h_a9d6caa62b0d171762992c07785d6f197}{entry}} $\ast$struct\+Survivor, int generation, int population\+Size)
+\item 
 \+\_\+\+\_\+host\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_a7e1cf1618da4c06310df9166ea335a2e}{read\+Inpu\+Test\+Data}} (char $\ast$test\+\_\+file, float $\ast$data\+Test, float $\ast$data\+Test\+Target, int nrow\+Test, int nvar\+Test)
 \item 
 \+\_\+\+\_\+host\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_a5a5753d284363de16b569f12551143ed}{read\+Population}} (float $\ast$initial\+Population, float $\ast$random\+Trees, int size\+Population, int depth, std\+::string log, std\+::string name, std\+::string nameR)
@@ -188,6 +190,10 @@ struct variable containing the values of the parameters specified in the configu
 \doxysubsubsection{\texorpdfstring{checkDirectoryPath()}{checkDirectoryPath()}}
 {\footnotesize\ttfamily \+\_\+\+\_\+host\+\_\+\+\_\+ void check\+Directory\+Path (\begin{DoxyParamCaption}\item[{std\+::string}]{dir\+Path }\end{DoxyParamCaption})}
 
+
+
+Definition at line 625 of file Gsgp\+Cuda.\+cpp.
+
 \mbox{\Hypertarget{_gsgp_cuda_8h_a15a884fe465ae2c56899a20d1225ffaf}\label{_gsgp_cuda_8h_a15a884fe465ae2c56899a20d1225ffaf}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!clearStack@{clearStack}}
 \index{clearStack@{clearStack}!GsgpCuda.h@{GsgpCuda.h}}
@@ -216,6 +222,10 @@ void
 \begin{DoxyAuthor}{Author}
 José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
 \end{DoxyAuthor}
+
+
+Definition at line 161 of file Gsgp\+Cuda.\+cpp.
+
 \mbox{\Hypertarget{_gsgp_cuda_8h_a23c025adf27156efab4429238b5f28ea}\label{_gsgp_cuda_8h_a23c025adf27156efab4429238b5f28ea}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!computeError@{computeError}}
 \index{computeError@{computeError}!GsgpCuda.h@{GsgpCuda.h}}
@@ -246,6 +256,10 @@ void
 \begin{DoxyAuthor}{Author}
 José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
 \end{DoxyAuthor}
+
+
+Definition at line 343 of file Gsgp\+Cuda.\+cpp.
+
 \mbox{\Hypertarget{_gsgp_cuda_8h_a455d4b3760ddfb47ca47a41ac4f6de85}\label{_gsgp_cuda_8h_a455d4b3760ddfb47ca47a41ac4f6de85}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!computeSemantics@{computeSemantics}}
 \index{computeSemantics@{computeSemantics}!GsgpCuda.h@{GsgpCuda.h}}
@@ -285,6 +299,10 @@ void
 \begin{DoxyAuthor}{Author}
 José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
 \end{DoxyAuthor}
+
+
+Definition at line 225 of file Gsgp\+Cuda.\+cpp.
+
 \mbox{\Hypertarget{_gsgp_cuda_8h_a0d1515a59003b1a58eedefa6dd17a995}\label{_gsgp_cuda_8h_a0d1515a59003b1a58eedefa6dd17a995}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!cudaErrorCheck@{cudaErrorCheck}}
 \index{cudaErrorCheck@{cudaErrorCheck}!GsgpCuda.h@{GsgpCuda.h}}
@@ -309,6 +327,10 @@ void
 \begin{DoxyAuthor}{Author}
 José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
 \end{DoxyAuthor}
+
+
+Definition at line 70 of file Gsgp\+Cuda.\+cpp.
+
 \mbox{\Hypertarget{_gsgp_cuda_8h_aa46369f3c8adbff876c82270346fffa2}\label{_gsgp_cuda_8h_aa46369f3c8adbff876c82270346fffa2}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!currentDateTime@{currentDateTime}}
 \index{currentDateTime@{currentDateTime}!GsgpCuda.h@{GsgpCuda.h}}
@@ -337,6 +359,10 @@ char\+: return date and time from the host computer
 \begin{DoxyAuthor}{Author}
 José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
 \end{DoxyAuthor}
+
+
+Definition at line 51 of file Gsgp\+Cuda.\+cpp.
+
 \mbox{\Hypertarget{_gsgp_cuda_8h_a815173a15ed4ce63b6776be317df8722}\label{_gsgp_cuda_8h_a815173a15ed4ce63b6776be317df8722}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!evaluate\_unseen\_new\_data@{evaluate\_unseen\_new\_data}}
 \index{evaluate\_unseen\_new\_data@{evaluate\_unseen\_new\_data}!GsgpCuda.h@{GsgpCuda.h}}
@@ -381,11 +407,19 @@ void
 \begin{DoxyAuthor}{Author}
 José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
 \end{DoxyAuthor}
+
+
+Definition at line 1026 of file Gsgp\+Cuda.\+cpp.
+
 \mbox{\Hypertarget{_gsgp_cuda_8h_a74f59e7ae6dd1f3464cba0f9ced82f9b}\label{_gsgp_cuda_8h_a74f59e7ae6dd1f3464cba0f9ced82f9b}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!geometricSemanticMutation@{geometricSemanticMutation}}
 \index{geometricSemanticMutation@{geometricSemanticMutation}!GsgpCuda.h@{GsgpCuda.h}}
 \doxysubsubsection{\texorpdfstring{geometricSemanticMutation()}{geometricSemanticMutation()}}
 {\footnotesize\ttfamily \+\_\+\+\_\+global\+\_\+\+\_\+ void geometric\+Semantic\+Mutation (\begin{DoxyParamCaption}\item[{float $\ast$}]{initial\+Population\+Semantics,  }\item[{float $\ast$}]{random\+Trees\+Semantics,  }\item[{float $\ast$}]{new\+Semantics\+Offsprings,  }\item[{int}]{size\+Population,  }\item[{int}]{nrow,  }\item[{int}]{t\+Elements,  }\item[{int}]{generation,  }\item[{float $\ast$}]{index\+Random\+Trees,  }\item[{\mbox{\hyperlink{structentry__}{entry\+\_\+}} $\ast$}]{x,  }\item[{\mbox{\hyperlink{structentry__}{entry\+\_\+}} $\ast$}]{y }\end{DoxyParamCaption})}
+
+
+
+Definition at line 403 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_a50873854f77ec81aa1e915eaaddf18d3}\label{_gsgp_cuda_8h_a50873854f77ec81aa1e915eaaddf18d3}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!init@{init}}
@@ -414,11 +448,19 @@ void
 \begin{DoxyAuthor}{Author}
 José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
 \end{DoxyAuthor}
+
+
+Definition at line 90 of file Gsgp\+Cuda.\+cpp.
+
 \mbox{\Hypertarget{_gsgp_cuda_8h_ae218d64b1ba67bb484c22c4c6ff293f5}\label{_gsgp_cuda_8h_ae218d64b1ba67bb484c22c4c6ff293f5}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!initializeIndexRandomTrees@{initializeIndexRandomTrees}}
 \index{initializeIndexRandomTrees@{initializeIndexRandomTrees}!GsgpCuda.h@{GsgpCuda.h}}
 \doxysubsubsection{\texorpdfstring{initializeIndexRandomTrees()}{initializeIndexRandomTrees()}}
 {\footnotesize\ttfamily \+\_\+\+\_\+global\+\_\+\+\_\+ void initialize\+Index\+Random\+Trees (\begin{DoxyParamCaption}\item[{int}]{size\+Population,  }\item[{float $\ast$}]{index\+Random\+Trees,  }\item[{curand\+State\+\_\+t $\ast$}]{states }\end{DoxyParamCaption})}
+
+
+
+Definition at line 379 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_af1acc65c5e1f4db666357c3565102751}\label{_gsgp_cuda_8h_af1acc65c5e1f4db666357c3565102751}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!initializePopulation@{initializePopulation}}
@@ -485,6 +527,10 @@ bool -\/ true if the stack is empty, false otherwise
 \begin{DoxyAuthor}{Author}
 José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
 \end{DoxyAuthor}
+
+
+Definition at line 141 of file Gsgp\+Cuda.\+cpp.
+
 \mbox{\Hypertarget{_gsgp_cuda_8h_ad9ba1431b7a76132782bc1a24a47c840}\label{_gsgp_cuda_8h_ad9ba1431b7a76132782bc1a24a47c840}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!IsPathExist@{IsPathExist}}
 \index{IsPathExist@{IsPathExist}!GsgpCuda.h@{GsgpCuda.h}}
@@ -509,6 +555,10 @@ void
 \begin{DoxyAuthor}{Author}
 Luis Armando Cardenas Florido, José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
 \end{DoxyAuthor}
+
+
+Definition at line 611 of file Gsgp\+Cuda.\+cpp.
+
 \mbox{\Hypertarget{_gsgp_cuda_8h_a8a5f5f5e456d163b873a118b6477b4ed}\label{_gsgp_cuda_8h_a8a5f5f5e456d163b873a118b6477b4ed}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!markTracesGeneration@{markTracesGeneration}}
 \index{markTracesGeneration@{markTracesGeneration}!GsgpCuda.h@{GsgpCuda.h}}
@@ -539,6 +589,10 @@ void
 \begin{DoxyAuthor}{Author}
 José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
 \end{DoxyAuthor}
+
+
+Definition at line 679 of file Gsgp\+Cuda.\+cpp.
+
 \mbox{\Hypertarget{_gsgp_cuda_8h_a955bdc425c4f7867b5b7bdb415ece57a}\label{_gsgp_cuda_8h_a955bdc425c4f7867b5b7bdb415ece57a}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!pop@{pop}}
 \index{pop@{pop}!GsgpCuda.h@{GsgpCuda.h}}
@@ -565,6 +619,10 @@ float\+: returns the stack\+Ind without the value positioned in push\+Genes \mbo
 \begin{DoxyAuthor}{Author}
 José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
 \end{DoxyAuthor}
+
+
+Definition at line 124 of file Gsgp\+Cuda.\+cpp.
+
 \mbox{\Hypertarget{_gsgp_cuda_8h_a6f6338e7da34e92f8aca5541f4ad4a93}\label{_gsgp_cuda_8h_a6f6338e7da34e92f8aca5541f4ad4a93}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!push@{push}}
 \index{push@{push}!GsgpCuda.h@{GsgpCuda.h}}
@@ -593,6 +651,10 @@ int\+: auxiliary pointer that stores the positions of individuals + 1
 \begin{DoxyAuthor}{Author}
 José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
 \end{DoxyAuthor}
+
+
+Definition at line 107 of file Gsgp\+Cuda.\+cpp.
+
 \mbox{\Hypertarget{_gsgp_cuda_8h_a81e2e6e609828492493948e200939a42}\label{_gsgp_cuda_8h_a81e2e6e609828492493948e200939a42}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!readConfigFile@{readConfigFile}}
 \index{readConfigFile@{readConfigFile}!GsgpCuda.h@{GsgpCuda.h}}
@@ -633,6 +695,10 @@ void
 \begin{DoxyAuthor}{Author}
 José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
 \end{DoxyAuthor}
+
+
+Definition at line 505 of file Gsgp\+Cuda.\+cpp.
+
 \mbox{\Hypertarget{_gsgp_cuda_8h_acfa80b09d39c91f2febe825a93e95f1c}\label{_gsgp_cuda_8h_acfa80b09d39c91f2febe825a93e95f1c}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!readInpuData@{readInpuData}}
 \index{readInpuData@{readInpuData}!GsgpCuda.h@{GsgpCuda.h}}
@@ -677,11 +743,19 @@ void\+:
 \begin{DoxyAuthor}{Author}
 José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
 \end{DoxyAuthor}
+
+
+Definition at line 443 of file Gsgp\+Cuda.\+cpp.
+
 \mbox{\Hypertarget{_gsgp_cuda_8h_a7e1cf1618da4c06310df9166ea335a2e}\label{_gsgp_cuda_8h_a7e1cf1618da4c06310df9166ea335a2e}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!readInpuTestData@{readInpuTestData}}
 \index{readInpuTestData@{readInpuTestData}!GsgpCuda.h@{GsgpCuda.h}}
 \doxysubsubsection{\texorpdfstring{readInpuTestData()}{readInpuTestData()}}
 {\footnotesize\ttfamily \+\_\+\+\_\+host\+\_\+\+\_\+ void read\+Inpu\+Test\+Data (\begin{DoxyParamCaption}\item[{char $\ast$}]{test\+\_\+file,  }\item[{float $\ast$}]{data\+Test,  }\item[{float $\ast$}]{data\+Test\+Target,  }\item[{int}]{nrow\+Test,  }\item[{int}]{nvar\+Test }\end{DoxyParamCaption})}
+
+
+
+Definition at line 805 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_a5a5753d284363de16b569f12551143ed}\label{_gsgp_cuda_8h_a5a5753d284363de16b569f12551143ed}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!readPopulation@{readPopulation}}
@@ -719,6 +793,10 @@ void\+:
 \begin{DoxyAuthor}{Author}
 José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
 \end{DoxyAuthor}
+
+
+Definition at line 848 of file Gsgp\+Cuda.\+cpp.
+
 \mbox{\Hypertarget{_gsgp_cuda_8h_a4d31979dbc400ebafec99c299db8be47}\label{_gsgp_cuda_8h_a4d31979dbc400ebafec99c299db8be47}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!saveIndividuals@{saveIndividuals}}
 \index{saveIndividuals@{saveIndividuals}!GsgpCuda.h@{GsgpCuda.h}}
@@ -751,10 +829,24 @@ void
 \begin{DoxyAuthor}{Author}
 José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
 \end{DoxyAuthor}
+
+
+Definition at line 777 of file Gsgp\+Cuda.\+cpp.
+
+\mbox{\Hypertarget{_gsgp_cuda_8h_a9d579ebd2713b78d9374006a9e27e35e}\label{_gsgp_cuda_8h_a9d579ebd2713b78d9374006a9e27e35e}} 
+\index{GsgpCuda.h@{GsgpCuda.h}!saveTrace@{saveTrace}}
+\index{saveTrace@{saveTrace}!GsgpCuda.h@{GsgpCuda.h}}
+\doxysubsubsection{\texorpdfstring{saveTrace()}{saveTrace()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \+\_\+\+\_\+host\+\_\+\+\_\+ void save\+Trace (\begin{DoxyParamCaption}\item[{std\+::string}]{name,  }\item[{std\+::string}]{path,  }\item[{\mbox{\hyperlink{_gsgp_cuda_8h_a9d6caa62b0d171762992c07785d6f197}{entry}} $\ast$}]{struct\+Survivor,  }\item[{int}]{generation,  }\item[{int}]{population\+Size }\end{DoxyParamCaption})}
+
+
+
+Definition at line 711 of file Gsgp\+Cuda.\+cpp.
+
 \mbox{\Hypertarget{_gsgp_cuda_8h_a5c9d4e48e5ef83d4c60b1f108641260c}\label{_gsgp_cuda_8h_a5c9d4e48e5ef83d4c60b1f108641260c}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!saveTrace@{saveTrace}}
 \index{saveTrace@{saveTrace}!GsgpCuda.h@{GsgpCuda.h}}
-\doxysubsubsection{\texorpdfstring{saveTrace()}{saveTrace()}}
+\doxysubsubsection{\texorpdfstring{saveTrace()}{saveTrace()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
 {\footnotesize\ttfamily \+\_\+\+\_\+host\+\_\+\+\_\+ void save\+Trace (\begin{DoxyParamCaption}\item[{std\+::string}]{path,  }\item[{\mbox{\hyperlink{_gsgp_cuda_8h_a9d6caa62b0d171762992c07785d6f197}{entry}} $\ast$}]{x,  }\item[{int}]{generation,  }\item[{int}]{population\+Size }\end{DoxyParamCaption})}
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_af1f98b169175a64c96985976b8a6b1cb}\label{_gsgp_cuda_8h_af1f98b169175a64c96985976b8a6b1cb}} 
@@ -807,6 +899,10 @@ void
 \begin{DoxyAuthor}{Author}
 José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
 \end{DoxyAuthor}
+
+
+Definition at line 745 of file Gsgp\+Cuda.\+cpp.
+
 \mbox{\Hypertarget{_gsgp_cuda_8h_aac4615221ef46543cb25d4807e0b42d2}\label{_gsgp_cuda_8h_aac4615221ef46543cb25d4807e0b42d2}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!sigmoid@{sigmoid}}
 \index{sigmoid@{sigmoid}!GsgpCuda.h@{GsgpCuda.h}}
@@ -831,6 +927,10 @@ float n\+: value resulting from the function
 \begin{DoxyAuthor}{Author}
 José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
 \end{DoxyAuthor}
+
+
+Definition at line 364 of file Gsgp\+Cuda.\+cpp.
+
 \mbox{\Hypertarget{_gsgp_cuda_8h_a780cb33de32b71bfdc0b39796de3c6b8}\label{_gsgp_cuda_8h_a780cb33de32b71bfdc0b39796de3c6b8}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!test@{test}}
 \index{test@{test}!GsgpCuda.h@{GsgpCuda.h}}
@@ -861,10 +961,18 @@ Jose Manuel Muñoz Contreras
 \end{DoxyAuthor}
 
 
+Definition at line 38 of file test\+Initial\+Population.\+cu.
+
+
+
 \doxysubsection{Variable Documentation}
 \mbox{\Hypertarget{_gsgp_cuda_8h_ac6f73ac686ef53a1065b100d1f764641}\label{_gsgp_cuda_8h_ac6f73ac686ef53a1065b100d1f764641}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!config@{config}}
 \index{config@{config}!GsgpCuda.h@{GsgpCuda.h}}
 \doxysubsubsection{\texorpdfstring{config}{config}}
 {\footnotesize\ttfamily \mbox{\hyperlink{_gsgp_cuda_8h_a69c02f6d66c6461c9a1c6d3d98075b5d}{cfg}} config}
+
+
+
+Definition at line 131 of file Gsgp\+Cuda.\+h.
 

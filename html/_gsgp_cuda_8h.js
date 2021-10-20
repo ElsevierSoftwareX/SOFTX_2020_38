@@ -26,6 +26,7 @@ var _gsgp_cuda_8h =
     [ "readInpuTestData", "_gsgp_cuda_8h.html#a7e1cf1618da4c06310df9166ea335a2e", null ],
     [ "readPopulation", "_gsgp_cuda_8h.html#a5a5753d284363de16b569f12551143ed", null ],
     [ "saveIndividuals", "_gsgp_cuda_8h.html#a4d31979dbc400ebafec99c299db8be47", null ],
+    [ "saveTrace", "_gsgp_cuda_8h.html#a9d579ebd2713b78d9374006a9e27e35e", null ],
     [ "saveTrace", "_gsgp_cuda_8h.html#a5c9d4e48e5ef83d4c60b1f108641260c", null ],
     [ "saveTraceComplete", "_gsgp_cuda_8h.html#af1f98b169175a64c96985976b8a6b1cb", null ],
     [ "sigmoid", "_gsgp_cuda_8h.html#aac4615221ef46543cb25d4807e0b42d2", null ],

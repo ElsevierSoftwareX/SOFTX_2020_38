@@ -92,8 +92,10 @@ $(document).ready(function(){initNavTree('_gsgp_cuda_8cu.html',''); initResizabl
 
 <p>file containing the main with the geometric semantic genetic programming algorithm  
 <a href="#details">More...</a></p>
-<div class="textblock"><code>#include &quot;<a class="el" href="_gsgp_cuda_8cpp.html">GsgpCuda.cpp</a>&quot;</code><br />
-</div><table class="memberdecls">
+<div class="textblock"><code>#include &quot;<a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>&quot;</code><br />
+</div>
+<p><a href="_gsgp_cuda_8cu_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
 <tr class="memitem:a3c04138a5bfe5d72780bb7e82a18e627"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cu.html#a3c04138a5bfe5d72780bb7e82a18e627">main</a> (int argc, char **argv)</td></tr>
@@ -103,6 +105,8 @@ Functions</h2></td></tr>
 <div class="textblock"><p>file containing the main with the geometric semantic genetic programming algorithm </p>
 <dl class="section author"><dt>Author</dt><dd>Jose Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>created on 25/01/2020</dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="_gsgp_cuda_8cu_source.html">GsgpCuda.cu</a>.</p>
 </div><h2 class="groupheader">Function Documentation</h2>
 <a id="a3c04138a5bfe5d72780bb7e82a18e627"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a3c04138a5bfe5d72780bb7e82a18e627">&#9670;&nbsp;</a></span>main()</h2>
@@ -129,36 +133,50 @@ Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>&lt; initialization of the seed for the generation of random numbers</p>
-<p>&lt; select a GPU device</p>
-<p>&lt; reading the parameters of the algorithm</p>
-<p>&lt; variable that stores maximum depth for individuals</p>
-<p>&lt; variable that stores size in bytes for initial population</p>
-<p>&lt; variable that stores twice the size in bytes of an initial population to store random numbers</p>
-<p>&lt; variable that stores size in bytes of the number of individuals in the initial population</p>
-<p>&lt; variable storing twice the initial population of individuals to generate random positions</p>
-<p>&lt; variable that stores the size in bytes of semantics for the entire population with training data</p>
-<p>&lt; variable that stores the size in bytes of semantics for the entire population with test data</p>
-<p>&lt; variable that stores the size in bytes the size of the training data</p>
-<p>&lt; variable that stores the size in bytes the size of the test data</p>
-<p>&lt; variable that stores training data elements</p>
-<p>&lt; variable that stores test data elements</p>
-<p>&lt; variable that stores the size in bytes of the structure to store the mutation record</p>
-<p>&lt; variable that stores the size in bytes of the structure to store the survival record</p>
-<p>&lt; variable that stores the size in bytes of the structure to store the survival record</p>
-<p>&lt; variables that store the execution configuration for a kernel in the GPU</p>
-<p>&lt; variables that store the execution configuration for a kernel in the GPU</p>
-<p>&lt; variable that stores the size in bytes the size of the test data</p>
-<p>&lt; name of the file with training instances</p>
-<p>&lt; name of the file with training instances</p>
-<p>&lt; variable name structure responsible for indicating the run</p>
-<p>&lt; variable name structure responsible for indicating the file extension</p>
-<p>&lt; variable name structure responsible for capturing the date and time of the run</p>
-<p>&lt; variable that stores file name matching</p>
+<p>&lt; Initialization of the seed for the generation of random numbers</p>
+<p>&lt; Select a GPU device</p>
+<p>&lt; Name of output files</p>
+<p>&lt; Name of file for save the output files*&zwj;/</p>
+<p>printf("\n Starting GsgpCuda \n\n");</p>
+<p>readConfigFile(&amp;config); /*!&lt; reading the parameters of the algorithm</p>
+<p>&lt; Variable that stores maximum depth for individuals</p>
+<p>&lt; Variable that stores size in bytes for initial population</p>
+<p>&lt; Variable that stores twice the size in bytes of an initial population to store random numbers</p>
+<p>&lt; Variable that stores size in bytes of the number of individuals in the initial population</p>
+<p>&lt; Variable storing twice the initial population of individuals to generate random positions</p>
+<p>&lt; Variable that stores the size in bytes of semantics for the entire population with training data</p>
+<p>&lt; Variable that stores the size in bytes of semantics for the entire population with test data</p>
+<p>&lt; Variable that stores the size in bytes the size of the training data</p>
+<p>&lt; Variable that stores the size in bytes the size of the test data</p>
+<p>&lt; Variable that stores training data elements</p>
+<p>&lt; Variable that stores test data elements</p>
+<p>&lt; Variable that stores the size in bytes of the structure to store the mutation record</p>
+<p>&lt; Variable that stores the size in bytes of the structure to store the survival record</p>
+<p>&lt; Variable that stores the size in bytes of the structure to store the survival record</p>
+<p>&lt; Variables that store the execution configuration for a kernel in the GPU</p>
+<p>&lt; Variables that store the execution configuration for a kernel in the GPU</p>
+<p>&lt; Name of file for save the initial population <br  />
+</p>
+<p>&lt; name of file for save the random trees</p>
+<p>&lt; Name of the file trace of best model</p>
+<p>&lt; Name of the file with test instances</p>
+<p>&lt; Name of the file to output values</p>
+<p>&lt; Variable that stores the size in bytes the size of the test data</p>
+<p>&lt; Variable that stores the size in bytes the size of the target data</p>
+<p>&lt; This vector pointers to store the individuals of the test data and target data</p>
+<p>&lt; Reserve memory on host</p>
+<p>&lt; Reserve memory on host</p>
+<p>&lt; This vector pointers to store the individuals of the initial population and random trees</p>
+<p>&lt; Variable that stores the size in bytes the initial population</p>
+<p>&lt; Variable that stores the size in bytes the initial population</p>
+<p>&lt; Create file for saved results of best model with the unseen data</p>
+<p>&lt; Variable name structure responsible for indicating the run</p>
+<p>&lt; Variable name structure responsible for indicating the file extension</p>
+<p>&lt; Variable that stores file name matching</p>
 <p>&lt; pointer to the timeExecution1 file that contains the time consumed by the different algorithm modules</p>
-<p>&lt; variables that store the time in milliseconds between the events mark1 and mark2.</p>
+<p>&lt; Variables that store the time in milliseconds between the events mark1 and mark2.</p>
 <p>&lt; algorithm run cycle</p>
-<p>&lt; variables that store the time in milliseconds between the events mark1 and mark2.</p>
+<p>&lt; Variables that store the time in milliseconds between the events mark1 and mark2.</p>
 <p>&lt; Variable used to create a start mark and a stop mark to create events</p>
 <p>&lt; function that initializes the start event</p>
 <p>&lt; function that initializes the stop event</p>
@@ -180,19 +198,19 @@ Functions</h2></td></tr>
 <p>&lt; pointers of vectors of training and test fitness values at generation g and assignment in the GPU</p>
 <p>&lt; pointer of vectors that contain the semantics of an individual in the population, calculated with the training set and test in generation g and its allocation in GPU</p>
 <p>&lt; auxiliary pointer vectors for the interpreter and calculate the semantics for the populations and assignment in the GPU</p>
-<p>&lt; temporal variables to perform the movement of pointers in survival</p>
+<p>&lt; temporal Variables to perform the movement of pointers in survival</p>
 <p>&lt; load set data train and test</p>
 <p>&lt; round up according to array size</p>
-<p>&lt; this section declares and initializes the variables for the events and captures the time elapsed in the initialization of the initial population in the GPU</p>
-<p>&lt; invokes the GPU to initialize the initial population*&zwj;/ initializePopulation&lt;&lt;&lt; gridSize, blockSize &gt;&gt;&gt;(dInitialPopulation, config.nvar, sizeMaxDepthIndividual, states, config.maxRandomConstant,4); cudaErrorCheck("initializePopulation"); <br  />
- cudaEventRecord(stopInitialPop); cudaEventSynchronize(stopInitialPop); cudaEventElapsedTime(&amp;initialitionTimePopulation, startInitialPop, stopInitialPop); cudaEventDestroy(startInitialPop); cudaEventDestroy(stopInitialPop); <br  />
+<p>&lt; this section declares and initializes the Variables for the events and captures the time elapsed in the initialization of the initial population in the GPU</p>
+<p>&lt; invokes the GPU to initialize the initial population*&zwj;/ initializePopulation&lt;&lt;&lt; gridSize, blockSize &gt;&gt;&gt;(dInitialPopulation, config.nvar, sizeMaxDepthIndividual, states, config.maxRandomConstant,4); cudaErrorCheck("initializePopulation");</p>
+<p>cudaEventRecord(stopInitialPop); cudaEventSynchronize(stopInitialPop); cudaEventElapsedTime(&amp;initialitionTimePopulation, startInitialPop, stopInitialPop); cudaEventDestroy(startInitialPop); cudaEventDestroy(stopInitialPop); <br  />
  /*!&lt;return the initial population of the device to the host*&zwj;/ cudaMemcpy(hInitialPopulation, dInitialPopulation, sizeMemPopulation, cudaMemcpyDeviceToHost); <br  />
  saveIndividuals(logPath,hInitialPopulation, namePopulation, sizeMaxDepthIndividual,config.populationSize); <br  />
  /*!&lt; invokes the GPU to initialize the random trees*&zwj;/ initializePopulation&lt;&lt;&lt; gridSize, blockSize &gt;&gt;&gt;(dRandomTrees, config.nvar, sizeMaxDepthIndividual, states, config.maxRandomConstant,4); <br  />
  cudaErrorCheck("initializePopulation"); <br  />
  /*!&lt;return the initial population of the device to the host*&zwj;/ cudaMemcpy(hRandomTrees, dRandomTrees,sizeMemPopulation, cudaMemcpyDeviceToHost); <br  />
  saveIndividuals(logPath,hRandomTrees, nameRandomTrees,sizeMaxDepthIndividual,config.populationSize); <br  />
- cudaEvent_t startComputeSemantics, stopComputeSemantics; /*!&lt; This section declares and initializes the variables for the events and captures the time elapsed in the interpretation of the initial population in the GPU</p>
+ cudaEvent_t startComputeSemantics, stopComputeSemantics; /*!&lt; This section declares and initializes the Variables for the events and captures the time elapsed in the interpretation of the initial population in the GPU</p>
 <p>&lt; heuristic function used to choose a good block size is to aim at high occupancy</p>
 <p>&lt; round up according to array size</p>
 <p>&lt; invokes the GPU to interpret the initial population with data train</p>
@@ -222,6 +240,8 @@ Functions</h2></td></tr>
 <p>&lt; at the end of the execution to deallocate memory</p>
 <p>&lt; writing the time execution for stages the algorithm</p>
 <p>&lt; all device allocations are removed</p>
+
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cu_source.html#l00036">36</a> of file <a class="el" href="_gsgp_cuda_8cu_source.html">GsgpCuda.cu</a>.</p>
 
 </div>
 </div>

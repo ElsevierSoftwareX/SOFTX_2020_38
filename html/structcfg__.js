@@ -15,6 +15,5 @@ var structcfg__ =
     [ "populationSize", "structcfg__.html#ae8d24427036d34b3a7d21d7a59ff05ed", null ],
     [ "testFile", "structcfg__.html#a07e442b9097fdde91f6abccdcedf07b6", null ],
     [ "trainFile", "structcfg__.html#aaac357160605a6d0940fc34ef3beec12", null ],
-    [ "useMultipleTrainFiles", "structcfg__.html#aae12f4228011f576b7a3f823a906a7a5", null ],
-    [ "useTestSet", "structcfg__.html#ae7e68a661a01162beba41a63d46a62d5", null ]
+    [ "useMultipleTrainFiles", "structcfg__.html#aae12f4228011f576b7a3f823a906a7a5", null ]
 ];
