@@ -20,7 +20,6 @@
 //! \author Jose Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 //! \date   created on 25/01/2020
 #include "GsgpCuda.cpp"
-#include <cstdio>
 using namespace std;   
 
 /*!
@@ -40,14 +39,14 @@ int main(int argc, char **argv){
 
     cudaSetDevice(0); /*!< select a GPU device*/
  
-    char output_model[50]=""; /* name of the file with test instances*/
+    char output_model[50]=""; /*!<  Name of output files*/
     for (int i=1; i<argc-1; i++){
         if(strncmp(argv[i],"-output_model",10) == 0) {
             strcat(output_model,argv[++i]);
         }      
     }
 
-    std::string outputNameFiles(output_model);
+    std::string outputNameFiles(output_model); /* name of file for save the random trees */
 
     printf("\n Starting GsgpCuda \n\n");
     
@@ -91,17 +90,17 @@ int main(int argc, char **argv){
 
     std::string dataPathTest (config.dataPathTest); /* Path of directory for data files for test */
 
-    std::string namePopulation = "_initialPopulation"; /* Name of file for save the initial population  */
+    std::string namePopulation = "_initialPopulation"; /*!< Name of file for save the initial population  */
 
     namePopulation = outputNameFiles + namePopulation;
 
-    std::string nameRandomTrees = "_randomTrees"; /* name of file for save the random trees */
+    std::string nameRandomTrees = "_randomTrees"; /*!< name of file for save the random trees */
 
     nameRandomTrees = outputNameFiles + nameRandomTrees;
     
     if (argc>3) {
 
-        char pathTrace[50]=""; /* name of the file trace of best model*/
+        char pathTrace[50]=""; /*!< Name of the file trace of best model*/
         for (int i=1; i<argc-1; i++){
             if(strncmp(argv[i],"-model",10) == 0) {
                 strcat(pathTrace,argv[++i]);
@@ -110,15 +109,15 @@ int main(int argc, char **argv){
         std::string tmp(pathTrace);
         namePopulation = tmp + namePopulation;
         nameRandomTrees = tmp + nameRandomTrees;
-        char path_test[50]=""; /* name of the file with test instances*/
+
+        char path_test[50]=""; /*!< Name of the file with test instances*/
         for (int i=1; i<argc-1; i++){
             if(strncmp(argv[i],"-input_data",10) == 0) {
                 strcat(path_test,argv[++i]);
             }      
         }
         
-
-        char pathOutFile[50]=""; /* name of the file trace of best model*/
+        char pathOutFile[50]=""; /*!< Name of the file to output values*/
         for (int i=1; i<argc-1; i++){
             if(strncmp(argv[i],"-prediction_output",10) == 0) {
                 strcat(pathOutFile,argv[++i]);
@@ -128,24 +127,20 @@ int main(int argc, char **argv){
         std::string outFile (pathOutFile);
         
         int sizeDataTest = sizeof(float)*(config.nrowTest*config.nvarTest); /*!< variable that stores the size in bytes the size of the test data*/
-        int sizeDataTestTarget = sizeof(float)*(config.nrowTest); /* variable that stores the size in bytes the size of the target data */
-        float *unssenDataTest, *unssenDataTestTarget; /* This vector pointers to store the individuals of the test data and target data */
-        unssenDataTest = (float *)malloc(sizeDataTest); /* reserve memory on host*/
-        unssenDataTestTarget = (float *)malloc(sizeDataTestTarget); /* reserve memory on host*/
+        int sizeDataTestTarget = sizeof(float)*(config.nrowTest); /*!< variable that stores the size in bytes the size of the target data */
+        float *unssenDataTest, *unssenDataTestTarget; /*!< This vector pointers to store the individuals of the test data and target data */
+        unssenDataTest = (float *)malloc(sizeDataTest); /*!< Reserve memory on host*/
+        unssenDataTestTarget = (float *)malloc(sizeDataTestTarget); /*!< Reserve memory on host*/
 
         readInpuTestData(path_test, unssenDataTest, unssenDataTestTarget, config.nrowTest, config.nvarTest);
         
-        float *initPopulation, *randomTress; /* This vector pointers to store the individuals of the initial population and random trees */
-        initPopulation = (float*)malloc(sizeMemPopulation); /* variable that stores the size in bytes the initial population */
-        randomTress = (float*)malloc(sizeMemPopulation);  /* variable that stores the size in bytes the initial population */
+        float *initPopulation, *randomTress; /*!< This vector pointers to store the individuals of the initial population and random trees */
+        initPopulation = (float*)malloc(sizeMemPopulation); /*!<  Variable that stores the size in bytes the initial population */
+        randomTress = (float*)malloc(sizeMemPopulation);  /*!< Variable that stores the size in bytes the initial population */
         
-        char traPath[50] = ""; /* Path of directory for data files and log files generated in execution */
-        strcpy(traPath,config.logPath); /*!< name of the file with training instances */
-        strcpy(traPath,pathTrace); /*!< name of the file with training instances */
-
         readPopulation(initPopulation, randomTress, config.populationSize, sizeMaxDepthIndividual, logPath, namePopulation, nameRandomTrees);
         
-        /*Create file for saved results of best model with the unseen data*/
+        /*!< Create file for saved results of best model with the unseen data*/
         std::ofstream OUT(outFile,ios::out);
         
         //function to evaluate new data with the best model
