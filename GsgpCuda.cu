@@ -35,18 +35,18 @@ using namespace std;
 
 int main(int argc, char **argv){
     
-    srand(time(NULL)); /*!< initialization of the seed for the generation of random numbers*/
+    srand(time(NULL)); /*!< Initialization of the seed for the generation of random numbers*/
 
-    cudaSetDevice(0); /*!< select a GPU device*/
+    cudaSetDevice(0); /*!< Select a GPU device*/
  
-    char output_model[50]=""; /*!<  Name of output files*/
+    char output_model[50]=""; /*!< Name of output files*/
     for (int i=1; i<argc-1; i++){
         if(strncmp(argv[i],"-output_model",10) == 0) {
             strcat(output_model,argv[++i]);
         }      
     }
 
-    std::string outputNameFiles(output_model); /* name of file for save the random trees */
+    std::string outputNameFiles(output_model); /* name of file for save the output files */
 
     printf("\n Starting GsgpCuda \n\n");
     
