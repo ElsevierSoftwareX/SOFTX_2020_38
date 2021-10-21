@@ -441,15 +441,16 @@ __global__ void geometricSemanticMutation(float *initialPopulationSemantics, flo
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cpp 
 */
-__host__ void readInpuData(char *train_file, char *test_file, float *dataTrain, float *dataTest, float *dataTrainTarget,
+__host__ void readInpuData(char *trainFile, char *testFile, float *dataTrain, float *dataTest, float *dataTrainTarget,
  float *dataTestTarget, int nrow, int nvar, int nrowTest, int nvarTest){
-  std::fstream in(train_file,ios::in);
+
+  std::fstream in(trainFile,ios::in);
   if (!in.is_open())
   {
     cout<<endl<<"ERROR: TRAINING FILE NOT FOUND." << endl;
     exit(-1);
   }
-  std::fstream inTest(test_file,ios::in);
+  std::fstream inTest(testFile,ios::in);
   if (!in.is_open())
   {
     cout<<endl<<"ERROR: TEST FILE NOT FOUND." << endl;
@@ -496,24 +497,18 @@ __host__ void readInpuData(char *train_file, char *test_file, float *dataTrain, 
 
 void countInputFile(std::string fileName, int &rows, int &cols){
   
-  printf("%s \n", fileName.c_str());
   std::ifstream f(fileName);
-  
   string line;
   std::getline(f, line);
-  cout << line << endl;         //read the first line of your file to string
   stringstream s;
   s << line;                   //send the line to the stringstream object...
 
   int how_many_columns = 0;    
   double value;
-
   while(s >> value) how_many_columns++;  //while there's something in the line, increase the number of columns
 
-  cout << how_many_columns;
   cols = how_many_columns;
   int how_many_rows =1;
-  
   while (std::getline(f, line)) how_many_rows++;
   rows = how_many_rows;
 
@@ -569,9 +564,6 @@ __host__ void readConfigFile(cfg *config){
       }
     }
 
-
-    config->numberRuns = 1;
-
     if (strcmp(str1, "numberGenerations")==0)
     	config->maxNumberGenerations=atoi(str2);
 
@@ -581,36 +573,12 @@ __host__ void readConfigFile(cfg *config){
     if (strcmp(str1, "maxDepth")==0)
     	config->maxDepth=atoi(str2);
 
-    if (strcmp(str1, "nrow")==0)
-    	config->nrow=atoi(str2);
-
-    if (strcmp(str1, "nvar")==0)
-    	config->nvar=atoi(str2);
-
-    if (strcmp(str1, "nrowTest")==0)
-    	config->nrowTest=atoi(str2);
-
-    if (strcmp(str1, "nvarTest")==0)
-    	config->nvarTest=atof(str2);
-
     if (strcmp(str1, "maxRandomConstant")==0)
     	config->maxRandomConstant=atof(str2);
 
-    if (strcmp(str1, "getRowVarFromFile")==0)
-    	config->getRowVarFromFile=atof(str2);
-
-    if (strcmp(str1, "useMultipleTrainFiles")==0)
-    	config->useMultipleTrainFiles=atoi(str2);
-
     if (strcmp(str1, "logPath")==0)
     	strcpy(config->logPath, str2);
-
-    if (strcmp(str1, "dataPath")==0)
-    	strcpy(config->dataPath, str2);
-
-    if (strcmp(str1, "dataPathTest")==0)
-      strcpy(config->dataPathTest, str2);
-                
+               
     k++;
   } 
     f.close();
@@ -825,6 +793,7 @@ __host__ void saveIndividuals(std::string path, float *hInitialPopulation, std::
 */
 
 __host__ void readInpuTestData( char *test_file, float *dataTest, float *dataTestTarget, int nrowTest, int nvarTest){
+  printf("readInpuTestData \n");
   std::fstream inTest(test_file,ios::in);
   if (!inTest.is_open()){
     cout<<endl<<"ERROR: TEST FILE NOT FOUND." << endl;
@@ -868,7 +837,7 @@ __host__ void readInpuTestData( char *test_file, float *dataTest, float *dataTes
 */
 
 __host__ void readPopulation( float *initialPopulation, float *randomTrees, int sizePopulation, int depth, std::string log, std::string name, std::string nameR){
-  //std::string tmpTime = currentDateTimeM();
+  printf("readPopulation \n");
   char tmPath[50] = "";
   strcpy(tmPath,name.c_str());
   //strcat(tmPath,tmpTime.c_str());
@@ -1046,6 +1015,7 @@ __host__ void intreSemanticCPU(float *initiPop, vector<float> &OutSemantic, floa
 */
 
 __host__ void evaluate_unseen_new_data(std::string path, int generations, const int sizeMaxDepthIndividual, float *initialPopulation, float *randomTrees, std::ofstream& OUT, std::string log, float *dataTest ,int nrow, int numIndi, int nvarTest){
+  printf("evaluate_unseen_new_data \n");
   std::vector<string>filesRa = vector<string>();
   list_dir(log,path,1,filesRa);
   int tama = filesRa.size();

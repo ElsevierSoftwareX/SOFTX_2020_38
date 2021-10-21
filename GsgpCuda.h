@@ -109,24 +109,22 @@ typedef struct entry_{
 * \file     GsgpCuda.h
 */
 typedef struct cfg_{
-  int numberRuns;           /*!< number of iterations of the GSGP algorithm */
   int maxNumberGenerations; /*!< number of generations of the GSGP algorithm */ 
   int populationSize;       /*!< size of the population, number of candidate solutions */
   int maxDepth;             /*!< maximum depth of a newly created individual*/
-  int nrow;                 /*!< variable containing the number of rows (instances) of the training dataset */
-  int nvar;                 /*!< variable containing the number of columns (excluding the target column) of the training dataset */
-  int nrowTest;             /*!< variable containing the number of rows (instances) of the test dataset*/
-  int nvarTest;             /*!< variable containing the number of columns (excluding the target column) of the test dataset */
-  int maxRandomConstant;     /*!< max number for ephemeral random constants */
-  int getRowVarFromFile;
-  int useMultipleTrainFiles;
+  int maxRandomConstant;
   char logPath[100];
-  char dataPath[100];
-  char dataPathTest[100];
 }cfg;
 
 /*!< struct variable containing the values of the parameters specified in the configuration.ini file */
 cfg config;
+
+/*!< struct variable containing the values of the parameters specified in the configuration.ini file */
+int nrow;
+/*!< struct variable containing the values of the parameters specified in the configuration.ini file */
+int nrowTest;
+/*!< struct variable containing the values of the parameters specified in the configuration.ini file */
+int nvar;
 
 /*!
 * \fn       __global__ void init(unsigned int seed, curandState_t* states)
