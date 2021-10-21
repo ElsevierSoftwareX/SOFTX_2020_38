@@ -793,7 +793,7 @@ __host__ void saveIndividuals(std::string path, float *hInitialPopulation, std::
 */
 
 __host__ void readInpuTestData( char *test_file, float *dataTest, float *dataTestTarget, int nrowTest, int nvarTest){
-  printf("readInpuTestData \n");
+
   std::fstream inTest(test_file,ios::in);
   if (!inTest.is_open()){
     cout<<endl<<"ERROR: TEST FILE NOT FOUND." << endl;
@@ -837,7 +837,7 @@ __host__ void readInpuTestData( char *test_file, float *dataTest, float *dataTes
 */
 
 __host__ void readPopulation( float *initialPopulation, float *randomTrees, int sizePopulation, int depth, std::string log, std::string name, std::string nameR){
-  printf("readPopulation \n");
+
   char tmPath[50] = "";
   strcpy(tmPath,name.c_str());
   //strcat(tmPath,tmpTime.c_str());
@@ -1015,7 +1015,7 @@ __host__ void intreSemanticCPU(float *initiPop, vector<float> &OutSemantic, floa
 */
 
 __host__ void evaluate_unseen_new_data(std::string path, int generations, const int sizeMaxDepthIndividual, float *initialPopulation, float *randomTrees, std::ofstream& OUT, std::string log, float *dataTest ,int nrow, int numIndi, int nvarTest){
-  printf("evaluate_unseen_new_data \n");
+  
   std::vector<string>filesRa = vector<string>();
   list_dir(log,path,1,filesRa);
   int tama = filesRa.size();

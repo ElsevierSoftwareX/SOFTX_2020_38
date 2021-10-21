@@ -99,10 +99,6 @@ typedef struct entry_{
 * \param    int maxNumberGenerations: number of generations of the GSGP algorithm 
 * \param    int populationSize: size of the population: number of candidate solutions
 * \param    int maxDepth: maximum depth of a newly created individual
-* \param    int nrow: variable containing the number of rows (instances) of the training dataset
-* \param    int nvar: variable containing the number of columns (excluding the target) of the training dataset
-* \param    int nrowTest: variable containing the number of rows (instances) of the test dataset
-* \param    int nvarTest: variable containing the number of columns (excluding the target) of the test dataset
 * \param    int maxRandomConstant: max number for ephemeral random constants
 * \date     25/01/2020
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
