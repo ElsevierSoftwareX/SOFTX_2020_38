@@ -9,22 +9,12 @@ Modify the parameters accordingly to adjust to the desired evolutionary conditio
 
 | Name     								| Values   |
 | -------- 								| -------- |
-|1.  Number of runs						| 1
-|2.  Number of generations				| 1024
-|3.  Population Size					| 1024
-|4.  Maximun tree Depth					| 10
-|5.  Number of fitness cases (train)	| 720
-|6.  Number of fitness features (train)	| 8
-|7.  Number of fitness cases (test)		| 309
-|8.  Number of fitness features (test)	| 8
-|10. Maximun Random Constant			| 10
-|11. Get Row Var From File              | 0
-|12. Use Multiple Train Files           | 1
-|13. Log Path                           | log/
-|14. Data Path Train                    | dataTrain/
-|15. Data Path Test                     | dataTest/
-|16. Train File                         | train_10107_
-|17. Test File                          | test_10107_
+|1.  Number of generations				| 1024
+|2.  Population Size					| 1024
+|3.  Maximun tree Depth					| 10
+|4. Maximun Random Constant			| 10
+|5. Log Path                           | log/
+
 
 ## Data Description:  
 It is important that the problem data are not separated by ",". Please separate your data by a blank space " ".
