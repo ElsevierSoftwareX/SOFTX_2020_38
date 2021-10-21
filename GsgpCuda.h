@@ -328,6 +328,19 @@ __host__ void readInpuData(char *trainFile, char *testFile, float *dataTrain, fl
 __host__ void readConfigFile(cfg *config);
 
 /*!
+* \fn        __host__ void countInputFile(std::string fileName, int &rows, int &cols)
+* \brief     function that reads rows and colums of files to train and test
+* \param     std::string fileName: This variable store the name of file data train or test
+* \param     int rows: This variable store the number of rows of file data
+* \param     int nvar: This variable store the number of colums of file data
+* \return    void
+* \date      05/10/2021
+* \author    José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
+* \file      GsgpCuda.cpp
+*/
+void countInputFile(std::string fileName, int &rows, int &cols);
+
+/*!
 * \fn       void intreSemanticCPU(float *initiPop, float *OutSemantic, float *data, int nrow, int depth, int numIndi)
 * \brief    This function interprets the generated individuals in CPU to obtain their semantics.
 * \param    float *initiPop: This vector pointers to store the individuals of the initial population.
@@ -341,6 +354,8 @@ __host__ void readConfigFile(cfg *config);
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     testSemantic.cu
 */
+
+
 __host__ void saveIndividuals(std::string path, float *Individuals, std::string namePopulation ,int maxDepth, int sizePopulation);
 
 /*!

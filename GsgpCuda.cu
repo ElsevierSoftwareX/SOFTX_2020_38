@@ -42,10 +42,10 @@ int main(int argc, char **argv){
     cudaSetDevice(0); /*!< Select a GPU device*/
     
     char trainFile[50]=""; /*!< Name of the train file*/
-    char testFile[50]="";
+    char testFile[50]="";  /*!< Name of the test file*/
     char output_model[50]=""; /*!< Name of output files*/
     char pathTrace[50]=""; /*!< Name of the file trace of best model*/
-    char path_test[50]=""; /*!< Name of the file with test instances*/
+    char path_test[50]=""; /*!< Name of the file with unsseen test instances*/
     char pathOutFile[50]=""; /*!< Name of the file to output values*/
     for (int i=1; i<argc-1; i++){
         if(strncmp(argv[i],"-train_file",10) == 0) {
