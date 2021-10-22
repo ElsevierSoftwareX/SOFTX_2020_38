@@ -8,6 +8,7 @@ var _gsgp_cuda_8h =
     [ "clearStack", "_gsgp_cuda_8h.html#a15a884fe465ae2c56899a20d1225ffaf", null ],
     [ "computeError", "_gsgp_cuda_8h.html#a23c025adf27156efab4429238b5f28ea", null ],
     [ "computeSemantics", "_gsgp_cuda_8h.html#a455d4b3760ddfb47ca47a41ac4f6de85", null ],
+    [ "countInputFile", "_gsgp_cuda_8h.html#a0f2ab994581757564401808a1009d47c", null ],
     [ "cudaErrorCheck", "_gsgp_cuda_8h.html#a0d1515a59003b1a58eedefa6dd17a995", null ],
     [ "currentDateTime", "_gsgp_cuda_8h.html#aa46369f3c8adbff876c82270346fffa2", null ],
     [ "evaluate_unseen_new_data", "_gsgp_cuda_8h.html#a815173a15ed4ce63b6776be317df8722", null ],
@@ -30,6 +31,9 @@ var _gsgp_cuda_8h =
     [ "saveTrace", "_gsgp_cuda_8h.html#a5c9d4e48e5ef83d4c60b1f108641260c", null ],
     [ "saveTraceComplete", "_gsgp_cuda_8h.html#af1f98b169175a64c96985976b8a6b1cb", null ],
     [ "sigmoid", "_gsgp_cuda_8h.html#aac4615221ef46543cb25d4807e0b42d2", null ],
-    [ "test", "_gsgp_cuda_8h.html#a780cb33de32b71bfdc0b39796de3c6b8", null ],
-    [ "config", "_gsgp_cuda_8h.html#ac6f73ac686ef53a1065b100d1f764641", null ]
+    [ "test", "_gsgp_cuda_8h.html#af44ca68b304fad2e633d2176754996fd", null ],
+    [ "config", "_gsgp_cuda_8h.html#ac6f73ac686ef53a1065b100d1f764641", null ],
+    [ "nrow", "_gsgp_cuda_8h.html#a8d2a2743f9e24ba875ac91d07fadf1d4", null ],
+    [ "nrowTest", "_gsgp_cuda_8h.html#ab86d8b12b023b979a3961e312547803e", null ],
+    [ "nvar", "_gsgp_cuda_8h.html#a659c08382b54340ded81efe36fcb6106", null ]
 ];

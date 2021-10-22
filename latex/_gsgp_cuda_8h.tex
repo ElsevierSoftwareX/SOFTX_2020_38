@@ -30,6 +30,10 @@ File containing the definition of the modules (kernels) used to create the popul
 {\ttfamily \#include $<$cublas\+\_\+v2.\+h$>$}\newline
 {\ttfamily \#include $<$helper\+\_\+cuda.\+h$>$}\newline
 {\ttfamily \#include $<$helper\+\_\+functions.\+h$>$}\newline
+Include dependency graph for Gsgp\+Cuda.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
 \doxysubsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
@@ -61,28 +65,30 @@ void \mbox{\hyperlink{_gsgp_cuda_8h_a0d1515a59003b1a58eedefa6dd17a995}{cuda\+Err
 \begin{DoxyCompactList}\small\item\em Check if a stack is empty. \end{DoxyCompactList}\item 
 \+\_\+\+\_\+device\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_a15a884fe465ae2c56899a20d1225ffaf}{clear\+Stack}} (int $\ast$push\+Genes, unsigned int size\+Max\+Depth\+Individual, float $\ast$stack\+Ind)
 \begin{DoxyCompactList}\small\item\em remove all elements from the stack so that in the next evaluations there are no previous values of other individuals \end{DoxyCompactList}\item 
-\+\_\+\+\_\+global\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_af1acc65c5e1f4db666357c3565102751}{initialize\+Population}} (float $\ast$d\+Initial\+Population, int nvar, int size\+Max\+Depth\+Individual, curand\+State\+\_\+t $\ast$states, int max\+Random\+Constant)
+\+\_\+\+\_\+global\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_af1acc65c5e1f4db666357c3565102751}{initialize\+Population}} (float $\ast$d\+Initial\+Population, int \mbox{\hyperlink{_gsgp_cuda_8h_a659c08382b54340ded81efe36fcb6106}{nvar}}, int size\+Max\+Depth\+Individual, curand\+State\+\_\+t $\ast$states, int max\+Random\+Constant)
 \begin{DoxyCompactList}\small\item\em The initialize\+Population kernel creates the population of programs T and the set of random trees R uses by the G\+SM kernel, based on the desired population size and maximun program length. The individuals are representd using a linear genome, composed of valid terminals (inputs to the program) and functions (basic elements with which programs can be built). \end{DoxyCompactList}\item 
-\+\_\+\+\_\+global\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_a455d4b3760ddfb47ca47a41ac4f6de85}{compute\+Semantics}} (float $\ast$input\+Population, float $\ast$out\+Semantic, unsigned int size\+Max\+Depth\+Individual, float $\ast$data, int nrow, int nvar, int $\ast$push\+Genes, float $\ast$stack\+Ind)
+\+\_\+\+\_\+global\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_a455d4b3760ddfb47ca47a41ac4f6de85}{compute\+Semantics}} (float $\ast$input\+Population, float $\ast$out\+Semantic, unsigned int size\+Max\+Depth\+Individual, float $\ast$data, int \mbox{\hyperlink{_gsgp_cuda_8h_a8d2a2743f9e24ba875ac91d07fadf1d4}{nrow}}, int \mbox{\hyperlink{_gsgp_cuda_8h_a659c08382b54340ded81efe36fcb6106}{nvar}}, int $\ast$push\+Genes, float $\ast$stack\+Ind)
 \begin{DoxyCompactList}\small\item\em The Compute\+Semantics kernel is an interpreter, that decodes each individual and evaluates it over all fitness cases, producing as output the semantic vector of each individual. The chromosome is interpreted linearly, using an auxiliary L\+I\+FO stack D that stores terminals from the chromosome and the output from valid operations. \end{DoxyCompactList}\item 
-\+\_\+\+\_\+global\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_a23c025adf27156efab4429238b5f28ea}{compute\+Error}} (float $\ast$semantics, float $\ast$target\+Values, float $\ast$fit, int nrow)
+\+\_\+\+\_\+global\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_a23c025adf27156efab4429238b5f28ea}{compute\+Error}} (float $\ast$semantics, float $\ast$target\+Values, float $\ast$fit, int \mbox{\hyperlink{_gsgp_cuda_8h_a8d2a2743f9e24ba875ac91d07fadf1d4}{nrow}})
 \begin{DoxyCompactList}\small\item\em The compute\+Error kernel computes the R\+M\+SE between each row of the semantic matrix ST,m×n and the target vector t, computing the fitness of each individual in the population. \end{DoxyCompactList}\item 
 \+\_\+\+\_\+device\+\_\+\+\_\+ float \mbox{\hyperlink{_gsgp_cuda_8h_aac4615221ef46543cb25d4807e0b42d2}{sigmoid}} (float n)
 \begin{DoxyCompactList}\small\item\em auxiliary function for the geometric semantic mutation operation \end{DoxyCompactList}\item 
 \+\_\+\+\_\+global\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_ae218d64b1ba67bb484c22c4c6ff293f5}{initialize\+Index\+Random\+Trees}} (int size\+Population, float $\ast$index\+Random\+Trees, curand\+State\+\_\+t $\ast$states)
 \item 
-\+\_\+\+\_\+global\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_a74f59e7ae6dd1f3464cba0f9ced82f9b}{geometric\+Semantic\+Mutation}} (float $\ast$initial\+Population\+Semantics, float $\ast$random\+Trees\+Semantics, float $\ast$new\+Semantics\+Offsprings, int size\+Population, int nrow, int t\+Elements, int generation, float $\ast$index\+Random\+Trees, \mbox{\hyperlink{structentry__}{entry\+\_\+}} $\ast$x, \mbox{\hyperlink{structentry__}{entry\+\_\+}} $\ast$y)
+\+\_\+\+\_\+global\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_a74f59e7ae6dd1f3464cba0f9ced82f9b}{geometric\+Semantic\+Mutation}} (float $\ast$initial\+Population\+Semantics, float $\ast$random\+Trees\+Semantics, float $\ast$new\+Semantics\+Offsprings, int size\+Population, int \mbox{\hyperlink{_gsgp_cuda_8h_a8d2a2743f9e24ba875ac91d07fadf1d4}{nrow}}, int t\+Elements, int generation, float $\ast$index\+Random\+Trees, \mbox{\hyperlink{structentry__}{entry\+\_\+}} $\ast$x, \mbox{\hyperlink{structentry__}{entry\+\_\+}} $\ast$y)
 \item 
 \+\_\+\+\_\+host\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_a5c9d4e48e5ef83d4c60b1f108641260c}{save\+Trace}} (std\+::string path, \mbox{\hyperlink{_gsgp_cuda_8h_a9d6caa62b0d171762992c07785d6f197}{entry}} $\ast$x, int generation, int population\+Size)
 \item 
-\+\_\+\+\_\+host\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_acfa80b09d39c91f2febe825a93e95f1c}{read\+Inpu\+Data}} (char $\ast$train\+File, char $\ast$test\+File, float $\ast$data\+Train, float $\ast$data\+Test, float $\ast$data\+Train\+Target, float $\ast$data\+Test\+Target, int nrow, int nvar, int nrow\+Test, int nvar\+Test)
+\+\_\+\+\_\+host\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_acfa80b09d39c91f2febe825a93e95f1c}{read\+Inpu\+Data}} (char $\ast$train\+File, char $\ast$test\+File, float $\ast$data\+Train, float $\ast$data\+Test, float $\ast$data\+Train\+Target, float $\ast$data\+Test\+Target, int \mbox{\hyperlink{_gsgp_cuda_8h_a8d2a2743f9e24ba875ac91d07fadf1d4}{nrow}}, int \mbox{\hyperlink{_gsgp_cuda_8h_a659c08382b54340ded81efe36fcb6106}{nvar}}, int \mbox{\hyperlink{_gsgp_cuda_8h_ab86d8b12b023b979a3961e312547803e}{nrow\+Test}}, int nvar\+Test)
 \begin{DoxyCompactList}\small\item\em This function that reads data from training and test files, also reads target values to store them in pointer vectors. \end{DoxyCompactList}\item 
 \+\_\+\+\_\+host\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_a81e2e6e609828492493948e200939a42}{read\+Config\+File}} (\mbox{\hyperlink{_gsgp_cuda_8h_a69c02f6d66c6461c9a1c6d3d98075b5d}{cfg}} $\ast$\mbox{\hyperlink{_gsgp_cuda_8h_ac6f73ac686ef53a1065b100d1f764641}{config}})
 \begin{DoxyCompactList}\small\item\em function that reads the configuration file \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_gsgp_cuda_8h_a0f2ab994581757564401808a1009d47c}{count\+Input\+File}} (std\+::string file\+Name, int \&rows, int \&cols)
+\begin{DoxyCompactList}\small\item\em function that reads rows and colums of files to train and test \end{DoxyCompactList}\item 
 \+\_\+\+\_\+host\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_a4d31979dbc400ebafec99c299db8be47}{save\+Individuals}} (std\+::string path, float $\ast$Individuals, std\+::string name\+Population, int max\+Depth, int size\+Population)
 \begin{DoxyCompactList}\small\item\em This function that stores the information related to the initial population on file initial\+Population.\+csv. \end{DoxyCompactList}\item 
-\+\_\+\+\_\+host\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_a780cb33de32b71bfdc0b39796de3c6b8}{test}} (float $\ast$individuals, int size\+Max\+Depth, int size\+Population)
-\begin{DoxyCompactList}\small\item\em This file contains the test for the kernel that initializes the individuals on G\+PU. \end{DoxyCompactList}\item 
+\+\_\+\+\_\+host\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_af44ca68b304fad2e633d2176754996fd}{test}} (float $\ast$individuals, int size\+Max\+Depth, int size\+Population)
+\item 
 \+\_\+\+\_\+host\+\_\+\+\_\+ bool \mbox{\hyperlink{_gsgp_cuda_8h_ad9ba1431b7a76132782bc1a24a47c840}{Is\+Path\+Exist}} (const std\+::string \&s)
 \begin{DoxyCompactList}\small\item\em function to check if exist a directory path. \end{DoxyCompactList}\item 
 \+\_\+\+\_\+host\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_ab4e91beb2a1b75296360be78df2ca5af}{check\+Directory\+Path}} (std\+::string dir\+Path)
@@ -93,18 +99,24 @@ void \mbox{\hyperlink{_gsgp_cuda_8h_a0d1515a59003b1a58eedefa6dd17a995}{cuda\+Err
 \begin{DoxyCompactList}\small\item\em Function that stores the information related to the evolutionary cycle and stores the indices of the individuals that were used in each generation to create new offspring, to later perform the reconstruction of the optimal solution in the trace.\+txt file. \end{DoxyCompactList}\item 
 \+\_\+\+\_\+host\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_a9d579ebd2713b78d9374006a9e27e35e}{save\+Trace}} (std\+::string name, std\+::string path, \mbox{\hyperlink{_gsgp_cuda_8h_a9d6caa62b0d171762992c07785d6f197}{entry}} $\ast$struct\+Survivor, int generation, int population\+Size)
 \item 
-\+\_\+\+\_\+host\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_a7e1cf1618da4c06310df9166ea335a2e}{read\+Inpu\+Test\+Data}} (char $\ast$test\+\_\+file, float $\ast$data\+Test, float $\ast$data\+Test\+Target, int nrow\+Test, int nvar\+Test)
+\+\_\+\+\_\+host\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_a7e1cf1618da4c06310df9166ea335a2e}{read\+Inpu\+Test\+Data}} (char $\ast$test\+\_\+file, float $\ast$data\+Test, float $\ast$data\+Test\+Target, int \mbox{\hyperlink{_gsgp_cuda_8h_ab86d8b12b023b979a3961e312547803e}{nrow\+Test}}, int nvar\+Test)
 \item 
 \+\_\+\+\_\+host\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_a5a5753d284363de16b569f12551143ed}{read\+Population}} (float $\ast$initial\+Population, float $\ast$random\+Trees, int size\+Population, int depth, std\+::string log, std\+::string name, std\+::string nameR)
 \begin{DoxyCompactList}\small\item\em This function that read the information related to the initial population from file initial\+Population.\+csv. \end{DoxyCompactList}\item 
-\+\_\+\+\_\+host\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_ad8d75f58f94b6f2ac45b02f2d69c2c23}{intre\+Semantic\+C\+PU}} (float $\ast$initi\+Pop, vector$<$ float $>$ \&Out\+Semantic, float $\ast$data, int nrow, int depth, int index, int nvar\+Test)
+\+\_\+\+\_\+host\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_ad8d75f58f94b6f2ac45b02f2d69c2c23}{intre\+Semantic\+C\+PU}} (float $\ast$initi\+Pop, vector$<$ float $>$ \&Out\+Semantic, float $\ast$data, int \mbox{\hyperlink{_gsgp_cuda_8h_a8d2a2743f9e24ba875ac91d07fadf1d4}{nrow}}, int depth, int index, int nvar\+Test)
 \item 
-\+\_\+\+\_\+host\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_a815173a15ed4ce63b6776be317df8722}{evaluate\+\_\+unseen\+\_\+new\+\_\+data}} (std\+::string path, int generations, const int size\+Max\+Depth\+Individual, float $\ast$initial\+Population, float $\ast$random\+Trees, std\+::ofstream \&O\+UT, std\+::string log, float $\ast$data\+Test, int nrow, int num\+Indi, int nvar\+Test)
+\+\_\+\+\_\+host\+\_\+\+\_\+ void \mbox{\hyperlink{_gsgp_cuda_8h_a815173a15ed4ce63b6776be317df8722}{evaluate\+\_\+unseen\+\_\+new\+\_\+data}} (std\+::string path, int generations, const int size\+Max\+Depth\+Individual, float $\ast$initial\+Population, float $\ast$random\+Trees, std\+::ofstream \&O\+UT, std\+::string log, float $\ast$data\+Test, int \mbox{\hyperlink{_gsgp_cuda_8h_a8d2a2743f9e24ba875ac91d07fadf1d4}{nrow}}, int num\+Indi, int nvar\+Test)
 \begin{DoxyCompactList}\small\item\em This function that evaluates the best model stored in trace.\+txt over newly provided unseen data. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \doxysubsection*{Variables}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{_gsgp_cuda_8h_a69c02f6d66c6461c9a1c6d3d98075b5d}{cfg}} \mbox{\hyperlink{_gsgp_cuda_8h_ac6f73ac686ef53a1065b100d1f764641}{config}}
+\item 
+int \mbox{\hyperlink{_gsgp_cuda_8h_a8d2a2743f9e24ba875ac91d07fadf1d4}{nrow}}
+\item 
+int \mbox{\hyperlink{_gsgp_cuda_8h_ab86d8b12b023b979a3961e312547803e}{nrow\+Test}}
+\item 
+int \mbox{\hyperlink{_gsgp_cuda_8h_a659c08382b54340ded81efe36fcb6106}{nvar}}
 \end{DoxyCompactItemize}
 
 
@@ -148,14 +160,6 @@ José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Ju�
 \hline
 {\em int} & max\+Depth\+: maximum depth of a newly created individual \\
 \hline
-{\em int} & nrow\+: variable containing the number of rows (instances) of the training dataset \\
-\hline
-{\em int} & nvar\+: variable containing the number of columns (excluding the target) of the training dataset \\
-\hline
-{\em int} & nrow\+Test\+: variable containing the number of rows (instances) of the test dataset \\
-\hline
-{\em int} & nvar\+Test\+: variable containing the number of columns (excluding the target) of the test dataset \\
-\hline
 {\em int} & max\+Random\+Constant\+: max number for ephemeral random constants \\
 \hline
 \end{DoxyParams}
@@ -192,7 +196,7 @@ struct variable containing the values of the parameters specified in the configu
 
 
 
-Definition at line 625 of file Gsgp\+Cuda.\+cpp.
+Definition at line 626 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_a15a884fe465ae2c56899a20d1225ffaf}\label{_gsgp_cuda_8h_a15a884fe465ae2c56899a20d1225ffaf}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!clearStack@{clearStack}}
@@ -224,7 +228,7 @@ José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Ju�
 \end{DoxyAuthor}
 
 
-Definition at line 161 of file Gsgp\+Cuda.\+cpp.
+Definition at line 162 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_a23c025adf27156efab4429238b5f28ea}\label{_gsgp_cuda_8h_a23c025adf27156efab4429238b5f28ea}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!computeError@{computeError}}
@@ -258,7 +262,7 @@ José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Ju�
 \end{DoxyAuthor}
 
 
-Definition at line 343 of file Gsgp\+Cuda.\+cpp.
+Definition at line 344 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_a455d4b3760ddfb47ca47a41ac4f6de85}\label{_gsgp_cuda_8h_a455d4b3760ddfb47ca47a41ac4f6de85}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!computeSemantics@{computeSemantics}}
@@ -301,7 +305,39 @@ José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Ju�
 \end{DoxyAuthor}
 
 
-Definition at line 225 of file Gsgp\+Cuda.\+cpp.
+Definition at line 226 of file Gsgp\+Cuda.\+cpp.
+
+\mbox{\Hypertarget{_gsgp_cuda_8h_a0f2ab994581757564401808a1009d47c}\label{_gsgp_cuda_8h_a0f2ab994581757564401808a1009d47c}} 
+\index{GsgpCuda.h@{GsgpCuda.h}!countInputFile@{countInputFile}}
+\index{countInputFile@{countInputFile}!GsgpCuda.h@{GsgpCuda.h}}
+\doxysubsubsection{\texorpdfstring{countInputFile()}{countInputFile()}}
+{\footnotesize\ttfamily void count\+Input\+File (\begin{DoxyParamCaption}\item[{std\+::string}]{file\+Name,  }\item[{int \&}]{rows,  }\item[{int \&}]{cols }\end{DoxyParamCaption})}
+
+
+
+function that reads rows and colums of files to train and test 
+
+
+\begin{DoxyParams}{Parameters}
+{\em std\+::string} & file\+Name\+: This variable store the name of file data train or test \\
+\hline
+{\em int} & rows\+: This variable store the number of rows of file data \\
+\hline
+{\em int} & nvar\+: This variable store the number of colums of file data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\begin{DoxyDate}{Date}
+05/10/2021 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
+\end{DoxyAuthor}
+
+
+Definition at line 509 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_a0d1515a59003b1a58eedefa6dd17a995}\label{_gsgp_cuda_8h_a0d1515a59003b1a58eedefa6dd17a995}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!cudaErrorCheck@{cudaErrorCheck}}
@@ -329,7 +365,7 @@ José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Ju�
 \end{DoxyAuthor}
 
 
-Definition at line 70 of file Gsgp\+Cuda.\+cpp.
+Definition at line 71 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_aa46369f3c8adbff876c82270346fffa2}\label{_gsgp_cuda_8h_aa46369f3c8adbff876c82270346fffa2}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!currentDateTime@{currentDateTime}}
@@ -361,7 +397,7 @@ José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Ju�
 \end{DoxyAuthor}
 
 
-Definition at line 51 of file Gsgp\+Cuda.\+cpp.
+Definition at line 52 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_a815173a15ed4ce63b6776be317df8722}\label{_gsgp_cuda_8h_a815173a15ed4ce63b6776be317df8722}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!evaluate\_unseen\_new\_data@{evaluate\_unseen\_new\_data}}
@@ -409,7 +445,7 @@ José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Ju�
 \end{DoxyAuthor}
 
 
-Definition at line 1026 of file Gsgp\+Cuda.\+cpp.
+Definition at line 1028 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_a74f59e7ae6dd1f3464cba0f9ced82f9b}\label{_gsgp_cuda_8h_a74f59e7ae6dd1f3464cba0f9ced82f9b}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!geometricSemanticMutation@{geometricSemanticMutation}}
@@ -419,7 +455,7 @@ Definition at line 1026 of file Gsgp\+Cuda.\+cpp.
 
 
 
-Definition at line 403 of file Gsgp\+Cuda.\+cpp.
+Definition at line 404 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_a50873854f77ec81aa1e915eaaddf18d3}\label{_gsgp_cuda_8h_a50873854f77ec81aa1e915eaaddf18d3}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!init@{init}}
@@ -450,7 +486,7 @@ José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Ju�
 \end{DoxyAuthor}
 
 
-Definition at line 90 of file Gsgp\+Cuda.\+cpp.
+Definition at line 91 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_ae218d64b1ba67bb484c22c4c6ff293f5}\label{_gsgp_cuda_8h_ae218d64b1ba67bb484c22c4c6ff293f5}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!initializeIndexRandomTrees@{initializeIndexRandomTrees}}
@@ -460,7 +496,7 @@ Definition at line 90 of file Gsgp\+Cuda.\+cpp.
 
 
 
-Definition at line 379 of file Gsgp\+Cuda.\+cpp.
+Definition at line 380 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_af1acc65c5e1f4db666357c3565102751}\label{_gsgp_cuda_8h_af1acc65c5e1f4db666357c3565102751}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!initializePopulation@{initializePopulation}}
@@ -529,7 +565,7 @@ José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Ju�
 \end{DoxyAuthor}
 
 
-Definition at line 141 of file Gsgp\+Cuda.\+cpp.
+Definition at line 142 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_ad9ba1431b7a76132782bc1a24a47c840}\label{_gsgp_cuda_8h_ad9ba1431b7a76132782bc1a24a47c840}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!IsPathExist@{IsPathExist}}
@@ -557,7 +593,7 @@ Luis Armando Cardenas Florido, José Manuel Muñoz Contreras, Leonardo Trujillo,
 \end{DoxyAuthor}
 
 
-Definition at line 611 of file Gsgp\+Cuda.\+cpp.
+Definition at line 612 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_a8a5f5f5e456d163b873a118b6477b4ed}\label{_gsgp_cuda_8h_a8a5f5f5e456d163b873a118b6477b4ed}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!markTracesGeneration@{markTracesGeneration}}
@@ -591,7 +627,7 @@ José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Ju�
 \end{DoxyAuthor}
 
 
-Definition at line 679 of file Gsgp\+Cuda.\+cpp.
+Definition at line 680 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_a955bdc425c4f7867b5b7bdb415ece57a}\label{_gsgp_cuda_8h_a955bdc425c4f7867b5b7bdb415ece57a}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!pop@{pop}}
@@ -621,7 +657,7 @@ José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Ju�
 \end{DoxyAuthor}
 
 
-Definition at line 124 of file Gsgp\+Cuda.\+cpp.
+Definition at line 125 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_a6f6338e7da34e92f8aca5541f4ad4a93}\label{_gsgp_cuda_8h_a6f6338e7da34e92f8aca5541f4ad4a93}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!push@{push}}
@@ -653,7 +689,7 @@ José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Ju�
 \end{DoxyAuthor}
 
 
-Definition at line 107 of file Gsgp\+Cuda.\+cpp.
+Definition at line 108 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_a81e2e6e609828492493948e200939a42}\label{_gsgp_cuda_8h_a81e2e6e609828492493948e200939a42}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!readConfigFile@{readConfigFile}}
@@ -697,13 +733,13 @@ José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Ju�
 \end{DoxyAuthor}
 
 
-Definition at line 505 of file Gsgp\+Cuda.\+cpp.
+Definition at line 539 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_acfa80b09d39c91f2febe825a93e95f1c}\label{_gsgp_cuda_8h_acfa80b09d39c91f2febe825a93e95f1c}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!readInpuData@{readInpuData}}
 \index{readInpuData@{readInpuData}!GsgpCuda.h@{GsgpCuda.h}}
 \doxysubsubsection{\texorpdfstring{readInpuData()}{readInpuData()}}
-{\footnotesize\ttfamily \+\_\+\+\_\+host\+\_\+\+\_\+ void read\+Inpu\+Data (\begin{DoxyParamCaption}\item[{char $\ast$}]{train\+\_\+file,  }\item[{char $\ast$}]{test\+\_\+file,  }\item[{float $\ast$}]{data\+Train,  }\item[{float $\ast$}]{data\+Test,  }\item[{float $\ast$}]{data\+Train\+Target,  }\item[{float $\ast$}]{data\+Test\+Target,  }\item[{int}]{nrow,  }\item[{int}]{nvar,  }\item[{int}]{nrow\+Test,  }\item[{int}]{nvar\+Test }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily \+\_\+\+\_\+host\+\_\+\+\_\+ void read\+Inpu\+Data (\begin{DoxyParamCaption}\item[{char $\ast$}]{train\+File,  }\item[{char $\ast$}]{test\+File,  }\item[{float $\ast$}]{data\+Train,  }\item[{float $\ast$}]{data\+Test,  }\item[{float $\ast$}]{data\+Train\+Target,  }\item[{float $\ast$}]{data\+Test\+Target,  }\item[{int}]{nrow,  }\item[{int}]{nvar,  }\item[{int}]{nrow\+Test,  }\item[{int}]{nvar\+Test }\end{DoxyParamCaption})}
 
 
 
@@ -745,7 +781,7 @@ José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Ju�
 \end{DoxyAuthor}
 
 
-Definition at line 443 of file Gsgp\+Cuda.\+cpp.
+Definition at line 444 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_a7e1cf1618da4c06310df9166ea335a2e}\label{_gsgp_cuda_8h_a7e1cf1618da4c06310df9166ea335a2e}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!readInpuTestData@{readInpuTestData}}
@@ -755,7 +791,7 @@ Definition at line 443 of file Gsgp\+Cuda.\+cpp.
 
 
 
-Definition at line 805 of file Gsgp\+Cuda.\+cpp.
+Definition at line 806 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_a5a5753d284363de16b569f12551143ed}\label{_gsgp_cuda_8h_a5a5753d284363de16b569f12551143ed}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!readPopulation@{readPopulation}}
@@ -795,7 +831,7 @@ José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Ju�
 \end{DoxyAuthor}
 
 
-Definition at line 848 of file Gsgp\+Cuda.\+cpp.
+Definition at line 850 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_a4d31979dbc400ebafec99c299db8be47}\label{_gsgp_cuda_8h_a4d31979dbc400ebafec99c299db8be47}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!saveIndividuals@{saveIndividuals}}
@@ -831,7 +867,7 @@ José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Ju�
 \end{DoxyAuthor}
 
 
-Definition at line 777 of file Gsgp\+Cuda.\+cpp.
+Definition at line 778 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_a9d579ebd2713b78d9374006a9e27e35e}\label{_gsgp_cuda_8h_a9d579ebd2713b78d9374006a9e27e35e}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!saveTrace@{saveTrace}}
@@ -841,7 +877,7 @@ Definition at line 777 of file Gsgp\+Cuda.\+cpp.
 
 
 
-Definition at line 711 of file Gsgp\+Cuda.\+cpp.
+Definition at line 712 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_a5c9d4e48e5ef83d4c60b1f108641260c}\label{_gsgp_cuda_8h_a5c9d4e48e5ef83d4c60b1f108641260c}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!saveTrace@{saveTrace}}
@@ -901,7 +937,7 @@ José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Ju�
 \end{DoxyAuthor}
 
 
-Definition at line 745 of file Gsgp\+Cuda.\+cpp.
+Definition at line 746 of file Gsgp\+Cuda.\+cpp.
 
 \mbox{\Hypertarget{_gsgp_cuda_8h_aac4615221ef46543cb25d4807e0b42d2}\label{_gsgp_cuda_8h_aac4615221ef46543cb25d4807e0b42d2}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!sigmoid@{sigmoid}}
@@ -929,39 +965,13 @@ José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Ju�
 \end{DoxyAuthor}
 
 
-Definition at line 364 of file Gsgp\+Cuda.\+cpp.
+Definition at line 365 of file Gsgp\+Cuda.\+cpp.
 
-\mbox{\Hypertarget{_gsgp_cuda_8h_a780cb33de32b71bfdc0b39796de3c6b8}\label{_gsgp_cuda_8h_a780cb33de32b71bfdc0b39796de3c6b8}} 
+\mbox{\Hypertarget{_gsgp_cuda_8h_af44ca68b304fad2e633d2176754996fd}\label{_gsgp_cuda_8h_af44ca68b304fad2e633d2176754996fd}} 
 \index{GsgpCuda.h@{GsgpCuda.h}!test@{test}}
 \index{test@{test}!GsgpCuda.h@{GsgpCuda.h}}
 \doxysubsubsection{\texorpdfstring{test()}{test()}}
-{\footnotesize\ttfamily void test (\begin{DoxyParamCaption}\item[{float $\ast$}]{individuals,  }\item[{int}]{size\+Max\+Depth,  }\item[{int}]{size\+Population }\end{DoxyParamCaption})}
-
-
-
-This file contains the test for the kernel that initializes the individuals on G\+PU. 
-
-
-\begin{DoxyParams}{Parameters}
-{\em float} & individuals\+: vector pointers to store the individuals of the initial population. \\
-\hline
-{\em int} & size\+Max\+Depth\+: Variable thar stores maximum depth for individuals. \\
-\hline
-{\em int} & size\+Population\+: Size of the population, number of candidate solutions \\
-\hline
-\end{DoxyParams}
-\begin{DoxyReturn}{Returns}
-void 
-\end{DoxyReturn}
-\begin{DoxyDate}{Date}
-5/12/2020 
-\end{DoxyDate}
-\begin{DoxyAuthor}{Author}
-Jose Manuel Muñoz Contreras 
-\end{DoxyAuthor}
-
-
-Definition at line 38 of file test\+Initial\+Population.\+cu.
+{\footnotesize\ttfamily \+\_\+\+\_\+host\+\_\+\+\_\+ void test (\begin{DoxyParamCaption}\item[{float $\ast$}]{individuals,  }\item[{int}]{size\+Max\+Depth,  }\item[{int}]{size\+Population }\end{DoxyParamCaption})}
 
 
 
@@ -972,7 +982,37 @@ Definition at line 38 of file test\+Initial\+Population.\+cu.
 \doxysubsubsection{\texorpdfstring{config}{config}}
 {\footnotesize\ttfamily \mbox{\hyperlink{_gsgp_cuda_8h_a69c02f6d66c6461c9a1c6d3d98075b5d}{cfg}} config}
 
+struct variable containing the values of the parameters specified in the configuration.\+ini file 
+
+Definition at line 116 of file Gsgp\+Cuda.\+h.
+
+\mbox{\Hypertarget{_gsgp_cuda_8h_a8d2a2743f9e24ba875ac91d07fadf1d4}\label{_gsgp_cuda_8h_a8d2a2743f9e24ba875ac91d07fadf1d4}} 
+\index{GsgpCuda.h@{GsgpCuda.h}!nrow@{nrow}}
+\index{nrow@{nrow}!GsgpCuda.h@{GsgpCuda.h}}
+\doxysubsubsection{\texorpdfstring{nrow}{nrow}}
+{\footnotesize\ttfamily int nrow}
+
+struct variable containing the values of the parameters specified in the configuration.\+ini file 
+
+Definition at line 119 of file Gsgp\+Cuda.\+h.
+
+\mbox{\Hypertarget{_gsgp_cuda_8h_ab86d8b12b023b979a3961e312547803e}\label{_gsgp_cuda_8h_ab86d8b12b023b979a3961e312547803e}} 
+\index{GsgpCuda.h@{GsgpCuda.h}!nrowTest@{nrowTest}}
+\index{nrowTest@{nrowTest}!GsgpCuda.h@{GsgpCuda.h}}
+\doxysubsubsection{\texorpdfstring{nrowTest}{nrowTest}}
+{\footnotesize\ttfamily int nrow\+Test}
+
+struct variable containing the values of the parameters specified in the configuration.\+ini file 
+
+Definition at line 121 of file Gsgp\+Cuda.\+h.
+
+\mbox{\Hypertarget{_gsgp_cuda_8h_a659c08382b54340ded81efe36fcb6106}\label{_gsgp_cuda_8h_a659c08382b54340ded81efe36fcb6106}} 
+\index{GsgpCuda.h@{GsgpCuda.h}!nvar@{nvar}}
+\index{nvar@{nvar}!GsgpCuda.h@{GsgpCuda.h}}
+\doxysubsubsection{\texorpdfstring{nvar}{nvar}}
+{\footnotesize\ttfamily int nvar}
 
 
-Definition at line 131 of file Gsgp\+Cuda.\+h.
+
+Definition at line 123 of file Gsgp\+Cuda.\+h.
 

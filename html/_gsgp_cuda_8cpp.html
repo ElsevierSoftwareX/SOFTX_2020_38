@@ -93,6 +93,12 @@ $(document).ready(function(){initNavTree('_gsgp_cuda_8cpp.html',''); initResizab
 <p>file containing the definition of the modules (kernels) used to create the population of individuals, evaluate them, the search operator and read data  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="_gsgp_cuda_8h_source.html">GsgpCuda.h</a>&quot;</code><br />
+<code>#include &lt;string&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for GsgpCuda.cpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="_gsgp_cuda_8cpp__incl.png" border="0" usemap="#a_gsgp_cuda_8cpp" alt=""/></div>
+</div>
 </div>
 <p><a href="_gsgp_cuda_8cpp_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -121,12 +127,12 @@ Functions</h2></td></tr>
 <tr class="memitem:a0c1ed2f842c6b8cf261a6c9f2edd9b0c"><td class="memItemLeft" align="right" valign="top">__device__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#a0c1ed2f842c6b8cf261a6c9f2edd9b0c">clearStack</a> (int *pushGenes, unsigned int sizeMaxDepthIndividual, float *stackInd)</td></tr>
 <tr class="memdesc:a0c1ed2f842c6b8cf261a6c9f2edd9b0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">remove all elements from the stack so that in the next evaluations there are no previous values of other individuals  <a href="_gsgp_cuda_8cpp.html#a0c1ed2f842c6b8cf261a6c9f2edd9b0c">More...</a><br /></td></tr>
 <tr class="separator:a0c1ed2f842c6b8cf261a6c9f2edd9b0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3225b299b0c987b0f7d2f1f350bc7c52"><td class="memItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#a3225b299b0c987b0f7d2f1f350bc7c52">initializePopulation</a> (float *dInitialPopulation, int nvar, int sizeMaxDepthIndividual, curandState_t *states, int maxRandomConstant, int functions)</td></tr>
+<tr class="memitem:a3225b299b0c987b0f7d2f1f350bc7c52"><td class="memItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#a3225b299b0c987b0f7d2f1f350bc7c52">initializePopulation</a> (float *dInitialPopulation, int <a class="el" href="_gsgp_cuda_8h.html#a659c08382b54340ded81efe36fcb6106">nvar</a>, int sizeMaxDepthIndividual, curandState_t *states, int maxRandomConstant, int functions)</td></tr>
 <tr class="separator:a3225b299b0c987b0f7d2f1f350bc7c52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9db7a327b13d8851fe8cfebeee656350"><td class="memItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#a9db7a327b13d8851fe8cfebeee656350">computeSemantics</a> (float *inputPopulation, float *outSemantic, unsigned int sizeMaxDepthIndividual, float *data, int nrow, int nvar, int *pushGenes, float *stackInd)</td></tr>
+<tr class="memitem:a9db7a327b13d8851fe8cfebeee656350"><td class="memItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#a9db7a327b13d8851fe8cfebeee656350">computeSemantics</a> (float *inputPopulation, float *outSemantic, unsigned int sizeMaxDepthIndividual, float *data, int <a class="el" href="_gsgp_cuda_8h.html#a8d2a2743f9e24ba875ac91d07fadf1d4">nrow</a>, int <a class="el" href="_gsgp_cuda_8h.html#a659c08382b54340ded81efe36fcb6106">nvar</a>, int *pushGenes, float *stackInd)</td></tr>
 <tr class="memdesc:a9db7a327b13d8851fe8cfebeee656350"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ComputeSemantics kernel is an interpreter, that decodes each individual and evaluates it over all fitness cases, producing as output the semantic vector of each individual. The chromosome is interpreted linearly, using an auxiliary LIFO stack D that stores terminals from the chromosome and the output from valid operations.  <a href="_gsgp_cuda_8cpp.html#a9db7a327b13d8851fe8cfebeee656350">More...</a><br /></td></tr>
 <tr class="separator:a9db7a327b13d8851fe8cfebeee656350"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac3fa3e601ac3e2c6a64e5c45beaccd89"><td class="memItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#ac3fa3e601ac3e2c6a64e5c45beaccd89">computeError</a> (float *semantics, float *targetValues, float *fit, int nrow)</td></tr>
+<tr class="memitem:ac3fa3e601ac3e2c6a64e5c45beaccd89"><td class="memItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#ac3fa3e601ac3e2c6a64e5c45beaccd89">computeError</a> (float *semantics, float *targetValues, float *fit, int <a class="el" href="_gsgp_cuda_8h.html#a8d2a2743f9e24ba875ac91d07fadf1d4">nrow</a>)</td></tr>
 <tr class="memdesc:ac3fa3e601ac3e2c6a64e5c45beaccd89"><td class="mdescLeft">&#160;</td><td class="mdescRight">The computeError kernel computes the RMSE between each row of the semantic matrix ST,m×n and the target vector t, computing the fitness of each individual in the population.  <a href="_gsgp_cuda_8cpp.html#ac3fa3e601ac3e2c6a64e5c45beaccd89">More...</a><br /></td></tr>
 <tr class="separator:ac3fa3e601ac3e2c6a64e5c45beaccd89"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a86a361f9f62d54f600cebb5612b660fc"><td class="memItemLeft" align="right" valign="top">__device__ float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#a86a361f9f62d54f600cebb5612b660fc">sigmoid</a> (float n)</td></tr>
@@ -134,11 +140,14 @@ Functions</h2></td></tr>
 <tr class="separator:a86a361f9f62d54f600cebb5612b660fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae218d64b1ba67bb484c22c4c6ff293f5"><td class="memItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#ae218d64b1ba67bb484c22c4c6ff293f5">initializeIndexRandomTrees</a> (int sizePopulation, float *indexRandomTrees, curandState_t *states)</td></tr>
 <tr class="separator:ae218d64b1ba67bb484c22c4c6ff293f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74f59e7ae6dd1f3464cba0f9ced82f9b"><td class="memItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#a74f59e7ae6dd1f3464cba0f9ced82f9b">geometricSemanticMutation</a> (float *initialPopulationSemantics, float *randomTreesSemantics, float *newSemanticsOffsprings, int sizePopulation, int nrow, int tElements, int generation, float *indexRandomTrees, <a class="el" href="structentry__.html">entry_</a> *x, <a class="el" href="structentry__.html">entry_</a> *y)</td></tr>
+<tr class="memitem:a74f59e7ae6dd1f3464cba0f9ced82f9b"><td class="memItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#a74f59e7ae6dd1f3464cba0f9ced82f9b">geometricSemanticMutation</a> (float *initialPopulationSemantics, float *randomTreesSemantics, float *newSemanticsOffsprings, int sizePopulation, int <a class="el" href="_gsgp_cuda_8h.html#a8d2a2743f9e24ba875ac91d07fadf1d4">nrow</a>, int tElements, int generation, float *indexRandomTrees, <a class="el" href="structentry__.html">entry_</a> *x, <a class="el" href="structentry__.html">entry_</a> *y)</td></tr>
 <tr class="separator:a74f59e7ae6dd1f3464cba0f9ced82f9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a14bc95f02546f2ed56ce69770053714b"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#a14bc95f02546f2ed56ce69770053714b">readInpuData</a> (char *train_file, char *test_file, float *dataTrain, float *dataTest, float *dataTrainTarget, float *dataTestTarget, int nrow, int nvar, int nrowTest, int nvarTest)</td></tr>
-<tr class="memdesc:a14bc95f02546f2ed56ce69770053714b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function that reads data from training and test files, also reads target values to store them in pointer vectors.  <a href="_gsgp_cuda_8cpp.html#a14bc95f02546f2ed56ce69770053714b">More...</a><br /></td></tr>
-<tr class="separator:a14bc95f02546f2ed56ce69770053714b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c3b4eb0e0d4a159a219555d49841601"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#a4c3b4eb0e0d4a159a219555d49841601">readInpuData</a> (char *trainFile, char *testFile, float *dataTrain, float *dataTest, float *dataTrainTarget, float *dataTestTarget, int <a class="el" href="_gsgp_cuda_8h.html#a8d2a2743f9e24ba875ac91d07fadf1d4">nrow</a>, int <a class="el" href="_gsgp_cuda_8h.html#a659c08382b54340ded81efe36fcb6106">nvar</a>, int <a class="el" href="_gsgp_cuda_8h.html#ab86d8b12b023b979a3961e312547803e">nrowTest</a>, int nvarTest)</td></tr>
+<tr class="memdesc:a4c3b4eb0e0d4a159a219555d49841601"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function that reads data from training and test files, also reads target values to store them in pointer vectors.  <a href="_gsgp_cuda_8cpp.html#a4c3b4eb0e0d4a159a219555d49841601">More...</a><br /></td></tr>
+<tr class="separator:a4c3b4eb0e0d4a159a219555d49841601"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aacc46648ced659c7d754a8546097fbdd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#aacc46648ced659c7d754a8546097fbdd">countInputFile</a> (std::string fileName, int &amp;rows, int &amp;cols)</td></tr>
+<tr class="memdesc:aacc46648ced659c7d754a8546097fbdd"><td class="mdescLeft">&#160;</td><td class="mdescRight">function that reads rows and colums of files to train and test  <a href="_gsgp_cuda_8cpp.html#aacc46648ced659c7d754a8546097fbdd">More...</a><br /></td></tr>
+<tr class="separator:aacc46648ced659c7d754a8546097fbdd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3ad4f51591d12acf0b3d3fc0badfca4d"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#a3ad4f51591d12acf0b3d3fc0badfca4d">readConfigFile</a> (<a class="el" href="_gsgp_cuda_8h.html#a69c02f6d66c6461c9a1c6d3d98075b5d">cfg</a> *<a class="el" href="_gsgp_cuda_8h.html#ac6f73ac686ef53a1065b100d1f764641">config</a>)</td></tr>
 <tr class="memdesc:a3ad4f51591d12acf0b3d3fc0badfca4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">function that reads the configuration file  <a href="_gsgp_cuda_8cpp.html#a3ad4f51591d12acf0b3d3fc0badfca4d">More...</a><br /></td></tr>
 <tr class="separator:a3ad4f51591d12acf0b3d3fc0badfca4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -158,7 +167,7 @@ Functions</h2></td></tr>
 <tr class="memitem:a6c5d1be84ec27b9c191cd63a0ecded09"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#a6c5d1be84ec27b9c191cd63a0ecded09">saveIndividuals</a> (std::string path, float *hInitialPopulation, std::string namePopulation, int sizeMaxDepthIndividual, int populationSize)</td></tr>
 <tr class="memdesc:a6c5d1be84ec27b9c191cd63a0ecded09"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function that stores the information related to the initial population on file initialPopulation.csv.  <a href="_gsgp_cuda_8cpp.html#a6c5d1be84ec27b9c191cd63a0ecded09">More...</a><br /></td></tr>
 <tr class="separator:a6c5d1be84ec27b9c191cd63a0ecded09"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7e1cf1618da4c06310df9166ea335a2e"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#a7e1cf1618da4c06310df9166ea335a2e">readInpuTestData</a> (char *test_file, float *dataTest, float *dataTestTarget, int nrowTest, int nvarTest)</td></tr>
+<tr class="memitem:a7e1cf1618da4c06310df9166ea335a2e"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#a7e1cf1618da4c06310df9166ea335a2e">readInpuTestData</a> (char *test_file, float *dataTest, float *dataTestTarget, int <a class="el" href="_gsgp_cuda_8h.html#ab86d8b12b023b979a3961e312547803e">nrowTest</a>, int nvarTest)</td></tr>
 <tr class="separator:a7e1cf1618da4c06310df9166ea335a2e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ec819e51f34bfda52361155d76a6229"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#a6ec819e51f34bfda52361155d76a6229">readPopulation</a> (float *initialPopulation, float *randomTrees, int sizePopulation, int depth, std::string log, std::string name, std::string nameR)</td></tr>
 <tr class="memdesc:a6ec819e51f34bfda52361155d76a6229"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function that read the information related to the initial population from file initialPopulation.csv.  <a href="_gsgp_cuda_8cpp.html#a6ec819e51f34bfda52361155d76a6229">More...</a><br /></td></tr>
@@ -166,9 +175,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ad24bb36aabdb435d1e655502e16154f1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#ad24bb36aabdb435d1e655502e16154f1">clear</a> (stack&lt; float &gt; as)</td></tr>
 <tr class="memdesc:ad24bb36aabdb435d1e655502e16154f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">remove all elements from the stack so that in the next evaluations there are no previous values of other individuals  <a href="_gsgp_cuda_8cpp.html#ad24bb36aabdb435d1e655502e16154f1">More...</a><br /></td></tr>
 <tr class="separator:ad24bb36aabdb435d1e655502e16154f1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a2e8b73094b4bc28e9e1bedd8fcefb6"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#a0a2e8b73094b4bc28e9e1bedd8fcefb6">intreSemanticCPU</a> (float *initiPop, vector&lt; float &gt; &amp;OutSemantic, float *data, int nrow, int depth, int index, int nvarTest, int l)</td></tr>
+<tr class="memitem:a0a2e8b73094b4bc28e9e1bedd8fcefb6"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#a0a2e8b73094b4bc28e9e1bedd8fcefb6">intreSemanticCPU</a> (float *initiPop, vector&lt; float &gt; &amp;OutSemantic, float *data, int <a class="el" href="_gsgp_cuda_8h.html#a8d2a2743f9e24ba875ac91d07fadf1d4">nrow</a>, int depth, int index, int nvarTest, int l)</td></tr>
 <tr class="separator:a0a2e8b73094b4bc28e9e1bedd8fcefb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af2468d548e2a477b520bad9918c1fc53"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#af2468d548e2a477b520bad9918c1fc53">evaluate_unseen_new_data</a> (std::string path, int generations, const int sizeMaxDepthIndividual, float *initialPopulation, float *randomTrees, std::ofstream &amp;OUT, std::string log, float *dataTest, int nrow, int numIndi, int nvarTest)</td></tr>
+<tr class="memitem:af2468d548e2a477b520bad9918c1fc53"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8cpp.html#af2468d548e2a477b520bad9918c1fc53">evaluate_unseen_new_data</a> (std::string path, int generations, const int sizeMaxDepthIndividual, float *initialPopulation, float *randomTrees, std::ofstream &amp;OUT, std::string log, float *dataTest, int <a class="el" href="_gsgp_cuda_8h.html#a8d2a2743f9e24ba875ac91d07fadf1d4">nrow</a>, int numIndi, int nvarTest)</td></tr>
 <tr class="memdesc:af2468d548e2a477b520bad9918c1fc53"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function that evaluates the best model stored in trace.txt over newly provided unseen data.  <a href="_gsgp_cuda_8cpp.html#af2468d548e2a477b520bad9918c1fc53">More...</a><br /></td></tr>
 <tr class="separator:af2468d548e2a477b520bad9918c1fc53"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
@@ -196,7 +205,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00625">625</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00626">626</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -225,18 +234,9 @@ Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>07/10/2021 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">stack</td><td>as: auxiliary pointer that stores the values ​​resulting from the evaluation of each individual </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00914">914</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00916">916</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -285,7 +285,7 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00161">161</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00162">162</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -341,7 +341,7 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00343">343</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00344">344</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -426,7 +426,56 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00225">225</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00226">226</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aacc46648ced659c7d754a8546097fbdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aacc46648ced659c7d754a8546097fbdd">&#9670;&nbsp;</a></span>countInputFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">&lt; strong &gt; host&lt;/strong &gt; void countInputFile </td>
+          <td>(</td>
+          <td class="paramtype">std::string&#160;</td>
+          <td class="paramname"><em>fileName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>rows</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int &amp;&#160;</td>
+          <td class="paramname"><em>cols</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>function that reads rows and colums of files to train and test </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">std::string</td><td>fileName: This variable store the name of file data train or test </td></tr>
+    <tr><td class="paramname">int</td><td>rows: This variable store the number of rows of file data </td></tr>
+    <tr><td class="paramname">int</td><td>nvar: This variable store the number of colums of file data </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>05/10/2021 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00509">509</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -457,7 +506,7 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00070">70</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00071">71</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -484,7 +533,7 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>25/01/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00051">51</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00052">52</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -503,7 +552,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00034">34</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00035">35</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -608,7 +657,7 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>05/12/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l01026">1026</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l01028">1028</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -686,7 +735,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00403">403</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00404">404</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -729,7 +778,7 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00090">90</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00091">91</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -765,7 +814,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00379">379</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00380">380</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -819,7 +868,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00184">184</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00185">185</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -885,7 +934,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00935">935</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00937">937</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -928,7 +977,7 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00141">141</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00142">142</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -959,7 +1008,7 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>27/02/2021 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Luis Armando Cardenas Florido, José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00611">611</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00612">612</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -1015,7 +1064,7 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>10/02/2021 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00679">679</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00680">680</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -1057,7 +1106,7 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00124">124</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00125">125</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -1106,7 +1155,7 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00107">107</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00108">108</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -1147,12 +1196,12 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00505">505</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00539">539</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
-<a id="a14bc95f02546f2ed56ce69770053714b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a14bc95f02546f2ed56ce69770053714b">&#9670;&nbsp;</a></span>readInpuData()</h2>
+<a id="a4c3b4eb0e0d4a159a219555d49841601"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c3b4eb0e0d4a159a219555d49841601">&#9670;&nbsp;</a></span>readInpuData()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1246,7 +1295,7 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00443">443</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00444">444</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -1294,7 +1343,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00805">805</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00806">806</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -1371,7 +1420,7 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>8/10/2021 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00848">848</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00850">850</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -1434,7 +1483,7 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00777">777</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00778">778</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -1482,7 +1531,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00711">711</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00712">712</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -1550,7 +1599,7 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>08/10/2021 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00745">745</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00746">746</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -1581,7 +1630,7 @@ Functions</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00364">364</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00365">365</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>

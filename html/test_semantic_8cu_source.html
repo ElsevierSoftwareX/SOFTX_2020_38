@@ -87,86 +87,103 @@ $(document).ready(function(){initNavTree('test_semantic_8cu_source.html',''); in
 <div class="title">testSemantic.cu</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="test_semantic_8cu.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*&lt;one line to give the program&#39;s name and a brief idea of what it does.&gt;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">    Copyright (C) 2020 José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">    This program is free software: you can redistribute it and/or modify</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    it under the terms of the GNU General Public License as published by</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    the Free Software Foundation, either version 3 of the License, or</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">    (at your option) any later version.</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">     This program is distributed in the hope that it will be useful,</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">    but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">    GNU General Public License for more details.</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">    You should have received a copy of the GNU Affero General Public License</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">    along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">*/</span></div>
+<a href="test_semantic_8cu.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;/*&lt;one line to give the program&#39;s name and a brief idea of what it does.&gt;</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    Copyright (C) 2020 José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    This program is free software: you can redistribute it and/or modify</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    it under the terms of the GNU General Public License as published by</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    the Free Software Foundation, either version 3 of the License, or</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    (at your option) any later version.</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;     This program is distributed in the hope that it will be useful,</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    but WITHOUT ANY WARRANTY; without even the implied warranty of</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    GNU General Public License for more details.</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    You should have received a copy of the GNU Affero General Public License</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;*/</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;//! \file   testSemantic.cu</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;//! \brief  This file contains the test for parallel interpreter that is used to decode the GP individuals.</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;//! \date   created on 05/12/2020</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_gsgp_cuda_8cpp.html">GsgpCuda.cpp</a>&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;cstdio&gt;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;cstdlib&gt;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;ostream&gt;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;stack&gt;</span></div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keyword">using namespace </span>std;   </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;#include &quot;GsgpCuda.cpp&quot;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;#include &lt;cstdio&gt;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;#include &lt;cstdlib&gt;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;#include &lt;ostream&gt;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;#include &lt;stack&gt;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;using namespace std;   </div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="test_semantic_8cu.html#a51021d5e1264e0851a87e3fe403eb20d">   43</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="test_semantic_8cu.html#a51021d5e1264e0851a87e3fe403eb20d">individualsTest</a>(<span class="keywordtype">float</span> *caseTest, <span class="keywordtype">int</span> caseOption, <span class="keywordtype">int</span> depth, <span class="keywordtype">int</span> numIndi, <span class="keywordtype">int</span> nvar){</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;/*!</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;* \fn       void individualsTest(float *caseTest, int caseOption, int depth, int numIndi, int nvar)</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;* \brief    This function initializes the individuals in the population depending on the case, they can be addition, subtraction, multiplication and division.</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;* \param    float *caseTest: vector pointers to store the individuals of the initial population</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;* \param    int caseOption: This variable determines what type of individuals will be generated</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;* \param    int depth: Variable thar stores maximum depth for individuals</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;* \param    int *numIndi: This variable contains the number of individuals that exist in the initial population.</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;* \param    int *nrow: This variable contains the number of fitness cases.</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;* \param    int *nvar: This variable contains the number of variable in problem.</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;* \return   void</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;* \date     05/12/2020</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;* \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;* \file     testSemantic.cu</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;*/</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;void individualsTest(float *caseTest, int caseOption, int depth, int numIndi, int nvar){</div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    srand(time(NULL));</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordtype">int</span> ale;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="keywordflow">if</span> (caseOption==1) {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        printf(<span class="stringliteral">&quot;Print case one\n&quot;</span>);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0; j&lt;numIndi; j++) {</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;depth; i++) {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    int ale;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    if (caseOption==1) {</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        printf(&quot;Print case one\n&quot;);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        for (int j=0; j&lt;numIndi; j++) {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;            for (int i=0; i&lt;depth; i++) {</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                ale = rand()%(3);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                <span class="keywordflow">if</span> (ale==1) {</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                if (ale==1) {</div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                    caseTest[j*depth+i]=-1;</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                }<span class="keywordflow">else</span> <span class="keywordflow">if</span>(ale==2){</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;                }else if(ale==2){</div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;                    caseTest[j*depth+i]=10;</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                }<span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                }else {</div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                    caseTest[j*depth+i]=-1000;</div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;                }    </div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            }   </div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        }</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }<span class="keywordflow">else</span> <span class="keywordflow">if</span> (caseOption==2) {</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        printf(<span class="stringliteral">&quot;Print case two \n&quot;</span>);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0; j&lt;numIndi; j++) {</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;depth; i++) {</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }else if (caseOption==2) {</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        printf(&quot;Print case two \n&quot;);</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;        for (int j=0; j&lt;numIndi; j++) {</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            for (int i=0; i&lt;depth; i++) {</div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                ale = rand()%(3);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                <span class="keywordflow">if</span> (ale==1) {</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;                if (ale==1) {</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                    caseTest[j*depth+i]=-2;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                }<span class="keywordflow">else</span> <span class="keywordflow">if</span>(ale==2){</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                }else if(ale==2){</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;                    caseTest[j*depth+i]=10;</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                }<span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;                }else {</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                    caseTest[j*depth+i]=-1000;</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;                }    </div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;            }   </div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        }</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }<span class="keywordflow">else</span> <span class="keywordflow">if</span> (caseOption==3) {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        printf(<span class="stringliteral">&quot;Print case three \n&quot;</span>);</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0; j&lt;numIndi; j++) {</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;depth; i++) {</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    }else if (caseOption==3) {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        printf(&quot;Print case three \n&quot;);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        for (int j=0; j&lt;numIndi; j++) {</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            for (int i=0; i&lt;depth; i++) {</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;                ale = rand()%(3);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                <span class="keywordflow">if</span> (ale==1) {</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                if (ale==1) {</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;                    caseTest[j*depth+i]=-3;</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                }<span class="keywordflow">else</span> <span class="keywordflow">if</span>(ale==2){</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;                }else if(ale==2){</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;                    caseTest[j*depth+i]=1;</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                }<span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;                }else {</div>
 <div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;                    caseTest[j*depth+i]=-1000;</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                }    </div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;            }   </div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        }</div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }<span class="keywordflow">else</span> <span class="keywordflow">if</span> (caseOption==4) {</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        printf(<span class="stringliteral">&quot;Print case four%d \n&quot;</span>,caseOption);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0; j&lt;numIndi; j++) {</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;depth; i++) {</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    }else if (caseOption==4) {</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;        printf(&quot;Print case four%d \n&quot;,caseOption);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;        for (int j=0; j&lt;numIndi; j++) {</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;            for (int i=0; i&lt;depth; i++) {</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                ale = rand()%(3);</div>
-<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                <span class="keywordflow">if</span> (ale==1) {</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;                if (ale==1) {</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;                    caseTest[j*depth+i]=-4;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                }<span class="keywordflow">else</span> <span class="keywordflow">if</span>(ale==2){</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;                }else if(ale==2){</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                    caseTest[j*depth+i]=1;</div>
-<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                }<span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;                }else {</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;                    caseTest[j*depth+i]=-1000;</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;                }    </div>
 <div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;            }   </div>
@@ -174,107 +191,173 @@ $(document).ready(function(){initNavTree('test_semantic_8cu_source.html',''); in
 <div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;    }</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;}</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160; </div>
-<div class="line"><a name="l00116"></a><span class="lineno"><a class="line" href="test_semantic_8cu.html#aa8ae90db1c53e9d06b6122fdb2264c1f">  116</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="test_semantic_8cu.html#aa8ae90db1c53e9d06b6122fdb2264c1f">resetIndi</a>(<span class="keywordtype">float</span> *caseTest, <span class="keywordtype">int</span> numIndi, <span class="keywordtype">int</span> depth){</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;numIndi; i++) {</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0; j&lt;depth; j++) {</div>
+<div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;/*!</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;* \fn       void resetIndi(float *caseTest, int numIndi, int depth)</div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;* \brief    This function initializes all elements of the individual to 0.</div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;* \param    float *caseTest: This vector of pointers contains the semantics of the initial population or random trees as the case may be.</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;* \param    int *numIndi: This variable contains the number of individuals that exist in the initial population.</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;* \param    int *depth: Variable thar stores maximum depth for individuals.</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;* \return   void</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;* \date     05/12/2020</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;* \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;* \file     testSemantic.cu</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;*/</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;void resetIndi(float *caseTest, int numIndi, int depth){</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;    for (int i=0; i&lt;numIndi; i++) {</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;        for (int j=0; j&lt;depth; j++) {</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;            caseTest[i*depth+j]=0;</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;        }</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;    }</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;}</div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160; </div>
-<div class="line"><a name="l00134"></a><span class="lineno"><a class="line" href="test_semantic_8cu.html#ae94af3503fb3f0687ae5832b976f9bc9">  134</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="test_semantic_8cu.html#ae94af3503fb3f0687ae5832b976f9bc9">fitnessCases</a>(<span class="keywordtype">float</span> *fitCases, <span class="keywordtype">int</span> nrow){</div>
-<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;nrow; i++) {</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;/*!</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;* \fn       void fitnessCases(float *fitCases, int nrow)</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;* \brief    This function only generates an aptitude case to test individuals.</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;* \param    float *fitCases:This vector of pointers contains the instances to train or fitnes cases.</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;* \param    int *nrow: This variable contains the number of fitness cases.</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;* \return   void</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;* \date     05/12/2020</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;* \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;* \file     testSemantic.cu</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;*/</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;void fitnessCases(float *fitCases, int nrow){</div>
+<div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;    for (int i=0; i&lt;nrow; i++) {</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        fitCases[i]=2;</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    }</div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;}</div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160; </div>
-<div class="line"><a name="l00151"></a><span class="lineno"><a class="line" href="test_semantic_8cu.html#a58802765eea2a18311ad4839ec9c9db8">  151</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="test_semantic_8cu.html#a58802765eea2a18311ad4839ec9c9db8">imprimeIndividuals</a>(<span class="keywordtype">float</span> *caseTest, <span class="keywordtype">int</span> numIndi, <span class="keywordtype">int</span> depth){</div>
-<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;numIndi; i++) {</div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0; j&lt;depth; j++) {</div>
-<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            printf(<span class="stringliteral">&quot; %f,&quot;</span>, caseTest[i*depth+j]);</div>
+<div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;/*!</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;* \fn       void imprimeIndividuals(float *caseTest, int numIndi, int depth)</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;* \brief    This function initializes with random numbers between 0 and 1 the semantics for initial population and random trees.</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;* \param    float *caseTest:This vector of pointers contains the indivuduals of the initial population.</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;* \param    int *numIndi: This variable contains the number of individuals that exist in the initial population.</div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;* \param    int *depth: Variable thar stores maximum depth for individuals.</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;* \return   void</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;* \date     05/12/2020</div>
+<div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;* \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;* \file     testSemantic.cu</div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;*/</div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;void imprimeIndividuals(float *caseTest, int numIndi, int depth){</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;    for (int i=0; i&lt;numIndi; i++) {</div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;        for (int j=0; j&lt;depth; j++) {</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160;            printf(&quot; %f,&quot;, caseTest[i*depth+j]);</div>
 <div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;        }</div>
-<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        printf(<span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160;        printf(&quot;\n&quot;);</div>
 <div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    }</div>
 <div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160;}</div>
 <div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160; </div>
-<div class="line"><a name="l00171"></a><span class="lineno"><a class="line" href="test_semantic_8cu.html#a32132b70a7cb7fd7bcae2d27bcd7a119">  171</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="test_semantic_8cu.html#a32132b70a7cb7fd7bcae2d27bcd7a119">imprimeSemantic</a>(<span class="keywordtype">float</span> *devSemanticTrainCases, <span class="keywordtype">int</span> numIndi, <span class="keywordtype">int</span> depth){</div>
-<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;numIndi; i++) {</div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0; j&lt;depth; j++) {</div>
-<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            printf(<span class="stringliteral">&quot; %f,&quot;</span>, devSemanticTrainCases[i*depth+j]);</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160;/*!</div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;* \fn       void imprimeSemantic(float *caseTest, int numIndi, int depth)</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160;* \brief    This function print the semantic of the initial population.</div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;* \param    float *devSemanticTrainCases:This vector of pointers contains the semantic of the initial population.</div>
+<div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;* \param    int *numIndi: This variable contains the number of individuals that exist in the initial population.</div>
+<div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160;* \param    int *depth: Variable thar stores maximum depth for individuals.</div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;* \return   void</div>
+<div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;* \date     05/12/2020</div>
+<div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160;* \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;* \file     testSemantic.cu</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;*/</div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;void imprimeSemantic(float *devSemanticTrainCases, int numIndi, int depth){</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    for (int i=0; i&lt;numIndi; i++) {</div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;        for (int j=0; j&lt;depth; j++) {</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160;            printf(&quot; %f,&quot;, devSemanticTrainCases[i*depth+j]);</div>
 <div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;        }</div>
-<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        printf(<span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160;        printf(&quot;\n&quot;);</div>
 <div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    }</div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;}</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
-<div class="line"><a name="l00189"></a><span class="lineno"><a class="line" href="test_semantic_8cu.html#a437d4cfa4d8eaa8ec4b05856fcaad5cf">  189</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="test_semantic_8cu.html#a437d4cfa4d8eaa8ec4b05856fcaad5cf">clean</a>(stack &lt;float&gt; as){</div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    <span class="keywordtype">int</span> a = as.size();</div>
-<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    <span class="keywordflow">while</span> (!as.empty()){</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;/*!</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160;* \fn       void clear(stack &lt;float&gt; as)</div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;* \brief    remove all elements from the stack so that in the next evaluations there are no previous values of other individuals</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160;* \param    stack as: auxiliary pointer that stores the values ​​resulting from the evaluation of each individual</div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;* \return   void</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;* \date     01/25/2020</div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;* \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;* \file     GsgpCuda.cpp </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;*/</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160;void clean(stack &lt;float&gt; as){</div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    int a = as.size();</div>
+<div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    while (!as.empty()){</div>
 <div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;        as.pop();</div>
 <div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160;    }</div>
 <div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;}</div>
 <div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160; </div>
-<div class="line"><a name="l00210"></a><span class="lineno"><a class="line" href="test_semantic_8cu.html#ab59679eec3aae3bb786e04eaa2fbe50e">  210</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="test_semantic_8cu.html#ab59679eec3aae3bb786e04eaa2fbe50e">intreSemanticCPU</a>(<span class="keywordtype">float</span> *initiPop, <span class="keywordtype">float</span> *OutSemantic, <span class="keywordtype">float</span> *data, <span class="keywordtype">int</span> nrow, <span class="keywordtype">int</span> depth, <span class="keywordtype">int</span> numIndi){</div>
-<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    <span class="keywordtype">float</span> tmp,tmp2,out;</div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;/*!</div>
+<div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;* \fn       void intreSemanticCPU(float *initiPop, float *OutSemantic, float *data, int nrow, int depth, int numIndi)</div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;* \brief    This function interprets the generated individuals in CPU to obtain their semantics.</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160;* \param    float *initiPop: This vector pointers to store the individuals of the initial population.</div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;* \param    flot  *OutSemantic: vector pointers to store the semantics of each individual in the population.</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;* \param    float *data: This pointer vector containing training or test data.</div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;* \param    int *nrow: This variable contains the number of fitness cases.</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160;* \param    int depth: This variable thar stores maximum depth for individuals</div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;* \param    int numIndi: This variable contains the number of individuals that exist in the initial population.</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160;* \return   void</div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;* \date     05/12/2020</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160;* \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;* \file     testSemantic.cu</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;*/</div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;void intreSemanticCPU(float *initiPop, float *OutSemantic, float *data, int nrow, int depth, int numIndi){</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    float tmp,tmp2,out;</div>
 <div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    stack &lt;float&gt; a;</div>
-<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> l=0; l&lt;nrow; l++) {</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    for (int l=0; l&lt;nrow; l++) {</div>
 <div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;        out=0;</div>
-<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        <a class="code" href="test_semantic_8cu.html#a437d4cfa4d8eaa8ec4b05856fcaad5cf">clean</a>(a);</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;        clean(a);</div>
 <div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;        a = stack&lt;float&gt;();</div>
-<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        <a class="code" href="_gsgp_cuda_8cpp.html#ad24bb36aabdb435d1e655502e16154f1">clear</a>(a);</div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;        <span class="keywordflow">if</span> (a.empty()) {</div>
-<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;            <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;numIndi; i++) {</div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;                <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0; j&lt;depth; j++) {</div>
-<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;                    <span class="keywordflow">if</span> (initiPop[i*depth+j]&gt;0) {</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;        clear(a);</div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;        if (a.empty()) {</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160;            for (int i=0; i&lt;numIndi; i++) {</div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;                for (int j=0; j&lt;depth; j++) {</div>
+<div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;                    if (initiPop[i*depth+j]&gt;0) {</div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160;                        a.push(initiPop[i*depth+j]);</div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;                    }<span class="keywordflow">else</span> <span class="keywordflow">if</span> (initiPop[i*depth+j] &lt;= -1000) {</div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;                    }else if (initiPop[i*depth+j] &lt;= -1000) {</div>
 <div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;                        a.push(data[l]);</div>
-<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;                    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (initiPop[i*depth+j]== -1) {</div>
-<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;                        <span class="keywordflow">if</span> (!a.empty()) {</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;                    } else if (initiPop[i*depth+j]== -1) {</div>
+<div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;                        if (!a.empty()) {</div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;                            tmp = a.top();</div>
 <div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;                            a.pop();</div>
-<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                        } <span class="keywordflow">if</span> (!a.empty()) {</div>
+<div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160;                        } if (!a.empty()) {</div>
 <div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;                            tmp2 = a.top();</div>
 <div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;                            a.pop();</div>
 <div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;                            a.push(tmp+tmp2);</div>
 <div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;                            out=tmp+tmp2;  </div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;                        } else {</div>
 <div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;                            a.push(tmp);</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;                        }          </div>
-<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                    }  <span class="keywordflow">else</span> <span class="keywordflow">if</span> (initiPop[i*depth+j]== -2) {</div>
-<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                        <span class="keywordflow">if</span> (!a.empty()) {</div>
+<div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;                    }  else if (initiPop[i*depth+j]== -2) {</div>
+<div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;                        if (!a.empty()) {</div>
 <div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;                            tmp = a.top();</div>
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160;                            a.pop();</div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                        } <span class="keywordflow">if</span> (!a.empty()) {</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;                        } if (!a.empty()) {</div>
 <div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;                            tmp2 = a.top();</div>
 <div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;                            a.pop();</div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;                            out=tmp-tmp2;  </div>
 <div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;                            a.push(out);</div>
-<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;                        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;                        } else {</div>
 <div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;                            a.push(tmp);</div>
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160;                        }          </div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;                    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (initiPop[i*depth+j]== -3) {</div>
-<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                        <span class="keywordflow">if</span> (!a.empty()) {</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;                    } else if (initiPop[i*depth+j]== -3) {</div>
+<div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;                        if (!a.empty()) {</div>
 <div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;                            tmp = a.top();</div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;                            a.pop();</div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                        } <span class="keywordflow">if</span> (!a.empty()) {</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;                        } if (!a.empty()) {</div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160;                            tmp2 = a.top();</div>
 <div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;                            a.pop();</div>
 <div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;                            out=tmp*tmp2;</div>
 <div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;                            a.push(out);</div>
 <div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;                              </div>
-<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                        } <span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;                        } else {</div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;                            a.push(tmp);</div>
 <div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;                        }          </div>
-<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                    } <span class="keywordflow">else</span> <span class="keywordflow">if</span> (initiPop[i*depth+j]== -4) {</div>
-<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;                        <span class="keywordflow">if</span> (!a.empty()) {</div>
+<div class="line"><a name="l00262"></a><span class="lineno">  262</span>&#160;                    } else if (initiPop[i*depth+j]== -4) {</div>
+<div class="line"><a name="l00263"></a><span class="lineno">  263</span>&#160;                        if (!a.empty()) {</div>
 <div class="line"><a name="l00264"></a><span class="lineno">  264</span>&#160;                            tmp = a.top();</div>
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;                            a.pop();</div>
-<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;                        } <span class="keywordflow">if</span> (!a.empty()) {</div>
+<div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;                        } if (!a.empty()) {</div>
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;                            tmp2 = a.top();</div>
 <div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;                            a.pop();</div>
 <div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;                            out=tmp2 / sqrt(1+tmp*tmp);</div>
 <div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;                            a.push(tmp2 / sqrt(1+tmp*tmp));</div>
-<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;                        }<span class="keywordflow">else</span> {</div>
+<div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;                        }else {</div>
 <div class="line"><a name="l00272"></a><span class="lineno">  272</span>&#160;                            a.push(tmp);</div>
 <div class="line"><a name="l00273"></a><span class="lineno">  273</span>&#160;                        }</div>
 <div class="line"><a name="l00274"></a><span class="lineno">  274</span>&#160;                    }</div>
@@ -287,16 +370,28 @@ $(document).ready(function(){initNavTree('test_semantic_8cu_source.html',''); in
 <div class="line"><a name="l00281"></a><span class="lineno">  281</span>&#160;    </div>
 <div class="line"><a name="l00282"></a><span class="lineno">  282</span>&#160;}</div>
 <div class="line"><a name="l00283"></a><span class="lineno">  283</span>&#160; </div>
-<div class="line"><a name="l00296"></a><span class="lineno"><a class="line" href="test_semantic_8cu.html#a7e1014d1be7b1bc646a919340d2f2deb">  296</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="test_semantic_8cu.html#a7e1014d1be7b1bc646a919340d2f2deb">testSemantic</a>(<span class="keywordtype">float</span> *hostSemanticTrainCases, <span class="keywordtype">float</span> *cpuSemantic, <span class="keywordtype">int</span> num, <span class="keywordtype">int</span> dept){</div>
-<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="_gsgp_cuda_8h.html#a780cb33de32b71bfdc0b39796de3c6b8">test</a>;</div>
-<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;num; i++) {</div>
-<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0; j&lt;dept; j++) {</div>
-<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;            <span class="keywordflow">if</span>(hostSemanticTrainCases[i*dept+j] == cpuSemantic[i*dept+j]){</div>
-<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                <a class="code" href="_gsgp_cuda_8h.html#a780cb33de32b71bfdc0b39796de3c6b8">test</a> = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                printf(<span class="stringliteral">&quot;Pass Test \n&quot;</span>);</div>
-<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            }<span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                <a class="code" href="_gsgp_cuda_8h.html#a780cb33de32b71bfdc0b39796de3c6b8">test</a>=<span class="keyword">false</span>;</div>
-<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;                printf(<span class="stringliteral">&quot;Dont Pass Test \n&quot;</span>);</div>
+<div class="line"><a name="l00284"></a><span class="lineno">  284</span>&#160;/*!</div>
+<div class="line"><a name="l00285"></a><span class="lineno">  285</span>&#160;* \fn       void testSemantic(float *hostSemanticTrainCases, float *cpuSemantic, int num, int dept)</div>
+<div class="line"><a name="l00286"></a><span class="lineno">  286</span>&#160;* \brief    This function determines and compares if the semantics on GPU and CPU are identical.</div>
+<div class="line"><a name="l00287"></a><span class="lineno">  287</span>&#160;* \param    float *hostSemanticTrainCases:This vector of pointers contains the semantics of the initial population or random trees as the case may be.</div>
+<div class="line"><a name="l00288"></a><span class="lineno">  288</span>&#160;* \param    float *cpuSemantic:This vector of pointers contains the semantics of the initial population or random trees as the case may be.</div>
+<div class="line"><a name="l00289"></a><span class="lineno">  289</span>&#160;* \param    int num: This variable contains the number of individuals that exist in the initial population.</div>
+<div class="line"><a name="l00290"></a><span class="lineno">  290</span>&#160;* \param    int depth: This variable thar stores maximum depth for individuals</div>
+<div class="line"><a name="l00291"></a><span class="lineno">  291</span>&#160;* \return   void</div>
+<div class="line"><a name="l00292"></a><span class="lineno">  292</span>&#160;* \date     05/12/2020</div>
+<div class="line"><a name="l00293"></a><span class="lineno">  293</span>&#160;* \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</div>
+<div class="line"><a name="l00294"></a><span class="lineno">  294</span>&#160;* \file     testSemantic.cu</div>
+<div class="line"><a name="l00295"></a><span class="lineno">  295</span>&#160;*/</div>
+<div class="line"><a name="l00296"></a><span class="lineno">  296</span>&#160;void testSemantic(float *hostSemanticTrainCases, float *cpuSemantic, int num, int dept){</div>
+<div class="line"><a name="l00297"></a><span class="lineno">  297</span>&#160;    bool test;</div>
+<div class="line"><a name="l00298"></a><span class="lineno">  298</span>&#160;    for (int i=0; i&lt;num; i++) {</div>
+<div class="line"><a name="l00299"></a><span class="lineno">  299</span>&#160;        for (int j=0; j&lt;dept; j++) {</div>
+<div class="line"><a name="l00300"></a><span class="lineno">  300</span>&#160;            if(hostSemanticTrainCases[i*dept+j] == cpuSemantic[i*dept+j]){</div>
+<div class="line"><a name="l00301"></a><span class="lineno">  301</span>&#160;                test = true;</div>
+<div class="line"><a name="l00302"></a><span class="lineno">  302</span>&#160;                printf(&quot;Pass Test \n&quot;);</div>
+<div class="line"><a name="l00303"></a><span class="lineno">  303</span>&#160;            }else {</div>
+<div class="line"><a name="l00304"></a><span class="lineno">  304</span>&#160;                test=false;</div>
+<div class="line"><a name="l00305"></a><span class="lineno">  305</span>&#160;                printf(&quot;Dont Pass Test \n&quot;);</div>
 <div class="line"><a name="l00306"></a><span class="lineno">  306</span>&#160;            }</div>
 <div class="line"><a name="l00307"></a><span class="lineno">  307</span>&#160;        }</div>
 <div class="line"><a name="l00308"></a><span class="lineno">  308</span>&#160;    }</div>
@@ -304,53 +399,92 @@ $(document).ready(function(){initNavTree('test_semantic_8cu_source.html',''); in
 <div class="line"><a name="l00310"></a><span class="lineno">  310</span>&#160;}</div>
 <div class="line"><a name="l00311"></a><span class="lineno">  311</span>&#160; </div>
 <div class="line"><a name="l00312"></a><span class="lineno">  312</span>&#160; </div>
-<div class="line"><a name="l00321"></a><span class="lineno"><a class="line" href="test_semantic_8cu.html#ae66f6b31b5ad750f1fe042a706a4e3d4">  321</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="test_semantic_8cu.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(){</div>
+<div class="line"><a name="l00313"></a><span class="lineno">  313</span>&#160;/*!</div>
+<div class="line"><a name="l00314"></a><span class="lineno">  314</span>&#160;* \fn       int main(int argc, const char **argv)</div>
+<div class="line"><a name="l00315"></a><span class="lineno">  315</span>&#160;* \brief    main method that runs the test algorithm computeSemantics</div>
+<div class="line"><a name="l00316"></a><span class="lineno">  316</span>&#160;* \return   int: 0 if the program ends without errors</div>
+<div class="line"><a name="l00317"></a><span class="lineno">  317</span>&#160;* \date     25/01/2020</div>
+<div class="line"><a name="l00318"></a><span class="lineno">  318</span>&#160;* \author   Jose Manuel Muñoz Contreras</div>
+<div class="line"><a name="l00319"></a><span class="lineno">  319</span>&#160;* \file     testSemantic.cu</div>
+<div class="line"><a name="l00320"></a><span class="lineno">  320</span>&#160;*/</div>
+<div class="line"><a name="l00321"></a><span class="lineno">  321</span>&#160;int main(){</div>
 <div class="line"><a name="l00322"></a><span class="lineno">  322</span>&#160; </div>
-<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    srand(time(NULL)); </div>
-<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    cudaSetDevice(0); </div>
-<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    printf(<span class="stringliteral">&quot;\n Starting GsgpCUDA \n\n&quot;</span>);</div>
+<div class="line"><a name="l00323"></a><span class="lineno">  323</span>&#160;    srand(time(NULL)); /*!&lt; initialization of the seed for the generation of random numbers*/</div>
+<div class="line"><a name="l00324"></a><span class="lineno">  324</span>&#160; </div>
+<div class="line"><a name="l00325"></a><span class="lineno">  325</span>&#160;    cudaSetDevice(0); /*!&lt; select a GPU device*/</div>
+<div class="line"><a name="l00326"></a><span class="lineno">  326</span>&#160; </div>
+<div class="line"><a name="l00327"></a><span class="lineno">  327</span>&#160;    printf(&quot;\n Starting GsgpCUDA \n\n&quot;);</div>
 <div class="line"><a name="l00328"></a><span class="lineno">  328</span>&#160; </div>
-<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    <span class="keywordtype">int</span> caseoption=4;</div>
+<div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;    int caseoption=4;</div>
 <div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    </div>
-<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    <span class="keywordtype">int</span> dept=8; </div>
-<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    <span class="keywordtype">int</span> num=1; </div>
-<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    <span class="keywordtype">int</span> nrow =8; </div>
-<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    <span class="keywordtype">int</span> size = <span class="keyword">sizeof</span>(float) * num * dept; </div>
-<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    <span class="keywordtype">int</span> sizeMemIndividuals = <span class="keyword">sizeof</span>(float) * num; </div>
-<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    <span class="keywordtype">int</span> sizeMemPopulation = <span class="keyword">sizeof</span>(float) * num*dept; </div>
-<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    <span class="keywordtype">int</span> sizeSemantic = <span class="keyword">sizeof</span>(float)*num*nrow; </div>
-<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    <span class="keywordtype">int</span> sizeT = <span class="keyword">sizeof</span>(float)*nrow;  </div>
-<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    <span class="keywordtype">int</span> gridSize,minGridSize,blockSize; </div>
-<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    cudaOccupancyMaxPotentialBlockSize(&amp;minGridSize, &amp;blockSize, <a class="code" href="_gsgp_cuda_8cpp.html#a9db7a327b13d8851fe8cfebeee656350">computeSemantics</a>, 0, num); </div>
-<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    gridSize = (num + blockSize - 1) / blockSize; </div>
-<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    printf(<span class="stringliteral">&quot;Grid and block %d %d \n&quot;</span>, gridSize, blockSize );</div>
+<div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    int dept=8; /*!&lt; variable that stores maximum depth for individuals */</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    </div>
+<div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    int num=1; /*!&lt; size of the population, number of candidate solutions */ </div>
+<div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    </div>
+<div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    int nrow =8; /*!&lt; variable containing the number of rows (instances) of the training dataset */</div>
+<div class="line"><a name="l00336"></a><span class="lineno">  336</span>&#160; </div>
+<div class="line"><a name="l00337"></a><span class="lineno">  337</span>&#160;    int size = sizeof(float) * num * dept; /*!&lt; variable that stores size in bytes for initial population*/</div>
+<div class="line"><a name="l00338"></a><span class="lineno">  338</span>&#160;    </div>
+<div class="line"><a name="l00339"></a><span class="lineno">  339</span>&#160;    int sizeMemIndividuals = sizeof(float) * num; /*!&lt; variable that stores size in bytes of the number of individuals in the initial population*/</div>
+<div class="line"><a name="l00340"></a><span class="lineno">  340</span>&#160; </div>
+<div class="line"><a name="l00341"></a><span class="lineno">  341</span>&#160;    int sizeMemPopulation = sizeof(float) * num*dept; /*!&lt; variable that stores size in bytes for initial population*/</div>
+<div class="line"><a name="l00342"></a><span class="lineno">  342</span>&#160; </div>
+<div class="line"><a name="l00343"></a><span class="lineno">  343</span>&#160;    int sizeSemantic = sizeof(float)*num*nrow; /*!&lt; variable that stores the size in bytes of semantics for the entire population with training data*/</div>
+<div class="line"><a name="l00344"></a><span class="lineno">  344</span>&#160; </div>
+<div class="line"><a name="l00345"></a><span class="lineno">  345</span>&#160;    int sizeT = sizeof(float)*nrow;  /*!&lt; variable that stores the size in bytes of fitness cases*/</div>
+<div class="line"><a name="l00346"></a><span class="lineno">  346</span>&#160; </div>
+<div class="line"><a name="l00347"></a><span class="lineno">  347</span>&#160;    int gridSize,minGridSize,blockSize; /*!&lt; variables that store the execution configuration for a kernel in the GPU*/</div>
+<div class="line"><a name="l00348"></a><span class="lineno">  348</span>&#160;    </div>
+<div class="line"><a name="l00349"></a><span class="lineno">  349</span>&#160;    cudaOccupancyMaxPotentialBlockSize(&amp;minGridSize, &amp;blockSize, computeSemantics, 0, num); /*!&lt; heuristic function used to choose a good block size is to aim at high occupancy*/</div>
+<div class="line"><a name="l00350"></a><span class="lineno">  350</span>&#160;    </div>
+<div class="line"><a name="l00351"></a><span class="lineno">  351</span>&#160;    gridSize = (num + blockSize - 1) / blockSize; /*!&lt; round up according to array size*/</div>
+<div class="line"><a name="l00352"></a><span class="lineno">  352</span>&#160; </div>
+<div class="line"><a name="l00353"></a><span class="lineno">  353</span>&#160;    printf(&quot;Grid and block %d %d \n&quot;, gridSize, blockSize );</div>
 <div class="line"><a name="l00354"></a><span class="lineno">  354</span>&#160; </div>
-<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;    <span class="keywordtype">float</span> *caseTest, *devCaseTest, *devSemanticTrainCases, *hostSemanticTrainCases, *trainingTest, *devtrainingTest, *cpuSemantics; <span class="comment">/*Pointers of vectos to use*/</span></div>
+<div class="line"><a name="l00355"></a><span class="lineno">  355</span>&#160;    float *caseTest, *devCaseTest, *devSemanticTrainCases, *hostSemanticTrainCases, *trainingTest, *devtrainingTest, *cpuSemantics; /*Pointers of vectos to use*/</div>
 <div class="line"><a name="l00356"></a><span class="lineno">  356</span>&#160; </div>
-<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    hostSemanticTrainCases = (<span class="keywordtype">float</span> *)malloc(sizeSemantic); </div>
-<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;    cpuSemantics = (<span class="keywordtype">float</span> *)malloc(sizeSemantic); </div>
-<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    cudaMalloc((<span class="keywordtype">void</span> **)&amp;devSemanticTrainCases,sizeSemantic); </div>
-<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    caseTest = (<span class="keywordtype">float</span> *)malloc(size); </div>
-<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    cudaMalloc((<span class="keywordtype">void</span>**)&amp;devCaseTest,<span class="keyword">sizeof</span>(<span class="keywordtype">float</span>)*size); </div>
-<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    trainingTest = (<span class="keywordtype">float</span> *)malloc(sizeT); </div>
-<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    cudaMalloc((<span class="keywordtype">void</span> **)&amp;devtrainingTest,<span class="keyword">sizeof</span>(<span class="keywordtype">float</span>)*nrow);   </div>
-<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    <span class="keywordtype">float</span> *uStackInd; </div>
-<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    <span class="keywordtype">int</span>   *uPushGenes;</div>
+<div class="line"><a name="l00357"></a><span class="lineno">  357</span>&#160;    hostSemanticTrainCases = (float *)malloc(sizeSemantic); /*!&lt; allocate space on the CPU for the hostSemanticTrainCases*/</div>
+<div class="line"><a name="l00358"></a><span class="lineno">  358</span>&#160; </div>
+<div class="line"><a name="l00359"></a><span class="lineno">  359</span>&#160;    cpuSemantics = (float *)malloc(sizeSemantic); /*!&lt; allocate space on the CPU for the cpuSemantics*/</div>
+<div class="line"><a name="l00360"></a><span class="lineno">  360</span>&#160; </div>
+<div class="line"><a name="l00361"></a><span class="lineno">  361</span>&#160;    cudaMalloc((void **)&amp;devSemanticTrainCases,sizeSemantic); /*!&lt; allocate space on the GPU for the devSemanticTrainCases*/</div>
+<div class="line"><a name="l00362"></a><span class="lineno">  362</span>&#160;     </div>
+<div class="line"><a name="l00363"></a><span class="lineno">  363</span>&#160;    caseTest = (float *)malloc(size); /*!&lt; allocate space on the GPU for the caseTest*/</div>
+<div class="line"><a name="l00364"></a><span class="lineno">  364</span>&#160; </div>
+<div class="line"><a name="l00365"></a><span class="lineno">  365</span>&#160;    cudaMalloc((void**)&amp;devCaseTest,sizeof(float)*size); /*!&lt; allocate space on the GPU for the devCaseTest*/</div>
+<div class="line"><a name="l00366"></a><span class="lineno">  366</span>&#160; </div>
+<div class="line"><a name="l00367"></a><span class="lineno">  367</span>&#160;    trainingTest = (float *)malloc(sizeT); /*!&lt; allocate space on the CPU for the trainingTest*/</div>
+<div class="line"><a name="l00368"></a><span class="lineno">  368</span>&#160; </div>
+<div class="line"><a name="l00369"></a><span class="lineno">  369</span>&#160;    cudaMalloc((void **)&amp;devtrainingTest,sizeof(float)*nrow);   /*!&lt; allocate space on the CPU for the devtrainingTest*/</div>
+<div class="line"><a name="l00370"></a><span class="lineno">  370</span>&#160; </div>
+<div class="line"><a name="l00371"></a><span class="lineno">  371</span>&#160;    float *uStackInd; /*!&lt; auxiliary pointer vectors for the interpreter and calculate the semantics for the populations and assignment in the GPU*/</div>
+<div class="line"><a name="l00372"></a><span class="lineno">  372</span>&#160;    </div>
+<div class="line"><a name="l00373"></a><span class="lineno">  373</span>&#160;    int   *uPushGenes;</div>
 <div class="line"><a name="l00374"></a><span class="lineno">  374</span>&#160;    </div>
-<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    checkCudaErrors(cudaMalloc((<span class="keywordtype">void</span>**)&amp;uPushGenes, sizeMemIndividuals));  </div>
-<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;    checkCudaErrors(cudaMalloc((<span class="keywordtype">void</span>**)&amp;uStackInd, sizeMemPopulation));  </div>
-<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    <a class="code" href="test_semantic_8cu.html#ae94af3503fb3f0687ae5832b976f9bc9">fitnessCases</a>(trainingTest, nrow); </div>
-<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    cudaMemcpy(devtrainingTest,trainingTest,<span class="keyword">sizeof</span>(<span class="keywordtype">float</span>)*nrow,cudaMemcpyHostToDevice);  </div>
-<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=1; i&lt;=caseoption; i++) {</div>
-<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;        <a class="code" href="test_semantic_8cu.html#a51021d5e1264e0851a87e3fe403eb20d">individualsTest</a>(caseTest, i, dept, num, 10); </div>
-<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;        <a class="code" href="test_semantic_8cu.html#ab59679eec3aae3bb786e04eaa2fbe50e">intreSemanticCPU</a>(caseTest, cpuSemantics, trainingTest, nrow, dept, num); </div>
-<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;        cudaMemcpy(devCaseTest,caseTest,<span class="keyword">sizeof</span>(<span class="keywordtype">float</span>)*size,cudaMemcpyHostToDevice);   </div>
-<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;        computeSemantics&lt;&lt;&lt; gridSize, blockSize &gt;&gt;&gt;(devCaseTest, devSemanticTrainCases, dept, devtrainingTest, nrow, 1, uPushGenes, uStackInd); </div>
-<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;        <a class="code" href="_gsgp_cuda_8cpp.html#a0d1515a59003b1a58eedefa6dd17a995">cudaErrorCheck</a>(<span class="stringliteral">&quot;computeSemantics&quot;</span>);</div>
+<div class="line"><a name="l00375"></a><span class="lineno">  375</span>&#160;    checkCudaErrors(cudaMalloc((void**)&amp;uPushGenes, sizeMemIndividuals));  /*!&lt; allocate space on the GPU for the uPushGenes*/</div>
+<div class="line"><a name="l00376"></a><span class="lineno">  376</span>&#160;    </div>
+<div class="line"><a name="l00377"></a><span class="lineno">  377</span>&#160;    checkCudaErrors(cudaMalloc((void**)&amp;uStackInd, sizeMemPopulation));  /*!&lt; allocate space on the CPU for the uStackInd*/</div>
+<div class="line"><a name="l00378"></a><span class="lineno">  378</span>&#160; </div>
+<div class="line"><a name="l00379"></a><span class="lineno">  379</span>&#160;    fitnessCases(trainingTest, nrow); /*!&lt;This function only generates an aptitude case to test individuals.&gt;*/</div>
+<div class="line"><a name="l00380"></a><span class="lineno">  380</span>&#160;    </div>
+<div class="line"><a name="l00381"></a><span class="lineno">  381</span>&#160;    cudaMemcpy(devtrainingTest,trainingTest,sizeof(float)*nrow,cudaMemcpyHostToDevice);  /*!&lt; This instruction makes a copy of a vector of pointers from CPU to GPU. */</div>
+<div class="line"><a name="l00382"></a><span class="lineno">  382</span>&#160; </div>
+<div class="line"><a name="l00383"></a><span class="lineno">  383</span>&#160;    for (int i=1; i&lt;=caseoption; i++) {</div>
+<div class="line"><a name="l00384"></a><span class="lineno">  384</span>&#160;        individualsTest(caseTest, i, dept, num, 10); /*!&lt;This function initializes the individuals in the population depending on the case, they can be addition, subtraction, multiplication and division.&gt;*/</div>
+<div class="line"><a name="l00385"></a><span class="lineno">  385</span>&#160;        </div>
+<div class="line"><a name="l00386"></a><span class="lineno">  386</span>&#160;        intreSemanticCPU(caseTest, cpuSemantics, trainingTest, nrow, dept, num); /*!&lt;This function that decodes each individual and evaluates it over all fitness cases,&gt;*/</div>
+<div class="line"><a name="l00387"></a><span class="lineno">  387</span>&#160;        </div>
+<div class="line"><a name="l00388"></a><span class="lineno">  388</span>&#160;        cudaMemcpy(devCaseTest,caseTest,sizeof(float)*size,cudaMemcpyHostToDevice);   /*!&lt; This instruction makes a copy of a vector of pointers from CPU to GPU. */</div>
+<div class="line"><a name="l00389"></a><span class="lineno">  389</span>&#160; </div>
+<div class="line"><a name="l00390"></a><span class="lineno">  390</span>&#160;        computeSemantics&lt;&lt;&lt; gridSize, blockSize &gt;&gt;&gt;(devCaseTest, devSemanticTrainCases, dept, devtrainingTest, nrow, 1, uPushGenes, uStackInd); /*!&lt; The ComputeSemantics kernel is an interpreter, that decodes each individual and evaluates it over all fitness cases,&gt;*/</div>
+<div class="line"><a name="l00391"></a><span class="lineno">  391</span>&#160;        </div>
+<div class="line"><a name="l00392"></a><span class="lineno">  392</span>&#160;        cudaErrorCheck(&quot;computeSemantics&quot;);</div>
 <div class="line"><a name="l00393"></a><span class="lineno">  393</span>&#160;        </div>
-<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;        cudaMemcpy(hostSemanticTrainCases,devSemanticTrainCases,sizeSemantic,cudaMemcpyDeviceToHost);   </div>
-<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;        <a class="code" href="test_semantic_8cu.html#aa8ae90db1c53e9d06b6122fdb2264c1f">resetIndi</a>(caseTest, num, dept); </div>
-<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;        <a class="code" href="test_semantic_8cu.html#a7e1014d1be7b1bc646a919340d2f2deb">testSemantic</a>(hostSemanticTrainCases, cpuSemantics, num, dept); </div>
+<div class="line"><a name="l00394"></a><span class="lineno">  394</span>&#160;        cudaMemcpy(hostSemanticTrainCases,devSemanticTrainCases,sizeSemantic,cudaMemcpyDeviceToHost);   /*!&lt; This instruction makes a copy of a vector of pointers from GPU to CPU. */</div>
+<div class="line"><a name="l00395"></a><span class="lineno">  395</span>&#160;        </div>
+<div class="line"><a name="l00396"></a><span class="lineno">  396</span>&#160;        resetIndi(caseTest, num, dept); /*!&lt;This function initializes all elements of the individual to 0.&gt;*/</div>
+<div class="line"><a name="l00397"></a><span class="lineno">  397</span>&#160;        </div>
+<div class="line"><a name="l00398"></a><span class="lineno">  398</span>&#160;        testSemantic(hostSemanticTrainCases, cpuSemantics, num, dept); /*!&lt;This function determines and compares if the semantics on GPU and CPU are identical.&gt;*/</div>
 <div class="line"><a name="l00399"></a><span class="lineno">  399</span>&#160;    }</div>
 <div class="line"><a name="l00400"></a><span class="lineno">  400</span>&#160;    </div>
 <div class="line"><a name="l00401"></a><span class="lineno">  401</span>&#160;    free(hostSemanticTrainCases);</div>
@@ -361,25 +495,12 @@ $(document).ready(function(){initNavTree('test_semantic_8cu_source.html',''); in
 <div class="line"><a name="l00406"></a><span class="lineno">  406</span>&#160;    cudaFree(devSemanticTrainCases);</div>
 <div class="line"><a name="l00407"></a><span class="lineno">  407</span>&#160;    cudaFree(uPushGenes);</div>
 <div class="line"><a name="l00408"></a><span class="lineno">  408</span>&#160;    cudaFree(uStackInd);</div>
-<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;    cudaDeviceReset(); </div>
-<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00409"></a><span class="lineno">  409</span>&#160;    cudaDeviceReset(); /*!&lt; all device allocations are removed*/</div>
+<div class="line"><a name="l00410"></a><span class="lineno">  410</span>&#160;    </div>
+<div class="line"><a name="l00411"></a><span class="lineno">  411</span>&#160;    return 0;</div>
 <div class="line"><a name="l00412"></a><span class="lineno">  412</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="a_gsgp_cuda_8cpp_html"><div class="ttname"><a href="_gsgp_cuda_8cpp.html">GsgpCuda.cpp</a></div><div class="ttdoc">file containing the definition of the modules (kernels) used to create the population of individuals,...</div></div>
-<div class="ttc" id="a_gsgp_cuda_8cpp_html_a0d1515a59003b1a58eedefa6dd17a995"><div class="ttname"><a href="_gsgp_cuda_8cpp.html#a0d1515a59003b1a58eedefa6dd17a995">cudaErrorCheck</a></div><div class="ttdeci">void cudaErrorCheck(const char *functionName)</div><div class="ttdoc">This function catches the error detected by the compiler and prints the user-friendly error message.</div><div class="ttdef"><b>Definition:</b> <a href="_gsgp_cuda_8cpp_source.html#l00070">GsgpCuda.cpp:70</a></div></div>
-<div class="ttc" id="atest_semantic_8cu_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="test_semantic_8cu.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdef"><b>Definition:</b> <a href="test_semantic_8cu_source.html#l00321">testSemantic.cu:321</a></div></div>
-<div class="ttc" id="atest_semantic_8cu_html_a51021d5e1264e0851a87e3fe403eb20d"><div class="ttname"><a href="test_semantic_8cu.html#a51021d5e1264e0851a87e3fe403eb20d">individualsTest</a></div><div class="ttdeci">void individualsTest(float *caseTest, int caseOption, int depth, int numIndi, int nvar)</div><div class="ttdoc">This function initializes the individuals in the population depending on the case,...</div><div class="ttdef"><b>Definition:</b> <a href="test_semantic_8cu_source.html#l00043">testSemantic.cu:43</a></div></div>
-<div class="ttc" id="atest_semantic_8cu_html_ab59679eec3aae3bb786e04eaa2fbe50e"><div class="ttname"><a href="test_semantic_8cu.html#ab59679eec3aae3bb786e04eaa2fbe50e">intreSemanticCPU</a></div><div class="ttdeci">void intreSemanticCPU(float *initiPop, float *OutSemantic, float *data, int nrow, int depth, int numIndi)</div><div class="ttdoc">This function interprets the generated individuals in CPU to obtain their semantics.</div><div class="ttdef"><b>Definition:</b> <a href="test_semantic_8cu_source.html#l00210">testSemantic.cu:210</a></div></div>
-<div class="ttc" id="a_gsgp_cuda_8cpp_html_a9db7a327b13d8851fe8cfebeee656350"><div class="ttname"><a href="_gsgp_cuda_8cpp.html#a9db7a327b13d8851fe8cfebeee656350">computeSemantics</a></div><div class="ttdeci">__global__ void computeSemantics(float *inputPopulation, float *outSemantic, unsigned int sizeMaxDepthIndividual, float *data, int nrow, int nvar, int *pushGenes, float *stackInd)</div><div class="ttdoc">The ComputeSemantics kernel is an interpreter, that decodes each individual and evaluates it over all...</div><div class="ttdef"><b>Definition:</b> <a href="_gsgp_cuda_8cpp_source.html#l00225">GsgpCuda.cpp:225</a></div></div>
-<div class="ttc" id="atest_semantic_8cu_html_a7e1014d1be7b1bc646a919340d2f2deb"><div class="ttname"><a href="test_semantic_8cu.html#a7e1014d1be7b1bc646a919340d2f2deb">testSemantic</a></div><div class="ttdeci">void testSemantic(float *hostSemanticTrainCases, float *cpuSemantic, int num, int dept)</div><div class="ttdef"><b>Definition:</b> <a href="test_semantic_8cu_source.html#l00296">testSemantic.cu:296</a></div></div>
-<div class="ttc" id="atest_semantic_8cu_html_a437d4cfa4d8eaa8ec4b05856fcaad5cf"><div class="ttname"><a href="test_semantic_8cu.html#a437d4cfa4d8eaa8ec4b05856fcaad5cf">clean</a></div><div class="ttdeci">void clean(stack&lt; float &gt; as)</div><div class="ttdef"><b>Definition:</b> <a href="test_semantic_8cu_source.html#l00189">testSemantic.cu:189</a></div></div>
-<div class="ttc" id="atest_semantic_8cu_html_a58802765eea2a18311ad4839ec9c9db8"><div class="ttname"><a href="test_semantic_8cu.html#a58802765eea2a18311ad4839ec9c9db8">imprimeIndividuals</a></div><div class="ttdeci">void imprimeIndividuals(float *caseTest, int numIndi, int depth)</div><div class="ttdoc">This function initializes with random numbers between 0 and 1 the semantics for initial population an...</div><div class="ttdef"><b>Definition:</b> <a href="test_semantic_8cu_source.html#l00151">testSemantic.cu:151</a></div></div>
-<div class="ttc" id="atest_semantic_8cu_html_aa8ae90db1c53e9d06b6122fdb2264c1f"><div class="ttname"><a href="test_semantic_8cu.html#aa8ae90db1c53e9d06b6122fdb2264c1f">resetIndi</a></div><div class="ttdeci">void resetIndi(float *caseTest, int numIndi, int depth)</div><div class="ttdoc">This function initializes all elements of the individual to 0.</div><div class="ttdef"><b>Definition:</b> <a href="test_semantic_8cu_source.html#l00116">testSemantic.cu:116</a></div></div>
-<div class="ttc" id="a_gsgp_cuda_8h_html_a780cb33de32b71bfdc0b39796de3c6b8"><div class="ttname"><a href="_gsgp_cuda_8h.html#a780cb33de32b71bfdc0b39796de3c6b8">test</a></div><div class="ttdeci">__host__ void test(float *individuals, int sizeMaxDepth, int sizePopulation)</div><div class="ttdoc">This file contains the test for the kernel that initializes the individuals on GPU.</div><div class="ttdef"><b>Definition:</b> <a href="test_initial_population_8cu_source.html#l00038">testInitialPopulation.cu:38</a></div></div>
-<div class="ttc" id="atest_semantic_8cu_html_ae94af3503fb3f0687ae5832b976f9bc9"><div class="ttname"><a href="test_semantic_8cu.html#ae94af3503fb3f0687ae5832b976f9bc9">fitnessCases</a></div><div class="ttdeci">void fitnessCases(float *fitCases, int nrow)</div><div class="ttdoc">This function only generates an aptitude case to test individuals.</div><div class="ttdef"><b>Definition:</b> <a href="test_semantic_8cu_source.html#l00134">testSemantic.cu:134</a></div></div>
-<div class="ttc" id="a_gsgp_cuda_8cpp_html_ad24bb36aabdb435d1e655502e16154f1"><div class="ttname"><a href="_gsgp_cuda_8cpp.html#ad24bb36aabdb435d1e655502e16154f1">clear</a></div><div class="ttdeci">void clear(stack&lt; float &gt; as)</div><div class="ttdoc">remove all elements from the stack so that in the next evaluations there are no previous values of ot...</div><div class="ttdef"><b>Definition:</b> <a href="_gsgp_cuda_8cpp_source.html#l00914">GsgpCuda.cpp:914</a></div></div>
-<div class="ttc" id="atest_semantic_8cu_html_a32132b70a7cb7fd7bcae2d27bcd7a119"><div class="ttname"><a href="test_semantic_8cu.html#a32132b70a7cb7fd7bcae2d27bcd7a119">imprimeSemantic</a></div><div class="ttdeci">void imprimeSemantic(float *devSemanticTrainCases, int numIndi, int depth)</div><div class="ttdoc">This function print the semantic of the initial population.</div><div class="ttdef"><b>Definition:</b> <a href="test_semantic_8cu_source.html#l00171">testSemantic.cu:171</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
