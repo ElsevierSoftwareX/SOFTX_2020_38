@@ -87,163 +87,264 @@ $(document).ready(function(){initNavTree('gsm_test_8cu_source.html',''); initRes
 <div class="title">gsmTest.cu</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="gsm_test_8cu.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">/*&lt;one line to give the program&#39;s name and a brief idea of what it does.&gt;</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">    Copyright (C) 2020 José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</span></div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">    This program is free software: you can redistribute it and/or modify</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">    it under the terms of the GNU General Public License as published by</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">    the Free Software Foundation, either version 3 of the License, or</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">    (at your option) any later version.</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="comment">     This program is distributed in the hope that it will be useful,</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="comment">    but WITHOUT ANY WARRANTY; without even the implied warranty of</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="comment">    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="comment">    GNU General Public License for more details.</span></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="comment"></span> </div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="comment">    You should have received a copy of the GNU Affero General Public License</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">    along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">*/</span></div>
+<a href="gsm_test_8cu.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;/*&lt;one line to give the program&#39;s name and a brief idea of what it does.&gt;</div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;    Copyright (C) 2020 José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</div>
+<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160; </div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;    This program is free software: you can redistribute it and/or modify</div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    it under the terms of the GNU General Public License as published by</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    the Free Software Foundation, either version 3 of the License, or</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    (at your option) any later version.</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160; </div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;     This program is distributed in the hope that it will be useful,</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    but WITHOUT ANY WARRANTY; without even the implied warranty of</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    GNU General Public License for more details.</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160; </div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    You should have received a copy of the GNU Affero General Public License</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;*/</div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160; </div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;//! \file   omsTest.cu</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;//! \brief  file containing the main test with the geometric semantic operator algorithm</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;//! \date   created on 25/01/2020</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="_gsgp_cuda_8cpp.html">GsgpCuda.cpp</a>&quot;</span></div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#include &lt;cstdio&gt;</span></div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="preprocessor">#include &lt;cstdlib&gt;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="preprocessor">#include &lt;ostream&gt;</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="preprocessor">#include &lt;stack&gt;</span></div>
-<div class="line"><a name="l00028"></a><span class="lineno"><a class="line" href="gsm_test_8cu.html#af6dbb904da0749afa81efc8d36b891a5">   28</a></span>&#160;<span class="preprocessor">#define frand() ((double) rand() / (RAND_MAX))</span></div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keyword">using namespace </span>std;   </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;#include &quot;GsgpCuda.cpp&quot;</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;#include &lt;cstdio&gt;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;#include &lt;cstdlib&gt;</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;#include &lt;ostream&gt;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;#include &lt;stack&gt;</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;/// Macro used to generate a random number</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;#define frand() ((double) rand() / (RAND_MAX))</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;using namespace std;   </div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160; </div>
-<div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="gsm_test_8cu.html#a1512f3435f9492efeb3f7367b9f1b571">   53</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="gsm_test_8cu.html#a1512f3435f9492efeb3f7367b9f1b571">exampleSemantics</a>(<span class="keywordtype">float</span> *semantic, <span class="keywordtype">int</span> sizeIndividuals, <span class="keywordtype">int</span> nrow){</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;sizeIndividuals; i++) {</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0; j&lt;nrow; j++) {</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            semantic[i*nrow+j] = <a class="code" href="gsm_test_8cu.html#af6dbb904da0749afa81efc8d36b891a5">frand</a>();            </div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;/*!</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;* \fn       int main(int argc, const char **argv)</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;* \brief    main method that executes the test for the semantic geometric mutation operator</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;* \param    int argc: sizeIndividualsber of parameters of the program</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;* \param    const char **argv: array of strings that contains the parameters of the program</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;* \return   int: 0 if the program ends without errors</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;* \date     05/12/2020</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;* \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;* \file     GsgpCuda.cu</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;*/</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160; </div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;/*!</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;* \fn       void exampleSemantics(float *semantic, int sizeIndividuals, int nrow)</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;* \brief    This function initializes with random numbers between 0 and 1 the semantics for initial population and random trees.</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;* \param    float *semantic:This vector of pointers contains the semantics of the initial population or random trees as the case may be.</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;* \param    int *sizeIndividuals: This variable contains the number of individuals that exist in the initial population.</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;* \param    int *nrow: This variable contains the number of fitness cases.</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;* \return   void</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;* \date     05/12/2020</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;* \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;* \file     omsTest.cu</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;*/</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;void exampleSemantics(float *semantic, int sizeIndividuals, int nrow){</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    for (int i=0; i&lt;sizeIndividuals; i++) {</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        for (int j=0; j&lt;nrow; j++) {</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            semantic[i*nrow+j] = frand();            </div>
 <div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;        }</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    }</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;}</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160; </div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="line" href="gsm_test_8cu.html#a2f0995fd0bd4f8449b26524e0c38f00b">   72</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="gsm_test_8cu.html#a2f0995fd0bd4f8449b26524e0c38f00b">printSemantics</a>(<span class="keywordtype">float</span> *semantic, <span class="keywordtype">int</span> sizeIndividualsIndi, <span class="keywordtype">int</span> nrow){</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;sizeIndividualsIndi; i++) {</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0; j&lt;nrow; j++) {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            printf(<span class="stringliteral">&quot; %f,&quot;</span>, semantic[i*nrow+j]);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;/*!</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;* \fn       void printSemantics(float *semantic, int sizeIndividualsIndi, int nrow)</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;* \brief    This function only prints the semantic values that exist in the pointer vectors it receives.</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;* \param    float *semantic:This vector of pointers contains the semantics of the initial population or random trees as the case may be.</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;* \param    int *sizeIndividuals: This variable contains the number of individuals that exist in the initial population.</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;* \param    int *nrow: This variable contains the number of fitness cases.</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;* \return   void</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;* \date     05/12/2020</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;* \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;* \file     omsTest.cu</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;*/</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;void printSemantics(float *semantic, int sizeIndividualsIndi, int nrow){</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    for (int i=0; i&lt;sizeIndividualsIndi; i++) {</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        for (int j=0; j&lt;nrow; j++) {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            printf(&quot; %f,&quot;, semantic[i*nrow+j]);</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        printf(<span class="stringliteral">&quot;\n&quot;</span>);</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;        printf(&quot;\n&quot;);</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    }</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;}</div>
 <div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160; </div>
-<div class="line"><a name="l00098"></a><span class="lineno"><a class="line" href="gsm_test_8cu.html#a63dc5c56f4e0ae5adc0560e7876ea5ca">   98</a></span>&#160;<span class="keywordtype">void</span> <a class="code" href="gsm_test_8cu.html#a63dc5c56f4e0ae5adc0560e7876ea5ca">omsCPU</a>(<span class="keywordtype">float</span> *initialPopSemantic, <span class="keywordtype">float</span> *randomTreesSemantic, <span class="keywordtype">float</span> *newOffspringSemantic, <span class="keywordtype">int</span> sizePopulation ,<span class="keywordtype">int</span> nrow, <span class="keywordtype">double</span> ms, <span class="keywordtype">float</span> *index){</div>
-<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    <span class="keywordtype">int</span> seed;</div>
-<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    <span class="keywordtype">int</span> firstTree, secondTree;</div>
-<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;sizePopulation; i++) {</div>
-<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0; j&lt;nrow; j++) {</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;/*!</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;* \fn       void omsCPU(float *initialPopSemantic, float *randomTreesSemantic, float *newOffspringSemantic, int sizePopulation ,int nrow, double ms, float *index)</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;* \brief    The GSM operator is basically a vector addition operation, that can be performed independently for each semantic element STi,j.</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;            However, it is necessary to select the semantics of two random trees R u and R v , and a random mutation step ms.</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;* \param    float *initialPopSemantic: This vector of pointers contains the semantics of the initial population</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;* \param    float *randomTreesSemantic: This vector of pointers contains the semantics of the random trees</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;* \param    float *newOffspringSemantic: This vector of pointers will store the semantics of the new offspring</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;* \param    int sizePopulation: This variable contains the number of individuals that the population has</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;* \param    int nrow: Variable containing the number of rows (instances) of the training dataset</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;* \param    double ms: This variable stores a random value that causes a disturbance in the sematics of an individual</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;* \param    int generation: Number of generation</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;* \param    float *indexRandomTrees: This pointer stores the indexes randomly for mutation</div>
+<div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;* \return   void</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;* \date     05/12/2020</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;* \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;* \file     omsTest.cu</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;*/</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;void omsCPU(float *initialPopSemantic, float *randomTreesSemantic, float *newOffspringSemantic, int sizePopulation ,int nrow, double ms, float *index){</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;    int seed;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;    int firstTree, secondTree;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;    for (int i=0; i&lt;sizePopulation; i++) {</div>
+<div class="line"><a name="l00102"></a><span class="lineno">  102</span>&#160;        for (int j=0; j&lt;nrow; j++) {</div>
 <div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;            seed = i+j/nrow;</div>
 <div class="line"><a name="l00104"></a><span class="lineno">  104</span>&#160;            firstTree = index[seed];</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;            secondTree = index[sizePopulation + seed];</div>
-<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            <span class="keywordtype">float</span> sigmoid_1=1.0/(1+std::exp(-(randomTreesSemantic[firstTree*nrow+j]))); </div>
-<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            <span class="keywordtype">float</span> sigmoid_2=1.0/(1+std::exp(-(randomTreesSemantic[secondTree*nrow+j])));</div>
+<div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;            float sigmoid_1=1.0/(1+std::exp(-(randomTreesSemantic[firstTree*nrow+j]))); </div>
+<div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;            float sigmoid_2=1.0/(1+std::exp(-(randomTreesSemantic[secondTree*nrow+j])));</div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;            newOffspringSemantic[i*nrow+j] = initialPopSemantic[i*nrow+j] + (ms *(sigmoid_1-sigmoid_2));</div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;        } </div>
 <div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    }</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;}</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160; </div>
-<div class="line"><a name="l00125"></a><span class="lineno"><a class="line" href="gsm_test_8cu.html#aae7b81b486be77d36f57372d8eb3c4fc">  125</a></span>&#160;<span class="keywordtype">bool</span> <a class="code" href="gsm_test_8cu.html#aae7b81b486be77d36f57372d8eb3c4fc">testSemantic</a>(<span class="keywordtype">float</span> *cpuSemantic, <span class="keywordtype">float</span> *gpuSemantic, <span class="keywordtype">int</span> sizeIndividuals, <span class="keywordtype">int</span> nrow){</div>
-<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="_gsgp_cuda_8h.html#a780cb33de32b71bfdc0b39796de3c6b8">test</a>;</div>
-<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> i=0; i&lt;sizeIndividuals; i++) {</div>
-<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        <span class="keywordflow">for</span> (<span class="keywordtype">int</span> j=0; j&lt;nrow; j++) {</div>
-<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;            <span class="keywordflow">if</span>(cpuSemantic[i*nrow+j] == gpuSemantic[i*nrow+j]){</div>
-<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                <a class="code" href="_gsgp_cuda_8h.html#a780cb33de32b71bfdc0b39796de3c6b8">test</a> = <span class="keyword">true</span>;</div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                <span class="comment">//printf(&quot;Pass Test \n&quot;);</span></div>
-<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            }<span class="keywordflow">else</span> {</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                <a class="code" href="_gsgp_cuda_8h.html#a780cb33de32b71bfdc0b39796de3c6b8">test</a>=<span class="keyword">false</span>;</div>
-<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                <span class="comment">//printf(&quot;Dont Pass Test \n&quot;);</span></div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;/*!</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;* \fn       void testSemantic(float *cpuSemantic, float *gpuSemantic, int sizeIndividuals, int nrow)</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;* \brief    This function compares the semantics obtained in the GPU against a semantics obtained in the CPU to verify that the operations within the kernel executed in the GPU are correct.</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;* \param    float *cpuSemantic:This vector of pointers contains the semantics of the new individuals resulting from the initial population and random trees, calculated in CPU.</div>
+<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;* \param    float *gpuSemantic:This vector of pointers contains the semantics of the new individuals resulting from the initial population and random trees, calculated in GPU.</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;* \param    int *sizeIndividuals: This variable contains the number of individuals that exist in the initial population.</div>
+<div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;* \param    int *nrow: This variable contains the number of fitness cases.</div>
+<div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;* \return   void</div>
+<div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;* \date     05/12/2020</div>
+<div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;* \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</div>
+<div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;* \file     omsTest.cu</div>
+<div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;*/</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;bool testSemantic(float *cpuSemantic, float *gpuSemantic, int sizeIndividuals, int nrow){</div>
+<div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;    bool test;</div>
+<div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;    for (int i=0; i&lt;sizeIndividuals; i++) {</div>
+<div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;        for (int j=0; j&lt;nrow; j++) {</div>
+<div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;            if(cpuSemantic[i*nrow+j] == gpuSemantic[i*nrow+j]){</div>
+<div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;                test = true;</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;                //printf(&quot;Pass Test \n&quot;);</div>
+<div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;            }else {</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;                test=false;</div>
+<div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;                //printf(&quot;Dont Pass Test \n&quot;);</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;            }</div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;        }</div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;    }</div>
-<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    <span class="keywordflow">return</span> <a class="code" href="_gsgp_cuda_8h.html#a780cb33de32b71bfdc0b39796de3c6b8">test</a>;</div>
+<div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;    return test;</div>
 <div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;}</div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160; </div>
-<div class="line"><a name="l00141"></a><span class="lineno"><a class="line" href="gsm_test_8cu.html#ae66f6b31b5ad750f1fe042a706a4e3d4">  141</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="gsm_test_8cu.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a>(){</div>
+<div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;int main(){</div>
 <div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160; </div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    srand(time(NULL)); </div>
-<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    cudaSetDevice(0); </div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    printf(<span class="stringliteral">&quot;\n Starting GsgpCUDA \n\n&quot;</span>);</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;    srand(time(NULL)); /*!&lt; initialization of the seed for the generation of random sizeIndividualsbers*/</div>
+<div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160; </div>
+<div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;    cudaSetDevice(0); /*!&lt; select a GPU device*/</div>
+<div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160; </div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;    printf(&quot;\n Starting GsgpCUDA \n\n&quot;);</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160; </div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    <span class="keywordtype">int</span> sizeIndividuals=1; </div>
-<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    <span class="keywordtype">int</span> nrow =8; </div>
-<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    <span class="keywordtype">int</span> sizeSemantic = <span class="keyword">sizeof</span>(float)*sizeIndividuals*nrow; </div>
-<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    <span class="keywordtype">int</span> sizeElementsSemanticTrain=sizeIndividuals*nrow; </div>
-<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    <span class="keywordtype">int</span> twoSizeMemPopulation = <span class="keyword">sizeof</span>(float) * (sizeIndividuals*2); </div>
-<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    <span class="keywordtype">long</span> <span class="keywordtype">int</span> twoSizePopulation = (sizeIndividuals*2); </div>
-<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    <span class="keywordtype">size_t</span> structMemMutation = (<span class="keyword">sizeof</span>(<a class="code" href="structentry__.html">entry_</a>)*sizeIndividuals); </div>
-<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    <a class="code" href="structentry__.html">entry</a>  *dStructMutation; </div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;    int sizeIndividuals=1; /*!&lt; size of the population, number of candidate solutions */ </div>
+<div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;    </div>
+<div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;    int nrow =8; /*!&lt; variable containing the number of rows (instances) of the training dataset */</div>
+<div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160; </div>
+<div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;    int sizeSemantic = sizeof(float)*sizeIndividuals*nrow; /*!&lt; variable that stores the size in bytes of semantics for the entire population with training data*/</div>
+<div class="line"><a name="l00154"></a><span class="lineno">  154</span>&#160; </div>
+<div class="line"><a name="l00155"></a><span class="lineno">  155</span>&#160;    int sizeElementsSemanticTrain=sizeIndividuals*nrow; /*!&lt; variable that stores training data elements*/</div>
+<div class="line"><a name="l00156"></a><span class="lineno">  156</span>&#160; </div>
+<div class="line"><a name="l00157"></a><span class="lineno">  157</span>&#160;    int twoSizeMemPopulation = sizeof(float) * (sizeIndividuals*2); /*!&lt; variable that stores twice the size in bytes of an initial population to store random numbers*/</div>
+<div class="line"><a name="l00158"></a><span class="lineno">  158</span>&#160; </div>
+<div class="line"><a name="l00159"></a><span class="lineno">  159</span>&#160;    long int twoSizePopulation = (sizeIndividuals*2); /*!&lt; variable storing twice the initial population of individuals to generate random positions*/</div>
+<div class="line"><a name="l00160"></a><span class="lineno">  160</span>&#160; </div>
+<div class="line"><a name="l00161"></a><span class="lineno">  161</span>&#160;    size_t structMemMutation = (sizeof(entry_)*sizeIndividuals); /*!&lt; variable that stores the size in bytes of the structure to store the mutation record*/</div>
+<div class="line"><a name="l00162"></a><span class="lineno">  162</span>&#160; </div>
+<div class="line"><a name="l00163"></a><span class="lineno">  163</span>&#160;    entry  *dStructMutation; /*!&lt; This block contains the vectors of pointers to store the structure to keep track of mutation and survival and space allocation in the GPU*/</div>
 <div class="line"><a name="l00164"></a><span class="lineno">  164</span>&#160;    checkCudaErrors(cudaMallocManaged(&amp;dStructMutation,structMemMutation)); </div>
 <div class="line"><a name="l00165"></a><span class="lineno">  165</span>&#160; </div>
-<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    <a class="code" href="structentry__.html">entry</a>  *dStructMutationy; </div>
+<div class="line"><a name="l00166"></a><span class="lineno">  166</span>&#160;    entry  *dStructMutationy; /*!&lt; This block contains the vectors of pointers to store the structure to keep track of mutation and survival and space allocation in the GPU*/</div>
 <div class="line"><a name="l00167"></a><span class="lineno">  167</span>&#160;    checkCudaErrors(cudaMallocManaged(&amp;dStructMutationy,structMemMutation)); </div>
 <div class="line"><a name="l00168"></a><span class="lineno">  168</span>&#160; </div>
-<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    <span class="keywordtype">int</span> gridSize,minGridSize,blockSize; </div>
-<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    cudaOccupancyMaxPotentialBlockSize(&amp;minGridSize, &amp;blockSize, <a class="code" href="_gsgp_cuda_8cpp.html#a9db7a327b13d8851fe8cfebeee656350">computeSemantics</a>, 0, sizeIndividuals); </div>
-<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    gridSize = (sizeIndividuals + blockSize - 1) / blockSize; </div>
-<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    printf(<span class="stringliteral">&quot;Grid and block %d %d \n&quot;</span>, gridSize, blockSize );</div>
+<div class="line"><a name="l00169"></a><span class="lineno">  169</span>&#160;    int gridSize,minGridSize,blockSize; /*!&lt; variables that store the execution configuration for a kernel in the GPU*/</div>
+<div class="line"><a name="l00170"></a><span class="lineno">  170</span>&#160;    </div>
+<div class="line"><a name="l00171"></a><span class="lineno">  171</span>&#160;    cudaOccupancyMaxPotentialBlockSize(&amp;minGridSize, &amp;blockSize, computeSemantics, 0, sizeIndividuals); /*!&lt; heuristic function used to choose a good block size is to aim at high occupancy*/</div>
+<div class="line"><a name="l00172"></a><span class="lineno">  172</span>&#160;    </div>
+<div class="line"><a name="l00173"></a><span class="lineno">  173</span>&#160;    gridSize = (sizeIndividuals + blockSize - 1) / blockSize; /*!&lt; round up according to array size*/</div>
+<div class="line"><a name="l00174"></a><span class="lineno">  174</span>&#160; </div>
+<div class="line"><a name="l00175"></a><span class="lineno">  175</span>&#160;    printf(&quot;Grid and block %d %d \n&quot;, gridSize, blockSize );</div>
 <div class="line"><a name="l00176"></a><span class="lineno">  176</span>&#160; </div>
-<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    <span class="keywordtype">float</span> *cpuSemanticInitialPopulation, *gpuSemanticInitialPopulation, *cpuRandomTrees, </div>
+<div class="line"><a name="l00177"></a><span class="lineno">  177</span>&#160;    float *cpuSemanticInitialPopulation, *gpuSemanticInitialPopulation, *cpuRandomTrees, </div>
 <div class="line"><a name="l00178"></a><span class="lineno">  178</span>&#160;    *gpuRandomTrees, *cpuNewSemanticsOffsprings, *gpuNewSemanticsOffsprings, *hostNewSemanticsOffsprings;</div>
 <div class="line"><a name="l00179"></a><span class="lineno">  179</span>&#160; </div>
-<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    cpuSemanticInitialPopulation = (<span class="keywordtype">float</span> *)malloc(sizeSemantic); </div>
-<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    cpuRandomTrees = (<span class="keywordtype">float</span> *)malloc(sizeSemantic); </div>
-<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    cpuNewSemanticsOffsprings = (<span class="keywordtype">float</span> *)malloc(sizeSemantic);  </div>
-<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    hostNewSemanticsOffsprings = (<span class="keywordtype">float</span> *)malloc(sizeSemantic); </div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    <a class="code" href="gsm_test_8cu.html#a1512f3435f9492efeb3f7367b9f1b571">exampleSemantics</a>(cpuSemanticInitialPopulation, sizeIndividuals, nrow);  </div>
-<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    printf(<span class="stringliteral">&quot;Print initial semantic \n&quot;</span>);</div>
+<div class="line"><a name="l00180"></a><span class="lineno">  180</span>&#160;    cpuSemanticInitialPopulation = (float *)malloc(sizeSemantic); /*!&lt; allocate space on the CPU for the cpuSemanticInitialPopulation*/</div>
+<div class="line"><a name="l00181"></a><span class="lineno">  181</span>&#160; </div>
+<div class="line"><a name="l00182"></a><span class="lineno">  182</span>&#160;    cpuRandomTrees = (float *)malloc(sizeSemantic); /*!&lt; allocate space on the CPU for the cpuRandomTrees*/</div>
+<div class="line"><a name="l00183"></a><span class="lineno">  183</span>&#160; </div>
+<div class="line"><a name="l00184"></a><span class="lineno">  184</span>&#160;    cpuNewSemanticsOffsprings = (float *)malloc(sizeSemantic);  /*!&lt; allocate space on the CPU for the cpuNewSemanticsOffsprings*/</div>
+<div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160; </div>
+<div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;    hostNewSemanticsOffsprings = (float *)malloc(sizeSemantic); /*!&lt; allocate space on the GPU for the hostNewSemanticsOffsprings*/</div>
+<div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160; </div>
+<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160;    exampleSemantics(cpuSemanticInitialPopulation, sizeIndividuals, nrow);  /*!&lt; Invoke the function to initialize the random semantics for the initial population.*/</div>
+<div class="line"><a name="l00189"></a><span class="lineno">  189</span>&#160; </div>
+<div class="line"><a name="l00190"></a><span class="lineno">  190</span>&#160;    printf(&quot;Print initial semantic \n&quot;);</div>
 <div class="line"><a name="l00191"></a><span class="lineno">  191</span>&#160;    </div>
-<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    <a class="code" href="gsm_test_8cu.html#a2f0995fd0bd4f8449b26524e0c38f00b">printSemantics</a>( cpuSemanticInitialPopulation, sizeIndividuals, nrow); </div>
-<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    <a class="code" href="gsm_test_8cu.html#a1512f3435f9492efeb3f7367b9f1b571">exampleSemantics</a>(cpuRandomTrees, sizeIndividuals,  nrow); </div>
-<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    printf(<span class="stringliteral">&quot;Print initial semantic\n&quot;</span>);</div>
+<div class="line"><a name="l00192"></a><span class="lineno">  192</span>&#160;    printSemantics( cpuSemanticInitialPopulation, sizeIndividuals, nrow); /*!&lt; Invoke the function print the random semantics for the initial population.*/</div>
+<div class="line"><a name="l00193"></a><span class="lineno">  193</span>&#160; </div>
+<div class="line"><a name="l00194"></a><span class="lineno">  194</span>&#160;    exampleSemantics(cpuRandomTrees, sizeIndividuals,  nrow); /*!&lt; Invoke the function to initialize the random values semantics for the random trees.*/</div>
+<div class="line"><a name="l00195"></a><span class="lineno">  195</span>&#160;    </div>
+<div class="line"><a name="l00196"></a><span class="lineno">  196</span>&#160;    printf(&quot;Print initial semantic\n&quot;);</div>
 <div class="line"><a name="l00197"></a><span class="lineno">  197</span>&#160;    </div>
-<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    <a class="code" href="gsm_test_8cu.html#a2f0995fd0bd4f8449b26524e0c38f00b">printSemantics</a>(cpuRandomTrees, sizeIndividuals, nrow); </div>
-<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    cudaMalloc((<span class="keywordtype">void</span> **)&amp;gpuSemanticInitialPopulation,sizeSemantic);  </div>
-<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    cudaMalloc((<span class="keywordtype">void</span>**)&amp;gpuRandomTrees,sizeSemantic); </div>
-<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    cudaMalloc((<span class="keywordtype">void</span>**)&amp;gpuNewSemanticsOffsprings,sizeSemantic); </div>
-<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    cudaMemcpy(gpuSemanticInitialPopulation,cpuSemanticInitialPopulation,sizeSemantic,cudaMemcpyHostToDevice); </div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    cudaMemcpy(gpuRandomTrees,cpuRandomTrees,sizeSemantic,cudaMemcpyHostToDevice); </div>
-<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    curandState_t* State; </div>
-<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    cudaMalloc((<span class="keywordtype">void</span>**) &amp;State, (twoSizePopulation) * <span class="keyword">sizeof</span>(curandState_t)); </div>
-<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    cudaOccupancyMaxPotentialBlockSize(&amp;minGridSize, &amp;blockSize, <a class="code" href="_gsgp_cuda_8cpp.html#a983dfdd69760a88100bc9efb04e4ac5a">init</a>, 0, twoSizePopulation); </div>
-<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    gridSize = (twoSizePopulation + blockSize - 1) / blockSize; </div>
-<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    init&lt;&lt;&lt;gridSize, blockSize&gt;&gt;&gt;(time(NULL), State); </div>
-<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    <span class="keywordtype">float</span> *indexRandomTrees; </div>
+<div class="line"><a name="l00198"></a><span class="lineno">  198</span>&#160;    printSemantics(cpuRandomTrees, sizeIndividuals, nrow); /*!&lt; Invoke the function print the random semantics for the the random trees.*/</div>
+<div class="line"><a name="l00199"></a><span class="lineno">  199</span>&#160; </div>
+<div class="line"><a name="l00200"></a><span class="lineno">  200</span>&#160;    cudaMalloc((void **)&amp;gpuSemanticInitialPopulation,sizeSemantic);  /*!&lt; allocate space on the GPU for the gpuSemanticInitialPopulation*/</div>
+<div class="line"><a name="l00201"></a><span class="lineno">  201</span>&#160;    </div>
+<div class="line"><a name="l00202"></a><span class="lineno">  202</span>&#160;    cudaMalloc((void**)&amp;gpuRandomTrees,sizeSemantic); /*!&lt; allocate space on the GPU for the gpuRandomTrees*/</div>
+<div class="line"><a name="l00203"></a><span class="lineno">  203</span>&#160; </div>
+<div class="line"><a name="l00204"></a><span class="lineno">  204</span>&#160;    cudaMalloc((void**)&amp;gpuNewSemanticsOffsprings,sizeSemantic); /*!&lt; allocate space on the GPU for the gpuNewSemanticsOffsprings*/</div>
+<div class="line"><a name="l00205"></a><span class="lineno">  205</span>&#160; </div>
+<div class="line"><a name="l00206"></a><span class="lineno">  206</span>&#160;    cudaMemcpy(gpuSemanticInitialPopulation,cpuSemanticInitialPopulation,sizeSemantic,cudaMemcpyHostToDevice); /*!&lt; This instruction makes a copy of a vector of pointers from CPU to GPU. */</div>
+<div class="line"><a name="l00207"></a><span class="lineno">  207</span>&#160; </div>
+<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;    cudaMemcpy(gpuRandomTrees,cpuRandomTrees,sizeSemantic,cudaMemcpyHostToDevice); /*!&lt; This instruction makes a copy of a vector of pointers from CPU to GPU. */</div>
+<div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160; </div>
+<div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160;    curandState_t* State; /*!&lt; CUDA&#39;s random number library uses curandState_t to keep track of the seed value we will store a random state for every thread*/</div>
+<div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;    </div>
+<div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;    cudaMalloc((void**) &amp;State, (twoSizePopulation) * sizeof(curandState_t)); /*!&lt; allocate space on the GPU for the random states*/</div>
+<div class="line"><a name="l00213"></a><span class="lineno">  213</span>&#160;    </div>
+<div class="line"><a name="l00214"></a><span class="lineno">  214</span>&#160;    cudaOccupancyMaxPotentialBlockSize(&amp;minGridSize, &amp;blockSize, init, 0, twoSizePopulation); /*!&lt; heuristic function used to choose a good block size is to aim at high occupancy*/</div>
+<div class="line"><a name="l00215"></a><span class="lineno">  215</span>&#160;    </div>
+<div class="line"><a name="l00216"></a><span class="lineno">  216</span>&#160;    gridSize = (twoSizePopulation + blockSize - 1) / blockSize; /*!&lt; round up according to array size*/</div>
+<div class="line"><a name="l00217"></a><span class="lineno">  217</span>&#160;    </div>
+<div class="line"><a name="l00218"></a><span class="lineno">  218</span>&#160;    init&lt;&lt;&lt;gridSize, blockSize&gt;&gt;&gt;(time(NULL), State); /*!&lt; invoke the GPU to initialize all of the random states*/</div>
+<div class="line"><a name="l00219"></a><span class="lineno">  219</span>&#160; </div>
+<div class="line"><a name="l00220"></a><span class="lineno">  220</span>&#160;    float *indexRandomTrees; /*!&lt; vector pointers to save random positions of random trees and allocation in GPU*/</div>
 <div class="line"><a name="l00221"></a><span class="lineno">  221</span>&#160;    checkCudaErrors(cudaMallocManaged(&amp;indexRandomTrees,twoSizeMemPopulation));</div>
 <div class="line"><a name="l00222"></a><span class="lineno">  222</span>&#160; </div>
-<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    cudaOccupancyMaxPotentialBlockSize(&amp;minGridSize, &amp;blockSize, <a class="code" href="_gsgp_cuda_8cpp.html#ae218d64b1ba67bb484c22c4c6ff293f5">initializeIndexRandomTrees</a>, 0, twoSizePopulation); </div>
-<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    gridSize = (twoSizePopulation + blockSize - 1) / blockSize;  </div>
+<div class="line"><a name="l00223"></a><span class="lineno">  223</span>&#160;    cudaOccupancyMaxPotentialBlockSize(&amp;minGridSize, &amp;blockSize, initializeIndexRandomTrees, 0, twoSizePopulation); /*!&lt; heuristic function used to choose a good block size is to aim at high occupancy*/</div>
+<div class="line"><a name="l00224"></a><span class="lineno">  224</span>&#160;    gridSize = (twoSizePopulation + blockSize - 1) / blockSize;  /*!&lt; round up according to array size*/</div>
+<div class="line"><a name="l00225"></a><span class="lineno">  225</span>&#160;            </div>
 <div class="line"><a name="l00226"></a><span class="lineno">  226</span>&#160;    initializeIndexRandomTrees&lt;&lt;&lt;gridSize,blockSize &gt;&gt;&gt;( sizeIndividuals, indexRandomTrees, State ); </div>
 <div class="line"><a name="l00227"></a><span class="lineno">  227</span>&#160;    </div>
-<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    <a class="code" href="_gsgp_cuda_8cpp.html#a0d1515a59003b1a58eedefa6dd17a995">cudaErrorCheck</a>(<span class="stringliteral">&quot;initializeIndexRandomTrees&quot;</span>);</div>
+<div class="line"><a name="l00228"></a><span class="lineno">  228</span>&#160;    cudaErrorCheck(&quot;initializeIndexRandomTrees&quot;);</div>
 <div class="line"><a name="l00229"></a><span class="lineno">  229</span>&#160; </div>
-<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    cudaOccupancyMaxPotentialBlockSize(&amp;minGridSize, &amp;blockSize, <a class="code" href="_gsgp_cuda_8cpp.html#a74f59e7ae6dd1f3464cba0f9ced82f9b">geometricSemanticMutation</a>, 0, sizeElementsSemanticTrain);  </div>
-<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    gridSize = (sizeElementsSemanticTrain + blockSize - 1) / blockSize; </div>
-<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    printf(<span class="stringliteral">&quot;Grid and block Mutacion %d %d \n&quot;</span>, gridSize, blockSize );</div>
+<div class="line"><a name="l00230"></a><span class="lineno">  230</span>&#160;    cudaOccupancyMaxPotentialBlockSize(&amp;minGridSize, &amp;blockSize, geometricSemanticMutation, 0, sizeElementsSemanticTrain);  /*!&lt; heuristic function used to choose a good block size is to aim at high occupancy*/</div>
+<div class="line"><a name="l00231"></a><span class="lineno">  231</span>&#160;    </div>
+<div class="line"><a name="l00232"></a><span class="lineno">  232</span>&#160;    gridSize = (sizeElementsSemanticTrain + blockSize - 1) / blockSize; /*!&lt; round up according to array size*/</div>
+<div class="line"><a name="l00233"></a><span class="lineno">  233</span>&#160;    </div>
+<div class="line"><a name="l00234"></a><span class="lineno">  234</span>&#160;    printf(&quot;Grid and block Mutacion %d %d \n&quot;, gridSize, blockSize );</div>
+<div class="line"><a name="l00235"></a><span class="lineno">  235</span>&#160;    /*!&lt; geometric semantic mutation with semantic train*/</div>
 <div class="line"><a name="l00236"></a><span class="lineno">  236</span>&#160;    geometricSemanticMutation&lt;&lt;&lt; gridSize, blockSize &gt;&gt;&gt;(gpuSemanticInitialPopulation, gpuRandomTrees,gpuNewSemanticsOffsprings,</div>
 <div class="line"><a name="l00237"></a><span class="lineno">  237</span>&#160;        sizeIndividuals, nrow, sizeElementsSemanticTrain, 1, indexRandomTrees, dStructMutation, dStructMutationy);</div>
 <div class="line"><a name="l00238"></a><span class="lineno">  238</span>&#160;    </div>
-<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        <a class="code" href="_gsgp_cuda_8cpp.html#a0d1515a59003b1a58eedefa6dd17a995">cudaErrorCheck</a>(<span class="stringliteral">&quot;geometricSemanticMutation&quot;</span>);</div>
+<div class="line"><a name="l00239"></a><span class="lineno">  239</span>&#160;        cudaErrorCheck(&quot;geometricSemanticMutation&quot;);</div>
 <div class="line"><a name="l00240"></a><span class="lineno">  240</span>&#160; </div>
-<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    cudaMemcpy(hostNewSemanticsOffsprings,gpuNewSemanticsOffsprings,sizeSemantic,cudaMemcpyDeviceToHost);  </div>
-<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    printf(<span class="stringliteral">&quot;Print initial semantic of GPU \n&quot;</span>);</div>
+<div class="line"><a name="l00241"></a><span class="lineno">  241</span>&#160;    cudaMemcpy(hostNewSemanticsOffsprings,gpuNewSemanticsOffsprings,sizeSemantic,cudaMemcpyDeviceToHost);  /*!&lt; This instruction makes a copy of a vector of pointers from CPU to GPU. */</div>
+<div class="line"><a name="l00242"></a><span class="lineno">  242</span>&#160;    </div>
+<div class="line"><a name="l00243"></a><span class="lineno">  243</span>&#160;    printf(&quot;Print initial semantic of GPU \n&quot;);</div>
 <div class="line"><a name="l00244"></a><span class="lineno">  244</span>&#160;    </div>
-<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    <a class="code" href="gsm_test_8cu.html#a2f0995fd0bd4f8449b26524e0c38f00b">printSemantics</a>(hostNewSemanticsOffsprings, sizeIndividuals, nrow);</div>
+<div class="line"><a name="l00245"></a><span class="lineno">  245</span>&#160;    printSemantics(hostNewSemanticsOffsprings, sizeIndividuals, nrow);</div>
 <div class="line"><a name="l00246"></a><span class="lineno">  246</span>&#160;    </div>
-<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    <span class="keywordtype">float</span> m= dStructMutation[0].mutStep;</div>
+<div class="line"><a name="l00247"></a><span class="lineno">  247</span>&#160;    float m= dStructMutation[0].mutStep;</div>
 <div class="line"><a name="l00248"></a><span class="lineno">  248</span>&#160; </div>
-<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    <a class="code" href="gsm_test_8cu.html#a63dc5c56f4e0ae5adc0560e7876ea5ca">omsCPU</a>(cpuSemanticInitialPopulation, cpuRandomTrees, cpuNewSemanticsOffsprings, sizeIndividuals, nrow, m, indexRandomTrees);</div>
+<div class="line"><a name="l00249"></a><span class="lineno">  249</span>&#160;    omsCPU(cpuSemanticInitialPopulation, cpuRandomTrees, cpuNewSemanticsOffsprings, sizeIndividuals, nrow, m, indexRandomTrees);</div>
 <div class="line"><a name="l00250"></a><span class="lineno">  250</span>&#160;    </div>
-<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    printf(<span class="stringliteral">&quot; Print initial semantic of CPU \n&quot;</span>);    </div>
+<div class="line"><a name="l00251"></a><span class="lineno">  251</span>&#160;    printf(&quot; Print initial semantic of CPU \n&quot;);    </div>
 <div class="line"><a name="l00252"></a><span class="lineno">  252</span>&#160;    </div>
-<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    <a class="code" href="gsm_test_8cu.html#a2f0995fd0bd4f8449b26524e0c38f00b">printSemantics</a>(cpuNewSemanticsOffsprings, sizeIndividuals,  nrow);</div>
+<div class="line"><a name="l00253"></a><span class="lineno">  253</span>&#160;    printSemantics(cpuNewSemanticsOffsprings, sizeIndividuals,  nrow);</div>
 <div class="line"><a name="l00254"></a><span class="lineno">  254</span>&#160; </div>
-<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    <span class="keywordflow">if</span>(<a class="code" href="gsm_test_8cu.html#aae7b81b486be77d36f57372d8eb3c4fc">testSemantic</a>(cpuNewSemanticsOffsprings,hostNewSemanticsOffsprings,sizeIndividuals,nrow)){</div>
-<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        printf(<span class="stringliteral">&quot; Pass test for the semantic mutation operator \n&quot;</span>);</div>
-<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    }<span class="keywordflow">else</span>{</div>
-<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        printf(<span class="stringliteral">&quot; Don&#39;t pass test for the semantic mutation operator \n&quot;</span>);</div>
+<div class="line"><a name="l00255"></a><span class="lineno">  255</span>&#160;    if(testSemantic(cpuNewSemanticsOffsprings,hostNewSemanticsOffsprings,sizeIndividuals,nrow)){</div>
+<div class="line"><a name="l00256"></a><span class="lineno">  256</span>&#160;        printf(&quot; Pass test for the semantic mutation operator \n&quot;);</div>
+<div class="line"><a name="l00257"></a><span class="lineno">  257</span>&#160;    }else{</div>
+<div class="line"><a name="l00258"></a><span class="lineno">  258</span>&#160;        printf(&quot; Don&#39;t pass test for the semantic mutation operator \n&quot;);</div>
 <div class="line"><a name="l00259"></a><span class="lineno">  259</span>&#160;    }</div>
 <div class="line"><a name="l00260"></a><span class="lineno">  260</span>&#160;    </div>
 <div class="line"><a name="l00261"></a><span class="lineno">  261</span>&#160;    free(cpuSemanticInitialPopulation);</div>
@@ -253,25 +354,12 @@ $(document).ready(function(){initNavTree('gsm_test_8cu_source.html',''); initRes
 <div class="line"><a name="l00265"></a><span class="lineno">  265</span>&#160;    cudaFree(gpuSemanticInitialPopulation);</div>
 <div class="line"><a name="l00266"></a><span class="lineno">  266</span>&#160;    cudaFree(gpuRandomTrees);</div>
 <div class="line"><a name="l00267"></a><span class="lineno">  267</span>&#160;    cudaFree(gpuNewSemanticsOffsprings);</div>
-<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    cudaDeviceReset(); </div>
-<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00268"></a><span class="lineno">  268</span>&#160;    cudaDeviceReset(); /*!&lt; all device allocations are removed*/</div>
+<div class="line"><a name="l00269"></a><span class="lineno">  269</span>&#160;    </div>
+<div class="line"><a name="l00270"></a><span class="lineno">  270</span>&#160;    return 0;</div>
 <div class="line"><a name="l00271"></a><span class="lineno">  271</span>&#160;}</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="agsm_test_8cu_html_a63dc5c56f4e0ae5adc0560e7876ea5ca"><div class="ttname"><a href="gsm_test_8cu.html#a63dc5c56f4e0ae5adc0560e7876ea5ca">omsCPU</a></div><div class="ttdeci">void omsCPU(float *initialPopSemantic, float *randomTreesSemantic, float *newOffspringSemantic, int sizePopulation, int nrow, double ms, float *index)</div><div class="ttdoc">The GSM operator is basically a vector addition operation, that can be performed independently for ea...</div><div class="ttdef"><b>Definition:</b> <a href="gsm_test_8cu_source.html#l00098">gsmTest.cu:98</a></div></div>
-<div class="ttc" id="a_gsgp_cuda_8cpp_html"><div class="ttname"><a href="_gsgp_cuda_8cpp.html">GsgpCuda.cpp</a></div><div class="ttdoc">file containing the definition of the modules (kernels) used to create the population of individuals,...</div></div>
-<div class="ttc" id="a_gsgp_cuda_8cpp_html_a0d1515a59003b1a58eedefa6dd17a995"><div class="ttname"><a href="_gsgp_cuda_8cpp.html#a0d1515a59003b1a58eedefa6dd17a995">cudaErrorCheck</a></div><div class="ttdeci">void cudaErrorCheck(const char *functionName)</div><div class="ttdoc">This function catches the error detected by the compiler and prints the user-friendly error message.</div><div class="ttdef"><b>Definition:</b> <a href="_gsgp_cuda_8cpp_source.html#l00070">GsgpCuda.cpp:70</a></div></div>
-<div class="ttc" id="agsm_test_8cu_html_aae7b81b486be77d36f57372d8eb3c4fc"><div class="ttname"><a href="gsm_test_8cu.html#aae7b81b486be77d36f57372d8eb3c4fc">testSemantic</a></div><div class="ttdeci">bool testSemantic(float *cpuSemantic, float *gpuSemantic, int sizeIndividuals, int nrow)</div><div class="ttdoc">This function compares the semantics obtained in the GPU against a semantics obtained in the CPU to v...</div><div class="ttdef"><b>Definition:</b> <a href="gsm_test_8cu_source.html#l00125">gsmTest.cu:125</a></div></div>
-<div class="ttc" id="a_gsgp_cuda_8cpp_html_a74f59e7ae6dd1f3464cba0f9ced82f9b"><div class="ttname"><a href="_gsgp_cuda_8cpp.html#a74f59e7ae6dd1f3464cba0f9ced82f9b">geometricSemanticMutation</a></div><div class="ttdeci">__global__ void geometricSemanticMutation(float *initialPopulationSemantics, float *randomTreesSemantics, float *newSemanticsOffsprings, int sizePopulation, int nrow, int tElements, int generation, float *indexRandomTrees, entry_ *x, entry_ *y)</div><div class="ttdef"><b>Definition:</b> <a href="_gsgp_cuda_8cpp_source.html#l00403">GsgpCuda.cpp:403</a></div></div>
-<div class="ttc" id="a_gsgp_cuda_8cpp_html_a9db7a327b13d8851fe8cfebeee656350"><div class="ttname"><a href="_gsgp_cuda_8cpp.html#a9db7a327b13d8851fe8cfebeee656350">computeSemantics</a></div><div class="ttdeci">__global__ void computeSemantics(float *inputPopulation, float *outSemantic, unsigned int sizeMaxDepthIndividual, float *data, int nrow, int nvar, int *pushGenes, float *stackInd)</div><div class="ttdoc">The ComputeSemantics kernel is an interpreter, that decodes each individual and evaluates it over all...</div><div class="ttdef"><b>Definition:</b> <a href="_gsgp_cuda_8cpp_source.html#l00225">GsgpCuda.cpp:225</a></div></div>
-<div class="ttc" id="agsm_test_8cu_html_ae66f6b31b5ad750f1fe042a706a4e3d4"><div class="ttname"><a href="gsm_test_8cu.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a></div><div class="ttdeci">int main()</div><div class="ttdoc">This file contains the test for the kernel that initializes the individuals on GPU.</div><div class="ttdef"><b>Definition:</b> <a href="gsm_test_8cu_source.html#l00141">gsmTest.cu:141</a></div></div>
-<div class="ttc" id="agsm_test_8cu_html_a2f0995fd0bd4f8449b26524e0c38f00b"><div class="ttname"><a href="gsm_test_8cu.html#a2f0995fd0bd4f8449b26524e0c38f00b">printSemantics</a></div><div class="ttdeci">void printSemantics(float *semantic, int sizeIndividualsIndi, int nrow)</div><div class="ttdoc">This function only prints the semantic values that exist in the pointer vectors it receives.</div><div class="ttdef"><b>Definition:</b> <a href="gsm_test_8cu_source.html#l00072">gsmTest.cu:72</a></div></div>
-<div class="ttc" id="agsm_test_8cu_html_a1512f3435f9492efeb3f7367b9f1b571"><div class="ttname"><a href="gsm_test_8cu.html#a1512f3435f9492efeb3f7367b9f1b571">exampleSemantics</a></div><div class="ttdeci">void exampleSemantics(float *semantic, int sizeIndividuals, int nrow)</div><div class="ttdoc">This function initializes with random numbers between 0 and 1 the semantics for initial population an...</div><div class="ttdef"><b>Definition:</b> <a href="gsm_test_8cu_source.html#l00053">gsmTest.cu:53</a></div></div>
-<div class="ttc" id="agsm_test_8cu_html_af6dbb904da0749afa81efc8d36b891a5"><div class="ttname"><a href="gsm_test_8cu.html#af6dbb904da0749afa81efc8d36b891a5">frand</a></div><div class="ttdeci">#define frand()</div><div class="ttdoc">Macro used to generate a random number.</div><div class="ttdef"><b>Definition:</b> <a href="gsm_test_8cu_source.html#l00028">gsmTest.cu:28</a></div></div>
-<div class="ttc" id="a_gsgp_cuda_8cpp_html_a983dfdd69760a88100bc9efb04e4ac5a"><div class="ttname"><a href="_gsgp_cuda_8cpp.html#a983dfdd69760a88100bc9efb04e4ac5a">init</a></div><div class="ttdeci">__global__ void init(unsigned int seed, curandState_t *states)</div><div class="ttdoc">This kernel is used to initialize the random states to generate random numbers with a different pseud...</div><div class="ttdef"><b>Definition:</b> <a href="_gsgp_cuda_8cpp_source.html#l00090">GsgpCuda.cpp:90</a></div></div>
-<div class="ttc" id="a_gsgp_cuda_8h_html_a780cb33de32b71bfdc0b39796de3c6b8"><div class="ttname"><a href="_gsgp_cuda_8h.html#a780cb33de32b71bfdc0b39796de3c6b8">test</a></div><div class="ttdeci">__host__ void test(float *individuals, int sizeMaxDepth, int sizePopulation)</div><div class="ttdoc">This file contains the test for the kernel that initializes the individuals on GPU.</div><div class="ttdef"><b>Definition:</b> <a href="test_initial_population_8cu_source.html#l00038">testInitialPopulation.cu:38</a></div></div>
-<div class="ttc" id="a_gsgp_cuda_8cpp_html_ae218d64b1ba67bb484c22c4c6ff293f5"><div class="ttname"><a href="_gsgp_cuda_8cpp.html#ae218d64b1ba67bb484c22c4c6ff293f5">initializeIndexRandomTrees</a></div><div class="ttdeci">__global__ void initializeIndexRandomTrees(int sizePopulation, float *indexRandomTrees, curandState_t *states)</div><div class="ttdef"><b>Definition:</b> <a href="_gsgp_cuda_8cpp_source.html#l00379">GsgpCuda.cpp:379</a></div></div>
-<div class="ttc" id="astructentry___html"><div class="ttname"><a href="structentry__.html">entry_</a></div><div class="ttdef"><b>Definition:</b> <a href="_gsgp_cuda_8h_source.html#l00084">GsgpCuda.h:84</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

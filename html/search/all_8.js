@@ -1,10 +1,6 @@
 var searchData=
 [
-  ['newindividual_47',['newIndividual',['../structentry__.html#aa1d655fb76c65dbee9b799fd56d1af3e',1,'entry_']]],
-  ['nrow_48',['nrow',['../structcfg__.html#af95f259e55617065a7c2f200e39ba93f',1,'cfg_']]],
-  ['nrowtest_49',['nrowTest',['../structcfg__.html#ac87fac8e96a5e2d32fa20dc7783e72f9',1,'cfg_']]],
-  ['number_50',['number',['../structentry__.html#ae4b922df64892c78429f45d28ffa5826',1,'entry_']]],
-  ['numberruns_51',['numberRuns',['../structcfg__.html#ab0c8f7373ece340822d32efba04b7e01',1,'cfg_']]],
-  ['nvar_52',['nvar',['../structcfg__.html#aaf8206fc15ba42f538c17a951f8c35da',1,'cfg_']]],
-  ['nvartest_53',['nvarTest',['../structcfg__.html#a04803290cbeff55d18e679b20b471030',1,'cfg_']]]
+  ['pop_41',['pop',['../_gsgp_cuda_8cpp.html#aeb41d1035545c56d8f6b46b7fd502e60',1,'pop(int *pushGenes, float *stackInd):&#160;GsgpCuda.cpp'],['../_gsgp_cuda_8h.html#a955bdc425c4f7867b5b7bdb415ece57a',1,'pop(int *pushGenes, float *stackInd):&#160;GsgpCuda.cpp']]],
+  ['populationsize_42',['populationSize',['../structcfg__.html#ae8d24427036d34b3a7d21d7a59ff05ed',1,'cfg_']]],
+  ['push_43',['push',['../_gsgp_cuda_8cpp.html#a8cde9b3f9b14f608e5f41be703a0eac4',1,'push(float val, int *pushGenes, float *stackInd):&#160;GsgpCuda.cpp'],['../_gsgp_cuda_8h.html#a6f6338e7da34e92f8aca5541f4ad4a93',1,'push(float val, int *pushGenes, float *stackInd):&#160;GsgpCuda.cpp']]]
 ];

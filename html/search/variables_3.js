@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['firstparent_136',['firstParent',['../structentry__.html#a9a41e1c72e4b291a74db65980420d165',1,'entry_']]]
+  ['logpath_104',['logPath',['../structcfg__.html#a7eaaeb784b7b8455ac58cadcc244efd8',1,'cfg_']]]
 ];
