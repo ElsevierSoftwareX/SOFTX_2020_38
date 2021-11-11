@@ -333,7 +333,7 @@ int main(int argc, char **argv){
         cudaEventRecord(startInitialPop);
 
         ///*!< invokes the GPU to initialize the initial population*/
-        initializePopulation<<< gridSize, blockSize >>>(dInitialPopulation, nvar, individualLength, states, config.maxRandomConstant,4, config.functionRatio, config.terminalRatio);
+        initializePopulation<<< gridSize, blockSize >>>(dInitialPopulation, nvar, individualLength, states, config.maxRandomConstant,4, config.functionRatio, config.variableRatio);
         cudaErrorCheck("initializePopulation");
 
         cudaEventRecord(stopInitialPop);
@@ -345,7 +345,7 @@ int main(int argc, char **argv){
         cudaMemcpy(hInitialPopulation, dInitialPopulation, sizeMemPopulation, cudaMemcpyDeviceToHost);    
         saveIndividuals(logPath,hInitialPopulation, namePopulation, individualLength,config.populationSize);  
         ///*!< invokes the GPU to initialize the random trees*/
-        initializePopulation<<< gridSize, blockSize >>>(dRandomTrees, nvar, individualLength, states, config.maxRandomConstant,4,config.functionRatio, config.terminalRatio);    
+        initializePopulation<<< gridSize, blockSize >>>(dRandomTrees, nvar, individualLength, states, config.maxRandomConstant,4,config.functionRatio, config.variableRatio);    
         cudaErrorCheck("initializePopulation");    
         ///*!<return the initial population of the device to the host*/
         cudaMemcpy(hRandomTrees, dRandomTrees,sizeMemPopulation, cudaMemcpyDeviceToHost);    

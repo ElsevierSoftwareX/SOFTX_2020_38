@@ -159,37 +159,37 @@ __device__ void clearStack(int *pushGenes, unsigned int sizeMaxDepthIndividual, 
 }
 
 /*!
-* \fn       __global__ void initializePopulation(float* dInitialPopulation, int nvar, int sizeGenes, curandState_t* states, int maxRandomConstant)
+* \fn       __global__ void initializePopulation(float* dInitialPopulation, int nvar, int maxIndividualLength, curandState_t* states, int maxRandomConstant)
 * \brief    The initializePopulation kernel creates the population of programs T and the set of random trees R uses by the GSM kernel, based on the desired population
             size and maximun program length. The individuals are representd using a linear genome, composed of valid terminals (inputs to the program) and functions 
             (basic elements with which programs can be built).
 * \param    float *dInitialPopulation: vector pointers to store the individuals of the initial population
 * \param    int nvar: variable containing the number of columns (excluding the target) of the training dataset
-* \param    int sizeGenes: number of genes in the genome
+* \param    int maxIndividualLength: number of genes in the genome
 * \param    curandState_t *states: random status pointer to generate random numbers for each thread
 * \param    int maxRandomConstant: variable containing the maximum number to generate ephemeral constants
 * \param    int funtion: variable containing the number of functions
 * \param    float functionRatio: variable containing the ratio of functions
-* \param    float terminalRatio: variable containing the ratio of terminals
+* \param    float variableRatio: variable containing the ratio of terminals
 * \return   void
 * \date     09/11/2021
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cpp
 */
-__global__ void initializePopulation(float* dInitialPopulation, int nvar, int sizeMaxDepthIndividual, curandState_t* states, int maxRandomConstant, int functions, float functionRatio, float terminalRatio){
+__global__ void initializePopulation(float* dInitialPopulation, int nvar, int maxIndividualLength, curandState_t* states, int maxRandomConstant, int functions, float functionRatio, float variableRatio){
   const unsigned int tid = threadIdx.x+blockIdx.x*blockDim.x;
-  for (unsigned int j = 0; j < sizeMaxDepthIndividual; j++){
+  for (unsigned int j = 0; j < maxIndividualLength; j++){
     if(curand_uniform(&states[tid])<functionRatio){
-      dInitialPopulation[tid*sizeMaxDepthIndividual+j] = (curand(&states[tid]) % functions + 10000)*(float)(-1);
+      dInitialPopulation[tid*maxIndividualLength+j] = (curand(&states[tid]) % functions + 10000)*(float)(-1);
     }else{
-      if (curand_uniform(&states[tid])<terminalRatio){
-        if(curand_uniform(&states[tid])<0.5){
-          dInitialPopulation[tid*sizeMaxDepthIndividual+j] = (curand(&states[tid]) % maxRandomConstant+1);
-        }else{
-          dInitialPopulation[tid*sizeMaxDepthIndividual+j] = (curand(&states[tid]) % maxRandomConstant+1)*(float)(-1);
-        } 
+      if (curand_uniform(&states[tid])<variableRatio){
+          dInitialPopulation[tid*maxIndividualLength+j] = (curand(&states[tid]) % nvar+1000)*(float)(-1);
       }else{
-        dInitialPopulation[tid*sizeMaxDepthIndividual+j] = (curand(&states[tid]) % nvar+1000)*(float)(-1);
+        if(curand_uniform(&states[tid])<0.5){
+          dInitialPopulation[tid*maxIndividualLength+j] = (curand(&states[tid]) % maxRandomConstant+1);
+        }else{
+          dInitialPopulation[tid*maxIndividualLength+j] = (curand(&states[tid]) % maxRandomConstant+1)*(float)(-1);
+        }
       }
     }
   }
@@ -528,8 +528,8 @@ __host__ void readConfigFile(cfg *config){
     if (strcmp(str1, "functionRatio")==0)
       config->functionRatio =atof(str2);
 
-    if (strcmp(str1, "terminalRatio")==0)
-      config->terminalRatio =atof(str2);
+    if (strcmp(str1, "variableRatio")==0)
+      config->variableRatio =atof(str2);
 
     if (strcmp(str1, "maxRandomConstant")==0)
     	config->maxRandomConstant=atof(str2);

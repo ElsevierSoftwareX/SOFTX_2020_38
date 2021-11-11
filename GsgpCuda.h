@@ -97,9 +97,9 @@ typedef struct entry_{
 * \brief    Structure used to store the parameters of the configuration.ini file and these are used to initialize the algorithm parameters  
 * \param    int numberGenerations: number of generations of the GSGP algorithm 
 * \param    int populationSize: number of individuals in the population
-* \param    int maxIndividualLength: number of genes in the genome
-* \param    float functionRatio : ratio of the number of functions in the GP algorithm
-* \param    float terminalRatio : ratio of the number of terminals in the GP algorithm
+* \param    int maxIndividualLength:  variable that stores the length (number of genes) of an individual
+* \param    float functionRatio : probability of selecting a function (otherwise a terminal).
+* \param    float variableRatio : probability of selecting a variable (otherwise a constant) when a terminal gene has been chosen.
 * \param    int maxRandomConstant: max number for ephemeral random constants
 * \param    char logPath[100]: name of the output files
 * \date     9/11/2021
@@ -111,7 +111,7 @@ typedef struct cfg_{
   int populationSize;       
   int maxIndividualLength;             
   float functionRatio;     
-  float terminalRatio;      
+  float variableRatio;      
   int maxRandomConstant;    
   char logPath[100];        
 }cfg;
