@@ -85,7 +85,7 @@ typedef struct entry_{
    int event;
    int firstParent;   /*!< variable containing the index of the first random tree for the  mutation operation */
    int secondParent;  /*!< variable containing the index of the second random tree for the  mutation operation */
-   int number; /// variable containing the index of the parent (mutation) or the index of the random tree (crossover)
+   int number;        /*!< variable containing the index of the parent (mutation) or the index of the random tree (crossover)*/
    int mark;          /*!< variable used to reconstruct the optimal solution. 1 means that a particular tree is involved in the construction of the optimal solution, 0 means that the particular tree can be ignored.*/
    int newIndividual; /*!< variable containing the index of the newly created individual */
    float mutStep;     /*!< variable containing the mutation step of the semantic mutation */
@@ -95,21 +95,25 @@ typedef struct entry_{
 
 /*!
 * \brief    Structure used to store the parameters of the configuration.ini file and these are used to initialize the algorithm parameters  
-* \param    int numberRuns: number of iterations of the GP algorithm
-* \param    int maxNumberGenerations: number of generations of the GSGP algorithm 
-* \param    int populationSize: size of the population: number of candidate solutions
-* \param    int maxDepth: maximum depth of a newly created individual
+* \param    int numberGenerations: number of generations of the GSGP algorithm 
+* \param    int populationSize: number of individuals in the population
+* \param    int maxIndividualLength: number of genes in the genome
+* \param    float functionRatio : ratio of the number of functions in the GP algorithm
+* \param    float terminalRatio : ratio of the number of terminals in the GP algorithm
 * \param    int maxRandomConstant: max number for ephemeral random constants
-* \date     25/01/2020
+* \param    char logPath[100]: name of the output files
+* \date     9/11/2021
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.h
 */
 typedef struct cfg_{
-  int maxNumberGenerations; /*!< number of generations of the GSGP algorithm */ 
-  int populationSize;       /*!< size of the population, number of candidate solutions */
-  int maxDepth;             /*!< maximum depth of a newly created individual*/
-  int maxRandomConstant;
-  char logPath[100];
+  int numberGenerations; 
+  int populationSize;       
+  int maxIndividualLength;             
+  float functionRatio;     
+  float terminalRatio;      
+  int maxRandomConstant;    
+  char logPath[100];        
 }cfg;
 
 /*!< struct variable containing the values of the parameters specified in the configuration.ini file */
@@ -194,12 +198,15 @@ __device__ void clearStack(int *pushGenes, unsigned int sizeMaxDepthIndividual, 
 * \param    int sizeMaxDepthIndividual: variable thar stores maximum depth for individuals
 * \param    curandState_t *states: random status pointer to generate random numbers for each thread
 * \param    int maxRandomConstant: variable containing the maximum number to generate ephemeral constants
+* \param    int funtion: variable containing the number of functions
+* \param    float functionRatio: probability of selecting a function
+* \param    float terminalRatio: probability of selecting a terminal
 * \return   void
-* \date     01/25/2020
+* \date     09/11/2021
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
-* \file     GsgpCuda.h
+* \file     GsgpCuda.cpp
 */
-__global__ void initializePopulation(float* dInitialPopulation, int nvar, int sizeMaxDepthIndividual, curandState_t* states, int maxRandomConstant);
+__global__ void initializePopulation(float* dInitialPopulation, int nvar, int sizeMaxDepthIndividual, curandState_t* states, int maxRandomConstant, int functions, float functionRatio, float terminalRatio);
 
 /*!
 * \fn       __global__ void computeSemantics(float *inputPopulation, float *outSemantic, unsigned int sizeMaxDepthIndividual, float *data, int nrow, int nvar, int *pushGenes, float *stackInd)  
@@ -280,7 +287,7 @@ __global__ void initializeIndexRandomTrees(int sizePopulation, float *indexRando
 * \file     GsgpCuda.h 
 */
 __global__ void geometricSemanticMutation(float *initialPopulationSemantics, float *randomTreesSemantics, float *newSemanticsOffsprings, int sizePopulation,
-  int nrow, int tElements, int generation, float *indexRandomTrees, entry_ *x, entry_ *y);
+  int nrow, int tElements, int generation, float *indexRandomTrees, entry_ *y);
 
 /*!
 * \fn       __host__ void saveTrace(entry *structSurvivor, int generation) 
@@ -492,22 +499,6 @@ __host__ void readInpuTestData( char *test_file, float *dataTest, float *dataTes
 */
 
 __host__ void readPopulation( float *initialPopulation, float *randomTrees, int sizePopulation, int depth, std::string log, std::string name, std::string nameR);
-
-/*!
-* \fn       void intreSemanticCPU(float *initiPop, float *OutSemantic, float *data, int nrow, int depth, int numIndi)
-* \brief    This function interprets the generated individuals in CPU to obtain their semantics.
-* \param    float *initiPop: This vector pointers to store the individuals of the initial population.
-* \param    flot  *OutSemantic: vector pointers to store the semantics of each individual in the population.
-* \param    float *data: This pointer vector containing training or test data.
-* \param    int *nrow: This variable contains the number of fitness cases.
-* \param    int depth: This variable thar stores maximum depth for individuals
-* \param    int numIndi: This variable contains the number of individuals that exist in the initial population.
-* \return   void
-* \date     05/12/2020
-* \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
-* \file     GsgpCuda.cpp
-*/
-__host__ void intreSemanticCPU(float *initiPop, vector<float> &OutSemantic, float *data, int nrow, int depth, int index, int nvarTest);
 
 /*!
 * \fn       __host__ void evaluate_unseen_new_data(std::string path, int generations, const int sizeMaxDepthIndividual, float *initialPopulation, float *randomTrees, std::ofstream& OUT, std::string log, float *dataTest ,int nrow, int numIndi, int nvarTest)__host__ void evaluate_unseen_new_data(std::string path, int generations, const int sizeMaxDepthIndividual, float *initialPopulation, float *randomTrees, std::ofstream& OUT, std::string log, float *dataTest ,int nrow, int numIndi, int nvarTest)

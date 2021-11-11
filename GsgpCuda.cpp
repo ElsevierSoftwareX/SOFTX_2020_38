@@ -20,7 +20,6 @@
 //! \date     created on 25/01/2020
 
 #include "GsgpCuda.h"
-#include <string>
 using namespace std; 
 
 /*!
@@ -33,11 +32,11 @@ using namespace std;
 * \file     GsgpCuda.cpp
 */
 const std::string currentDateTimeM() { 
-    time_t now = time(0); struct tm tstruct;
-    char buf[80];
-    tstruct = *localtime(&now);
-    strftime(buf, sizeof(buf), "%Y-%m-%d", &tstruct);
-    return buf;    
+  time_t now = time(0); struct tm tstruct;
+  char buf[80];
+  tstruct = *localtime(&now);
+  strftime(buf, sizeof(buf), "%Y-%m-%d", &tstruct);
+  return buf;    
 }
 
 /*!
@@ -49,13 +48,12 @@ const std::string currentDateTimeM() {
 * \author   Jose Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cpp
 */
-const std::string currentDateTime()
-{
-    time_t     now = time(0);
-    struct tm  tstruct;
-    char       buf[80];
-    tstruct = *localtime(&now);
-    strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
+const std::string currentDateTime(){
+  time_t     now = time(0);
+  struct tm  tstruct;
+  char       buf[80];
+  tstruct = *localtime(&now);
+  strftime(buf, sizeof(buf), "%Y-%m-%d.%X", &tstruct);
   return buf;
 }
 
@@ -68,14 +66,12 @@ const std::string currentDateTime()
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cpp
 */
-void cudaErrorCheck(const char* functionName)
-{
-    cudaError_t error = cudaGetLastError();
-    if(error != cudaSuccess)
-    {
-        printf("CUDA error (%s): %s\n", functionName, cudaGetErrorString(error));
-        exit(-1);
-    }
+void cudaErrorCheck(const char* functionName){
+  cudaError_t error = cudaGetLastError();
+  if(error != cudaSuccess){
+    printf("CUDA error (%s): %s\n", functionName, cudaGetErrorString(error));
+    exit(-1);
+  }
 }
 
 /*!
@@ -88,8 +84,7 @@ void cudaErrorCheck(const char* functionName)
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cpp
 */
-__global__ void init(unsigned int seed, curandState_t* states)
-{
+__global__ void init(unsigned int seed, curandState_t* states){
   const unsigned int tid = threadIdx.x+blockIdx.x*blockDim.x;
   curand_init(seed, tid, 0, &states[tid]);
 }
@@ -105,8 +100,7 @@ __global__ void init(unsigned int seed, curandState_t* states)
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cpp 
 */
-__device__ int push(float val, int *pushGenes, float *stackInd)
-{
+__device__ int push(float val, int *pushGenes, float *stackInd){
   const unsigned int tid = threadIdx.x+blockIdx.x*blockDim.x;
   stackInd[pushGenes[tid]] = val;
   return pushGenes[tid]+1;
@@ -122,8 +116,7 @@ __device__ int push(float val, int *pushGenes, float *stackInd)
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cpp
 */
-__device__ float pop(int *pushGenes, float *stackInd)
-{
+__device__ float pop(int *pushGenes, float *stackInd){
   const unsigned int tid = threadIdx.x+blockIdx.x*blockDim.x;
   pushGenes[tid]--;
   return stackInd[pushGenes[tid]];
@@ -139,8 +132,7 @@ __device__ float pop(int *pushGenes, float *stackInd)
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     gsgpMalloc.cpp
 */
-__device__ bool isEmpty(int *pushGenes, unsigned int sizeMaxDepthIndividual)
-{
+__device__ bool isEmpty(int *pushGenes, unsigned int sizeMaxDepthIndividual){
   const unsigned int tid = threadIdx.x+blockIdx.x*blockDim.x;
   if (pushGenes[tid] <= tid * sizeMaxDepthIndividual)
     return true;
@@ -159,8 +151,7 @@ __device__ bool isEmpty(int *pushGenes, unsigned int sizeMaxDepthIndividual)
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cpp 
 */
-__device__ void clearStack(int *pushGenes, unsigned int sizeMaxDepthIndividual, float *stackInd)
-{
+__device__ void clearStack(int *pushGenes, unsigned int sizeMaxDepthIndividual, float *stackInd){
   const unsigned int tid = threadIdx.x+blockIdx.x*blockDim.x;
   pushGenes[tid] = tid*sizeMaxDepthIndividual;
   for(int i = 0; i< sizeMaxDepthIndividual; i++)
@@ -168,41 +159,40 @@ __device__ void clearStack(int *pushGenes, unsigned int sizeMaxDepthIndividual, 
 }
 
 /*!
-* \fn       __global__ void initializePopulation(float* dInitialPopulation, int nvar, int sizeMaxDepthIndividual, curandState_t* states, int maxRandomConstant)
+* \fn       __global__ void initializePopulation(float* dInitialPopulation, int nvar, int sizeGenes, curandState_t* states, int maxRandomConstant)
 * \brief    The initializePopulation kernel creates the population of programs T and the set of random trees R uses by the GSM kernel, based on the desired population
             size and maximun program length. The individuals are representd using a linear genome, composed of valid terminals (inputs to the program) and functions 
             (basic elements with which programs can be built).
 * \param    float *dInitialPopulation: vector pointers to store the individuals of the initial population
 * \param    int nvar: variable containing the number of columns (excluding the target) of the training dataset
-* \param    int sizeMaxDepthIndividual: variable thar stores maximum depth for individuals
+* \param    int sizeGenes: number of genes in the genome
 * \param    curandState_t *states: random status pointer to generate random numbers for each thread
 * \param    int maxRandomConstant: variable containing the maximum number to generate ephemeral constants
+* \param    int funtion: variable containing the number of functions
+* \param    float functionRatio: variable containing the ratio of functions
+* \param    float terminalRatio: variable containing the ratio of terminals
 * \return   void
-* \date     01/25/2020
+* \date     09/11/2021
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cpp
 */
-__global__ void initializePopulation(float* dInitialPopulation, int nvar, int sizeMaxDepthIndividual, curandState_t* states, int maxRandomConstant, int functions)
-{
+__global__ void initializePopulation(float* dInitialPopulation, int nvar, int sizeMaxDepthIndividual, curandState_t* states, int maxRandomConstant, int functions, float functionRatio, float terminalRatio){
   const unsigned int tid = threadIdx.x+blockIdx.x*blockDim.x;
-      for (unsigned int j = 0; j < sizeMaxDepthIndividual; j++)
-      {
-          if(curand_uniform(&states[tid])<0.5)
-          {
-             dInitialPopulation[tid*sizeMaxDepthIndividual+j] = (curand(&states[tid]) % functions + 1)*(float)(-1);
-          }  
-          else
-          {
-            if (curand_uniform(&states[tid])<0.3)
-            {
-              dInitialPopulation[tid*sizeMaxDepthIndividual+j] = (curand(&states[tid]) % maxRandomConstant+1);
-            }
-            else
-            {
-              dInitialPopulation[tid*sizeMaxDepthIndividual+j] = (curand(&states[tid]) % nvar+1000)*(float)(-1);
-            }
-          }
+  for (unsigned int j = 0; j < sizeMaxDepthIndividual; j++){
+    if(curand_uniform(&states[tid])<functionRatio){
+      dInitialPopulation[tid*sizeMaxDepthIndividual+j] = (curand(&states[tid]) % functions + 10000)*(float)(-1);
+    }else{
+      if (curand_uniform(&states[tid])<terminalRatio){
+        if(curand_uniform(&states[tid])<0.5){
+          dInitialPopulation[tid*sizeMaxDepthIndividual+j] = (curand(&states[tid]) % maxRandomConstant+1);
+        }else{
+          dInitialPopulation[tid*sizeMaxDepthIndividual+j] = (curand(&states[tid]) % maxRandomConstant+1)*(float)(-1);
+        } 
+      }else{
+        dInitialPopulation[tid*sizeMaxDepthIndividual+j] = (curand(&states[tid]) % nvar+1000)*(float)(-1);
       }
+    }
+  }
 }
 
 /*!
@@ -224,109 +214,82 @@ __global__ void initializePopulation(float* dInitialPopulation, int nvar, int si
 * \file     GsgpCuda.cpp 
 */
 __global__ void computeSemantics(float *inputPopulation, float *outSemantic, unsigned int sizeMaxDepthIndividual, float *data,
- int nrow, int nvar, int *pushGenes, float *stackInd)
-{
-
+ int nrow, int nvar, int *pushGenes, float *stackInd){
   const unsigned int tid = threadIdx.x+blockIdx.x*blockDim.x;
   pushGenes[tid] = tid * sizeMaxDepthIndividual;
   int t,t_;
   float tmp,tmp2,out;
-  for(int k=0; k<nrow; k++)
-  {
-    out=0;
+  for(int k=0; k<nrow; k++){
+    out=0, t=0, t_=0 ,tmp=0, tmp2=0;
     clearStack(pushGenes,sizeMaxDepthIndividual, stackInd);
-    for(int i=0; i < sizeMaxDepthIndividual; i++)
-    {
-
-      if(inputPopulation[tid*sizeMaxDepthIndividual+i] > 0)
-      {
+    for(int i=0; i < sizeMaxDepthIndividual; i++){
+      if(inputPopulation[tid*sizeMaxDepthIndividual+i] > 0){
         pushGenes[tid] = push(inputPopulation[tid*sizeMaxDepthIndividual+i],pushGenes,stackInd);
       }
-      else 
-        if(inputPopulation[tid*sizeMaxDepthIndividual+i] <= -1000)
-        {
+      else if(inputPopulation[tid*sizeMaxDepthIndividual+i] < 0 && inputPopulation[tid*sizeMaxDepthIndividual+i] > -1000 && inputPopulation[tid*sizeMaxDepthIndividual+i] > -10000){
+        pushGenes[tid] = push(inputPopulation[tid*sizeMaxDepthIndividual+i],pushGenes,stackInd);
+      }
+      else if(inputPopulation[tid*sizeMaxDepthIndividual+i] <= -1000 && inputPopulation[tid*sizeMaxDepthIndividual+i] > -10000){
           t=inputPopulation[tid*sizeMaxDepthIndividual+i];
           t_=(t+1000)*(-1);
           pushGenes[tid] = push(data[t_+nvar*k],pushGenes,stackInd);
-        }   
-        else 
-          if (inputPopulation[tid*sizeMaxDepthIndividual+i] == -1)
-          {
-            if (!isEmpty(pushGenes,sizeMaxDepthIndividual))
-            {
-              tmp = pop(pushGenes,stackInd);
-              if (!isEmpty(pushGenes,sizeMaxDepthIndividual))
-              {
-                tmp2 = pop(pushGenes,stackInd);
-                if (!isnan(tmp) || !isnan(tmp2))
-                {
-                  pushGenes[tid] = push(tmp2 + tmp,pushGenes,stackInd);
-                  out = tmp2+tmp;
-                }
-              }
-              else
-                pushGenes[tid] = push(tmp,pushGenes,stackInd);
-            }
-          }
-          else 
-            if (inputPopulation[tid*sizeMaxDepthIndividual+i] == -2)
-            {
-              if(!isEmpty(pushGenes,sizeMaxDepthIndividual))
-              {
-                tmp = pop(pushGenes,stackInd);
-                  if (!isEmpty(pushGenes,sizeMaxDepthIndividual))
-                  {
-                      tmp2 = pop(pushGenes,stackInd);
-                  if (!isnan(tmp) || !isnan(tmp2))
-                  {
-                    pushGenes[tid] = push(tmp2 - tmp,pushGenes,stackInd);
-                    out = tmp2-tmp;
-                  }
+        }
+        else if (inputPopulation[tid*sizeMaxDepthIndividual+i] == -10001){
+          if (!isEmpty(pushGenes,sizeMaxDepthIndividual)){
+            tmp = pop(pushGenes,stackInd);
+            if (!isEmpty(pushGenes,sizeMaxDepthIndividual)){
+              tmp2 = pop(pushGenes,stackInd);
+              if (!isnan(tmp) && !isinf(tmp) && !isnan(tmp2) && !isinf(tmp2)){
+                pushGenes[tid] = push(tmp2 + tmp,pushGenes,stackInd);
+                out = tmp2+tmp;
               }
             }else
-              pushGenes[tid] = push(tmp,pushGenes,stackInd);
-            }
-            else
-              if (inputPopulation[tid*sizeMaxDepthIndividual+i] == -3)
-              {
-                if (!isEmpty(pushGenes,sizeMaxDepthIndividual))
-                {
-                  tmp = pop(pushGenes,stackInd);
-                  if (!isEmpty(pushGenes,sizeMaxDepthIndividual))
-                  {
-                    tmp2 = pop(pushGenes,stackInd);
-                    if (!isnan(tmp) || !isnan(tmp2))
-                    {
-                      pushGenes[tid] = push(tmp2 * tmp,pushGenes,stackInd);
-                      out = tmp2*tmp;
-                  }
-              }
-          }else
-          pushGenes[tid] = push(tmp,pushGenes,stackInd);
-       }
-       else
-        if (inputPopulation[tid*sizeMaxDepthIndividual+i] == -4)
-        {
-          if (!isEmpty(pushGenes,sizeMaxDepthIndividual))
-          {
-              tmp = pop(pushGenes,stackInd);
-              if (!isEmpty(pushGenes,sizeMaxDepthIndividual))
-              {
-                tmp2 = pop(pushGenes,stackInd);
-                if (!isnan(tmp) || !isnan(tmp2))
-                {
-                  pushGenes[tid] = push(tmp2 / sqrtf(1+tmp*tmp),pushGenes,stackInd);
-                  out = tmp2 / sqrtf(1+tmp*tmp);
-                }
-              }
-          }else
             pushGenes[tid] = push(tmp,pushGenes,stackInd);
-      }
+          }
+        }
+        else if (inputPopulation[tid*sizeMaxDepthIndividual+i] == -10002){
+          if(!isEmpty(pushGenes,sizeMaxDepthIndividual)){
+            tmp = pop(pushGenes,stackInd);
+            if (!isEmpty(pushGenes,sizeMaxDepthIndividual)){
+              tmp2 = pop(pushGenes,stackInd);
+              if (!isnan(tmp) && !isinf(tmp) && !isnan(tmp2) && !isinf(tmp2)){
+                pushGenes[tid] = push(tmp2 - tmp,pushGenes,stackInd);
+                out = tmp2-tmp;
+              }
+            }else
+            pushGenes[tid] = push(tmp,pushGenes,stackInd);
+          }
+        }
+        else if (inputPopulation[tid*sizeMaxDepthIndividual+i] == -10003){
+          if (!isEmpty(pushGenes,sizeMaxDepthIndividual)){
+            tmp = pop(pushGenes,stackInd);
+            if (!isEmpty(pushGenes,sizeMaxDepthIndividual)){
+              tmp2 = pop(pushGenes,stackInd);
+              if (!isnan(tmp) && !isinf(tmp) && !isnan(tmp2) && !isinf(tmp2)){
+                pushGenes[tid] = push(tmp2 * tmp,pushGenes,stackInd);
+                out = tmp2*tmp;
+              }
+            }else
+            pushGenes[tid] = push(tmp,pushGenes,stackInd);
+          }
+        }
+        else if (inputPopulation[tid*sizeMaxDepthIndividual+i] == -10004){
+          if (!isEmpty(pushGenes,sizeMaxDepthIndividual)){
+            tmp = pop(pushGenes,stackInd);
+            if (!isEmpty(pushGenes,sizeMaxDepthIndividual)){
+              tmp2 = pop(pushGenes,stackInd);
+              if (!isnan(tmp) && !isinf(tmp) && !isnan(tmp2) && !isinf(tmp2)){
+                pushGenes[tid] = push(tmp2 / sqrtf(1+tmp*tmp),pushGenes,stackInd);
+                out = tmp2 / sqrtf(1+tmp*tmp);
+              }
+            }else
+            pushGenes[tid] = push(tmp,pushGenes,stackInd);
+          }
+        }
     }
-      outSemantic[(tid*nrow+k)] = out;
-  } 
+  outSemantic[(tid*nrow+k)] = out;
+  }
 }
-
 /*!
 * \fn       __global__ void computeError(float *semantics, float *targetValues, float *fit, int nrow)
 * \brief    The computeError kernel computes the RMSE between each row of the semantic matrix ST,m×n and the target vector t, computing the
@@ -341,14 +304,12 @@ __global__ void computeSemantics(float *inputPopulation, float *outSemantic, uns
 * \file     gsgpMalloc.cpp
 */
 
-__global__ void computeError(float *semantics, float *targetValues, float *fit, int nrow)
-{
+__global__ void computeError(float *semantics, float *targetValues, float *fit, int nrow){
   const unsigned int tid = threadIdx.x+blockIdx.x*blockDim.x;
   float temp = 0;
-    for(int i=0; i<nrow; i++)
-    {
-      temp += (semantics[tid*nrow+i]-targetValues[i])*(semantics[tid*nrow+i]-targetValues[i]);  
-    }
+  for(int i=0; i<nrow; i++){
+    temp += (semantics[tid*nrow+i]-targetValues[i])*(semantics[tid*nrow+i]-targetValues[i]);  
+  }
   temp = sqrtf(temp/nrow);
   fit[tid] = temp;
 }
@@ -380,7 +341,6 @@ __device__ float sigmoid(float n){
 __global__ void initializeIndexRandomTrees(int sizePopulation, float *indexRandomTrees, curandState_t* states){
   const unsigned int tid = threadIdx.x+blockIdx.x*blockDim.x;
   indexRandomTrees[tid] = (curand(&states[tid]) % sizePopulation);
-  
 }
 
 /*!
@@ -402,25 +362,24 @@ __global__ void initializeIndexRandomTrees(int sizePopulation, float *indexRando
 * \file     GsgpCuda.cpp
 */
 __global__ void geometricSemanticMutation(float *initialPopulationSemantics, float *randomTreesSemantics, float *newSemanticsOffsprings, int sizePopulation,
-  int nrow, int tElements, int generation, float *indexRandomTrees, entry_ *x, entry_ *y)
-{
-  const unsigned int tid = threadIdx.x+blockIdx.x*blockDim.x;
-  int nSeed = (tid%sizePopulation);
-  int firstTree = indexRandomTrees[nSeed], secondTree = indexRandomTrees[sizePopulation + nSeed];
-  curandState_t state;
-  
-  //curand_init(firstTree*generation, 0, 0, &state);
-  curand_init(tid, 0, 0, &state);
-  int index = generation-1;
-  float ms= curand_uniform(&state);
-  y[(index*sizePopulation)+tid%sizePopulation].firstParent=firstTree;
-  y[(index*sizePopulation)+tid%sizePopulation].secondParent=secondTree;
-  y[(index*sizePopulation)+tid%sizePopulation].number=tid%sizePopulation;
-  y[(index*sizePopulation)+tid%sizePopulation].event=1;
-  y[(index*sizePopulation)+tid%sizePopulation].newIndividual=tid%sizePopulation;
-  y[(index*sizePopulation)+tid%sizePopulation].mark=0;
-  y[(index*sizePopulation)+tid%sizePopulation].mutStep=ms;
-  newSemanticsOffsprings[tid] = initialPopulationSemantics[tid]+(ms)*((1.0/(1+expf(-(randomTreesSemantics[firstTree*nrow+tid%nrow]))))-(1.0/(1+expf(-(randomTreesSemantics[secondTree*nrow+tid%nrow])))));
+  int nrow, int tElements, int generation, float *indexRandomTrees, entry_ *y){
+
+    const unsigned int tid = threadIdx.x+blockIdx.x*blockDim.x;
+    int nSeed = (tid/nrow);
+    int firstTree = indexRandomTrees[nSeed], secondTree = indexRandomTrees[sizePopulation + nSeed];
+    curandState_t state;
+    curand_init((tid/nrow)*generation, 0, 0, &state);
+    //curand_init(generation, 0, 0, &state);
+    int index = generation-1;
+    float ms= curand_uniform(&state);
+    y[(index*sizePopulation)+tid%sizePopulation].firstParent=firstTree;
+    y[(index*sizePopulation)+tid%sizePopulation].secondParent=secondTree;
+    y[(index*sizePopulation)+tid%sizePopulation].number=tid%sizePopulation;
+    y[(index*sizePopulation)+tid%sizePopulation].event=1;
+    y[(index*sizePopulation)+tid%sizePopulation].newIndividual=tid%sizePopulation;
+    y[(index*sizePopulation)+tid%sizePopulation].mark=0;
+    y[(index*sizePopulation)+tid%sizePopulation].mutStep=ms;
+    newSemanticsOffsprings[tid] = initialPopulationSemantics[tid]+(ms)*((1.0/(1+expf(-(randomTreesSemantics[firstTree*nrow+tid%nrow]))))-(1.0/(1+expf(-(randomTreesSemantics[secondTree*nrow+tid%nrow])))));
 }
 
 /*!
@@ -445,30 +404,24 @@ __host__ void readInpuData(char *trainFile, char *testFile, float *dataTrain, fl
  float *dataTestTarget, int nrow, int nvar, int nrowTest, int nvarTest){
 
   std::fstream in(trainFile,ios::in);
-  if (!in.is_open())
-  {
+  if (!in.is_open()){
     cout<<endl<<"ERROR: TRAINING FILE NOT FOUND." << endl;
     exit(-1);
   }
   std::fstream inTest(testFile,ios::in);
-  if (!in.is_open())
-  {
+  if (!in.is_open()){
     cout<<endl<<"ERROR: TEST FILE NOT FOUND." << endl;
     exit(-1);
   }
   char Str[1024];
   int max = nvar;
-  for(int i=0;i<nrow;i++)
-  {
-    for (int j=0; j<nvar+1; j++)
-    {
-      if (j==max)
-      {
+  for(int i=0;i<nrow;i++){
+    for (int j=0; j<nvar+1; j++){
+      if (j==max){
         in>>Str;
         dataTrainTarget[i]=atof(Str);
       }
-      if (j<nvar)
-      {
+      if (j<nvar){
         in>>Str;
         dataTrain[i*nvar+j] = atof(Str);
       }
@@ -476,17 +429,13 @@ __host__ void readInpuData(char *trainFile, char *testFile, float *dataTrain, fl
   }
   in.close();
   int maxTest = nvarTest;
-  for(int i=0;i<nrowTest;i++)
-  {
-    for (int j=0; j<nvarTest+1; j++)
-    {
-      if (j==maxTest)
-      {
+  for(int i=0;i<nrowTest;i++){
+    for (int j=0; j<nvarTest+1; j++){
+      if (j==maxTest){
         inTest>>Str;
         dataTestTarget[i]=atof(Str);
       }
-      if (j<nvarTest)
-      {
+      if (j<nvarTest){
         inTest>>Str;
         dataTest[i*nvarTest+j] = atof(Str);
       }
@@ -513,7 +462,6 @@ void countInputFile(std::string fileName, int &rows, int &cols){
   std::getline(f, line);
   stringstream s;
   s << line;                   //send the line to the stringstream object...
-
   int how_many_columns = 0;    
   double value;
   while(s >> value) how_many_columns++;  //while there's something in the line, increase the number of columns
@@ -524,7 +472,6 @@ void countInputFile(std::string fileName, int &rows, int &cols){
   rows = how_many_rows;
 
   f.close();
-
 }
 
 /*!
@@ -538,23 +485,19 @@ void countInputFile(std::string fileName, int &rows, int &cols){
 */
 __host__ void readConfigFile(cfg *config){
   std::fstream f("configuration.ini", ios::in);
-  if (!f.is_open())
-  {
+  if (!f.is_open()){
     cerr<<"CONFIGURATION FILE NOT FOUND." << endl;
     exit(-1);
   }
   int k=0;
-  while(!f.eof())
-  {
+  while(!f.eof()){
     char str[100]="";
     char str1[100]="";
     char str2[100]="";
     int j=0;
     f.getline(str,100);
-    if(str[0]!='\0')
-    {
-      while(str[j]!='=')
-      {
+    if(str[0]!='\0'){
+      while(str[j]!='='){
     	  if (str[j]!=' ')
     		  str1[j] = str[j];
     	  else
@@ -563,12 +506,10 @@ __host__ void readConfigFile(cfg *config){
       }
       j++;
       int i=0;
-      while(str[j]==' ')
-      {
+      while(str[j]==' '){
         j++;
       }
-      while(str[j]!='\0')
-      {
+      while(str[j]!='\0'){
         str2[i] = str[j];
         j++;
         i++;
@@ -576,25 +517,30 @@ __host__ void readConfigFile(cfg *config){
     }
 
     if (strcmp(str1, "numberGenerations")==0)
-    	config->maxNumberGenerations=atoi(str2);
+    	config->numberGenerations=atoi(str2);
 
     if (strcmp(str1, "populationSize")==0)
     	config->populationSize =atoi(str2);
 
-    if (strcmp(str1, "maxDepth")==0)
-    	config->maxDepth=atoi(str2);
+     if (strcmp(str1, "maxIndividualLength")==0)
+    	config->maxIndividualLength=atoi(str2);
+
+    if (strcmp(str1, "functionRatio")==0)
+      config->functionRatio =atof(str2);
+
+    if (strcmp(str1, "terminalRatio")==0)
+      config->terminalRatio =atof(str2);
 
     if (strcmp(str1, "maxRandomConstant")==0)
     	config->maxRandomConstant=atof(str2);
 
     if (strcmp(str1, "logPath")==0)
     	strcpy(config->logPath, str2);
-               
+
     k++;
   } 
     f.close();
-    if(config->populationSize<0 || config->maxDepth<0 )
-    {
+    if(config->populationSize<0 || config->maxIndividualLength<0 ){
         cout<<"ERROR: POPULATION SIZE AND MAX DEPTH MUST BE SMALLER THAN (OR EQUAL TO) 0 AND THEIR SUM SMALLER THAN (OR EQUAL TO) 1.";
         exit(-1);
     }
@@ -678,12 +624,14 @@ static void list_dir(std::string path, std::string nameFile, int useMultipleFile
 * \file     GsgpCuda.cpp
 */
 __host__ void markTracesGeneration(entry *vectorTraces, int populationSize, int generationSize ,int bestIndividual){
+
   vectorTraces[(generationSize-1)*populationSize+bestIndividual].mark=1;
   int index;
-  int a;
+  int a =0;
   for (int i = generationSize-1; i >0; i--){
     a = i-1;
-    for (int j= 0; j < populationSize; j++){
+    for (int j = 0; j < populationSize; j++){
+      index =0;
       if(vectorTraces[i*populationSize+j].mark==1 && vectorTraces[i*populationSize+j].event==1){
         index = vectorTraces[i*populationSize+j].number;
         vectorTraces[a*populationSize+index].mark=1;
@@ -712,7 +660,6 @@ __host__ void markTracesGeneration(entry *vectorTraces, int populationSize, int 
 __host__ void saveTrace(std::string name, std::string path, entry *structSurvivor, int generation, int populationSize){
   std::string tmpT = name;
   std::string tmpExt = ".csv";
-  //std::string tmpTime = currentDateTime();
   tmpT = path + tmpT  +tmpExt;  
   std::ofstream trace(tmpT,ios::out);
   int r=0;
@@ -724,9 +671,9 @@ __host__ void saveTrace(std::string name, std::string path, entry *structSurvivo
       }
     }
     if(i<r)
-       trace<<"***"<<endl;
-      else	
-			  trace<<"***";
+    trace<<"***"<<endl;
+    else
+    trace<<"***";
   } 
 }
 
@@ -777,7 +724,6 @@ __host__ void saveTraceComplete(std::string path, entry *structSurvivor, int gen
 
 __host__ void saveIndividuals(std::string path, float *hInitialPopulation, std::string namePopulation ,int sizeMaxDepthIndividual, int populationSize){  
   std::string tmpExt = ".csv";
-  //std::string tmpTime = currentDateTime();
   namePopulation = path + namePopulation + tmpExt;       
   std::ofstream outIndividuals(namePopulation,ios::out);
   
@@ -804,7 +750,6 @@ __host__ void saveIndividuals(std::string path, float *hInitialPopulation, std::
 */
 
 __host__ void readInpuTestData( char *test_file, float *dataTest, float *dataTestTarget, int nrowTest, int nvarTest){
-
   std::fstream inTest(test_file,ios::in);
   if (!inTest.is_open()){
     cout<<endl<<"ERROR: TEST FILE NOT FOUND." << endl;
@@ -812,17 +757,13 @@ __host__ void readInpuTestData( char *test_file, float *dataTest, float *dataTes
   }
   char Str[1024];
   int maxTest = nvarTest;
-  for(int i=0;i<nrowTest;i++)
-  {
-    for (int j=0; j<nvarTest+1; j++)
-    {
-      if (j==maxTest)
-      {
+  for(int i=0;i<nrowTest;i++){
+    for (int j=0; j<nvarTest+1; j++){
+      if (j==maxTest){
         inTest>>Str;
         dataTestTarget[i]=atof(Str);
       }
-      if (j<nvarTest)
-      {
+      if (j<nvarTest){
         inTest>>Str;
         dataTest[i*nvarTest+j] = atof(Str);
       }
@@ -851,13 +792,10 @@ __host__ void readPopulation( float *initialPopulation, float *randomTrees, int 
 
   char tmPath[50] = "";
   strcpy(tmPath,name.c_str());
-  //strcat(tmPath,tmpTime.c_str());
   std::vector<string> files = vector<string>();
   std::vector<string>filesRa = vector<string>();
   list_dir(log,tmPath,1,files);
-  
   int tama = files.size();
-  
   std::string dataFile = (files[0]);
   char initPopPath[50] = "";
   strcat(initPopPath,log.c_str());
@@ -865,8 +803,6 @@ __host__ void readPopulation( float *initialPopulation, float *randomTrees, int 
   
   char tmRandom[50] = "";
   strcpy(tmRandom,nameR.c_str());
-  //strcat(tmRandom,tmpTime.c_str());
-  //std::string t (tmRandom);
   list_dir(log,tmRandom,1,filesRa);
   int tamaR = filesRa.size();
   std::string dataFileRan = (filesRa[0]);
@@ -904,109 +840,7 @@ __host__ void readPopulation( float *initialPopulation, float *randomTrees, int 
 }
 
 /*!
-* \fn       void clear(stack <float> as)
-* \brief    remove all elements from the stack so that in the next evaluations there are no previous values of other individuals
-* \param    stack as: auxiliary pointer that stores the values ​​resulting from the evaluation of each individual
-* \return   void
-* \date     07/10/2021
-* \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
-* \file     GsgpCuda.cpp 
-*/
-
-void clear(stack <float> as){
-    int a = as.size();
-    while (!as.empty()){
-        as.pop();
-    }
-}
-
-/*!
-* \fn       void intreSemanticCPU(float *initiPop, float *OutSemantic, float *data, int nrow, int depth, int numIndi)
-* \brief    This function interprets the generated individuals in CPU to obtain their semantics.
-* \param    float *initiPop: This vector pointers to store the individuals of the initial population.
-* \param    flot  *OutSemantic: vector pointers to store the semantics of each individual in the population.
-* \param    float *data: This pointer vector containing training or test data.
-* \param    int *nrow: This variable contains the number of fitness cases.
-* \param    int depth: This variable thar stores maximum depth for individuals
-* \param    int numIndi: This variable contains the number of individuals that exist in the initial population.
-* \return   void
-* \date     05/12/2020
-* \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
-* \file     GsgpCuda.cpp 
-*/
-__host__ void intreSemanticCPU(float *initiPop, vector<float> &OutSemantic, float *data, int nrow, int depth, int index, int nvarTest, int l){
-    float tmp,tmp2,out;
-    int t,t_;
-    stack <float> a;
-    out=0;
-    clear(a);
-    a = stack<float>();
-    clear(a);
-    if (a.empty()) {
-        for (int j=0; j<depth; j++) {
-          if (initiPop[index*depth+j]>0) {
-            a.push(initiPop[index*depth+j]);
-            }else if (initiPop[index*depth+j] <= -1000) {
-              t=initiPop[index*depth+j];
-              t_=(t+1000)*(-1);
-              a.push(data[l*nvarTest+t_]);
-              } else if (initiPop[index*depth+j]== -1) {
-                  if (!a.empty()) {
-                      tmp = a.top();
-                      a.pop();
-                  } if (!a.empty()) {
-                      tmp2 = a.top();
-                      a.pop();
-                      a.push(tmp+tmp2);
-                      out=tmp+tmp2;  
-                  } else {
-                      a.push(tmp);
-                  }          
-              }  else if (initiPop[index*depth+j]== -2) {
-                  if (!a.empty()) {
-                      tmp = a.top();
-                      a.pop();
-                  } if (!a.empty()) {
-                      tmp2 = a.top();
-                      a.pop();
-                      out=tmp-tmp2;  
-                      a.push(out);
-                  } else {
-                      a.push(tmp);
-                  }          
-              } else if (initiPop[index*depth+j]== -3) {
-                  if (!a.empty()) {
-                      tmp = a.top();
-                      a.pop();
-                  } if (!a.empty()) {
-                      tmp2 = a.top();
-                      a.pop();
-                      out=tmp*tmp2;
-                      a.push(out);
-                        
-                  } else {
-                      a.push(tmp);
-                  }          
-              } else if (initiPop[index*depth+j]== -4) {
-                  if (!a.empty()) {
-                      tmp = a.top();
-                      a.pop();
-                  } if (!a.empty()) {
-                      tmp2 = a.top();
-                      a.pop();
-                      out=tmp2 / sqrt(1+tmp*tmp);
-                      a.push(tmp2 / sqrt(1+tmp*tmp));
-                  }else {
-                      a.push(tmp);
-                  }
-              }
-          }
-          OutSemantic[index] = out;      
-        }    
-}
-
-/*!
-* \fn       __host__ void evaluate_unseen_new_data(std::string path, int generations, const int sizeMaxDepthIndividual, float *initialPopulation, float *randomTrees, std::ofstream& OUT, std::string log, float *dataTest ,int nrow, int numIndi, int nvarTest)__host__ void evaluate_unseen_new_data(std::string path, int generations, const int sizeMaxDepthIndividual, float *initialPopulation, float *randomTrees, std::ofstream& OUT, std::string log, float *dataTest ,int nrow, int numIndi, int nvarTest)
+* \fn       __host__ void evaluate_data(std::string path, int generations, float *initialPopulation, float *randomTrees, std::ofstream& OUT, std::string log, int nrow, int numIndi, int nvarTest, float *salidas)
 * \brief    This function that evaluates the best model stored in trace.txt over newly provided unseen data
 * \param    std::string path: trace file name
 * \param    int generations: number of generations.
@@ -1024,9 +858,7 @@ __host__ void intreSemanticCPU(float *initiPop, vector<float> &OutSemantic, floa
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     testSemantic.cu
 */
-
-__host__ void evaluate_unseen_new_data(std::string path, int generations, const int sizeMaxDepthIndividual, float *initialPopulation, float *randomTrees, std::ofstream& OUT, std::string log, float *dataTest ,int nrow, int numIndi, int nvarTest){
-  
+__host__ void evaluate_data(std::string path, int generations, float *initialPopulation, float *randomTrees, std::ofstream& OUT, std::string log, int nrow, int numIndi, int nvarTest, float *salidas){
   std::vector<string>filesRa = vector<string>();
   list_dir(log,path,1,filesRa);
   int tama = filesRa.size();
@@ -1034,18 +866,8 @@ __host__ void evaluate_unseen_new_data(std::string path, int generations, const 
   char tracePath[50] = "";
   strcat(tracePath,log.c_str());
   strcat(tracePath,nameFile.c_str());
-  int best=0;
+  float valor =0, v=0;
   for (size_t i = 0; i < nrow; i++){
-    std::vector <float> eval_random;
-	  std::vector <float> eval_;
-    std::vector <float> eval_aux;
-	  std::vector <float> eval_new;
-    best=0;
-    for(int m=0; m<config.populationSize; m++){
-		eval_.push_back(-1);
-    eval_aux.push_back(-1);
-    eval_random.push_back(-1);
-    }
     fstream in(tracePath,ios::in);
     if(!in.is_open()) {
       cout<<endl<<"ERROR: FILE MODEL NOT FOUND." << endl;
@@ -1069,21 +891,13 @@ __host__ void evaluate_unseen_new_data(std::string path, int generations, const 
         in >> str;
         float index6 = atof(str); 
         if(index4==1){
-          intreSemanticCPU(randomTrees, eval_random, dataTest, nrow, sizeMaxDepthIndividual, index1, nvarTest,i);        
-          intreSemanticCPU(randomTrees, eval_random, dataTest, nrow, sizeMaxDepthIndividual, index2, nvarTest, i);
-          intreSemanticCPU(initialPopulation, eval_, dataTest, nrow, sizeMaxDepthIndividual, index3, nvarTest, i);
-          eval_[index5+1] = (eval_[index3]+(index6*((1.0/(1+exp(-eval_random[index1])))-(1.0/(1+exp(-eval_random[index2]))))));
+          valor = (initialPopulation[index3*nrow+i]+((index6)*((1.0/(1+exp(randomTrees[index1*nrow+i])))-(1.0/(1+exp(randomTrees[index2*nrow+i]))))));
         }
         if(index4==-1){
-          intreSemanticCPU(initialPopulation, eval_, dataTest, nrow, sizeMaxDepthIndividual, index1, nvarTest, i); 
-          eval_[index5+1]=eval_[index1];
-          best = index5+1;
+          valor = initialPopulation[index1*nrow+i];
         }
       }
       while(!in.eof()){
-        for(int k=0; k<config.populationSize; k++){
-              eval_new.push_back(-1);
-        }
         while(true){
           in >> str;
           if(strcmp(str,"***")==0){
@@ -1100,25 +914,17 @@ __host__ void evaluate_unseen_new_data(std::string path, int generations, const 
           int index5 = atoi(str); 
 				  in >> str;
 				  double index6 = atof(str); 
+         // printf("Indices de trace index1 %i index2 %i index3 %i index4 %i index5 %i index6 %f \n", index1,index2,index3,index4,index5,index6);
           if(index4==1){
-            intreSemanticCPU(randomTrees, eval_random, dataTest, nrow, sizeMaxDepthIndividual, index1, nvarTest, i);        
-            intreSemanticCPU(randomTrees, eval_random, dataTest, nrow, sizeMaxDepthIndividual, index2, nvarTest, i);
-            intreSemanticCPU(initialPopulation, eval_, dataTest, nrow, sizeMaxDepthIndividual, index3, nvarTest, i);
-            eval_new[index5+1] = ((eval_[index3]+index6*((1.0/(1+exp(eval_random[index1])))-(1.0/(1+exp(eval_random[index2]))))));         
-            best=index5+1;
+            v = ((valor+(index6)*((1.0/(1+exp(randomTrees[index1*nrow+i])))-(1.0/(1+exp(randomTrees[index2*nrow+i])))))); 
           }
           if(index4==-1){
-            eval_new[index5+1] = eval_[best];
-            best=index5+1;
+            v=valor;
           }
         }
-        eval_.clear();
-        for(int q=0;q<config.populationSize;q++){
-          eval_[q]=eval_new[q];
-        }
-			  eval_new.clear();
+        valor=v;
       }
     }
-    OUT<<eval_[best]<<endl;
+    OUT<<valor<<endl;
   }
 }

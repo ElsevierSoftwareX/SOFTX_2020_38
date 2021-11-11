@@ -21,8 +21,6 @@
 //! \date   created on 25/01/2020
 #include "GsgpCuda.cpp"
 #include <cstdio>
-#include <string>
-using namespace std;   
 
 /*!
 * \fn       int main(int argc, const char **argv)
@@ -34,6 +32,43 @@ using namespace std;
 * \author   Jose Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cu
 */
+void validacion(std::string name, float *targer, int nrow){
+    
+    std::fstream in(name.c_str(),ios::in);
+    char Str[1024];
+    float RMSE=0;
+    float t=0;
+    float tmp[nrow];
+    if (!in.is_open())
+    {
+      cout<<endl<<"ERROR: TRAINING FILE NOT FOUND." << endl;
+      exit(-1);
+    }
+
+    for(int i=0;i<nrow;i++){
+        in>>Str;
+        tmp[i]=atof(Str);
+        RMSE += (targer[i]-tmp[i])*(targer[i]-tmp[i]);
+    //    / printf("Error %f diferencia %f semantica %f - targer %f \n", RMSE, (tmp[i]-targer[i])*(tmp[i]-targer[i]) ,tmp[i], targer[i]);
+    }
+    
+    t = sqrt(RMSE/nrow);
+    printf("error %f \n", t);
+}
+
+__global__ void poblacion(float *p, int size){
+    const unsigned int tid = threadIdx.x+blockIdx.x*blockDim.x;
+    for (int i=0; i<size; i++) {
+        printf(" %f ", p[tid*size+i]);
+    }
+}
+
+__global__ void dataIn(float *p, int size){
+    const unsigned int tid = threadIdx.x+blockIdx.x*blockDim.x;
+    for (int i=0; i<size; i++) {
+        printf(" %f ", p[tid*size+i]);
+    }
+}
 
 int main(int argc, char **argv){
     
@@ -41,12 +76,12 @@ int main(int argc, char **argv){
 
     cudaSetDevice(0); /*!< Select a GPU device*/
     
-    char trainFile[50]=""; /*!< Name of the train file*/
-    char testFile[50]="";  /*!< Name of the test file*/
+    char trainFile[50]="";    /*!< Name of the train file*/
+    char testFile[50]="";     /*!< Name of the test file*/
     char output_model[50]=""; /*!< Name of output files*/
-    char pathTrace[50]=""; /*!< Name of the file trace of best model*/
-    char path_test[50]=""; /*!< Name of the file with unsseen test instances*/
-    char pathOutFile[50]=""; /*!< Name of the file to output values*/
+    char pathTrace[50]="";    /*!< Name of the file trace of best model*/
+    char path_test[50]="";    /*!< Name of the file with unsseen test instances*/
+    char pathOutFile[50]="";  /*!< Name of the file to output values*/
     for (int i=1; i<argc-1; i++){
         if(strncmp(argv[i],"-train_file",10) == 0) {
             strcat(trainFile,argv[++i]);
@@ -76,9 +111,9 @@ int main(int argc, char **argv){
 
     nvar--;
 
-    const int sizeMaxDepthIndividual = (int)exp2(config.maxDepth*1.0) - 1; /*!< Variable that stores maximum depth for individuals */
+    const int individualLength = config.maxIndividualLength; /*!< Variable that stores maximum depth for individuals */
     
-    int sizeMemPopulation = sizeof(float) * config.populationSize * sizeMaxDepthIndividual; /*!< Variable that stores size in bytes for initial population*/
+    int sizeMemPopulation = sizeof(float) * config.populationSize * individualLength; /*!< Variable that stores size in bytes for initial population*/
     
     int twoSizeMemPopulation = sizeof(float) * (config.populationSize*2); /*!< Variable that stores twice the size in bytes of an initial population to store random numbers*/
     
@@ -98,11 +133,7 @@ int main(int argc, char **argv){
     
     long int sizeElementsSemanticTest = (config.populationSize*nrowTest); /*!< Variable that stores test data elements*/
     
-    size_t structMemMutation = (sizeof(entry_)*config.populationSize); /*!< Variable that stores the size in bytes of the structure to store the mutation record*/
-    
-    size_t structMemSurvivor = (sizeof(entry_)*config.maxNumberGenerations); /*!< Variable that stores the size in bytes of the structure to store the survival record*/
-    
-    long int vectorTracesMem = (sizeof(entry_)*config.maxNumberGenerations*config.populationSize); /*!< Variable that stores the size in bytes of the structure to store the survival record*/
+    long int vectorTracesMem = (sizeof(entry_)*config.numberGenerations*config.populationSize); /*!< Variable that stores the size in bytes of the structure to store the survival record*/
 
     int gridSize,minGridSize,blockSize; /*!< Variables that store the execution configuration for a kernel in the GPU*/
     
@@ -132,82 +163,134 @@ int main(int argc, char **argv){
 
         int sizeDataTestTarget = sizeof(float)*(nrowTest); /*!< Variable that stores the size in bytes the size of the target data */
 
-        float *unssenDataTest, *unssenDataTestTarget; /*!< This vector pointers to store the individuals of the test data and target data */
+        float *unssenDataTest, *dUnssenDataTest ,*unssenDataTestTarget, *hsalidas, *dsalidas; /*!< This vector pointers to store the individuals of the test data and target data */
 
         unssenDataTest = (float *)malloc(sizeDataTest); /*!< Reserve memory on host*/
 
         unssenDataTestTarget = (float *)malloc(sizeDataTestTarget); /*!< Reserve memory on host*/
 
+        checkCudaErrors(cudaMalloc((void **)&dUnssenDataTest, sizeDataTest));
+
+        hsalidas = (float *)malloc(sizeDataTestTarget); /*!< Reserve memory on host*/
+
+        checkCudaErrors(cudaMalloc((void **)&dsalidas, sizeDataTest));
+
         readInpuTestData(path_test, unssenDataTest, unssenDataTestTarget, nrowTest, nvar);
+
+        cudaMemcpy(dUnssenDataTest, unssenDataTest, sizeDataTest, cudaMemcpyHostToDevice); 
+
+        dataIn<<<1,1>>>(dUnssenDataTest, nrowTest);
         
-        float *initPopulation, *randomTress; /*!< This vector pointers to store the individuals of the initial population and random trees */
+        float *initPopulation, *randomTress, *dInitialPopulation,*dRandomTrees; /*!< This vector pointers to store the individuals of the initial population and random trees */
 
         initPopulation = (float*)malloc(sizeMemPopulation); /*!<  Variable that stores the size in bytes the initial population */
 
         randomTress = (float*)malloc(sizeMemPopulation);  /*!< Variable that stores the size in bytes the initial population */
 
-        readPopulation(initPopulation, randomTress, config.populationSize, sizeMaxDepthIndividual, logPath, namePopulation, nameRandomTrees);
+        checkCudaErrors(cudaMalloc((void **)&dRandomTrees, sizeMemPopulation)); 
+
+        checkCudaErrors(cudaMalloc((void **)&dInitialPopulation, sizeMemPopulation));
+
+        long int sizeMemSemanticTest = sizeof(float)*(config.populationSize*nrowTest); /*!< Variable that stores the size in bytes of semantics for the entire population with test data*/
+
+        float *uStackInd; /*!< auxiliary pointer vectors for the interpreter and calculate the semantics for the populations and assignment in the GPU*/
+        int   *uPushGenes;
+        checkCudaErrors(cudaMalloc((void**)&uPushGenes, sizeMemIndividuals));
+        checkCudaErrors(cudaMalloc((void**)&uStackInd, sizeMemPopulation));  
+
+        float *uSemanticCases, *hSemanticCases, *uSemanticRandomTrees,*hSemanticRandomTrees; /*!< pointer of vectors that contain the semantics of an individual in the population, calculated with the training set and test in generation g and its allocation in GPU*/
+        checkCudaErrors(cudaMalloc((void**)&uSemanticCases,sizeMemSemanticTest));            
+        checkCudaErrors(cudaMalloc((void**)&uSemanticRandomTrees,sizeMemSemanticTest));   
+        hSemanticCases = (float*)malloc(sizeMemSemanticTest);
+        hSemanticRandomTrees= (float*)malloc(sizeMemSemanticTest);             
+
+
+        readPopulation(initPopulation, randomTress, config.populationSize, individualLength, logPath, namePopulation, nameRandomTrees);
+
+        ///*!<return the initial population of the device to the host*/
+        cudaMemcpy(dInitialPopulation, initPopulation, sizeMemPopulation, cudaMemcpyHostToDevice); 
+        cudaMemcpy(dRandomTrees, randomTress, sizeMemPopulation, cudaMemcpyHostToDevice); 
+        
+        poblacion<<<1,1>>>(dInitialPopulation,individualLength);
+
+        cudaOccupancyMaxPotentialBlockSize(&minGridSize, &blockSize, computeSemantics, 0, config.populationSize); /*!< heuristic function used to choose a good block size is to aim at high occupancy*/
+        gridSize = (config.populationSize + blockSize - 1) / blockSize; /*!< round up according to array size*/            
+        printf("gird %i and blovk %i \n", gridSize, blockSize);
+        /*!< invokes the GPU to interpret the initial population with data train*/
+        computeSemantics<<< gridSize, blockSize >>>(dInitialPopulation, uSemanticCases, individualLength, dUnssenDataTest, nrowTest, nvar, uPushGenes, uStackInd);
+        cudaMemcpy(hSemanticCases,uSemanticCases, sizeMemSemanticTest,cudaMemcpyDeviceToHost);
+
+        computeSemantics<<< gridSize, blockSize >>>(dRandomTrees, uSemanticRandomTrees, individualLength, dUnssenDataTest, nrowTest, nvar, uPushGenes, uStackInd);
+        cudaMemcpy(hSemanticRandomTrees,uSemanticRandomTrees, sizeMemSemanticTest,cudaMemcpyDeviceToHost);
 
         /*!< Create file for saved results of best model with the unseen data*/
         std::ofstream OUT(outFile,ios::out);
 
-        //function to evaluate new data with the best model
-        evaluate_unseen_new_data(pathTrace, config.maxNumberGenerations, sizeMaxDepthIndividual, initPopulation, randomTress, OUT, config.logPath, unssenDataTest, nrowTest, config.populationSize, nvar);
-	    
+        /*!< Create file for saved results of best model with the unseen data*/
+        std::ofstream OUTSem("semantica.txt",ios::out);
+        for (int i=0; i<config.populationSize; i++) {
+            for (int j=0; j<nrowTest; j++) {
+                OUTSem<<hSemanticCases[i*nrowTest+j]<<" ";
+            }
+            OUTSem<<endl;
+        }
+        std::ofstream OUTSemRt("semanticaRT.txt",ios::out);
+        for (int i=0; i<config.populationSize; i++) {
+            for (int j=0; j<nrowTest; j++) {
+                OUTSemRt<<hSemanticRandomTrees[i*nrowTest+j]<< " ";
+            }
+            OUTSemRt<<endl;
+        }
+        evaluate_data(pathTrace, config.numberGenerations, hSemanticCases, hSemanticRandomTrees, OUT, config.logPath, nrowTest, config.populationSize, nvar,hsalidas);
+        
+        printf("Validacion \n");
+        validacion(outFile, unssenDataTestTarget,  nrowTest);
+       
         free(unssenDataTest); 
         free(unssenDataTestTarget);
         free(initPopulation);
         free(randomTress);
+        cudaFree(dInitialPopulation);
+        cudaFree(dRandomTrees);
+        cudaFree(uSemanticCases);
+        cudaFree(uSemanticRandomTrees);
+        cudaFree(uPushGenes);
+        cudaFree(uStackInd);
     }else {
         
         /* Check if log and data diectories exists */
         checkDirectoryPath(logPath);
- 
-        std::string timeExecution1 = "_processing_time"; /*!< Variable name structure responsible for indicating the run*/
- 
-        std::string timeExecution2 = ".csv"; /*!< Variable name structure responsible for indicating the file extension*/
- 
-        timeExecution1 = logPath + outputNameFiles + timeExecution1 + timeExecution2; /*!< Variable that stores file name matching*/
- 
-        std::ofstream times(timeExecution1,ios::out); /*!< pointer to the timeExecution1 file that contains the time consumed by the different algorithm modules*/
- 
+        
         float executionTime = 0, initialitionTimePopulation = 0, timeComputeSemantics = 0, generationTime = 0; /*!< Variables that store the time in milliseconds between the events mark1 and mark2.*/
 
-        executionTime = 0, initialitionTimePopulation = 0, timeComputeSemantics = 0, generationTime = 0; /*!< Variables that store the time in milliseconds between the events mark1 and mark2.*/    
-
-        cudaEvent_t startRun, stopRun; /*!< Variable used to create a start mark and a stop mark to create events*/
+        std::string timeExecution1 = "_processing_time"; /*!< Variable name structure responsible for indicating the run*/
+        std::string timeExecution2 = ".csv"; /*!< Variable name structure responsible for indicating the file extension*/
+        timeExecution1 = logPath + outputNameFiles + timeExecution1 + timeExecution2; /*!< Variable that stores file name matching*/
+        std::ofstream times(timeExecution1,ios::out); /*!< pointer to the timeExecution1 file that contains the time consumed by the different algorithm modules*/
  
+        cudaEvent_t startRun, stopRun; /*!< Variable used to create a start mark and a stop mark to create events*/
         cudaEventCreate(&startRun); /*!< function that initializes the start event*/
-
         cudaEventCreate(&stopRun); /*!< function that initializes the stop event*/
 
         curandState_t* states; /*!< CUDA's random number library uses curandState_t to keep track of the seed value we will store a random state for every thread*/
-
         cudaMalloc((void**) &states, config.populationSize * sizeof(curandState_t)); /*!< allocate space on the GPU for the random states*/
-
         cudaOccupancyMaxPotentialBlockSize(&minGridSize, &blockSize, init, 0, config.populationSize); /*!< heuristic function used to choose a good block size is to aim at high occupancy*/
 
         gridSize = (config.populationSize + blockSize - 1) / blockSize; /*!< round up according to array size*/
-
         init<<<gridSize, blockSize>>>(time(0), states); /*!< invoke the GPU to initialize all of the random states*/
 
         cudaEventRecord(startRun);     
         std::string fitnessTrain  = "_fitnestrain"; /**/
         std::string fitnessTrain2 = ".csv"; /**/
-        //std::string fitnessTrain3 = currentDateTime(); /**/
         fitnessTrain = logPath + outputNameFiles + fitnessTrain + fitnessTrain2; /**/
-
         std::ofstream fitTraining(fitnessTrain,ios::out); /*!< pointer to the file fitnesstrain.csv containing the training fitness of the best individual at each generation*/
 
         std::string fitnessTest  = "_fitnestest"; /**/
         std::string fitnessTest2 = ".csv"; /**/
-        //std::string fitnessTest3 = currentDateTime(); /**/
         fitnessTest = logPath + outputNameFiles + fitnessTest + fitnessTest2; /**/
-
         std::ofstream fitTesting(fitnessTest,ios::out); /*!< pointer to the file fitnesstest.csv containing the test fitness of the best individual at each generation*/
 
         cublasHandle_t handle; /*!< the handle to the cuBLAS library context*/
-
         cublasCreate(&handle); /*!< initialized using the function and is explicitly passed to every subsequent library function call*/
  
         float *dInitialPopulation,*dRandomTrees,*hInitialPopulation,*hRandomTrees;  /*!< This block contains the vectors of pointers to store the population and random trees and space allocation in the GPU*/
@@ -216,13 +299,9 @@ int main(int argc, char **argv){
         checkCudaErrors(cudaMalloc((void **)&dRandomTrees, sizeMemPopulation)); 
         checkCudaErrors(cudaMalloc((void **)&dInitialPopulation, sizeMemPopulation));
 
-        entry  *dStructMutation, *dStructMutationTest ,*dStructSurvivor,*vectorTraces,*vectorTracesTest; /*!< This block contains the vectors of pointers to store the structure to keep track of mutation and survival and space allocation in the GPU*/
-        checkCudaErrors(cudaMallocManaged(&dStructMutation,structMemMutation));
-        checkCudaErrors(cudaMallocManaged(&dStructMutationTest,structMemMutation)); 
-        checkCudaErrors(cudaMallocManaged(&dStructSurvivor,structMemSurvivor));
+        entry  *vectorTraces; /*!< This block contains the vectors of pointers to store the structure to keep track of mutation and survival and space allocation in the GPU*/
         checkCudaErrors(cudaMallocManaged(&vectorTraces,vectorTracesMem));
-        checkCudaErrors(cudaMallocManaged(&vectorTracesTest,vectorTracesMem));    
-
+        
         float *uDataTrain, *uDataTest, *uDataTrainTarget, *uDataTestTarget;  /*!< this block contains the pointer of vectors for the input data and target values ​​and assignment in the GPU*/
         checkCudaErrors(cudaMallocManaged(&uDataTrain, sizeMemDataTrain));
         checkCudaErrors(cudaMallocManaged(&uDataTest, sizeMemDataTest));      
@@ -254,7 +333,7 @@ int main(int argc, char **argv){
         cudaEventRecord(startInitialPop);
 
         ///*!< invokes the GPU to initialize the initial population*/
-        initializePopulation<<< gridSize, blockSize >>>(dInitialPopulation, nvar, sizeMaxDepthIndividual, states, config.maxRandomConstant,4);
+        initializePopulation<<< gridSize, blockSize >>>(dInitialPopulation, nvar, individualLength, states, config.maxRandomConstant,4, config.functionRatio, config.terminalRatio);
         cudaErrorCheck("initializePopulation");
 
         cudaEventRecord(stopInitialPop);
@@ -264,13 +343,14 @@ int main(int argc, char **argv){
         cudaEventDestroy(stopInitialPop);    
         ///*!<return the initial population of the device to the host*/
         cudaMemcpy(hInitialPopulation, dInitialPopulation, sizeMemPopulation, cudaMemcpyDeviceToHost);    
-        saveIndividuals(logPath,hInitialPopulation, namePopulation, sizeMaxDepthIndividual,config.populationSize);  
+        saveIndividuals(logPath,hInitialPopulation, namePopulation, individualLength,config.populationSize);  
         ///*!< invokes the GPU to initialize the random trees*/
-        initializePopulation<<< gridSize, blockSize >>>(dRandomTrees, nvar, sizeMaxDepthIndividual, states, config.maxRandomConstant,4);    
+        initializePopulation<<< gridSize, blockSize >>>(dRandomTrees, nvar, individualLength, states, config.maxRandomConstant,4,config.functionRatio, config.terminalRatio);    
         cudaErrorCheck("initializePopulation");    
         ///*!<return the initial population of the device to the host*/
         cudaMemcpy(hRandomTrees, dRandomTrees,sizeMemPopulation, cudaMemcpyDeviceToHost);    
-        saveIndividuals(logPath,hRandomTrees, nameRandomTrees,sizeMaxDepthIndividual,config.populationSize);  
+        saveIndividuals(logPath,hRandomTrees, nameRandomTrees,individualLength,config.populationSize);  
+        
         cudaEvent_t startComputeSemantics, stopComputeSemantics; /*!< This section declares and initializes the Variables for the events and captures the time elapsed in the interpretation of the initial population in the GPU*/
         cudaEventCreate(&startComputeSemantics);
         cudaEventCreate(&stopComputeSemantics);
@@ -278,27 +358,30 @@ int main(int argc, char **argv){
         cudaOccupancyMaxPotentialBlockSize(&minGridSize, &blockSize, computeSemantics, 0, config.populationSize); /*!< heuristic function used to choose a good block size is to aim at high occupancy*/
         gridSize = (config.populationSize + blockSize - 1) / blockSize; /*!< round up according to array size*/            
         /*!< invokes the GPU to interpret the initial population with data train*/
-        computeSemantics<<< gridSize, blockSize >>>(dInitialPopulation, uSemanticTrainCases, sizeMaxDepthIndividual, uDataTrain, nrow, nvar, uPushGenes, uStackInd);
+        computeSemantics<<< gridSize, blockSize >>>(dInitialPopulation, uSemanticTrainCases, individualLength, uDataTrain, nrow, nvar, uPushGenes, uStackInd);
         cudaErrorCheck("computeSemantics");            
         /*!< invokes the GPU to interpret the random trees with data train*/
-        computeSemantics<<< gridSize, blockSize >>>(dRandomTrees, uSemanticRandomTrees, sizeMaxDepthIndividual, uDataTrain, nrow, nvar, uPushGenes, uStackInd);
+        computeSemantics<<< gridSize, blockSize >>>(dRandomTrees, uSemanticRandomTrees, individualLength, uDataTrain, nrow, nvar, uPushGenes, uStackInd);
         cudaErrorCheck("computeSemantics");            
         cudaEventRecord(stopComputeSemantics);
         cudaEventSynchronize(stopComputeSemantics);
         cudaEventElapsedTime(&timeComputeSemantics, startComputeSemantics, stopComputeSemantics);
         cudaEventDestroy(startComputeSemantics);
         cudaEventDestroy(stopComputeSemantics);            
+        
         /*!< invokes the GPU to interpret the initial population with data train*/
-        computeSemantics<<< gridSize, blockSize >>>(dInitialPopulation, uSemanticTestCases, sizeMaxDepthIndividual, uDataTest, nrowTest, nvar, uPushGenes, uStackInd);
+        computeSemantics<<< gridSize, blockSize >>>(dInitialPopulation, uSemanticTestCases, individualLength, uDataTest, nrowTest, nvar, uPushGenes, uStackInd);
         cudaErrorCheck("computeSemantics");           
         /*!< invokes the GPU to interpret the random trees with data test*/
-        computeSemantics<<< gridSize, blockSize >>>(dRandomTrees, uSemanticTestRandomTrees, sizeMaxDepthIndividual, uDataTest, nrowTest, nvar, uPushGenes, uStackInd);
+        computeSemantics<<< gridSize, blockSize >>>(dRandomTrees, uSemanticTestRandomTrees, individualLength, uDataTest, nrowTest, nvar, uPushGenes, uStackInd);
         cudaErrorCheck("computeSemantics");            
+        
         /*!< memory is deallocated for training data and auxiliary vectors for the interpreter*/
         cudaFree(uDataTrain);
         cudaFree(uDataTest);
         cudaFree(uStackInd);
         cudaFree(uPushGenes);            
+        
         cudaOccupancyMaxPotentialBlockSize(&minGridSize, &blockSize, computeError, 0, config.populationSize); 
         gridSize = (config.populationSize + blockSize - 1) / blockSize;         
         
@@ -317,9 +400,9 @@ int main(int argc, char **argv){
         cudaDeviceSynchronize();
         
         /*!< writing the  training fitness of the best individual on the file fitnesstrain.csv*/
-        fitTraining  << 0 << "," << uFit[indexBestIndividual]<<endl;
+        fitTraining << 0 << uFit[indexBestIndividual]<<endl;
         /*!< writing the  test fitness of the best individual on the file fitnesstest.csv*/
-        fitTesting   << 0 << "," << uFitTest[indexBestIndividual]<<endl;              
+        fitTesting << 0 << uFitTest[indexBestIndividual]<<endl;              
 
         float *uSemanticTrainCasesNew, *uFitNew, *uSemanticTestCasesNew, *uFitTestNew; /*!< vectors that contain the semantics of an individual in the population, calculated in the training and test set in the g + 1 generation and its allocation in GPU*/
         checkCudaErrors(cudaMallocManaged(&uSemanticTrainCasesNew,sizeMemSemanticTrain));
@@ -331,22 +414,21 @@ int main(int argc, char **argv){
         cudaEventCreate(&startGsgp);
         cudaEventCreate(&stopGsgp);          
         curandState_t* State;
-        cudaMalloc((void**) &State, (twoSizePopulation) * sizeof(curandState_t));
-
-        cudaOccupancyMaxPotentialBlockSize(&minGridSize, &blockSize, init, 0, twoSizePopulation);
-        gridSize = (twoSizePopulation + blockSize - 1) / blockSize;
-        init<<<gridSize, blockSize>>>(time(NULL), State);         
+        cudaMalloc((void**) &State, (twoSizePopulation) * sizeof(curandState_t));     
 
         float *indexRandomTrees; /*!< vector of pointers to save random positions of random trees and allocation in GPU*/
         checkCudaErrors(cudaMallocManaged(&indexRandomTrees,twoSizeMemPopulation));         
         /*!< main GSGP cycle*/
-        for ( int generation=1; generation<=config.maxNumberGenerations; generation++){
+        for ( int generation=1; generation<=config.numberGenerations; generation++){
 
             /*!< register execution time*/
             cudaEventRecord(startGsgp);
-            cudaOccupancyMaxPotentialBlockSize(&minGridSize, &blockSize, initializeIndexRandomTrees, 0, twoSizePopulation);
+            
+            cudaOccupancyMaxPotentialBlockSize(&minGridSize, &blockSize, init, 0, twoSizePopulation);
             gridSize = (twoSizePopulation + blockSize - 1) / blockSize;
-     
+            init<<<gridSize, blockSize>>>(time(NULL), State); /*!< initializes the random number generator*/
+            cudaErrorCheck("init");
+            /*!< invokes the GPU to initialize the random positions of the random trees*/
             initializeIndexRandomTrees<<<gridSize,blockSize >>>( config.populationSize, indexRandomTrees, State );
             cudaErrorCheck("initializeIndexRandomTrees");
 
@@ -354,10 +436,9 @@ int main(int argc, char **argv){
             gridSize = (sizeElementsSemanticTrain + blockSize - 1) / blockSize;
             /*!< geometric semantic mutation with semantic train*/
             geometricSemanticMutation<<< gridSize, blockSize >>>(uSemanticTrainCases, uSemanticRandomTrees,uSemanticTrainCasesNew,
-                config.populationSize, nrow, sizeElementsSemanticTrain, generation, indexRandomTrees, dStructMutation, vectorTraces);
+            config.populationSize, nrow, sizeElementsSemanticTrain, generation, indexRandomTrees, vectorTraces);
             cudaErrorCheck("geometricSemanticMutation");
             cudaOccupancyMaxPotentialBlockSize(&minGridSize, &blockSize, computeError, 0, config.populationSize); 
-
 
             gridSize = (config.populationSize + blockSize - 1) / blockSize;
             /*!< invokes the GPU to calculate the error (RMSE) the new population*/
@@ -379,7 +460,7 @@ int main(int argc, char **argv){
             gridSizeTest = (sizeElementsSemanticTest + blockSizeTest - 1) / blockSizeTest;
          
             geometricSemanticMutation<<< gridSizeTest, blockSizeTest >>>(uSemanticTestCases, uSemanticTestRandomTrees,uSemanticTestCasesNew,
-            config.populationSize, nrowTest, sizeElementsSemanticTest, generation, indexRandomTrees, dStructMutationTest, vectorTracesTest);
+            config.populationSize, nrowTest, sizeElementsSemanticTest, generation, indexRandomTrees, vectorTraces);
             cudaErrorCheck("geometricSemanticMutation");
 
             cudaOccupancyMaxPotentialBlockSize(&minGridSize, &blockSizeTest, computeError, 0, config.populationSize); 
@@ -393,34 +474,36 @@ int main(int argc, char **argv){
             cudaDeviceSynchronize();
          
             /*!< this section performs survival by updating the semantic and fitness vectors respectively*/
-            int index = generation-1;
+            int index = generation-1;;
+            int mane =0;
             if(uFitNew[indexBestOffspring] > uFit[indexBestIndividual]){
+                               
                 for (int i = 0; i < nrow; ++i){
                     uSemanticTrainCasesNew[indexWorstOffspring*nrow+i] = uSemanticTrainCases[indexBestIndividual*nrow+i];
                 }
 
-            uFitNew[indexWorstOffspring] = uFit[indexBestIndividual];
-         
+                uFitNew[indexWorstOffspring] = uFit[indexBestIndividual];
+                mane = indexBestIndividual;
                 tempFitnes = uFit;
                 uFit = uFitNew;
                 uFitNew = tempFitnes;
                 tempSemantic = uSemanticTrainCases;
                 uSemanticTrainCases = uSemanticTrainCasesNew;
                 uSemanticTrainCasesNew = tempSemantic;
-            
+                vectorTraces[(index*config.populationSize)+indexWorstOffspring].firstParent = mane;
+                vectorTraces[(index*config.populationSize)+indexWorstOffspring].secondParent = -1;
+                vectorTraces[(index*config.populationSize)+indexWorstOffspring].number=mane;
+                vectorTraces[(index*config.populationSize)+indexWorstOffspring].event = -1;
+                vectorTraces[(index*config.populationSize)+indexWorstOffspring].newIndividual = mane;
+                vectorTraces[(index*config.populationSize)+indexWorstOffspring].mark=0;
+                vectorTraces[(index*config.populationSize)+indexWorstOffspring].mutStep = 0;
+
                 for (int j = 0; j < nrowTest; ++j){
                     uSemanticTestCasesNew[indexWorstOffspring*nrowTest+j] = uSemanticTestCases[indexBestIndividual*nrowTest+j];
                 }
 
                 uFitTestNew[indexWorstOffspring] = uFitTest[indexBestIndividual];
-                vectorTraces[(index*config.populationSize)+indexWorstOffspring].firstParent = indexBestIndividual;
-                vectorTraces[(index*config.populationSize)+indexWorstOffspring].secondParent = -1;
-                vectorTraces[(index*config.populationSize)+indexWorstOffspring].number=indexBestIndividual;
-                vectorTraces[(index*config.populationSize)+indexWorstOffspring].event = -1;
-                vectorTraces[(index*config.populationSize)+indexWorstOffspring].newIndividual = indexBestIndividual;
-                vectorTraces[(index*config.populationSize)+indexWorstOffspring].mark=0;
-                vectorTraces[(index*config.populationSize)+indexWorstOffspring].mutStep = 0;
-
+                
                 tempFitnesTest = uFitTest;
                 uFitTest = uFitTestNew;
                 uFitTestNew = tempFitnesTest;
@@ -428,8 +511,7 @@ int main(int argc, char **argv){
                 uSemanticTestCases = uSemanticTestCasesNew;
                 uSemanticTestCasesNew = tempSemanticTest;
                 indexBestIndividual = indexWorstOffspring;
-            }else
-            {
+            }else{
                 tempFitnes = uFit;
                 uFit = uFitNew;
                 uFitNew = tempFitnes;
@@ -444,60 +526,58 @@ int main(int argc, char **argv){
                 uSemanticTestCasesNew = tempSemanticTest;
                 indexBestIndividual = indexBestOffspring;
             }
+
             /*!< writing the  training fitness of the best individual on the file fitnesstrain.csv*/
             fitTraining << generation << ","<<uFit[indexBestIndividual]<<endl;
             /*!< writing the  test fitness of the best individual on the file fitnesstest.csv*/
             fitTesting << generation << ","<<uFitTest[indexBestIndividual]<<endl;
+            
             cudaEventRecord(stopGsgp);
             cudaEventSynchronize(stopGsgp);
             cudaEventElapsedTime(&generationTime, startGsgp, stopGsgp);    
         }
-        //saveTraceComplete(logPath, vectorTraces, config.maxNumberGenerations, config.populationSize);
+           saveTraceComplete(logPath, vectorTraces, config.numberGenerations, config.populationSize);
+           markTracesGeneration(vectorTraces, config.populationSize, config.numberGenerations,  indexBestIndividual);
+           saveTrace(outputNameFiles,logPath, vectorTraces, config.numberGenerations, config.populationSize);
             
-            markTracesGeneration(vectorTraces, config.populationSize, config.maxNumberGenerations,  indexBestIndividual);
-
-            saveTrace(outputNameFiles,logPath, vectorTraces, config.maxNumberGenerations, config.populationSize);
-            
-            /*!< at the end of the execution  to deallocate memory*/
-            cudaFree(indexRandomTrees);
-            cudaFree(dStructMutation);
-            cudaFree(dStructSurvivor);
-            cudaFree(vectorTraces);
-            cudaFree(State);
-            cublasDestroy(handle);
-            cudaFree(dInitialPopulation);
-            cudaFree(dRandomTrees);
-            free(hInitialPopulation);
-            free(hRandomTrees);
-            cudaFree(uDataTrainTarget);
-            cudaFree(uDataTestTarget);
-            cudaFree(uFit);
-            cudaFree(uFitNew);
-            cudaFree(uSemanticTrainCases);
-            cudaFree(uSemanticRandomTrees);
-            cudaFree(uSemanticTrainCasesNew);
-            cudaFree(uSemanticTestCases);
-            cudaFree(uSemanticTestRandomTrees);
-            cudaFree(uSemanticTestCasesNew);     
-            cudaFree(uFitTest);
-            cudaFree(uFitTestNew);
-            cudaEventRecord(stopRun);
-            cudaEventSynchronize(stopRun);
-            cudaEventElapsedTime(&executionTime, startRun, stopRun);
+           /*!< at the end of the execution  to deallocate memory*/
+           cudaFree(indexRandomTrees);
+           cudaFree(vectorTraces);
+           cudaFree(State);
+           cublasDestroy(handle);
+           cudaFree(dInitialPopulation);
+           cudaFree(dRandomTrees);
+           free(hInitialPopulation);
+           free(hRandomTrees);
+           cudaFree(uDataTrainTarget);
+           cudaFree(uDataTestTarget);
+           cudaFree(uFit);
+           cudaFree(uFitNew);
+           cudaFree(uSemanticTrainCases);
+           cudaFree(uSemanticRandomTrees);
+           cudaFree(uSemanticTrainCasesNew);
+           cudaFree(uSemanticTestCases);
+           cudaFree(uSemanticTestRandomTrees);
+           cudaFree(uSemanticTestCasesNew);     
+           cudaFree(uFitTest);
+           cudaFree(uFitTestNew);
+           cudaEventRecord(stopRun);
+           cudaEventSynchronize(stopRun);
+           cudaEventElapsedTime(&executionTime, startRun, stopRun);
 
             /*!< writing the time execution for stages the algorithm*/
-            times << config.populationSize
-            << "," << sizeMaxDepthIndividual 
-            << "," << nrow 
-            << "," << nvar 
-            << "," << executionTime/1000
-            << "," << initialitionTimePopulation/1000
-            << "," << timeComputeSemantics/1000
-            << "," << generationTime/1000
-            <<endl;
-            cudaFree(states);
-            /*!< all device allocations are removed*/
-            cudaDeviceReset();
+           times << config.populationSize
+           << "," << individualLength 
+           << "," << nrow 
+           << "," << nvar 
+           << "," << executionTime/1000
+           << "," << initialitionTimePopulation/1000
+           << "," << timeComputeSemantics/1000
+           << "," << generationTime/1000
+           <<endl;
+           cudaFree(states);
+           /*!< all device allocations are removed*/
+           cudaDeviceReset();
         } 
     return 0;
 }
