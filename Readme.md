@@ -40,6 +40,7 @@ To run gsgpCuda it is necessary to add a name for the output file generation, as
 train.txt: This file must contain the training data used to compute fitness and given in a format of space-seperated values with n columns, where the first n-1 columns are the input features and the last column is the target variable.
 test.txt:  This file must contain the test data used to evalaute the best individual at each generation. this data does not influence the evolutionary/training process, and must be given in the same format as the training data.
 best_model: This file contains the information needed to apply the best model found by gsgpcuda on new data (make new predictions or inferences). other auxiliary files are also generated and required.
+GsgpCuda generates the following output files, which are located in the log folder
 
     best_model_initialPopulation.csv: This file will store the individuals of the initial population.
     best_model_randomTrees.csv: This file will store the individuals of the auxiliary population.
