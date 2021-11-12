@@ -20,7 +20,7 @@
 //! \author Jose Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 //! \date   created on 25/01/2020
 #include "GsgpCuda.cpp"
-#include <cstdio>
+
 
 /*!
 * \fn       int main(int argc, const char **argv)
@@ -179,7 +179,7 @@ int main(int argc, char **argv){
 
         cudaMemcpy(dUnssenDataTest, unssenDataTest, sizeDataTest, cudaMemcpyHostToDevice); 
 
-        dataIn<<<1,1>>>(dUnssenDataTest, nrowTest);
+        //dataIn<<<1,1>>>(dUnssenDataTest, nrowTest);
         
         float *initPopulation, *randomTress, *dInitialPopulation,*dRandomTrees; /*!< This vector pointers to store the individuals of the initial population and random trees */
 
@@ -211,7 +211,7 @@ int main(int argc, char **argv){
         cudaMemcpy(dInitialPopulation, initPopulation, sizeMemPopulation, cudaMemcpyHostToDevice); 
         cudaMemcpy(dRandomTrees, randomTress, sizeMemPopulation, cudaMemcpyHostToDevice); 
         
-        poblacion<<<1,1>>>(dInitialPopulation,individualLength);
+        ///poblacion<<<1,1>>>(dInitialPopulation,individualLength);
 
         cudaOccupancyMaxPotentialBlockSize(&minGridSize, &blockSize, computeSemantics, 0, config.populationSize); /*!< heuristic function used to choose a good block size is to aim at high occupancy*/
         gridSize = (config.populationSize + blockSize - 1) / blockSize; /*!< round up according to array size*/            
@@ -427,10 +427,11 @@ int main(int argc, char **argv){
 
             /*!< register execution time*/
             cudaEventRecord(startGsgp);
-            
+            gridSize =0, blockSize=0;
             /*!< invokes the GPU to initialize the random positions of the random trees*/
             cudaOccupancyMaxPotentialBlockSize(&minGridSize, &blockSize, initializeIndexRandomTrees, 0, twoSizePopulation);
             gridSize = (twoSizePopulation + blockSize - 1) / blockSize;
+            //printf("grid %i blocksize %i \n", gridSize, blockSize);
             initializeIndexRandomTrees<<<gridSize,blockSize >>>( config.populationSize, indexRandomTrees, State );
             cudaErrorCheck("initializeIndexRandomTrees");
 
@@ -476,16 +477,16 @@ int main(int argc, char **argv){
             cudaDeviceSynchronize();
          
             /*!< this section performs survival by updating the semantic and fitness vectors respectively*/
-            int index = generation-1;;
-            int mane =0;
+            int index = generation-1;
+            int tmpIndex = 0;
             if(uFitNew[indexBestOffspring] > uFit[indexBestIndividual]){
-                               
+                //printf("Fue mejor el padre por lo tanto sucede una supervivencia en la generacion %i el indice del peor de los hijos es %i el mejor de los padres %i \n", generation, indexWorstOffspring, indexBestIndividual);
                 for (int i = 0; i < nrow; ++i){
                     uSemanticTrainCasesNew[indexWorstOffspring*nrow+i] = uSemanticTrainCases[indexBestIndividual*nrow+i];
                 }
 
                 uFitNew[indexWorstOffspring] = uFit[indexBestIndividual];
-                mane = indexBestIndividual;
+                tmpIndex = indexBestIndividual;
                 tempFitnes = uFit;
                 uFit = uFitNew;
                 uFitNew = tempFitnes;
@@ -496,12 +497,12 @@ int main(int argc, char **argv){
                     uSemanticTestCasesNew[indexWorstOffspring*nrowTest+j] = uSemanticTestCases[indexBestIndividual*nrowTest+j];
                 }
                 uFitTestNew[indexWorstOffspring] = uFitTest[indexBestIndividual];
-                vectorTraces[(index*config.populationSize)+indexWorstOffspring].firstParent = mane;
-                vectorTraces[(index*config.populationSize)+indexWorstOffspring].secondParent = -1;
-                vectorTraces[(index*config.populationSize)+indexWorstOffspring].number=mane;
+                vectorTraces[(index*config.populationSize)+indexWorstOffspring].firstParent = tmpIndex;
+                vectorTraces[(index*config.populationSize)+indexWorstOffspring].secondParent = indexWorstOffspring;
+                vectorTraces[(index*config.populationSize)+indexWorstOffspring].number=tmpIndex;
                 vectorTraces[(index*config.populationSize)+indexWorstOffspring].event = -1;
-                vectorTraces[(index*config.populationSize)+indexWorstOffspring].newIndividual = mane;
-                vectorTraces[(index*config.populationSize)+indexWorstOffspring].mark=0;
+                vectorTraces[(index*config.populationSize)+indexWorstOffspring].newIndividual = tmpIndex;
+                vectorTraces[(index*config.populationSize)+indexWorstOffspring].mark=1;
                 vectorTraces[(index*config.populationSize)+indexWorstOffspring].mutStep = 0;
                 
                 tempFitnesTest = uFitTest;
@@ -512,6 +513,14 @@ int main(int argc, char **argv){
                 uSemanticTestCasesNew = tempSemanticTest;
                 indexBestIndividual = indexWorstOffspring;
             }else{
+                //printf("Fue mejor el hijo por lo tanto sucede una Mutacion en la generacion %i, el mejor de los padres %i el mejor de los hijos %i \n", generation, indexBestIndividual, indexBestOffspring);
+                vectorTraces[(index*config.populationSize)+indexBestOffspring].firstParent = vectorTraces[(index*config.populationSize)+indexBestOffspring].firstParent;
+                vectorTraces[(index*config.populationSize)+indexBestOffspring].secondParent =  vectorTraces[(index*config.populationSize)+indexBestOffspring].secondParent;
+                vectorTraces[(index*config.populationSize)+indexBestOffspring].number= vectorTraces[(index*config.populationSize)+indexBestOffspring].number;
+                vectorTraces[(index*config.populationSize)+indexBestOffspring].event =  vectorTraces[(index*config.populationSize)+indexBestOffspring].event;
+                vectorTraces[(index*config.populationSize)+indexBestOffspring].newIndividual =  vectorTraces[(index*config.populationSize)+indexBestOffspring].newIndividual;
+                vectorTraces[(index*config.populationSize)+indexBestOffspring].mark= vectorTraces[(index*config.populationSize)+indexBestOffspring].mark=1;
+                vectorTraces[(index*config.populationSize)+indexBestOffspring].mutStep =  vectorTraces[(index*config.populationSize)+indexBestOffspring].mutStep;
                 tempFitnes = uFit;
                 uFit = uFitNew;
                 uFitNew = tempFitnes;
@@ -536,48 +545,48 @@ int main(int argc, char **argv){
             cudaEventSynchronize(stopGsgp);
             cudaEventElapsedTime(&generationTime, startGsgp, stopGsgp);    
         }
-           saveTraceComplete(logPath, vectorTraces, config.numberGenerations, config.populationSize);
-           markTracesGeneration(vectorTraces, config.populationSize, config.numberGenerations,  indexBestIndividual);
-           saveTrace(outputNameFiles,logPath, vectorTraces, config.numberGenerations, config.populationSize);
+        //markTracesGeneration(vectorTraces, config.populationSize, config.numberGenerations,  indexBestIndividual);
+        saveTraceComplete(logPath, vectorTraces, config.numberGenerations, config.populationSize);
+        saveTrace(outputNameFiles,logPath, vectorTraces, config.numberGenerations, config.populationSize);
             
-           /*!< at the end of the execution  to deallocate memory*/
-           cudaFree(indexRandomTrees);
-           cudaFree(vectorTraces);
-           cudaFree(State);
-           cublasDestroy(handle);
-           cudaFree(dInitialPopulation);
-           cudaFree(dRandomTrees);
-           free(hInitialPopulation);
-           free(hRandomTrees);
-           cudaFree(uDataTrainTarget);
-           cudaFree(uDataTestTarget);
-           cudaFree(uFit);
-           cudaFree(uFitNew);
-           cudaFree(uSemanticTrainCases);
-           cudaFree(uSemanticRandomTrees);
-           cudaFree(uSemanticTrainCasesNew);
-           cudaFree(uSemanticTestCases);
-           cudaFree(uSemanticTestRandomTrees);
-           cudaFree(uSemanticTestCasesNew);     
-           cudaFree(uFitTest);
-           cudaFree(uFitTestNew);
-           cudaEventRecord(stopRun);
-           cudaEventSynchronize(stopRun);
-           cudaEventElapsedTime(&executionTime, startRun, stopRun);
+        /*!< at the end of the execution  to deallocate memory*/
+        cudaFree(indexRandomTrees);
+        cudaFree(vectorTraces);
+        cudaFree(State);
+        cublasDestroy(handle);
+        cudaFree(dInitialPopulation);
+        cudaFree(dRandomTrees);
+        free(hInitialPopulation);
+        free(hRandomTrees);
+        cudaFree(uDataTrainTarget);
+        cudaFree(uDataTestTarget);
+        cudaFree(uFit);
+        cudaFree(uFitNew);
+        cudaFree(uSemanticTrainCases);
+        cudaFree(uSemanticRandomTrees);
+        cudaFree(uSemanticTrainCasesNew);
+        cudaFree(uSemanticTestCases);
+        cudaFree(uSemanticTestRandomTrees);
+        cudaFree(uSemanticTestCasesNew);     
+        cudaFree(uFitTest);
+        cudaFree(uFitTestNew);
+        cudaEventRecord(stopRun);
+        cudaEventSynchronize(stopRun);
+        cudaEventElapsedTime(&executionTime, startRun, stopRun);
 
-            /*!< writing the time execution for stages the algorithm*/
-           times << config.populationSize
-           << "," << individualLength 
-           << "," << nrow 
-           << "," << nvar 
-           << "," << executionTime/1000
-           << "," << initialitionTimePopulation/1000
-           << "," << timeComputeSemantics/1000
-           << "," << generationTime/1000
-           <<endl;
-           cudaFree(states);
-           /*!< all device allocations are removed*/
-           cudaDeviceReset();
+         /*!< writing the time execution for stages the algorithm*/
+        times << config.populationSize
+        << "," << individualLength 
+        << "," << nrow 
+        << "," << nvar 
+        << "," << executionTime/1000
+        << "," << initialitionTimePopulation/1000
+        << "," << timeComputeSemantics/1000
+        << "," << generationTime/1000
+        <<endl;
+        cudaFree(states);
+        /*!< all device allocations are removed*/
+        cudaDeviceReset();
         } 
     return 0;
 }

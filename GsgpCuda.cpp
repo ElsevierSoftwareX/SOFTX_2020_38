@@ -399,8 +399,7 @@ __global__ void geometricSemanticMutation(float *initialPopulationSemantics, flo
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cpp 
 */
-__host__ void readInpuData(char *trainFile, char *testFile, float *dataTrain, float *dataTest, float *dataTrainTarget,
- float *dataTestTarget, int nrow, int nvar, int nrowTest, int nvarTest){
+__host__ void readInpuData(char *trainFile, char *testFile, float *dataTrain, float *dataTest, float *dataTrainTarget, float *dataTestTarget, int nrow, int nvar, int nrowTest, int nvarTest){
 
   std::fstream in(trainFile,ios::in);
   if (!in.is_open()){
@@ -623,20 +622,21 @@ static void list_dir(std::string path, std::string nameFile, int useMultipleFile
 * \file     GsgpCuda.cpp
 */
 __host__ void markTracesGeneration(entry *vectorTraces, int populationSize, int generationSize ,int bestIndividual){
-
   vectorTraces[(generationSize-1)*populationSize+bestIndividual].mark=1;
-  int index;
-  int a =0;
+  int index,index2;
+  int a = 0;
   for (int i = generationSize-1; i >0; i--){
     a = i-1;
     for (int j = 0; j < populationSize; j++){
-      index =0;
-      if(vectorTraces[i*populationSize+j].mark==1 && vectorTraces[i*populationSize+j].event==1){
+      index =0,index2=0;
+      if(vectorTraces[i*populationSize+j].mark==1 && vectorTraces[i*populationSize+j].event==1 ){ 
         index = vectorTraces[i*populationSize+j].number;
         vectorTraces[a*populationSize+index].mark=1;
       }
-      if (vectorTraces[i*populationSize+j].mark==1 && (vectorTraces[i*populationSize+j].event==-1)){
-        index = vectorTraces[i*populationSize+j].firstParent;
+      if ( vectorTraces[i*populationSize+j].event==-1 && vectorTraces[i*populationSize+j].mark==1){
+        index2 = vectorTraces[i*populationSize+j].secondParent;
+        index = vectorTraces[i*populationSize+index2].firstParent;
+        printf("generacion %d indPop %d  firsParent %d \n",i,j,index);
         vectorTraces[a*populationSize+index].mark=1;
       }
     }
@@ -666,13 +666,13 @@ __host__ void saveTrace(std::string name, std::string path, entry *structSurvivo
     r=generation-1;
     for (int j = 0; j < populationSize; j++){
       if (structSurvivor[i*populationSize+j].mark==1){
-      trace << structSurvivor[i*populationSize+j].firstParent<<"\t" << structSurvivor[i*populationSize+j].secondParent << "\t" << structSurvivor[i*populationSize+j].number << "\t" << structSurvivor[i*populationSize+j].event <<"\t"<<  structSurvivor[i*populationSize+j].newIndividual << "\t" <<structSurvivor[i*populationSize+j].mutStep<<endl;
+        trace << structSurvivor[i*populationSize+j].firstParent<<"\t" << structSurvivor[i*populationSize+j].secondParent << "\t" << structSurvivor[i*populationSize+j].number << "\t" << structSurvivor[i*populationSize+j].event <<"\t"<<  structSurvivor[i*populationSize+j].newIndividual << "\t" <<structSurvivor[i*populationSize+j].mutStep<<endl;
       }
     }
     if(i<r)
-    trace<<"***"<<endl;
+      trace<<"***"<<endl;
     else
-    trace<<"***";
+      trace<<"***";
   } 
 }
 
@@ -698,12 +698,13 @@ __host__ void saveTraceComplete(std::string path, entry *structSurvivor, int gen
   std::ofstream trace(tmpT,ios::out);
   for(int i=0; i<generation; i++){
     for (int j = 0; j < populationSize; j++){
-      trace << structSurvivor[i*populationSize+j].event<<"\t" <<structSurvivor[i*populationSize+j].firstParent<<"\t" << structSurvivor[i*populationSize+j].secondParent << "\t" << structSurvivor[i*populationSize+j].number  <<"\t"<<  structSurvivor[i*populationSize+j].newIndividual << "\t" <<structSurvivor[i*populationSize+j].mutStep<<endl;
+      //trace << structSurvivor[i*populationSize+j].event<<"\t" <<structSurvivor[i*populationSize+j].firstParent<<"\t" << structSurvivor[i*populationSize+j].secondParent << "\t" << structSurvivor[i*populationSize+j].number  <<"\t"<<  structSurvivor[i*populationSize+j].newIndividual << "\t" <<structSurvivor[i*populationSize+j].mutStep<<endl;
+      trace << structSurvivor[i*populationSize+j].firstParent<<"\t" << structSurvivor[i*populationSize+j].secondParent << "\t" << structSurvivor[i*populationSize+j].number << "\t" << structSurvivor[i*populationSize+j].event <<"\t"<< structSurvivor[i*populationSize+j].mark <<"\t"<<  structSurvivor[i*populationSize+j].newIndividual << "\t" <<structSurvivor[i*populationSize+j].mutStep<<endl;
     }
     if(i<generation-1)
       trace<<"***"<<endl;
     else
-      trace<<"***"<<endl;
+      trace<<"***";
   } 
 }
 
