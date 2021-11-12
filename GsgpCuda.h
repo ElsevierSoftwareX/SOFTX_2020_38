@@ -91,8 +91,6 @@ typedef struct entry_{
    float mutStep;     /*!< variable containing the mutation step of the semantic mutation */
 }entry;
 
-
-
 /*!
 * \brief    Structure used to store the parameters of the configuration.ini file and these are used to initialize the algorithm parameters  
 * \param    int numberGenerations: number of generations of the GSGP algorithm 
@@ -116,14 +114,14 @@ typedef struct cfg_{
   char logPath[100];        
 }cfg;
 
-/*!< struct variable containing the values of the parameters specified in the configuration.ini file */
+/// struct variable containing the values of the parameters specified in the configuration.ini file
 cfg config;
 
-/*!< struct variable containing the values of the parameters specified in the configuration.ini file */
+/// variable containing the numbers of rows (instances) of the training dataset
 int nrow;
-/*!< struct variable containing the values of the parameters specified in the configuration.ini file */
+/// variable containing the numbers of rows (instances) of the test dataset
 int nrowTest;
-/*!< struct variable containing the values of the parameters specified in the configuration.ini file */
+/// variable containing the numbers of columns (excluding the target) of the training dataset
 int nvar;
 
 /*!
@@ -361,8 +359,6 @@ void countInputFile(std::string fileName, int &rows, int &cols);
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     testSemantic.cu
 */
-
-
 __host__ void saveIndividuals(std::string path, float *Individuals, std::string namePopulation ,int maxDepth, int sizePopulation);
 
 /*!
@@ -401,7 +397,6 @@ __host__  bool IsPathExist(const std::string &s);
 * \author   Luis Armando Cardenas Florido, José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cpp
 */
-
 __host__ void checkDirectoryPath(std::string dirPath);
 
 /*!
@@ -416,7 +411,6 @@ __host__ void checkDirectoryPath(std::string dirPath);
 * \author   Luis Armando Cardenas Florido, José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cpp
 */
-
 __host__ static void list_dir(std::string path, std::string nameFile, int useMultipleFiles, std::vector<string> &files);
 
 /*!
@@ -431,7 +425,6 @@ __host__ static void list_dir(std::string path, std::string nameFile, int useMul
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cpp
 */
-
 __host__ void markTracesGeneration(entry *vectorTraces, int populationSize, int generationSize ,int bestIndividual);
 
 /*!
@@ -447,7 +440,6 @@ __host__ void markTracesGeneration(entry *vectorTraces, int populationSize, int 
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cpp  
 */
-
 __host__ void saveTraceComplete(std::string path, entry *structSurvivor, int generation, int populationSize);
 
 
@@ -479,7 +471,6 @@ __host__ void saveTrace(std::string name, std::string path, entry *structSurvivo
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cpp 
 */
-
 __host__ void readInpuTestData( char *test_file, float *dataTest, float *dataTestTarget, int nrowTest, int nvarTest );
 
 /*!
@@ -497,7 +488,6 @@ __host__ void readInpuTestData( char *test_file, float *dataTest, float *dataTes
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cpp 
 */
-
 __host__ void readPopulation( float *initialPopulation, float *randomTrees, int sizePopulation, int depth, std::string log, std::string name, std::string nameR);
 
 /*!
@@ -519,5 +509,4 @@ __host__ void readPopulation( float *initialPopulation, float *randomTrees, int 
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cpp
 */
-
 __host__ void evaluate_unseen_new_data(std::string path, int generations, const int sizeMaxDepthIndividual, float *initialPopulation, float *randomTrees, std::ofstream& OUT, std::string log, float *dataTest, int nrow, int numIndi, int nvarTest);

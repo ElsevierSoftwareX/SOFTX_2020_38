@@ -332,7 +332,7 @@ int main(int argc, char **argv){
         cudaEventCreate(&stopInitialPop);
         cudaEventRecord(startInitialPop);
 
-        ///*!< invokes the GPU to initialize the initial population*/
+        ///invokes the GPU to initialize the initial population
         initializePopulation<<< gridSize, blockSize >>>(dInitialPopulation, nvar, individualLength, states, config.maxRandomConstant,4, config.functionRatio, config.variableRatio);
         cudaErrorCheck("initializePopulation");
 
@@ -400,9 +400,9 @@ int main(int argc, char **argv){
         cudaDeviceSynchronize();
         
         /*!< writing the  training fitness of the best individual on the file fitnesstrain.csv*/
-        fitTraining << 0 << uFit[indexBestIndividual]<<endl;
+        fitTraining << 0 << "," <<uFit[indexBestIndividual]<<endl;
         /*!< writing the  test fitness of the best individual on the file fitnesstest.csv*/
-        fitTesting << 0 << uFitTest[indexBestIndividual]<<endl;              
+        fitTesting << 0 << "," <<uFitTest[indexBestIndividual]<<endl;              
 
         float *uSemanticTrainCasesNew, *uFitNew, *uSemanticTestCasesNew, *uFitTestNew; /*!< vectors that contain the semantics of an individual in the population, calculated in the training and test set in the g + 1 generation and its allocation in GPU*/
         checkCudaErrors(cudaMallocManaged(&uSemanticTrainCasesNew,sizeMemSemanticTrain));
@@ -414,7 +414,11 @@ int main(int argc, char **argv){
         cudaEventCreate(&startGsgp);
         cudaEventCreate(&stopGsgp);          
         curandState_t* State;
-        cudaMalloc((void**) &State, (twoSizePopulation) * sizeof(curandState_t));     
+        cudaMalloc((void**) &State, (twoSizePopulation) * sizeof(curandState_t));
+        cudaOccupancyMaxPotentialBlockSize(&minGridSize, &blockSize, init, 0, twoSizePopulation);
+        gridSize = (twoSizePopulation + blockSize - 1) / blockSize;
+        init<<<gridSize, blockSize>>>(time(NULL), State); /*!< initializes the random number generator*/
+        cudaErrorCheck("init");     
 
         float *indexRandomTrees; /*!< vector of pointers to save random positions of random trees and allocation in GPU*/
         checkCudaErrors(cudaMallocManaged(&indexRandomTrees,twoSizeMemPopulation));         
@@ -424,11 +428,9 @@ int main(int argc, char **argv){
             /*!< register execution time*/
             cudaEventRecord(startGsgp);
             
-            cudaOccupancyMaxPotentialBlockSize(&minGridSize, &blockSize, init, 0, twoSizePopulation);
-            gridSize = (twoSizePopulation + blockSize - 1) / blockSize;
-            init<<<gridSize, blockSize>>>(time(NULL), State); /*!< initializes the random number generator*/
-            cudaErrorCheck("init");
             /*!< invokes the GPU to initialize the random positions of the random trees*/
+            cudaOccupancyMaxPotentialBlockSize(&minGridSize, &blockSize, initializeIndexRandomTrees, 0, twoSizePopulation);
+            gridSize = (twoSizePopulation + blockSize - 1) / blockSize;
             initializeIndexRandomTrees<<<gridSize,blockSize >>>( config.populationSize, indexRandomTrees, State );
             cudaErrorCheck("initializeIndexRandomTrees");
 
@@ -490,6 +492,10 @@ int main(int argc, char **argv){
                 tempSemantic = uSemanticTrainCases;
                 uSemanticTrainCases = uSemanticTrainCasesNew;
                 uSemanticTrainCasesNew = tempSemantic;
+                for (int j = 0; j < nrowTest; ++j){
+                    uSemanticTestCasesNew[indexWorstOffspring*nrowTest+j] = uSemanticTestCases[indexBestIndividual*nrowTest+j];
+                }
+                uFitTestNew[indexWorstOffspring] = uFitTest[indexBestIndividual];
                 vectorTraces[(index*config.populationSize)+indexWorstOffspring].firstParent = mane;
                 vectorTraces[(index*config.populationSize)+indexWorstOffspring].secondParent = -1;
                 vectorTraces[(index*config.populationSize)+indexWorstOffspring].number=mane;
@@ -497,12 +503,6 @@ int main(int argc, char **argv){
                 vectorTraces[(index*config.populationSize)+indexWorstOffspring].newIndividual = mane;
                 vectorTraces[(index*config.populationSize)+indexWorstOffspring].mark=0;
                 vectorTraces[(index*config.populationSize)+indexWorstOffspring].mutStep = 0;
-
-                for (int j = 0; j < nrowTest; ++j){
-                    uSemanticTestCasesNew[indexWorstOffspring*nrowTest+j] = uSemanticTestCases[indexBestIndividual*nrowTest+j];
-                }
-
-                uFitTestNew[indexWorstOffspring] = uFitTest[indexBestIndividual];
                 
                 tempFitnesTest = uFitTest;
                 uFitTest = uFitTestNew;

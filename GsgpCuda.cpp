@@ -361,25 +361,24 @@ __global__ void initializeIndexRandomTrees(int sizePopulation, float *indexRando
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cpp
 */
-__global__ void geometricSemanticMutation(float *initialPopulationSemantics, float *randomTreesSemantics, float *newSemanticsOffsprings, int sizePopulation,
-  int nrow, int tElements, int generation, float *indexRandomTrees, entry_ *y){
-
-    const unsigned int tid = threadIdx.x+blockIdx.x*blockDim.x;
-    int nSeed = (tid/nrow);
-    int firstTree = indexRandomTrees[nSeed], secondTree = indexRandomTrees[sizePopulation + nSeed];
-    curandState_t state;
-    curand_init((tid/nrow)*generation, 0, 0, &state);
-    //curand_init(generation, 0, 0, &state);
-    int index = generation-1;
-    float ms= curand_uniform(&state);
-    y[(index*sizePopulation)+tid%sizePopulation].firstParent=firstTree;
-    y[(index*sizePopulation)+tid%sizePopulation].secondParent=secondTree;
-    y[(index*sizePopulation)+tid%sizePopulation].number=tid%sizePopulation;
-    y[(index*sizePopulation)+tid%sizePopulation].event=1;
-    y[(index*sizePopulation)+tid%sizePopulation].newIndividual=tid%sizePopulation;
-    y[(index*sizePopulation)+tid%sizePopulation].mark=0;
-    y[(index*sizePopulation)+tid%sizePopulation].mutStep=ms;
-    newSemanticsOffsprings[tid] = initialPopulationSemantics[tid]+(ms)*((1.0/(1+expf(-(randomTreesSemantics[firstTree*nrow+tid%nrow]))))-(1.0/(1+expf(-(randomTreesSemantics[secondTree*nrow+tid%nrow])))));
+__global__ void geometricSemanticMutation(float *initialPopulationSemantics, float *randomTreesSemantics, float *newSemanticsOffsprings, int sizePopulation,int nrow, int tElements, int generation, float *indexRandomTrees, entry_ *y){
+  const unsigned int tid = threadIdx.x+blockIdx.x*blockDim.x;
+  int nSeed = (tid/nrow);
+  int firstTree = indexRandomTrees[nSeed], secondTree = indexRandomTrees[sizePopulation + nSeed];
+  curandState_t state;
+  //curand_init((tid/nrow)*generation, 0, 0, &state);
+  //curand_init(generation, 0, 0, &state);
+  curand_init(firstTree*generation, 0, 0, &state);
+  int index = generation-1;
+  float ms = curand_uniform(&state);
+  y[(index*sizePopulation)+tid%sizePopulation].firstParent=firstTree;
+  y[(index*sizePopulation)+tid%sizePopulation].secondParent=secondTree;
+  y[(index*sizePopulation)+tid%sizePopulation].number=tid%sizePopulation;
+  y[(index*sizePopulation)+tid%sizePopulation].event=1;
+  y[(index*sizePopulation)+tid%sizePopulation].newIndividual=tid%sizePopulation;
+  y[(index*sizePopulation)+tid%sizePopulation].mark=0;
+  y[(index*sizePopulation)+tid%sizePopulation].mutStep=ms;
+  newSemanticsOffsprings[tid] = initialPopulationSemantics[tid]+(ms)*((1.0/(1+expf(-(randomTreesSemantics[firstTree*nrow+tid%nrow]))))-(1.0/(1+expf(-(randomTreesSemantics[secondTree*nrow+tid%nrow])))));
 }
 
 /*!
