@@ -20,6 +20,7 @@
 //! \author Jose Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 //! \date   created on 25/01/2020
 #include "GsgpCuda.cpp"
+#include <cstdio>
 
 
 /*!
@@ -53,7 +54,7 @@ void validacion(std::string name, float *targer, int nrow){
     }
     
     t = sqrt(RMSE/nrow);
-    printf("error %f \n", t);
+    printf("error %f nrows %i \n", t, nrow);
 }
 
 __global__ void poblacion(float *p, int size){
@@ -158,6 +159,7 @@ int main(int argc, char **argv){
 
         std::string outFile (pathOutFile);
         outFile = logPath + outFile;
+        outFile.c_str();
 
         int sizeDataTest = sizeof(float)*(nrowTest*nvar); /*!< Variable that stores the size in bytes the size of the test data*/
 
@@ -421,13 +423,16 @@ int main(int argc, char **argv){
         cudaErrorCheck("init");     
 
         float *indexRandomTrees; /*!< vector of pointers to save random positions of random trees and allocation in GPU*/
-        checkCudaErrors(cudaMallocManaged(&indexRandomTrees,twoSizeMemPopulation));         
+        checkCudaErrors(cudaMallocManaged(&indexRandomTrees,twoSizeMemPopulation));  
+        int index =0;       
         /*!< main GSGP cycle*/
         for ( int generation=1; generation<=config.numberGenerations; generation++){
 
             /*!< register execution time*/
             cudaEventRecord(startGsgp);
             gridSize =0, blockSize=0;
+            index = generation-1;
+            printf("\n Indice para struc %d\n", index);
             /*!< invokes the GPU to initialize the random positions of the random trees*/
             cudaOccupancyMaxPotentialBlockSize(&minGridSize, &blockSize, initializeIndexRandomTrees, 0, twoSizePopulation);
             gridSize = (twoSizePopulation + blockSize - 1) / blockSize;
@@ -439,7 +444,7 @@ int main(int argc, char **argv){
             gridSize = (sizeElementsSemanticTrain + blockSize - 1) / blockSize;
             /*!< geometric semantic mutation with semantic train*/
             geometricSemanticMutation<<< gridSize, blockSize >>>(uSemanticTrainCases, uSemanticRandomTrees,uSemanticTrainCasesNew,
-            config.populationSize, nrow, sizeElementsSemanticTrain, generation, indexRandomTrees, vectorTraces);
+            config.populationSize, nrow, sizeElementsSemanticTrain, generation, indexRandomTrees, vectorTraces, index);
             cudaErrorCheck("geometricSemanticMutation");
             cudaOccupancyMaxPotentialBlockSize(&minGridSize, &blockSize, computeError, 0, config.populationSize); 
 
@@ -463,7 +468,7 @@ int main(int argc, char **argv){
             gridSizeTest = (sizeElementsSemanticTest + blockSizeTest - 1) / blockSizeTest;
          
             geometricSemanticMutation<<< gridSizeTest, blockSizeTest >>>(uSemanticTestCases, uSemanticTestRandomTrees,uSemanticTestCasesNew,
-            config.populationSize, nrowTest, sizeElementsSemanticTest, generation, indexRandomTrees, vectorTraces);
+            config.populationSize, nrowTest, sizeElementsSemanticTest, generation, indexRandomTrees, vectorTraces,index);
             cudaErrorCheck("geometricSemanticMutation");
 
             cudaOccupancyMaxPotentialBlockSize(&minGridSize, &blockSizeTest, computeError, 0, config.populationSize); 
@@ -477,10 +482,11 @@ int main(int argc, char **argv){
             cudaDeviceSynchronize();
          
             /*!< this section performs survival by updating the semantic and fitness vectors respectively*/
-            int index = generation-1;
             int tmpIndex = 0;
+            //printf("mejor hijo %f contra el mejor de la generacion previa %f \n", uFitNew[indexBestOffspring] ,uFit[indexBestIndividual]);
             if(uFitNew[indexBestOffspring] > uFit[indexBestIndividual]){
-                //printf("Fue mejor el padre por lo tanto sucede una supervivencia en la generacion %i el indice del peor de los hijos es %i el mejor de los padres %i \n", generation, indexWorstOffspring, indexBestIndividual);
+
+                printf("Fue mejor el padre por lo tanto sucede una supervivencia en la generacion %i el indice del peor de los hijos es %i el mejor de los padres %i \n", generation, indexWorstOffspring, indexBestIndividual);
                 for (int i = 0; i < nrow; ++i){
                     uSemanticTrainCasesNew[indexWorstOffspring*nrow+i] = uSemanticTrainCases[indexBestIndividual*nrow+i];
                 }
@@ -497,13 +503,21 @@ int main(int argc, char **argv){
                     uSemanticTestCasesNew[indexWorstOffspring*nrowTest+j] = uSemanticTestCases[indexBestIndividual*nrowTest+j];
                 }
                 uFitTestNew[indexWorstOffspring] = uFitTest[indexBestIndividual];
-                vectorTraces[(index*config.populationSize)+indexWorstOffspring].firstParent = tmpIndex;
-                vectorTraces[(index*config.populationSize)+indexWorstOffspring].secondParent = indexWorstOffspring;
-                vectorTraces[(index*config.populationSize)+indexWorstOffspring].number=tmpIndex;
+
+                vectorTraces[(index*config.populationSize)+indexWorstOffspring].firstParent = indexBestIndividual;
+                vectorTraces[(index*config.populationSize)+indexWorstOffspring].secondParent = -1;
+                vectorTraces[(index*config.populationSize)+indexWorstOffspring].number = indexBestIndividual;
                 vectorTraces[(index*config.populationSize)+indexWorstOffspring].event = -1;
-                vectorTraces[(index*config.populationSize)+indexWorstOffspring].newIndividual = tmpIndex;
-                vectorTraces[(index*config.populationSize)+indexWorstOffspring].mark=1;
+                vectorTraces[(index*config.populationSize)+indexWorstOffspring].newIndividual = indexWorstOffspring;
+                vectorTraces[(index*config.populationSize)+indexWorstOffspring].mark = 0;
                 vectorTraces[(index*config.populationSize)+indexWorstOffspring].mutStep = 0;
+                // vectorTraces[(index*config.populationSize)+indexWorstOffspring].firstParent = vectorTraces[(index*config.populationSize)+indexBestIndividual].firstParent;
+                // vectorTraces[(index*config.populationSize)+indexWorstOffspring].secondParent = vectorTraces[(index*config.populationSize)+indexBestIndividual].secondParent;
+                // vectorTraces[(index*config.populationSize)+indexWorstOffspring].number = vectorTraces[(index*config.populationSize)+indexBestIndividual].number;
+                // vectorTraces[(index*config.populationSize)+indexWorstOffspring].event = -1;
+                // vectorTraces[(index*config.populationSize)+indexWorstOffspring].newIndividual = vectorTraces[(index*config.populationSize)+indexBestIndividual].newIndividual;
+                // vectorTraces[(index*config.populationSize)+indexWorstOffspring].mark =  vectorTraces[(index*config.populationSize)+indexBestIndividual].mark;
+                // vectorTraces[(index*config.populationSize)+indexWorstOffspring].mutStep = vectorTraces[(index*config.populationSize)+indexBestIndividual].mutStep;
                 
                 tempFitnesTest = uFitTest;
                 uFitTest = uFitTestNew;
@@ -513,14 +527,7 @@ int main(int argc, char **argv){
                 uSemanticTestCasesNew = tempSemanticTest;
                 indexBestIndividual = indexWorstOffspring;
             }else{
-                //printf("Fue mejor el hijo por lo tanto sucede una Mutacion en la generacion %i, el mejor de los padres %i el mejor de los hijos %i \n", generation, indexBestIndividual, indexBestOffspring);
-                vectorTraces[(index*config.populationSize)+indexBestOffspring].firstParent = vectorTraces[(index*config.populationSize)+indexBestOffspring].firstParent;
-                vectorTraces[(index*config.populationSize)+indexBestOffspring].secondParent =  vectorTraces[(index*config.populationSize)+indexBestOffspring].secondParent;
-                vectorTraces[(index*config.populationSize)+indexBestOffspring].number= vectorTraces[(index*config.populationSize)+indexBestOffspring].number;
-                vectorTraces[(index*config.populationSize)+indexBestOffspring].event =  vectorTraces[(index*config.populationSize)+indexBestOffspring].event;
-                vectorTraces[(index*config.populationSize)+indexBestOffspring].newIndividual =  vectorTraces[(index*config.populationSize)+indexBestOffspring].newIndividual;
-                vectorTraces[(index*config.populationSize)+indexBestOffspring].mark= vectorTraces[(index*config.populationSize)+indexBestOffspring].mark=1;
-                vectorTraces[(index*config.populationSize)+indexBestOffspring].mutStep =  vectorTraces[(index*config.populationSize)+indexBestOffspring].mutStep;
+                printf("Fue mejor el hijo por lo tanto sucede una Mutacion en la generacion %i, el mejor de los padres %i el mejor de los hijos %i \n", generation, indexBestIndividual, indexBestOffspring);
                 tempFitnes = uFit;
                 uFit = uFitNew;
                 uFitNew = tempFitnes;
@@ -545,7 +552,7 @@ int main(int argc, char **argv){
             cudaEventSynchronize(stopGsgp);
             cudaEventElapsedTime(&generationTime, startGsgp, stopGsgp);    
         }
-        //markTracesGeneration(vectorTraces, config.populationSize, config.numberGenerations,  indexBestIndividual);
+        markTracesGeneration(vectorTraces, config.populationSize, config.numberGenerations,  indexBestIndividual);
         saveTraceComplete(logPath, vectorTraces, config.numberGenerations, config.populationSize);
         saveTrace(outputNameFiles,logPath, vectorTraces, config.numberGenerations, config.populationSize);
             

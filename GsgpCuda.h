@@ -285,7 +285,7 @@ __global__ void initializeIndexRandomTrees(int sizePopulation, float *indexRando
 * \file     GsgpCuda.h 
 */
 __global__ void geometricSemanticMutation(float *initialPopulationSemantics, float *randomTreesSemantics, float *newSemanticsOffsprings, int sizePopulation,
-  int nrow, int tElements, int generation, float *indexRandomTrees, entry_ *y);
+  int nrow, int tElements, int generation, float *indexRandomTrees, entry_ *y, int index);
 
 /*!
 * \fn       __host__ void saveTrace(entry *structSurvivor, int generation) 

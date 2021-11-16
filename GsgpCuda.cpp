@@ -361,23 +361,23 @@ __global__ void initializeIndexRandomTrees(int sizePopulation, float *indexRando
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cpp
 */
-__global__ void geometricSemanticMutation(float *initialPopulationSemantics, float *randomTreesSemantics, float *newSemanticsOffsprings, int sizePopulation,int nrow, int tElements, int generation, float *indexRandomTrees, entry_ *y){
+__global__ void geometricSemanticMutation(float *initialPopulationSemantics, float *randomTreesSemantics, float *newSemanticsOffsprings, int sizePopulation,int nrow, int tElements, int generation, float *indexRandomTrees, entry_ *y, int index){
   const unsigned int tid = threadIdx.x+blockIdx.x*blockDim.x;
   int nSeed = (tid/nrow);
   int firstTree = indexRandomTrees[nSeed], secondTree = indexRandomTrees[sizePopulation + nSeed];
   curandState_t state;
+  
   //curand_init((tid/nrow)*generation, 0, 0, &state);
   //curand_init(generation, 0, 0, &state);
   curand_init(firstTree*generation, 0, 0, &state);
-  int index = generation-1;
   float ms = curand_uniform(&state);
-  y[(index*sizePopulation)+tid%sizePopulation].firstParent=firstTree;
-  y[(index*sizePopulation)+tid%sizePopulation].secondParent=secondTree;
-  y[(index*sizePopulation)+tid%sizePopulation].number=tid%sizePopulation;
-  y[(index*sizePopulation)+tid%sizePopulation].event=1;
-  y[(index*sizePopulation)+tid%sizePopulation].newIndividual=tid%sizePopulation;
-  y[(index*sizePopulation)+tid%sizePopulation].mark=0;
-  y[(index*sizePopulation)+tid%sizePopulation].mutStep=ms;
+  y[(index*sizePopulation)+(tid%sizePopulation)].firstParent=firstTree;
+  y[(index*sizePopulation)+(tid%sizePopulation)].secondParent=secondTree;
+  y[(index*sizePopulation)+(tid%sizePopulation)].number=tid%sizePopulation;
+  y[(index*sizePopulation)+(tid%sizePopulation)].event=1;
+  y[(index*sizePopulation)+(tid%sizePopulation)].newIndividual=tid%sizePopulation;
+  y[(index*sizePopulation)+(tid%sizePopulation)].mark=0;
+  y[(index*sizePopulation)+(tid%sizePopulation)].mutStep=ms;
   newSemanticsOffsprings[tid] = initialPopulationSemantics[tid]+(ms)*((1.0/(1+expf(-(randomTreesSemantics[firstTree*nrow+tid%nrow]))))-(1.0/(1+expf(-(randomTreesSemantics[secondTree*nrow+tid%nrow])))));
 }
 
@@ -623,21 +623,23 @@ static void list_dir(std::string path, std::string nameFile, int useMultipleFile
 */
 __host__ void markTracesGeneration(entry *vectorTraces, int populationSize, int generationSize ,int bestIndividual){
   vectorTraces[(generationSize-1)*populationSize+bestIndividual].mark=1;
+  printf("Rt1 %d Rt2 %d Padre %d\n",vectorTraces[(generationSize-1)*populationSize+bestIndividual].firstParent,vectorTraces[(generationSize-1)*populationSize+bestIndividual].secondParent,vectorTraces[(generationSize-1)*populationSize+bestIndividual].number);
   int index,index2;
   int a = 0;
   for (int i = generationSize-1; i >0; i--){
-    a = i-1;
     for (int j = 0; j < populationSize; j++){
       index =0,index2=0;
-      if(vectorTraces[i*populationSize+j].mark==1 && vectorTraces[i*populationSize+j].event==1 ){ 
-        index = vectorTraces[i*populationSize+j].number;
-        vectorTraces[a*populationSize+index].mark=1;
-      }
-      if ( vectorTraces[i*populationSize+j].event==-1 && vectorTraces[i*populationSize+j].mark==1){
-        index2 = vectorTraces[i*populationSize+j].secondParent;
-        index = vectorTraces[i*populationSize+index2].firstParent;
-        printf("generacion %d indPop %d  firsParent %d \n",i,j,index);
-        vectorTraces[a*populationSize+index].mark=1;
+      a = i-1;
+      if(vectorTraces[i*populationSize+j].mark==1){ 
+          index = vectorTraces[i*populationSize+j].number;
+          vectorTraces[a*populationSize+index].mark=1;
+        for(int k = 0; k < populationSize; k++){
+          if(vectorTraces[a*populationSize+k].event==-1 ){
+            vectorTraces[a*populationSize+index].mark=0;
+            index2 = vectorTraces[i*populationSize+k].number;
+            vectorTraces[a*populationSize+index2].mark=1;
+          }
+        }
       }
     }
   }
@@ -868,6 +870,7 @@ __host__ void evaluate_data(std::string path, int generations, float *initialPop
   strcat(tracePath,nameFile.c_str());
   float valor =0, v=0;
   for (size_t i = 0; i < nrow; i++){
+    valor =0, v=0;
     fstream in(tracePath,ios::in);
     if(!in.is_open()) {
       cout<<endl<<"ERROR: FILE MODEL NOT FOUND." << endl;
@@ -891,7 +894,7 @@ __host__ void evaluate_data(std::string path, int generations, float *initialPop
         in >> str;
         float index6 = atof(str); 
         if(index4==1){
-          valor = (initialPopulation[index3*nrow+i]+((index6)*((1.0/(1+exp(randomTrees[index1*nrow+i])))-(1.0/(1+exp(randomTrees[index2*nrow+i]))))));
+          valor = (initialPopulation[index3*nrow+i]+((index6)*((1.0/(1+exp(-randomTrees[index1*nrow+i])))-(1.0/(1+exp(-randomTrees[index2*nrow+i]))))));
         }
         if(index4==-1){
           valor = initialPopulation[index1*nrow+i];
@@ -916,7 +919,7 @@ __host__ void evaluate_data(std::string path, int generations, float *initialPop
 				  double index6 = atof(str); 
          // printf("Indices de trace index1 %i index2 %i index3 %i index4 %i index5 %i index6 %f \n", index1,index2,index3,index4,index5,index6);
           if(index4==1){
-            v = ((valor+(index6)*((1.0/(1+exp(randomTrees[index1*nrow+i])))-(1.0/(1+exp(randomTrees[index2*nrow+i])))))); 
+            v = ((valor+(index6)*((1.0/(1+exp(-randomTrees[index1*nrow+i])))-(1.0/(1+exp(-randomTrees[index2*nrow+i])))))); 
           }
           if(index4==-1){
             v=valor;
