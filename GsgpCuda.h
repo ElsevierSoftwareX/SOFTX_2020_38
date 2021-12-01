@@ -37,6 +37,7 @@
 #include <errno.h>
 #include <time.h>
 #include <stack>
+#include <limits>
 #include <cuda_runtime.h>
 #include <cuda.h>
 #include <curand.h>
@@ -70,26 +71,6 @@ const std::string currentDateTime();
 */
 void cudaErrorCheck(const char* functionName);
 
-/*!
-* \brief    Structure that represents the tuple used to store information on the individuals involved in each generation and is used for the reconstruction of the best individual.
-* \param    int initializePopulationParent: variable containing the index of the parent (mutation)
-* \param    int firstParent: variable containing the index of the first random tree (mutation)
-* \param    int secondParent: variable containing the index of the second random tree (mutation)
-* \param    int newIndividual: variable containing the index of newly created individual
-* \param    float mutStep: variable containing the mutation step of semantic mutation
-* \date     25/01/2020
-* \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
-* \file     GsgpCuda.h
-*/
-typedef struct entry_{
-   int event;
-   int firstParent;   /*!< variable containing the index of the first random tree for the  mutation operation */
-   int secondParent;  /*!< variable containing the index of the second random tree for the  mutation operation */
-   int number;        /*!< variable containing the index of the parent (mutation) or the index of the random tree (crossover)*/
-   int mark;          /*!< variable used to reconstruct the optimal solution. 1 means that a particular tree is involved in the construction of the optimal solution, 0 means that the particular tree can be ignored.*/
-   int newIndividual; /*!< variable containing the index of the newly created individual */
-   float mutStep;     /*!< variable containing the mutation step of the semantic mutation */
-}entry;
 
 /*!
 * \brief    Structure used to store the parameters of the configuration.ini file and these are used to initialize the algorithm parameters  
@@ -116,13 +97,91 @@ typedef struct cfg_{
 
 /// struct variable containing the values of the parameters specified in the configuration.ini file
 cfg config;
-
 /// variable containing the numbers of rows (instances) of the training dataset
 int nrow;
 /// variable containing the numbers of rows (instances) of the test dataset
 int nrowTest;
 /// variable containing the numbers of columns (excluding the target) of the training dataset
 int nvar;
+
+/*!
+* \brief    Structure that represents the tuple used to store information on the individuals involved in each generation and is used for the reconstruction of the best individual.
+* \param    int initializePopulationParent: variable containing the index of the parent (mutation)
+* \param    int firstParent: variable containing the index of the first random tree (mutation)
+* \param    int secondParent: variable containing the index of the second random tree (mutation)
+* \param    int newIndividual: variable containing the index of newly created individual
+* \param    float mutStep: variable containing the mutation step of semantic mutation
+* \date     25/01/2020
+* \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
+* \file     GsgpCuda.h
+*/
+ typedef struct entry_{
+   int firstParent;   /*!< variable containing the index of the first random tree for the  mutation operation */
+   int secondParent;  /*!< variable containing the index of the second random tree for the  mutation operation */
+   int number;        /*!< variable containing the index of the parent (mutation) or the index of the random tree (crossover)*/
+   int event;
+   int mark;          /*!< variable used to reconstruct the optimal solution. 1 means that a particular tree is involved in the construction of the optimal solution, 0 means that the particular tree can be ignored.*/
+   int newIndividual; /*!< variable containing the index of the newly created individual */
+   float mutStep;     /*!< variable containing the mutation step of the semantic mutation */
+}entry;
+
+int individualLength = 0;
+
+int gridSize,minGridSize,blockSize; /*!< Variables that store the execution configuration for a kernel in the GPU*/
+
+int sizeMemIndividuals; /*!< Variable that stores the size of the memory for the individuals in the GPU*/
+
+int sizeMemPopulation; /*!< Variable that stores the size of the memory for the population in the GPU*/
+
+int twoSizeMemPopulation; /*!< Variable that stores twice the size in bytes of an initial population to store random numbers*/
+
+long int twoSizePopulation; /*!< Variable storing twice the initial population of individuals to generate random positions*/
+
+long int sizeMemSemanticTrain; /*!< Variable that stores the size in bytes of semantics for the entire population with training data*/
+
+long int sizeMemSemanticTest; /*!< Variable that stores the size in bytes of semantics for the entire population with test data*/
+
+long int sizeMemDataTrain; /*!< Variable that stores the size in bytes the size of the training data*/
+
+long int sizeMemDataTest = sizeof(float)*(nrowTest*nvar); /*!< Variable that stores the size in bytes the size of the test data*/
+
+long int sizeElementsSemanticTest = (config.populationSize*nrowTest); /*!< Variable that stores test data elements*/
+
+int gridSizeTest,minGridSizeTest,blockSizeTest; /*!< Variables that store the execution configuration for a kernel in the GPU*/
+
+long int sizeElementsSemanticTrain ; /*!< Variable that stores training data elements*/
+
+long int vectorTracesMem ; /*!< Variable that stores the size in bytes of the structure to store the survival record*/
+
+float *dInitialPopulation,*dRandomTrees,*hInitialPopulation,*hRandomTrees;  /*!< This block contains the vectors of pointers to store the population and random trees and space allocation in the GPU*/
+
+entry  *vectorTraces; /*!< This block contains the vectors of pointers to store the structure to keep track of mutation and survival and space allocation in the GPU*/
+
+float *uDataTrain, *uDataTrainTarget, *uDataTest, *uDataTestTarget, *uFitTest ;  /*!< this block contains the pointer of vectors for the input data and target values ​​and assignment in the GPU*/
+
+float *uFit; /*!< pointers of vectors of training and test fitness values at generation g and assignment in the GPU*/
+
+float *uSemanticTrainCases, *uSemanticRandomTrees, *uSemanticTestRandomTrees, *uSemanticTestCases; /*!< pointer of vectors that contain the semantics of an individual in the population, calculated with the training set and test in generation g and its allocation in GPU*/
+
+float *uStackInd; /*!< auxiliary pointer vectors for the interpreter and calculate the semantics for the populations and assignment in the GPU*/
+
+int   *uPushGenes;
+
+int result,incx1=1,indexBestIndividual; /*!< this section makes use of the isamin de cublas function to determine the position of the best individual*/
+
+float *indexRandomTrees; /*!< vector of pointers to save random positions of random trees and allocation in GPU*/   
+
+float *mutationStep; /*!< vector of pointers to save the mutation step of the semantic mutation and allocation in GPU*/
+
+/*!< this section makes use of the isamin de cublas function to determine the position of the best individual of the new population*/
+int resultBestOffspring,incxBestOffspring=1,indexBestOffspring;
+
+/*!< this section makes use of the isamin de cublas function to determine the position of the worst individual of the new population*/
+int resultWorst,incxWorst=1,indexWorstOffspring;
+
+float *tempSemantic,*tempFitnes,*tempSemanticTest,*tempFitnesTest; /*!< temporal Variables to perform the movement of pointers in survival*/
+
+float *uSemanticTrainCasesNew, *uFitNew, *uSemanticTestCasesNew, *uFitTestNew; /*!< vectors that contain the semantics of an individual in the population, calculated in the training and test set in the g + 1 generation and its allocation in GPU*/
 
 /*!
 * \fn       __global__ void init(unsigned int seed, curandState_t* states)
@@ -285,7 +344,7 @@ __global__ void initializeIndexRandomTrees(int sizePopulation, float *indexRando
 * \file     GsgpCuda.h 
 */
 __global__ void geometricSemanticMutation(float *initialPopulationSemantics, float *randomTreesSemantics, float *newSemanticsOffsprings, int sizePopulation,
-  int nrow, int tElements, int generation, float *indexRandomTrees, entry_ *y, int index);
+  int nrow, int tElements, int generation, float *indexRandomTrees, entry_ *y, int index, float *mutationStep);
 
 /*!
 * \fn       __host__ void saveTrace(entry *structSurvivor, int generation) 
@@ -346,30 +405,26 @@ __host__ void readConfigFile(cfg *config);
 void countInputFile(std::string fileName, int &rows, int &cols);
 
 /*!
-* \fn       void intreSemanticCPU(float *initiPop, float *OutSemantic, float *data, int nrow, int depth, int numIndi)
-* \brief    This function interprets the generated individuals in CPU to obtain their semantics.
-* \param    float *initiPop: This vector pointers to store the individuals of the initial population.
-* \param    flot  *OutSemantic: vector pointers to store the semantics of each individual in the population.
-* \param    float *data: This pointer vector containing training or test data.
-* \param    int *nrow: This variable contains the number of fitness cases.
-* \param    int depth: This variable thar stores maximum depth for individuals
-* \param    int numIndi: This variable contains the number of individuals that exist in the initial population.
+* \fn       __host__ void saveIndividuals(std::string path, float *Individuals, std::string namePopulation ,int maxDepth, int sizePopulation);
+* \brief   This function stores the initial population and the auxiliary population of random trees.
+* \param    std::string path: This vector pointers to store the individuals of the initial population.
+* \param    float *Individuals: vector pointers to store the semantics of each individual in the population.
+* \param    std::string namePopulation: This variable stores the name of the population.
+* \param    int maxDepth: This variable thar stores maximum depth for individuals
+* \param    int sizePopulation: This variable contains the number of individuals that exist in the population.
 * \return   void
 * \date     05/12/2020
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
-* \file     testSemantic.cu
+* \file     GsgpCuda.cpp
 */
 __host__ void saveIndividuals(std::string path, float *Individuals, std::string namePopulation ,int maxDepth, int sizePopulation);
 
 /*!
-* \fn       void intreSemanticCPU(float *initiPop, float *OutSemantic, float *data, int nrow, int depth, int numIndi)
-* \brief    This function interprets the generated individuals in CPU to obtain their semantics.
-* \param    float *initiPop: This vector pointers to store the individuals of the initial population.
-* \param    flot  *OutSemantic: vector pointers to store the semantics of each individual in the population.
-* \param    float *data: This pointer vector containing training or test data.
-* \param    int *nrow: This variable contains the number of fitness cases.
-* \param    int depth: This variable thar stores maximum depth for individuals
-* \param    int numIndi: This variable contains the number of individuals that exist in the initial population.
+* \fn       __host__ void test(float *individuals, int sizeMaxDepth, int sizePopulation);
+* \brief    Function that tests the individuals of the population.
+* \param    float *individuals: This vector pointers to store the individuals of the population.
+* \param    int sizeMaxDepth: This variable stores the maximum depth of the individuals.
+* \param    int sizePopulation: This variable contains the number of individuals that exist in the population.
 * \return   void
 * \date     05/12/2020
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
@@ -380,7 +435,7 @@ __host__ void test(float *individuals, int sizeMaxDepth, int sizePopulation);
 /*!
 * \fn       bool IsPathExist(const std::string &s)
 * \brief    function to check if exist a directory path.
-* \param    string &s: name of path
+* \param    string &s: name of path to check if exist.
 * \return   void
 * \date     27/02/2021
 * \author   Luis Armando Cardenas Florido, José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
@@ -442,7 +497,6 @@ __host__ void markTracesGeneration(entry *vectorTraces, int populationSize, int 
 */
 __host__ void saveTraceComplete(std::string path, entry *structSurvivor, int generation, int populationSize);
 
-
 /*!
 * \fn       __host__ void saveTrace(entry *structSurvivor, int generation) 
 * \brief    Function that stores the information related to the evolutionary cycle and stores the indices of the individuals that were used in each generation to create new offspring,
@@ -491,22 +545,21 @@ __host__ void readInpuTestData( char *test_file, float *dataTest, float *dataTes
 __host__ void readPopulation( float *initialPopulation, float *randomTrees, int sizePopulation, int depth, std::string log, std::string name, std::string nameR);
 
 /*!
-* \fn       __host__ void evaluate_unseen_new_data(std::string path, int generations, const int sizeMaxDepthIndividual, float *initialPopulation, float *randomTrees, std::ofstream& OUT, std::string log, float *dataTest ,int nrow, int numIndi, int nvarTest)__host__ void evaluate_unseen_new_data(std::string path, int generations, const int sizeMaxDepthIndividual, float *initialPopulation, float *randomTrees, std::ofstream& OUT, std::string log, float *dataTest ,int nrow, int numIndi, int nvarTest)
+* \fn       __host__ void evaluate_data(std::string path, int generations, float *initialPopulation, float *randomTrees, std::ofstream& OUT, std::string log, int nrow, int numIndi, int nvarTest);
 * \brief    This function that evaluates the best model stored in trace.txt over newly provided unseen data
 * \param    std::string path: trace file name
 * \param    int generations: number of generations.
-* \param    const int sizeMaxDepthIndividual: ariable that stores maximum depth for individuals.
 * \param    float *initialPopulation: vector of pointers storing the initial population
 * \param    float *randomTrees: vector of pointers storing random trees
 * \param    std::ofstream& OUT: file where the result of the evaluation of the best model with each fitness will be written.
 * \param    std::string log: path where the algorithm output files are stored.
-* \param    float *dataTest : vector pointers to store test data
+* \param    int sizePopulation: number of individuals in the population
+* \param    const int depth: ariable that stores maximum depth for individuals.
 * \param    int nrow: This variable contains the number of fitness cases.
-* \param    int numIndi: number of individuals in the population
 * \param    int nvarTest:This variable contains the number of features of problem.
 * \return   void
 * \date     05/12/2020
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cpp
 */
-__host__ void evaluate_unseen_new_data(std::string path, int generations, const int sizeMaxDepthIndividual, float *initialPopulation, float *randomTrees, std::ofstream& OUT, std::string log, float *dataTest, int nrow, int numIndi, int nvarTest);
+__host__ void evaluate_data(std::string path, int generations, float *initialPopulation, float *randomTrees, std::ofstream& OUT, std::string log, int nrow, int nvarTest);

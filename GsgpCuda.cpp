@@ -310,7 +310,7 @@ __global__ void computeError(float *semantics, float *targetValues, float *fit, 
   for(int i=0; i<nrow; i++){
     temp += (semantics[tid*nrow+i]-targetValues[i])*(semantics[tid*nrow+i]-targetValues[i]);  
   }
-  temp = sqrtf(temp/nrow);
+  temp = sqrt(temp/nrow);
   fit[tid] = temp;
 }
 
@@ -324,7 +324,7 @@ __global__ void computeError(float *semantics, float *targetValues, float *fit, 
 * \file     GsgpCuda.cpp  
 */
 __device__ float sigmoid(float n){
-  return 1.0/(1+expf(-1*(n)));
+  return 1.0/(1+exp(-1*(n)));
 }
 
 /*!
@@ -341,6 +341,22 @@ __device__ float sigmoid(float n){
 __global__ void initializeIndexRandomTrees(int sizePopulation, float *indexRandomTrees, curandState_t* states){
   const unsigned int tid = threadIdx.x+blockIdx.x*blockDim.x;
   indexRandomTrees[tid] = (curand(&states[tid]) % sizePopulation);
+}
+
+/*!
+* \fn       __global__ void initializeIndexRandomTrees(int sizePopulation, float *indexRandomTrees, curandState_t* states)
+* \brief    this kernel generates random indexes for random trees that are used in the mutation operator to select two random trees.
+* \param    int sizePopulation: this variable contains the number of individuals that the population has
+* \param    float *mutationStep: this pointer stores the indexes randomly for mutation
+* \param    curandState_t* states: random status pointer to generate random numbers for each thread
+* \return   void
+* \date     01/25/2020
+* \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
+* \file     GsgpCuda.cpp  
+*/              
+__global__ void initializeMutationStep(float *mutationStep, curandState_t* state){
+  const unsigned int tid = threadIdx.x+blockIdx.x*blockDim.x;
+  mutationStep[tid] = (curand_uniform(&state[tid]));
 }
 
 /*!
@@ -361,24 +377,23 @@ __global__ void initializeIndexRandomTrees(int sizePopulation, float *indexRando
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     GsgpCuda.cpp
 */
-__global__ void geometricSemanticMutation(float *initialPopulationSemantics, float *randomTreesSemantics, float *newSemanticsOffsprings, int sizePopulation,int nrow, int tElements, int generation, float *indexRandomTrees, entry_ *y, int index){
+__global__ void geometricSemanticMutation(float *initialPopulationSemantics, float *randomTreesSemantics, float *newSemanticsOffsprings, int sizePopulation,int nrow, int tElements, int generation, float *indexRandomTrees, entry_ *y, int index, float *mutationStep){
   const unsigned int tid = threadIdx.x+blockIdx.x*blockDim.x;
   int nSeed = (tid/nrow);
   int firstTree = indexRandomTrees[nSeed], secondTree = indexRandomTrees[sizePopulation + nSeed];
-  curandState_t state;
-  
-  //curand_init((tid/nrow)*generation, 0, 0, &state);
-  //curand_init(generation, 0, 0, &state);
-  curand_init(firstTree*generation, 0, 0, &state);
-  float ms = curand_uniform(&state);
-  y[(index*sizePopulation)+(tid%sizePopulation)].firstParent=firstTree;
-  y[(index*sizePopulation)+(tid%sizePopulation)].secondParent=secondTree;
-  y[(index*sizePopulation)+(tid%sizePopulation)].number=tid%sizePopulation;
-  y[(index*sizePopulation)+(tid%sizePopulation)].event=1;
-  y[(index*sizePopulation)+(tid%sizePopulation)].newIndividual=tid%sizePopulation;
-  y[(index*sizePopulation)+(tid%sizePopulation)].mark=0;
-  y[(index*sizePopulation)+(tid%sizePopulation)].mutStep=ms;
-  newSemanticsOffsprings[tid] = initialPopulationSemantics[tid]+(ms)*((1.0/(1+expf(-(randomTreesSemantics[firstTree*nrow+tid%nrow]))))-(1.0/(1+expf(-(randomTreesSemantics[secondTree*nrow+tid%nrow])))));
+  if (tid%nrow==0){
+      y[(index*sizePopulation)+tid/nrow].firstParent=firstTree;
+      y[(index*sizePopulation)+tid/nrow].secondParent=secondTree;
+      y[(index*sizePopulation)+tid/nrow].number=tid/nrow;
+      y[(index*sizePopulation)+tid/nrow].event=1;
+      y[(index*sizePopulation)+tid/nrow].newIndividual=tid/nrow;
+      y[(index*sizePopulation)+tid/nrow].mark=0;
+      y[(index*sizePopulation)+tid/nrow].mutStep=mutationStep[tid/nrow];
+    }
+  double s1 = (1.0/(1+exp(-(randomTreesSemantics[firstTree*nrow+tid%nrow]))));
+  double s2 = (1.0/(1+exp(-(randomTreesSemantics[secondTree*nrow+tid%nrow]))));
+  //newSemanticsOffsprings[tid] = initialPopulationSemantics[tid]+(mutationStep[tid/nrow])*((1.0/(1+exp(-(randomTreesSemantics[firstTree*nrow+tid%nrow]))))-(1.0/(1+exp(-(randomTreesSemantics[secondTree*nrow+tid%nrow])))));
+  newSemanticsOffsprings[tid] = initialPopulationSemantics[tid]+(mutationStep[tid/nrow])*(s1-s2);
 }
 
 /*!
@@ -443,6 +458,48 @@ __host__ void readInpuData(char *trainFile, char *testFile, float *dataTrain, fl
 }
 
 /*!
+* \fn        __host__ void readInpuData(char *train_file, char *test_file, float *dataTrain, float *dataTest, float *dataTrainTarget,float *dataTestTarget, int nrow, int nvar, int nrowTest, int nvarTest)
+* \brief    This function that reads data from training and test files, also reads target values to store them in pointer vectors.
+* \param    char *train_file: name of the file with training instances 
+* \param    char *test_file: name of the file with test instances
+* \param    float *dataTrain: vector pointers to store training data
+* \param    float *dataTest: vector pointers to store test data
+* \param    float *dataTrainTarget: vector pointers to store training target data
+* \param    float *dataTestTarget: vector pointers to store test target data
+* \param    int nrow: variable containing the number of rows (instances) of the training dataset
+* \param    int nvar: variable containing the number of columns (excluding the target) of the training dataset
+* \param    int nrowTest: variable containing the number of rows (instances) of the test dataset
+* \param    int nvarTest: variable containing the number of columns (excluding the target) of the test dataset
+* \return   void: 
+* \date     01/25/2020
+* \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
+* \file     GsgpCuda.cpp 
+*/
+__host__ void readInpuDataTrain(char *trainFile, float *dataTrain, float *dataTrainTarget, int nrow, int nvar){
+
+  std::fstream in(trainFile,ios::in);
+  if (!in.is_open()){
+    cout<<endl<<"ERROR: TRAINING FILE NOT FOUND." << endl;
+    exit(-1);
+  }
+  char Str[1024];
+  int max = nvar;
+  for(int i=0;i<nrow;i++){
+    for (int j=0; j<nvar+1; j++){
+      if (j==max){
+        in>>Str;
+        dataTrainTarget[i]=atof(Str);
+      }
+      if (j<nvar){
+        in>>Str;
+        dataTrain[i*nvar+j] = atof(Str);
+      }
+    }
+  }
+  in.close();
+}
+
+/*!
 * \fn        __host__ void countInputFile(std::string fileName, int &rows, int &cols)
 * \brief     function that reads rows and colums of files to train and test
 * \param     std::string fileName: This variable store the name of file data train or test
@@ -454,7 +511,6 @@ __host__ void readInpuData(char *trainFile, char *testFile, float *dataTrain, fl
 * \file      GsgpCuda.cpp
 */
 void countInputFile(std::string fileName, int &rows, int &cols){
-  
   std::ifstream f(fileName);
   string line;
   std::getline(f, line);
@@ -623,24 +679,20 @@ static void list_dir(std::string path, std::string nameFile, int useMultipleFile
 */
 __host__ void markTracesGeneration(entry *vectorTraces, int populationSize, int generationSize ,int bestIndividual){
   vectorTraces[(generationSize-1)*populationSize+bestIndividual].mark=1;
-  printf("Rt1 %d Rt2 %d Padre %d\n",vectorTraces[(generationSize-1)*populationSize+bestIndividual].firstParent,vectorTraces[(generationSize-1)*populationSize+bestIndividual].secondParent,vectorTraces[(generationSize-1)*populationSize+bestIndividual].number);
   int index,index2;
   int a = 0;
   for (int i = generationSize-1; i >0; i--){
     for (int j = 0; j < populationSize; j++){
       index =0,index2=0;
       a = i-1;
-      if(vectorTraces[i*populationSize+j].mark==1){ 
+      if(vectorTraces[i*populationSize+j].mark==1 && vectorTraces[i*populationSize+j].event==1){ 
           index = vectorTraces[i*populationSize+j].number;
           vectorTraces[a*populationSize+index].mark=1;
-        for(int k = 0; k < populationSize; k++){
-          if(vectorTraces[a*populationSize+k].event==-1 ){
-            vectorTraces[a*populationSize+index].mark=0;
-            index2 = vectorTraces[i*populationSize+k].number;
-            vectorTraces[a*populationSize+index2].mark=1;
-          }
         }
-      }
+      if(vectorTraces[i*populationSize+j].mark==1 && vectorTraces[i*populationSize+j].event==-1){
+          index2 = vectorTraces[i*populationSize+j].number;
+          vectorTraces[a*populationSize+index2].mark=1;
+        }
     }
   }
 }
@@ -659,16 +711,18 @@ __host__ void markTracesGeneration(entry *vectorTraces, int populationSize, int 
 * \file     GsgpCuda.cpp  
 */
 __host__ void saveTrace(std::string name, std::string path, entry *structSurvivor, int generation, int populationSize){
+  cudaDeviceSynchronize();
   std::string tmpT = name;
   std::string tmpExt = ".csv";
   tmpT = path + tmpT  +tmpExt;  
   std::ofstream trace(tmpT,ios::out);
   int r=0;
+  
   for(int i=0; i<generation; i++){
     r=generation-1;
     for (int j = 0; j < populationSize; j++){
       if (structSurvivor[i*populationSize+j].mark==1){
-        trace << structSurvivor[i*populationSize+j].firstParent<<"\t" << structSurvivor[i*populationSize+j].secondParent << "\t" << structSurvivor[i*populationSize+j].number << "\t" << structSurvivor[i*populationSize+j].event <<"\t"<<  structSurvivor[i*populationSize+j].newIndividual << "\t" <<structSurvivor[i*populationSize+j].mutStep<<endl;
+        trace << structSurvivor[i*populationSize+j].firstParent<<"\t"<<structSurvivor[i*populationSize+j].secondParent<<"\t"<<structSurvivor[i*populationSize+j].number<<"\t"<<structSurvivor[i*populationSize+j].event<<"\t"<<structSurvivor[i*populationSize+j].newIndividual<<"\t"<<structSurvivor[i*populationSize+j].mutStep<<endl;
       }
     }
     if(i<r)
@@ -692,7 +746,7 @@ __host__ void saveTrace(std::string name, std::string path, entry *structSurvivo
 * \file     GsgpCuda.cpp  
 */
 __host__ void saveTraceComplete(std::string path, entry *structSurvivor, int generation, int populationSize){
-
+  cudaDeviceSynchronize();
   std::string tmpT  = "traceCompleteIndividuals";
   std::string tmpExt = ".csv";
   std::string tmpTime = currentDateTime();
@@ -700,7 +754,6 @@ __host__ void saveTraceComplete(std::string path, entry *structSurvivor, int gen
   std::ofstream trace(tmpT,ios::out);
   for(int i=0; i<generation; i++){
     for (int j = 0; j < populationSize; j++){
-      //trace << structSurvivor[i*populationSize+j].event<<"\t" <<structSurvivor[i*populationSize+j].firstParent<<"\t" << structSurvivor[i*populationSize+j].secondParent << "\t" << structSurvivor[i*populationSize+j].number  <<"\t"<<  structSurvivor[i*populationSize+j].newIndividual << "\t" <<structSurvivor[i*populationSize+j].mutStep<<endl;
       trace << structSurvivor[i*populationSize+j].firstParent<<"\t" << structSurvivor[i*populationSize+j].secondParent << "\t" << structSurvivor[i*populationSize+j].number << "\t" << structSurvivor[i*populationSize+j].event <<"\t"<< structSurvivor[i*populationSize+j].mark <<"\t"<<  structSurvivor[i*populationSize+j].newIndividual << "\t" <<structSurvivor[i*populationSize+j].mutStep<<endl;
     }
     if(i<generation-1)
@@ -728,7 +781,6 @@ __host__ void saveIndividuals(std::string path, float *hInitialPopulation, std::
   std::string tmpExt = ".csv";
   namePopulation = path + namePopulation + tmpExt;       
   std::ofstream outIndividuals(namePopulation,ios::out);
-  
   for (int i=0; i< (populationSize); i++){
       for (int j=0; j<sizeMaxDepthIndividual; j++){
         outIndividuals<< hInitialPopulation[i*sizeMaxDepthIndividual+j] << " ";      
@@ -860,7 +912,7 @@ __host__ void readPopulation( float *initialPopulation, float *randomTrees, int 
 * \author   José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 * \file     testSemantic.cu
 */
-__host__ void evaluate_data(std::string path, int generations, float *initialPopulation, float *randomTrees, std::ofstream& OUT, std::string log, int nrow, int numIndi, int nvarTest, float *salidas){
+__host__ void evaluate_data(std::string path, int generations, float *initialPopulation, float *randomTrees, std::ofstream& OUT, std::string log, int nrow, int nvarTest){
   std::vector<string>filesRa = vector<string>();
   list_dir(log,path,1,filesRa);
   int tama = filesRa.size();
@@ -868,9 +920,13 @@ __host__ void evaluate_data(std::string path, int generations, float *initialPop
   char tracePath[50] = "";
   strcat(tracePath,log.c_str());
   strcat(tracePath,nameFile.c_str());
-  float valor =0, v=0;
-  for (size_t i = 0; i < nrow; i++){
-    valor =0, v=0;
+  vector <double> eval_;
+  vector <double> eval_new;
+  int best=0;
+  for (int i = 0; i < nrow; i++){
+    for(int j=0; j<config.populationSize; j++){
+      eval_.push_back(-1);
+    }
     fstream in(tracePath,ios::in);
     if(!in.is_open()) {
       cout<<endl<<"ERROR: FILE MODEL NOT FOUND." << endl;
@@ -890,17 +946,22 @@ __host__ void evaluate_data(std::string path, int generations, float *initialPop
         in >> str;
         int index4 = atoi(str); 
         in >> str;
-        int index5 = atof(str);
+        int index5 = atoi(str);
         in >> str;
-        float index6 = atof(str); 
+        double index6 = atof(str); 
         if(index4==1){
-          valor = (initialPopulation[index3*nrow+i]+((index6)*((1.0/(1+exp(-randomTrees[index1*nrow+i])))-(1.0/(1+exp(-randomTrees[index2*nrow+i]))))));
+          eval_[index5]= initialPopulation[index3*nrow+i]+(index6)*((1.0/(1+exp(-(randomTrees[index1*nrow+i]))))-(1.0/(1+exp(-(randomTrees[index2*nrow+i])))));
+          best=index5;
         }
         if(index4==-1){
-          valor = initialPopulation[index1*nrow+i];
+          eval_[index3] = initialPopulation[index3*nrow+i];
+          best=index3;
         }
       }
       while(!in.eof()){
+        for(int l=0; l<config.populationSize; l++){
+            eval_new.push_back(-1);
+          }
         while(true){
           in >> str;
           if(strcmp(str,"***")==0){
@@ -917,17 +978,44 @@ __host__ void evaluate_data(std::string path, int generations, float *initialPop
           int index5 = atoi(str); 
 				  in >> str;
 				  double index6 = atof(str); 
-         // printf("Indices de trace index1 %i index2 %i index3 %i index4 %i index5 %i index6 %f \n", index1,index2,index3,index4,index5,index6);
           if(index4==1){
-            v = ((valor+(index6)*((1.0/(1+exp(-randomTrees[index1*nrow+i])))-(1.0/(1+exp(-randomTrees[index2*nrow+i])))))); 
+            eval_new[index5] = eval_[best]+(index6)*((1.0/(1+exp(-(randomTrees[index1*nrow+i]))))-(1.0/(1+exp(-(randomTrees[index2*nrow+i])))));
+            best=index5;
           }
           if(index4==-1){
-            v=valor;
+            eval_new[index3] = eval_[best];
+					  best=index3;
           }
         }
-        valor=v;
+        eval_.clear();
+        eval_.assign(eval_new.begin(),eval_new.end());
+        eval_new.clear();        
       }
     }
-    OUT<<valor<<endl;
+    OUT<<eval_[best]<<endl;
   }
+}
+
+void validacion(std::string name, float *targer, int nrow){
+    
+    std::fstream in(name.c_str(),ios::in);
+    char Str[1024];
+    float RMSE=0;
+    double t=0;
+    float tmp[nrow];
+    if (!in.is_open())
+    {
+      cout<<endl<<"ERROR: TRAINING FILE NOT FOUND." << endl;
+      exit(-1);
+    }
+
+    for(int i=0;i<nrow;i++){
+        in>>Str;
+        tmp[i]=atof(Str);
+        RMSE += (tmp[i]-targer[i])*(tmp[i]-targer[i]);
+        //printf("Error %f diferencia %f semantica %f - targer %f \n", RMSE, (tmp[i]-targer[i])*(tmp[i]-targer[i]) ,tmp[i], targer[i]);
+    }
+    double p = RMSE/nrow;
+    t = sqrt(p);
+    printf("error %f nrows %i \n", t, nrow);
 }
