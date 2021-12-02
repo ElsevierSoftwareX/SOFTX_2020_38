@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['logpath_104',['logPath',['../structcfg__.html#a7eaaeb784b7b8455ac58cadcc244efd8',1,'cfg_']]]
+  ['event_187',['event',['../structentry__.html#a58749b1db41fda8666198fc10fafd8b5',1,'entry_']]]
 ];

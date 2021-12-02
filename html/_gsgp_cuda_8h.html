@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>GsgpCuda: GsgpCuda.h File Reference</title>
+<title>Gsgp-CUDA: GsgpCuda.h File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,10 +25,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">GsgpCuda
-   &#160;<span id="projectnumber">1.0</span>
+   <div id="projectname">Gsgp-CUDA
+   &#160;<span id="projectnumber">2.0</span>
    </div>
-   <div id="projectbrief">This  is a C/C++/CUDA implementation of a geometric semantic genetic programming algorithm.</div>
+   <div id="projectbrief">This is a C/C++/CUDA implementation of a geometric semantic genetic programming algorithm.</div>
   </td>
  </tr>
  </tbody>
@@ -113,6 +113,7 @@ $(document).ready(function(){initNavTree('_gsgp_cuda_8h.html',''); initResizable
 <code>#include &lt;sys/types.h&gt;</code><br />
 <code>#include &lt;errno.h&gt;</code><br />
 <code>#include &lt;stack&gt;</code><br />
+<code>#include &lt;limits&gt;</code><br />
 <code>#include &lt;cuda_runtime.h&gt;</code><br />
 <code>#include &lt;cuda.h&gt;</code><br />
 <code>#include &lt;curand.h&gt;</code><br />
@@ -135,17 +136,17 @@ This graph shows which files directly or indirectly include this file:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structentry__.html">entry_</a></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structcfg__.html">cfg_</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structentry__.html">entry_</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:a9d6caa62b0d171762992c07785d6f197"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structentry__.html">entry_</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a9d6caa62b0d171762992c07785d6f197">entry</a></td></tr>
-<tr class="separator:a9d6caa62b0d171762992c07785d6f197"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a69c02f6d66c6461c9a1c6d3d98075b5d"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structcfg__.html">cfg_</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a69c02f6d66c6461c9a1c6d3d98075b5d">cfg</a></td></tr>
 <tr class="separator:a69c02f6d66c6461c9a1c6d3d98075b5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d6caa62b0d171762992c07785d6f197"><td class="memItemLeft" align="right" valign="top">typedef struct <a class="el" href="structentry__.html">entry_</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a9d6caa62b0d171762992c07785d6f197">entry</a></td></tr>
+<tr class="separator:a9d6caa62b0d171762992c07785d6f197"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions</h2></td></tr>
@@ -170,9 +171,8 @@ Functions</h2></td></tr>
 <tr class="memitem:a15a884fe465ae2c56899a20d1225ffaf"><td class="memItemLeft" align="right" valign="top">__device__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a15a884fe465ae2c56899a20d1225ffaf">clearStack</a> (int *pushGenes, unsigned int sizeMaxDepthIndividual, float *stackInd)</td></tr>
 <tr class="memdesc:a15a884fe465ae2c56899a20d1225ffaf"><td class="mdescLeft">&#160;</td><td class="mdescRight">remove all elements from the stack so that in the next evaluations there are no previous values of other individuals  <a href="_gsgp_cuda_8h.html#a15a884fe465ae2c56899a20d1225ffaf">More...</a><br /></td></tr>
 <tr class="separator:a15a884fe465ae2c56899a20d1225ffaf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af1acc65c5e1f4db666357c3565102751"><td class="memItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#af1acc65c5e1f4db666357c3565102751">initializePopulation</a> (float *dInitialPopulation, int <a class="el" href="_gsgp_cuda_8h.html#a659c08382b54340ded81efe36fcb6106">nvar</a>, int sizeMaxDepthIndividual, curandState_t *states, int maxRandomConstant)</td></tr>
-<tr class="memdesc:af1acc65c5e1f4db666357c3565102751"><td class="mdescLeft">&#160;</td><td class="mdescRight">The initializePopulation kernel creates the population of programs T and the set of random trees R uses by the GSM kernel, based on the desired population size and maximun program length. The individuals are representd using a linear genome, composed of valid terminals (inputs to the program) and functions (basic elements with which programs can be built).  <a href="_gsgp_cuda_8h.html#af1acc65c5e1f4db666357c3565102751">More...</a><br /></td></tr>
-<tr class="separator:af1acc65c5e1f4db666357c3565102751"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8c998ae7ec7ae0f42899fca51d7bb809"><td class="memItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a8c998ae7ec7ae0f42899fca51d7bb809">initializePopulation</a> (float *<a class="el" href="_gsgp_cuda_8h.html#aab1bfb93b5cb3873688507bdb57bf082">dInitialPopulation</a>, int <a class="el" href="_gsgp_cuda_8h.html#a659c08382b54340ded81efe36fcb6106">nvar</a>, int sizeMaxDepthIndividual, curandState_t *states, int maxRandomConstant, int functions, float functionRatio, float terminalRatio)</td></tr>
+<tr class="separator:a8c998ae7ec7ae0f42899fca51d7bb809"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a455d4b3760ddfb47ca47a41ac4f6de85"><td class="memItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a455d4b3760ddfb47ca47a41ac4f6de85">computeSemantics</a> (float *inputPopulation, float *outSemantic, unsigned int sizeMaxDepthIndividual, float *data, int <a class="el" href="_gsgp_cuda_8h.html#a8d2a2743f9e24ba875ac91d07fadf1d4">nrow</a>, int <a class="el" href="_gsgp_cuda_8h.html#a659c08382b54340ded81efe36fcb6106">nvar</a>, int *pushGenes, float *stackInd)</td></tr>
 <tr class="memdesc:a455d4b3760ddfb47ca47a41ac4f6de85"><td class="mdescLeft">&#160;</td><td class="mdescRight">The ComputeSemantics kernel is an interpreter, that decodes each individual and evaluates it over all fitness cases, producing as output the semantic vector of each individual. The chromosome is interpreted linearly, using an auxiliary LIFO stack D that stores terminals from the chromosome and the output from valid operations.  <a href="_gsgp_cuda_8h.html#a455d4b3760ddfb47ca47a41ac4f6de85">More...</a><br /></td></tr>
 <tr class="separator:a455d4b3760ddfb47ca47a41ac4f6de85"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -182,10 +182,10 @@ Functions</h2></td></tr>
 <tr class="memitem:aac4615221ef46543cb25d4807e0b42d2"><td class="memItemLeft" align="right" valign="top">__device__ float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#aac4615221ef46543cb25d4807e0b42d2">sigmoid</a> (float n)</td></tr>
 <tr class="memdesc:aac4615221ef46543cb25d4807e0b42d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">auxiliary function for the geometric semantic mutation operation  <a href="_gsgp_cuda_8h.html#aac4615221ef46543cb25d4807e0b42d2">More...</a><br /></td></tr>
 <tr class="separator:aac4615221ef46543cb25d4807e0b42d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae218d64b1ba67bb484c22c4c6ff293f5"><td class="memItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#ae218d64b1ba67bb484c22c4c6ff293f5">initializeIndexRandomTrees</a> (int sizePopulation, float *indexRandomTrees, curandState_t *states)</td></tr>
+<tr class="memitem:ae218d64b1ba67bb484c22c4c6ff293f5"><td class="memItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#ae218d64b1ba67bb484c22c4c6ff293f5">initializeIndexRandomTrees</a> (int sizePopulation, float *<a class="el" href="_gsgp_cuda_8h.html#ada040e84790d4bc82644e9f571386bea">indexRandomTrees</a>, curandState_t *states)</td></tr>
 <tr class="separator:ae218d64b1ba67bb484c22c4c6ff293f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a74f59e7ae6dd1f3464cba0f9ced82f9b"><td class="memItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a74f59e7ae6dd1f3464cba0f9ced82f9b">geometricSemanticMutation</a> (float *initialPopulationSemantics, float *randomTreesSemantics, float *newSemanticsOffsprings, int sizePopulation, int <a class="el" href="_gsgp_cuda_8h.html#a8d2a2743f9e24ba875ac91d07fadf1d4">nrow</a>, int tElements, int generation, float *indexRandomTrees, <a class="el" href="structentry__.html">entry_</a> *x, <a class="el" href="structentry__.html">entry_</a> *y)</td></tr>
-<tr class="separator:a74f59e7ae6dd1f3464cba0f9ced82f9b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab6cc2c87ef32c6f5077e036959b21119"><td class="memItemLeft" align="right" valign="top">__global__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#ab6cc2c87ef32c6f5077e036959b21119">geometricSemanticMutation</a> (float *initialPopulationSemantics, float *randomTreesSemantics, float *newSemanticsOffsprings, int sizePopulation, int <a class="el" href="_gsgp_cuda_8h.html#a8d2a2743f9e24ba875ac91d07fadf1d4">nrow</a>, int tElements, int generation, float *<a class="el" href="_gsgp_cuda_8h.html#ada040e84790d4bc82644e9f571386bea">indexRandomTrees</a>, <a class="el" href="structentry__.html">entry_</a> *y, int index, float *<a class="el" href="_gsgp_cuda_8h.html#a3b9d453513bd37270390a572e6d3f263">mutationStep</a>)</td></tr>
+<tr class="separator:ab6cc2c87ef32c6f5077e036959b21119"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5c9d4e48e5ef83d4c60b1f108641260c"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a5c9d4e48e5ef83d4c60b1f108641260c">saveTrace</a> (std::string path, <a class="el" href="_gsgp_cuda_8h.html#a9d6caa62b0d171762992c07785d6f197">entry</a> *x, int generation, int populationSize)</td></tr>
 <tr class="separator:a5c9d4e48e5ef83d4c60b1f108641260c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:acfa80b09d39c91f2febe825a93e95f1c"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#acfa80b09d39c91f2febe825a93e95f1c">readInpuData</a> (char *trainFile, char *testFile, float *dataTrain, float *dataTest, float *dataTrainTarget, float *dataTestTarget, int <a class="el" href="_gsgp_cuda_8h.html#a8d2a2743f9e24ba875ac91d07fadf1d4">nrow</a>, int <a class="el" href="_gsgp_cuda_8h.html#a659c08382b54340ded81efe36fcb6106">nvar</a>, int <a class="el" href="_gsgp_cuda_8h.html#ab86d8b12b023b979a3961e312547803e">nrowTest</a>, int nvarTest)</td></tr>
@@ -200,14 +200,15 @@ Functions</h2></td></tr>
 <tr class="memitem:a4d31979dbc400ebafec99c299db8be47"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a4d31979dbc400ebafec99c299db8be47">saveIndividuals</a> (std::string path, float *Individuals, std::string namePopulation, int maxDepth, int sizePopulation)</td></tr>
 <tr class="memdesc:a4d31979dbc400ebafec99c299db8be47"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function that stores the information related to the initial population on file initialPopulation.csv.  <a href="_gsgp_cuda_8h.html#a4d31979dbc400ebafec99c299db8be47">More...</a><br /></td></tr>
 <tr class="separator:a4d31979dbc400ebafec99c299db8be47"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af44ca68b304fad2e633d2176754996fd"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#af44ca68b304fad2e633d2176754996fd">test</a> (float *individuals, int sizeMaxDepth, int sizePopulation)</td></tr>
-<tr class="separator:af44ca68b304fad2e633d2176754996fd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a780cb33de32b71bfdc0b39796de3c6b8"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a780cb33de32b71bfdc0b39796de3c6b8">test</a> (float *individuals, int sizeMaxDepth, int sizePopulation)</td></tr>
+<tr class="memdesc:a780cb33de32b71bfdc0b39796de3c6b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that tests the individuals of the population.  <a href="_gsgp_cuda_8h.html#a780cb33de32b71bfdc0b39796de3c6b8">More...</a><br /></td></tr>
+<tr class="separator:a780cb33de32b71bfdc0b39796de3c6b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad9ba1431b7a76132782bc1a24a47c840"><td class="memItemLeft" align="right" valign="top">__host__ bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#ad9ba1431b7a76132782bc1a24a47c840">IsPathExist</a> (const std::string &amp;s)</td></tr>
 <tr class="memdesc:ad9ba1431b7a76132782bc1a24a47c840"><td class="mdescLeft">&#160;</td><td class="mdescRight">function to check if exist a directory path.  <a href="_gsgp_cuda_8h.html#ad9ba1431b7a76132782bc1a24a47c840">More...</a><br /></td></tr>
 <tr class="separator:ad9ba1431b7a76132782bc1a24a47c840"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab4e91beb2a1b75296360be78df2ca5af"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#ab4e91beb2a1b75296360be78df2ca5af">checkDirectoryPath</a> (std::string dirPath)</td></tr>
 <tr class="separator:ab4e91beb2a1b75296360be78df2ca5af"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a5f5f5e456d163b873a118b6477b4ed"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a8a5f5f5e456d163b873a118b6477b4ed">markTracesGeneration</a> (<a class="el" href="_gsgp_cuda_8h.html#a9d6caa62b0d171762992c07785d6f197">entry</a> *vectorTraces, int populationSize, int generationSize, int bestIndividual)</td></tr>
+<tr class="memitem:a8a5f5f5e456d163b873a118b6477b4ed"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a8a5f5f5e456d163b873a118b6477b4ed">markTracesGeneration</a> (<a class="el" href="_gsgp_cuda_8h.html#a9d6caa62b0d171762992c07785d6f197">entry</a> *<a class="el" href="_gsgp_cuda_8h.html#a4f7c270de7686aa5ae7c3a5f6d61ddf1">vectorTraces</a>, int populationSize, int generationSize, int bestIndividual)</td></tr>
 <tr class="memdesc:a8a5f5f5e456d163b873a118b6477b4ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function that implements the marking procedure used to store the structure of the optimal solution.  <a href="_gsgp_cuda_8h.html#a8a5f5f5e456d163b873a118b6477b4ed">More...</a><br /></td></tr>
 <tr class="separator:a8a5f5f5e456d163b873a118b6477b4ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af1f98b169175a64c96985976b8a6b1cb"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#af1f98b169175a64c96985976b8a6b1cb">saveTraceComplete</a> (std::string path, <a class="el" href="_gsgp_cuda_8h.html#a9d6caa62b0d171762992c07785d6f197">entry</a> *structSurvivor, int generation, int populationSize)</td></tr>
@@ -220,29 +221,152 @@ Functions</h2></td></tr>
 <tr class="memitem:a5a5753d284363de16b569f12551143ed"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a5a5753d284363de16b569f12551143ed">readPopulation</a> (float *initialPopulation, float *randomTrees, int sizePopulation, int depth, std::string log, std::string name, std::string nameR)</td></tr>
 <tr class="memdesc:a5a5753d284363de16b569f12551143ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function that read the information related to the initial population from file initialPopulation.csv.  <a href="_gsgp_cuda_8h.html#a5a5753d284363de16b569f12551143ed">More...</a><br /></td></tr>
 <tr class="separator:a5a5753d284363de16b569f12551143ed"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad8d75f58f94b6f2ac45b02f2d69c2c23"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#ad8d75f58f94b6f2ac45b02f2d69c2c23">intreSemanticCPU</a> (float *initiPop, vector&lt; float &gt; &amp;OutSemantic, float *data, int <a class="el" href="_gsgp_cuda_8h.html#a8d2a2743f9e24ba875ac91d07fadf1d4">nrow</a>, int depth, int index, int nvarTest)</td></tr>
-<tr class="separator:ad8d75f58f94b6f2ac45b02f2d69c2c23"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a815173a15ed4ce63b6776be317df8722"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a815173a15ed4ce63b6776be317df8722">evaluate_unseen_new_data</a> (std::string path, int generations, const int sizeMaxDepthIndividual, float *initialPopulation, float *randomTrees, std::ofstream &amp;OUT, std::string log, float *dataTest, int <a class="el" href="_gsgp_cuda_8h.html#a8d2a2743f9e24ba875ac91d07fadf1d4">nrow</a>, int numIndi, int nvarTest)</td></tr>
-<tr class="memdesc:a815173a15ed4ce63b6776be317df8722"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function that evaluates the best model stored in trace.txt over newly provided unseen data.  <a href="_gsgp_cuda_8h.html#a815173a15ed4ce63b6776be317df8722">More...</a><br /></td></tr>
-<tr class="separator:a815173a15ed4ce63b6776be317df8722"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4aa7eb10eebf5ce6cb29db3ab834eb8"><td class="memItemLeft" align="right" valign="top">__host__ void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#af4aa7eb10eebf5ce6cb29db3ab834eb8">evaluate_data</a> (std::string path, int generations, float *initialPopulation, float *randomTrees, std::ofstream &amp;OUT, std::string log, int <a class="el" href="_gsgp_cuda_8h.html#a8d2a2743f9e24ba875ac91d07fadf1d4">nrow</a>, int nvarTest)</td></tr>
+<tr class="separator:af4aa7eb10eebf5ce6cb29db3ab834eb8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="var-members"></a>
 Variables</h2></td></tr>
 <tr class="memitem:ac6f73ac686ef53a1065b100d1f764641"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_gsgp_cuda_8h.html#a69c02f6d66c6461c9a1c6d3d98075b5d">cfg</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#ac6f73ac686ef53a1065b100d1f764641">config</a></td></tr>
+<tr class="memdesc:ac6f73ac686ef53a1065b100d1f764641"><td class="mdescLeft">&#160;</td><td class="mdescRight">struct variable containing the values of the parameters specified in the configuration.ini file  <a href="_gsgp_cuda_8h.html#ac6f73ac686ef53a1065b100d1f764641">More...</a><br /></td></tr>
 <tr class="separator:ac6f73ac686ef53a1065b100d1f764641"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8d2a2743f9e24ba875ac91d07fadf1d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a8d2a2743f9e24ba875ac91d07fadf1d4">nrow</a></td></tr>
+<tr class="memdesc:a8d2a2743f9e24ba875ac91d07fadf1d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable containing the numbers of rows (instances) of the training dataset  <a href="_gsgp_cuda_8h.html#a8d2a2743f9e24ba875ac91d07fadf1d4">More...</a><br /></td></tr>
 <tr class="separator:a8d2a2743f9e24ba875ac91d07fadf1d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab86d8b12b023b979a3961e312547803e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#ab86d8b12b023b979a3961e312547803e">nrowTest</a></td></tr>
+<tr class="memdesc:ab86d8b12b023b979a3961e312547803e"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable containing the numbers of rows (instances) of the test dataset  <a href="_gsgp_cuda_8h.html#ab86d8b12b023b979a3961e312547803e">More...</a><br /></td></tr>
 <tr class="separator:ab86d8b12b023b979a3961e312547803e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a659c08382b54340ded81efe36fcb6106"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a659c08382b54340ded81efe36fcb6106">nvar</a></td></tr>
+<tr class="memdesc:a659c08382b54340ded81efe36fcb6106"><td class="mdescLeft">&#160;</td><td class="mdescRight">variable containing the numbers of columns (excluding the target) of the training dataset  <a href="_gsgp_cuda_8h.html#a659c08382b54340ded81efe36fcb6106">More...</a><br /></td></tr>
 <tr class="separator:a659c08382b54340ded81efe36fcb6106"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5daa7a3beb6899c303b00e907fcb2c76"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a5daa7a3beb6899c303b00e907fcb2c76">individualLength</a> = 0</td></tr>
+<tr class="separator:a5daa7a3beb6899c303b00e907fcb2c76"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4b16bb042891838996c6db35e71e951b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a4b16bb042891838996c6db35e71e951b">gridSize</a></td></tr>
+<tr class="separator:a4b16bb042891838996c6db35e71e951b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98b1ca953eacd0473f02ff8cad0dd5d9"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a98b1ca953eacd0473f02ff8cad0dd5d9">minGridSize</a></td></tr>
+<tr class="separator:a98b1ca953eacd0473f02ff8cad0dd5d9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4aaa73e329d20f35039fa5cdd2e6f648"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a4aaa73e329d20f35039fa5cdd2e6f648">blockSize</a></td></tr>
+<tr class="separator:a4aaa73e329d20f35039fa5cdd2e6f648"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab35f6352fca975b1822aea8b6be732db"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#ab35f6352fca975b1822aea8b6be732db">sizeMemIndividuals</a></td></tr>
+<tr class="separator:ab35f6352fca975b1822aea8b6be732db"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a301e176f84e6e4147e084cd036838482"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a301e176f84e6e4147e084cd036838482">sizeMemPopulation</a></td></tr>
+<tr class="separator:a301e176f84e6e4147e084cd036838482"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a385066922ced304aa156537e1d92f3a2"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a385066922ced304aa156537e1d92f3a2">twoSizeMemPopulation</a></td></tr>
+<tr class="separator:a385066922ced304aa156537e1d92f3a2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3bf8f384e4d90e276ffec67349be0b52"><td class="memItemLeft" align="right" valign="top">long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a3bf8f384e4d90e276ffec67349be0b52">twoSizePopulation</a></td></tr>
+<tr class="separator:a3bf8f384e4d90e276ffec67349be0b52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4c2f76394f3c9a2e84fe7ca6f66d6171"><td class="memItemLeft" align="right" valign="top">long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a4c2f76394f3c9a2e84fe7ca6f66d6171">sizeMemSemanticTrain</a></td></tr>
+<tr class="separator:a4c2f76394f3c9a2e84fe7ca6f66d6171"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08dd9ac9bee8e2796b9af7c2fb32fcf5"><td class="memItemLeft" align="right" valign="top">long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a08dd9ac9bee8e2796b9af7c2fb32fcf5">sizeMemSemanticTest</a></td></tr>
+<tr class="separator:a08dd9ac9bee8e2796b9af7c2fb32fcf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acfa513b4aeac8b8b24cf38a728860835"><td class="memItemLeft" align="right" valign="top">long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#acfa513b4aeac8b8b24cf38a728860835">sizeMemDataTrain</a></td></tr>
+<tr class="separator:acfa513b4aeac8b8b24cf38a728860835"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0da4d8bb2558093b2af246c83a127dc3"><td class="memItemLeft" align="right" valign="top">long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a0da4d8bb2558093b2af246c83a127dc3">sizeMemDataTest</a> = sizeof(float)*(<a class="el" href="_gsgp_cuda_8h.html#ab86d8b12b023b979a3961e312547803e">nrowTest</a>*<a class="el" href="_gsgp_cuda_8h.html#a659c08382b54340ded81efe36fcb6106">nvar</a>)</td></tr>
+<tr class="separator:a0da4d8bb2558093b2af246c83a127dc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a669e327a59820bfbde98d43dcf08066f"><td class="memItemLeft" align="right" valign="top">long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a669e327a59820bfbde98d43dcf08066f">sizeElementsSemanticTest</a> = (config.populationSize*<a class="el" href="_gsgp_cuda_8h.html#ab86d8b12b023b979a3961e312547803e">nrowTest</a>)</td></tr>
+<tr class="separator:a669e327a59820bfbde98d43dcf08066f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7ee03039c58442d5c813540afa9c1e3a"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a7ee03039c58442d5c813540afa9c1e3a">gridSizeTest</a></td></tr>
+<tr class="separator:a7ee03039c58442d5c813540afa9c1e3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad45118f04f421126781ec029b882420f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#ad45118f04f421126781ec029b882420f">minGridSizeTest</a></td></tr>
+<tr class="separator:ad45118f04f421126781ec029b882420f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a764869a5e91f5bd8c4e3d2b1fd0950b5"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a764869a5e91f5bd8c4e3d2b1fd0950b5">blockSizeTest</a></td></tr>
+<tr class="separator:a764869a5e91f5bd8c4e3d2b1fd0950b5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f495e81c1a54b531561484b0f6613a0"><td class="memItemLeft" align="right" valign="top">long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a4f495e81c1a54b531561484b0f6613a0">sizeElementsSemanticTrain</a></td></tr>
+<tr class="separator:a4f495e81c1a54b531561484b0f6613a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4929f7becf992d9e6af7f05b60ec363d"><td class="memItemLeft" align="right" valign="top">long int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a4929f7becf992d9e6af7f05b60ec363d">vectorTracesMem</a></td></tr>
+<tr class="separator:a4929f7becf992d9e6af7f05b60ec363d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aab1bfb93b5cb3873688507bdb57bf082"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#aab1bfb93b5cb3873688507bdb57bf082">dInitialPopulation</a></td></tr>
+<tr class="separator:aab1bfb93b5cb3873688507bdb57bf082"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4cc4e2abe07de7136bdf9b7199693d16"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a4cc4e2abe07de7136bdf9b7199693d16">dRandomTrees</a></td></tr>
+<tr class="separator:a4cc4e2abe07de7136bdf9b7199693d16"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac6c122d311db32725ef98bad659570be"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#ac6c122d311db32725ef98bad659570be">hInitialPopulation</a></td></tr>
+<tr class="separator:ac6c122d311db32725ef98bad659570be"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac8e35bc9463d27efd96f506bf53eac7c"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#ac8e35bc9463d27efd96f506bf53eac7c">hRandomTrees</a></td></tr>
+<tr class="separator:ac8e35bc9463d27efd96f506bf53eac7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f7c270de7686aa5ae7c3a5f6d61ddf1"><td class="memItemLeft" align="right" valign="top"><a class="el" href="_gsgp_cuda_8h.html#a9d6caa62b0d171762992c07785d6f197">entry</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a4f7c270de7686aa5ae7c3a5f6d61ddf1">vectorTraces</a></td></tr>
+<tr class="separator:a4f7c270de7686aa5ae7c3a5f6d61ddf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb962d16e9ec96c6bd56f3894c49a0ae"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#adb962d16e9ec96c6bd56f3894c49a0ae">uDataTrain</a></td></tr>
+<tr class="separator:adb962d16e9ec96c6bd56f3894c49a0ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a533a836d795041adcb69b944cfe9c61f"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a533a836d795041adcb69b944cfe9c61f">uDataTrainTarget</a></td></tr>
+<tr class="separator:a533a836d795041adcb69b944cfe9c61f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07e90ec7dc215d7bb532f737b280a340"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a07e90ec7dc215d7bb532f737b280a340">uDataTest</a></td></tr>
+<tr class="separator:a07e90ec7dc215d7bb532f737b280a340"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adfe7919de8cd5425d43716e28447923b"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#adfe7919de8cd5425d43716e28447923b">uDataTestTarget</a></td></tr>
+<tr class="separator:adfe7919de8cd5425d43716e28447923b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac3e8d601be52581117f807630ce965d3"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#ac3e8d601be52581117f807630ce965d3">uFitTest</a></td></tr>
+<tr class="separator:ac3e8d601be52581117f807630ce965d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a671f41e5af40f231220fc90d958eb27b"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a671f41e5af40f231220fc90d958eb27b">uFit</a></td></tr>
+<tr class="separator:a671f41e5af40f231220fc90d958eb27b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa03ff391facaab8dc7c60ba47d962a9"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#afa03ff391facaab8dc7c60ba47d962a9">uSemanticTrainCases</a></td></tr>
+<tr class="separator:afa03ff391facaab8dc7c60ba47d962a9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35d1b18a3960c662f8ffb920330c557e"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a35d1b18a3960c662f8ffb920330c557e">uSemanticRandomTrees</a></td></tr>
+<tr class="separator:a35d1b18a3960c662f8ffb920330c557e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a32ac8b5a54dd5133a2837aac510832c1"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a32ac8b5a54dd5133a2837aac510832c1">uSemanticTestRandomTrees</a></td></tr>
+<tr class="separator:a32ac8b5a54dd5133a2837aac510832c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac51e6cbf8911229381b901130f148f85"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#ac51e6cbf8911229381b901130f148f85">uSemanticTestCases</a></td></tr>
+<tr class="separator:ac51e6cbf8911229381b901130f148f85"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af44520c78b9a85480eb275928bacbad6"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#af44520c78b9a85480eb275928bacbad6">uStackInd</a></td></tr>
+<tr class="separator:af44520c78b9a85480eb275928bacbad6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3be2b7cb45503176eac5634a3274125d"><td class="memItemLeft" align="right" valign="top">int *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a3be2b7cb45503176eac5634a3274125d">uPushGenes</a></td></tr>
+<tr class="separator:a3be2b7cb45503176eac5634a3274125d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b2e13c78efca330f06b6ddcd7464b41"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a8b2e13c78efca330f06b6ddcd7464b41">result</a></td></tr>
+<tr class="separator:a8b2e13c78efca330f06b6ddcd7464b41"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5d3acb08d234875f3c653bda8d289acd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a5d3acb08d234875f3c653bda8d289acd">incx1</a> =1</td></tr>
+<tr class="separator:a5d3acb08d234875f3c653bda8d289acd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42da5b309061e27cd6035f94f562c18b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a42da5b309061e27cd6035f94f562c18b">indexBestIndividual</a></td></tr>
+<tr class="separator:a42da5b309061e27cd6035f94f562c18b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada040e84790d4bc82644e9f571386bea"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#ada040e84790d4bc82644e9f571386bea">indexRandomTrees</a></td></tr>
+<tr class="separator:ada040e84790d4bc82644e9f571386bea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3b9d453513bd37270390a572e6d3f263"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a3b9d453513bd37270390a572e6d3f263">mutationStep</a></td></tr>
+<tr class="separator:a3b9d453513bd37270390a572e6d3f263"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a469754b37c9b28fa101998ebae0a1c42"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a469754b37c9b28fa101998ebae0a1c42">resultBestOffspring</a></td></tr>
+<tr class="separator:a469754b37c9b28fa101998ebae0a1c42"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a51c396e15969793f602d54c844a4a596"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a51c396e15969793f602d54c844a4a596">incxBestOffspring</a> =1</td></tr>
+<tr class="separator:a51c396e15969793f602d54c844a4a596"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afaa6b586512922be933c766c19d0825e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#afaa6b586512922be933c766c19d0825e">indexBestOffspring</a></td></tr>
+<tr class="separator:afaa6b586512922be933c766c19d0825e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeba078edd988b47feb16e94260aa4ffd"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#aeba078edd988b47feb16e94260aa4ffd">resultWorst</a></td></tr>
+<tr class="separator:aeba078edd988b47feb16e94260aa4ffd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade630c91252cba05a186ad2ad304f112"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#ade630c91252cba05a186ad2ad304f112">incxWorst</a> =1</td></tr>
+<tr class="separator:ade630c91252cba05a186ad2ad304f112"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb88f9036567a33800ee29600cf9fe24"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#adb88f9036567a33800ee29600cf9fe24">indexWorstOffspring</a></td></tr>
+<tr class="separator:adb88f9036567a33800ee29600cf9fe24"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46baa3cc16a8aafbed2cd6fc85ebc3ff"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a46baa3cc16a8aafbed2cd6fc85ebc3ff">tempSemantic</a></td></tr>
+<tr class="separator:a46baa3cc16a8aafbed2cd6fc85ebc3ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dc78b744cc77c15dc87023eeedb5d00"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a3dc78b744cc77c15dc87023eeedb5d00">tempFitnes</a></td></tr>
+<tr class="separator:a3dc78b744cc77c15dc87023eeedb5d00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a718f0f8ca658a8d31d4be94a4be4eb9a"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a718f0f8ca658a8d31d4be94a4be4eb9a">tempSemanticTest</a></td></tr>
+<tr class="separator:a718f0f8ca658a8d31d4be94a4be4eb9a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4fd49df423809a5ca5696f9462b1515f"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a4fd49df423809a5ca5696f9462b1515f">tempFitnesTest</a></td></tr>
+<tr class="separator:a4fd49df423809a5ca5696f9462b1515f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af7b2f94d09417db3c188aea153d83761"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#af7b2f94d09417db3c188aea153d83761">uSemanticTrainCasesNew</a></td></tr>
+<tr class="separator:af7b2f94d09417db3c188aea153d83761"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a6da0d301cb34f302256638670a7b1af2"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a6da0d301cb34f302256638670a7b1af2">uFitNew</a></td></tr>
+<tr class="separator:a6da0d301cb34f302256638670a7b1af2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5c2ad0e948e20a0ba462b1d1ed04205a"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a5c2ad0e948e20a0ba462b1d1ed04205a">uSemanticTestCasesNew</a></td></tr>
+<tr class="separator:a5c2ad0e948e20a0ba462b1d1ed04205a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3887e0582380e5a7b2365ee6a51c95af"><td class="memItemLeft" align="right" valign="top">float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="_gsgp_cuda_8h.html#a3887e0582380e5a7b2365ee6a51c95af">uFitTestNew</a></td></tr>
+<tr class="separator:a3887e0582380e5a7b2365ee6a51c95af"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>File containing the definition of the modules (kernels) used to create the population of individuals, evaluate them, the search operator and read data. </p>
+<p>Structure that represents the tuple used to store information on the individuals involved in each generation and is used for the reconstruction of the best individual.</p>
 <p>Structure used to store the parameters of the configuration.ini file and these are used to initialize the algorithm parameters <br  />
 </p>
-<p>Structure that represents the tuple used to store information on the individuals involved in each generation and is used for the reconstruction of the best individual.</p>
 <dl class="section date"><dt>Date</dt><dd>created on 25/01/2020</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">int</td><td>numberGenerations: number of generations of the GSGP algorithm </td></tr>
+    <tr><td class="paramname">int</td><td>populationSize: number of individuals in the population </td></tr>
+    <tr><td class="paramname">int</td><td>maxIndividualLength: variable that stores the length (number of genes) of an individual </td></tr>
+    <tr><td class="paramname">float</td><td>functionRatio : probability of selecting a function (otherwise a terminal). </td></tr>
+    <tr><td class="paramname">float</td><td>variableRatio : probability of selecting a variable (otherwise a constant) when a terminal gene has been chosen. </td></tr>
+    <tr><td class="paramname">int</td><td>maxRandomConstant: max number for ephemeral random constants </td></tr>
+    <tr><td class="paramname">char</td><td>logPath[100]: name of the output files </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section date"><dt>Date</dt><dd>9/11/2021 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">int</td><td>initializePopulationParent: variable containing the index of the parent (mutation) </td></tr>
@@ -255,22 +379,8 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section date"><dt>Date</dt><dd>25/01/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</dd></dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">int</td><td>numberRuns: number of iterations of the GP algorithm </td></tr>
-    <tr><td class="paramname">int</td><td>maxNumberGenerations: number of generations of the GSGP algorithm </td></tr>
-    <tr><td class="paramname">int</td><td>populationSize: size of the population: number of candidate solutions </td></tr>
-    <tr><td class="paramname">int</td><td>maxDepth: maximum depth of a newly created individual </td></tr>
-    <tr><td class="paramname">int</td><td>maxRandomConstant: max number for ephemeral random constants </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section date"><dt>Date</dt><dd>25/01/2020 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</dd></dl>
 <p><br  />
  </p>
-
-<p class="definition">Definition in file <a class="el" href="_gsgp_cuda_8h_source.html">GsgpCuda.h</a>.</p>
 </div><h2 class="groupheader">Typedef Documentation</h2>
 <a id="a69c02f6d66c6461c9a1c6d3d98075b5d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a69c02f6d66c6461c9a1c6d3d98075b5d">&#9670;&nbsp;</a></span>cfg</h2>
@@ -283,7 +393,6 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>struct variable containing the values of the parameters specified in the configuration.ini file </p>
 
 </div>
 </div>
@@ -317,8 +426,6 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00626">626</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -366,8 +473,6 @@ Variables</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00162">162</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -422,8 +527,6 @@ Variables</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00344">344</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -508,8 +611,6 @@ Variables</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00226">226</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
-
 </div>
 </div>
 <a id="a0f2ab994581757564401808a1009d47c"></a>
@@ -557,8 +658,6 @@ Variables</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>05/10/2021 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00509">509</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
-
 </div>
 </div>
 <a id="a0d1515a59003b1a58eedefa6dd17a995"></a>
@@ -588,8 +687,6 @@ Variables</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00071">71</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
-
 </div>
 </div>
 <a id="aa46369f3c8adbff876c82270346fffa2"></a>
@@ -615,18 +712,16 @@ Variables</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>25/01/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00052">52</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
-
 </div>
 </div>
-<a id="a815173a15ed4ce63b6776be317df8722"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a815173a15ed4ce63b6776be317df8722">&#9670;&nbsp;</a></span>evaluate_unseen_new_data()</h2>
+<a id="af4aa7eb10eebf5ce6cb29db3ab834eb8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4aa7eb10eebf5ce6cb29db3ab834eb8">&#9670;&nbsp;</a></span>evaluate_data()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">__host__ void evaluate_unseen_new_data </td>
+          <td class="memname">__host__ void evaluate_data </td>
           <td>(</td>
           <td class="paramtype">std::string&#160;</td>
           <td class="paramname"><em>path</em>, </td>
@@ -636,12 +731,6 @@ Variables</h2></td></tr>
           <td></td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>generations</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">const int&#160;</td>
-          <td class="paramname"><em>sizeMaxDepthIndividual</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -670,20 +759,8 @@ Variables</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float *&#160;</td>
-          <td class="paramname"><em>dataTest</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype">int&#160;</td>
           <td class="paramname"><em>nrow</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>numIndi</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -699,33 +776,10 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>This function that evaluates the best model stored in trace.txt over newly provided unseen data. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">std::string</td><td>path: trace file name </td></tr>
-    <tr><td class="paramname">int</td><td>generations: number of generations. </td></tr>
-    <tr><td class="paramname">const</td><td>int sizeMaxDepthIndividual: ariable that stores maximum depth for individuals. </td></tr>
-    <tr><td class="paramname">float</td><td>*initialPopulation: vector of pointers storing the initial population </td></tr>
-    <tr><td class="paramname">float</td><td>*randomTrees: vector of pointers storing random trees </td></tr>
-    <tr><td class="paramname">std::ofstream&amp;</td><td>OUT: file where the result of the evaluation of the best model with each fitness will be written. </td></tr>
-    <tr><td class="paramname">std::string</td><td>log: path where the algorithm output files are stored. </td></tr>
-    <tr><td class="paramname">float</td><td>*dataTest : vector pointers to store test data </td></tr>
-    <tr><td class="paramname">int</td><td>nrow: This variable contains the number of fitness cases. </td></tr>
-    <tr><td class="paramname">int</td><td>numIndi: number of individuals in the population </td></tr>
-    <tr><td class="paramname">int</td><td>nvarTest:This variable contains the number of features of problem. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>05/12/2020 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l01028">1028</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
-
 </div>
 </div>
-<a id="a74f59e7ae6dd1f3464cba0f9ced82f9b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a74f59e7ae6dd1f3464cba0f9ced82f9b">&#9670;&nbsp;</a></span>geometricSemanticMutation()</h2>
+<a id="ab6cc2c87ef32c6f5077e036959b21119"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab6cc2c87ef32c6f5077e036959b21119">&#9670;&nbsp;</a></span>geometricSemanticMutation()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -782,13 +836,19 @@ Variables</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype"><a class="el" href="structentry__.html">entry_</a> *&#160;</td>
-          <td class="paramname"><em>x</em>, </td>
+          <td class="paramname"><em>y</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structentry__.html">entry_</a> *&#160;</td>
-          <td class="paramname"><em>y</em>&#160;</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>index</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>mutationStep</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -797,8 +857,6 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00404">404</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -841,8 +899,6 @@ Variables</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00091">91</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
-
 </div>
 </div>
 <a id="ae218d64b1ba67bb484c22c4c6ff293f5"></a>
@@ -877,18 +933,16 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00380">380</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
-
 </div>
 </div>
-<a id="af1acc65c5e1f4db666357c3565102751"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af1acc65c5e1f4db666357c3565102751">&#9670;&nbsp;</a></span>initializePopulation()</h2>
+<a id="a8c998ae7ec7ae0f42899fca51d7bb809"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8c998ae7ec7ae0f42899fca51d7bb809">&#9670;&nbsp;</a></span>initializePopulation()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">&lt; strong &gt; global&lt;/strong &gt; void initializePopulation </td>
+          <td class="memname">__global__ void initializePopulation </td>
           <td>(</td>
           <td class="paramtype">float *&#160;</td>
           <td class="paramname"><em>dInitialPopulation</em>, </td>
@@ -915,80 +969,25 @@ Variables</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>maxRandomConstant</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The initializePopulation kernel creates the population of programs T and the set of random trees R uses by the GSM kernel, based on the desired population size and maximun program length. The individuals are representd using a linear genome, composed of valid terminals (inputs to the program) and functions (basic elements with which programs can be built). </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">float</td><td>*dInitialPopulation: vector pointers to store the individuals of the initial population </td></tr>
-    <tr><td class="paramname">int</td><td>nvar: variable containing the number of columns (excluding the target) of the training dataset </td></tr>
-    <tr><td class="paramname">int</td><td>sizeMaxDepthIndividual: variable thar stores maximum depth for individuals </td></tr>
-    <tr><td class="paramname">curandState_t</td><td>*states: random status pointer to generate random numbers for each thread </td></tr>
-    <tr><td class="paramname">int</td><td>maxRandomConstant: variable containing the maximum number to generate ephemeral constants </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
-<dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
-
-</div>
-</div>
-<a id="ad8d75f58f94b6f2ac45b02f2d69c2c23"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ad8d75f58f94b6f2ac45b02f2d69c2c23">&#9670;&nbsp;</a></span>intreSemanticCPU()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">__host__ void intreSemanticCPU </td>
-          <td>(</td>
-          <td class="paramtype">float *&#160;</td>
-          <td class="paramname"><em>initiPop</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">vector&lt; float &gt; &amp;&#160;</td>
-          <td class="paramname"><em>OutSemantic</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">float *&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
+          <td class="paramname"><em>maxRandomConstant</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>nrow</em>, </td>
+          <td class="paramname"><em>functions</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>depth</em>, </td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>functionRatio</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>index</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>nvarTest</em>&#160;</td>
+          <td class="paramtype">float&#160;</td>
+          <td class="paramname"><em>terminalRatio</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -1039,8 +1038,6 @@ Variables</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00142">142</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
-
 </div>
 </div>
 <a id="ad9ba1431b7a76132782bc1a24a47c840"></a>
@@ -1068,9 +1065,16 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>27/02/2021 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Luis Armando Cardenas Florido, José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">string</td><td>&amp;s: name of path to check if exist. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>27/02/2021 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>Luis Armando Cardenas Florido, José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00612">612</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -1126,8 +1130,6 @@ Variables</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>10/02/2021 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00680">680</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
-
 </div>
 </div>
 <a id="a955bdc425c4f7867b5b7bdb415ece57a"></a>
@@ -1167,8 +1169,6 @@ Variables</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>float: returns the stackInd without the value positioned in pushGenes [tid] </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00125">125</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -1217,8 +1217,6 @@ Variables</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00108">108</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
-
 </div>
 </div>
 <a id="a81e2e6e609828492493948e200939a42"></a>
@@ -1257,8 +1255,6 @@ Variables</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00539">539</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -1357,8 +1353,6 @@ Variables</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00444">444</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
-
 </div>
 </div>
 <a id="a7e1cf1618da4c06310df9166ea335a2e"></a>
@@ -1404,8 +1398,6 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00806">806</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -1482,8 +1474,6 @@ Variables</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>8/10/2021 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00850">850</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
-
 </div>
 </div>
 <a id="a4d31979dbc400ebafec99c299db8be47"></a>
@@ -1531,6 +1521,7 @@ Variables</h2></td></tr>
 </div><div class="memdoc">
 
 <p>This function that stores the information related to the initial population on file initialPopulation.csv. </p>
+<p>This function stores the initial population and the auxiliary population of random trees.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">string</td><td>path: path where the algorithm output files are stored. </td></tr>
@@ -1543,9 +1534,20 @@ Variables</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">std::string</td><td>path: This vector pointers to store the individuals of the initial population. </td></tr>
+    <tr><td class="paramname">float</td><td>*Individuals: vector pointers to store the semantics of each individual in the population. </td></tr>
+    <tr><td class="paramname">std::string</td><td>namePopulation: This variable stores the name of the population. </td></tr>
+    <tr><td class="paramname">int</td><td>maxDepth: This variable thar stores maximum depth for individuals </td></tr>
+    <tr><td class="paramname">int</td><td>sizePopulation: This variable contains the number of individuals that exist in the population. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>05/12/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
-
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00778">778</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -1592,8 +1594,6 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00712">712</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
 
 </div>
 </div>
@@ -1701,8 +1701,6 @@ Variables</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>08/10/2021 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00746">746</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
-
 </div>
 </div>
 <a id="aac4615221ef46543cb25d4807e0b42d2"></a>
@@ -1732,18 +1730,16 @@ Variables</h2></td></tr>
 <dl class="section date"><dt>Date</dt><dd>01/25/2020 </dd></dl>
 <dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8cpp_source.html#l00365">365</a> of file <a class="el" href="_gsgp_cuda_8cpp_source.html">GsgpCuda.cpp</a>.</p>
-
 </div>
 </div>
-<a id="af44ca68b304fad2e633d2176754996fd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af44ca68b304fad2e633d2176754996fd">&#9670;&nbsp;</a></span>test()</h2>
+<a id="a780cb33de32b71bfdc0b39796de3c6b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a780cb33de32b71bfdc0b39796de3c6b8">&#9670;&nbsp;</a></span>test()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">__host__ void test </td>
+          <td class="memname">void test </td>
           <td>(</td>
           <td class="paramtype">float *&#160;</td>
           <td class="paramname"><em>individuals</em>, </td>
@@ -1768,9 +1764,64 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
+<p>Function that tests the individuals of the population. </p>
+<p>This file contains the test for the kernel that initializes the individuals on GPU.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">float</td><td>*individuals: This vector pointers to store the individuals of the population. </td></tr>
+    <tr><td class="paramname">int</td><td>sizeMaxDepth: This variable stores the maximum depth of the individuals. </td></tr>
+    <tr><td class="paramname">int</td><td>sizePopulation: This variable contains the number of individuals that exist in the population. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>05/12/2020 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">float</td><td>individuals: vector pointers to store the individuals of the initial population. </td></tr>
+    <tr><td class="paramname">int</td><td>sizeMaxDepth: Variable thar stores maximum depth for individuals. </td></tr>
+    <tr><td class="paramname">int</td><td>sizePopulation: Size of the population, number of candidate solutions </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>5/12/2020 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Jose Manuel Muñoz Contreras </dd></dl>
+
 </div>
 </div>
 <h2 class="groupheader">Variable Documentation</h2>
+<a id="a4aaa73e329d20f35039fa5cdd2e6f648"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4aaa73e329d20f35039fa5cdd2e6f648">&#9670;&nbsp;</a></span>blockSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int blockSize</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Variables that store the execution configuration for a kernel in the GPU </p>
+
+</div>
+</div>
+<a id="a764869a5e91f5bd8c4e3d2b1fd0950b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a764869a5e91f5bd8c4e3d2b1fd0950b5">&#9670;&nbsp;</a></span>blockSizeTest</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int blockSizeTest</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Variables that store the execution configuration for a kernel in the GPU </p>
+
+</div>
+</div>
 <a id="ac6f73ac686ef53a1065b100d1f764641"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ac6f73ac686ef53a1065b100d1f764641">&#9670;&nbsp;</a></span>config</h2>
 
@@ -1782,9 +1833,251 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+
 <p>struct variable containing the values of the parameters specified in the configuration.ini file </p>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8h_source.html#l00116">116</a> of file <a class="el" href="_gsgp_cuda_8h_source.html">GsgpCuda.h</a>.</p>
+</div>
+</div>
+<a id="aab1bfb93b5cb3873688507bdb57bf082"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aab1bfb93b5cb3873688507bdb57bf082">&#9670;&nbsp;</a></span>dInitialPopulation</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float* dInitialPopulation</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4cc4e2abe07de7136bdf9b7199693d16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4cc4e2abe07de7136bdf9b7199693d16">&#9670;&nbsp;</a></span>dRandomTrees</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float * dRandomTrees</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4b16bb042891838996c6db35e71e951b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4b16bb042891838996c6db35e71e951b">&#9670;&nbsp;</a></span>gridSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int gridSize</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7ee03039c58442d5c813540afa9c1e3a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7ee03039c58442d5c813540afa9c1e3a">&#9670;&nbsp;</a></span>gridSizeTest</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int gridSizeTest</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac6c122d311db32725ef98bad659570be"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6c122d311db32725ef98bad659570be">&#9670;&nbsp;</a></span>hInitialPopulation</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float * hInitialPopulation</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac8e35bc9463d27efd96f506bf53eac7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8e35bc9463d27efd96f506bf53eac7c">&#9670;&nbsp;</a></span>hRandomTrees</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float * hRandomTrees</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This block contains the vectors of pointers to store the population and random trees and space allocation in the GPU </p>
+
+</div>
+</div>
+<a id="a5d3acb08d234875f3c653bda8d289acd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5d3acb08d234875f3c653bda8d289acd">&#9670;&nbsp;</a></span>incx1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int incx1 =1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a51c396e15969793f602d54c844a4a596"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51c396e15969793f602d54c844a4a596">&#9670;&nbsp;</a></span>incxBestOffspring</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int incxBestOffspring =1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ade630c91252cba05a186ad2ad304f112"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ade630c91252cba05a186ad2ad304f112">&#9670;&nbsp;</a></span>incxWorst</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int incxWorst =1</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a42da5b309061e27cd6035f94f562c18b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42da5b309061e27cd6035f94f562c18b">&#9670;&nbsp;</a></span>indexBestIndividual</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int indexBestIndividual</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>this section makes use of the isamin de cublas function to determine the position of the best individual </p>
+
+</div>
+</div>
+<a id="afaa6b586512922be933c766c19d0825e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afaa6b586512922be933c766c19d0825e">&#9670;&nbsp;</a></span>indexBestOffspring</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int indexBestOffspring</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>this section makes use of the isamin de cublas function to determine the position of the worst individual of the new population </p>
+
+</div>
+</div>
+<a id="ada040e84790d4bc82644e9f571386bea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada040e84790d4bc82644e9f571386bea">&#9670;&nbsp;</a></span>indexRandomTrees</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float* indexRandomTrees</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>vector of pointers to save random positions of random trees and allocation in GPU </p>
+
+</div>
+</div>
+<a id="adb88f9036567a33800ee29600cf9fe24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb88f9036567a33800ee29600cf9fe24">&#9670;&nbsp;</a></span>indexWorstOffspring</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int indexWorstOffspring</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a5daa7a3beb6899c303b00e907fcb2c76"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5daa7a3beb6899c303b00e907fcb2c76">&#9670;&nbsp;</a></span>individualLength</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int individualLength = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a98b1ca953eacd0473f02ff8cad0dd5d9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98b1ca953eacd0473f02ff8cad0dd5d9">&#9670;&nbsp;</a></span>minGridSize</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int minGridSize</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad45118f04f421126781ec029b882420f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad45118f04f421126781ec029b882420f">&#9670;&nbsp;</a></span>minGridSizeTest</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int minGridSizeTest</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a3b9d453513bd37270390a572e6d3f263"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3b9d453513bd37270390a572e6d3f263">&#9670;&nbsp;</a></span>mutationStep</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float* mutationStep</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>vector of pointers to save the mutation step of the semantic mutation and allocation in GPU this section makes use of the isamin de cublas function to determine the position of the best individual of the new population </p>
 
 </div>
 </div>
@@ -1799,9 +2092,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>struct variable containing the values of the parameters specified in the configuration.ini file </p>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8h_source.html#l00119">119</a> of file <a class="el" href="_gsgp_cuda_8h_source.html">GsgpCuda.h</a>.</p>
+<p>variable containing the numbers of rows (instances) of the training dataset </p>
 
 </div>
 </div>
@@ -1816,9 +2108,8 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>struct variable containing the values of the parameters specified in the configuration.ini file </p>
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8h_source.html#l00121">121</a> of file <a class="el" href="_gsgp_cuda_8h_source.html">GsgpCuda.h</a>.</p>
+<p>variable containing the numbers of rows (instances) of the test dataset </p>
 
 </div>
 </div>
@@ -1834,7 +2125,515 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_gsgp_cuda_8h_source.html#l00123">123</a> of file <a class="el" href="_gsgp_cuda_8h_source.html">GsgpCuda.h</a>.</p>
+<p>variable containing the numbers of columns (excluding the target) of the training dataset </p>
+
+</div>
+</div>
+<a id="a8b2e13c78efca330f06b6ddcd7464b41"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8b2e13c78efca330f06b6ddcd7464b41">&#9670;&nbsp;</a></span>result</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int result</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a469754b37c9b28fa101998ebae0a1c42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a469754b37c9b28fa101998ebae0a1c42">&#9670;&nbsp;</a></span>resultBestOffspring</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int resultBestOffspring</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aeba078edd988b47feb16e94260aa4ffd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeba078edd988b47feb16e94260aa4ffd">&#9670;&nbsp;</a></span>resultWorst</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int resultWorst</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a669e327a59820bfbde98d43dcf08066f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a669e327a59820bfbde98d43dcf08066f">&#9670;&nbsp;</a></span>sizeElementsSemanticTest</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long int sizeElementsSemanticTest = (config.populationSize*<a class="el" href="_gsgp_cuda_8h.html#ab86d8b12b023b979a3961e312547803e">nrowTest</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Variable that stores test data elements </p>
+
+</div>
+</div>
+<a id="a4f495e81c1a54b531561484b0f6613a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f495e81c1a54b531561484b0f6613a0">&#9670;&nbsp;</a></span>sizeElementsSemanticTrain</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long int sizeElementsSemanticTrain</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Variable that stores training data elements </p>
+
+</div>
+</div>
+<a id="a0da4d8bb2558093b2af246c83a127dc3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0da4d8bb2558093b2af246c83a127dc3">&#9670;&nbsp;</a></span>sizeMemDataTest</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long int sizeMemDataTest = sizeof(float)*(<a class="el" href="_gsgp_cuda_8h.html#ab86d8b12b023b979a3961e312547803e">nrowTest</a>*<a class="el" href="_gsgp_cuda_8h.html#a659c08382b54340ded81efe36fcb6106">nvar</a>)</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Variable that stores the size in bytes the size of the test data </p>
+
+</div>
+</div>
+<a id="acfa513b4aeac8b8b24cf38a728860835"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acfa513b4aeac8b8b24cf38a728860835">&#9670;&nbsp;</a></span>sizeMemDataTrain</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long int sizeMemDataTrain</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Variable that stores the size in bytes the size of the training data </p>
+
+</div>
+</div>
+<a id="ab35f6352fca975b1822aea8b6be732db"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab35f6352fca975b1822aea8b6be732db">&#9670;&nbsp;</a></span>sizeMemIndividuals</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sizeMemIndividuals</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Variable that stores the size of the memory for the individuals in the GPU </p>
+
+</div>
+</div>
+<a id="a301e176f84e6e4147e084cd036838482"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a301e176f84e6e4147e084cd036838482">&#9670;&nbsp;</a></span>sizeMemPopulation</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int sizeMemPopulation</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Variable that stores the size of the memory for the population in the GPU </p>
+
+</div>
+</div>
+<a id="a08dd9ac9bee8e2796b9af7c2fb32fcf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08dd9ac9bee8e2796b9af7c2fb32fcf5">&#9670;&nbsp;</a></span>sizeMemSemanticTest</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long int sizeMemSemanticTest</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Variable that stores the size in bytes of semantics for the entire population with test data </p>
+
+</div>
+</div>
+<a id="a4c2f76394f3c9a2e84fe7ca6f66d6171"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4c2f76394f3c9a2e84fe7ca6f66d6171">&#9670;&nbsp;</a></span>sizeMemSemanticTrain</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long int sizeMemSemanticTrain</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Variable that stores the size in bytes of semantics for the entire population with training data </p>
+
+</div>
+</div>
+<a id="a3dc78b744cc77c15dc87023eeedb5d00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3dc78b744cc77c15dc87023eeedb5d00">&#9670;&nbsp;</a></span>tempFitnes</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float * tempFitnes</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a4fd49df423809a5ca5696f9462b1515f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4fd49df423809a5ca5696f9462b1515f">&#9670;&nbsp;</a></span>tempFitnesTest</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float * tempFitnesTest</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>temporal Variables to perform the movement of pointers in survival </p>
+
+</div>
+</div>
+<a id="a46baa3cc16a8aafbed2cd6fc85ebc3ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a46baa3cc16a8aafbed2cd6fc85ebc3ff">&#9670;&nbsp;</a></span>tempSemantic</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float* tempSemantic</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a718f0f8ca658a8d31d4be94a4be4eb9a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a718f0f8ca658a8d31d4be94a4be4eb9a">&#9670;&nbsp;</a></span>tempSemanticTest</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float * tempSemanticTest</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a385066922ced304aa156537e1d92f3a2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a385066922ced304aa156537e1d92f3a2">&#9670;&nbsp;</a></span>twoSizeMemPopulation</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int twoSizeMemPopulation</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Variable that stores twice the size in bytes of an initial population to store random numbers </p>
+
+</div>
+</div>
+<a id="a3bf8f384e4d90e276ffec67349be0b52"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3bf8f384e4d90e276ffec67349be0b52">&#9670;&nbsp;</a></span>twoSizePopulation</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long int twoSizePopulation</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Variable storing twice the initial population of individuals to generate random positions </p>
+
+</div>
+</div>
+<a id="a07e90ec7dc215d7bb532f737b280a340"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a07e90ec7dc215d7bb532f737b280a340">&#9670;&nbsp;</a></span>uDataTest</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float * uDataTest</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adfe7919de8cd5425d43716e28447923b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adfe7919de8cd5425d43716e28447923b">&#9670;&nbsp;</a></span>uDataTestTarget</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float * uDataTestTarget</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="adb962d16e9ec96c6bd56f3894c49a0ae"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb962d16e9ec96c6bd56f3894c49a0ae">&#9670;&nbsp;</a></span>uDataTrain</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float* uDataTrain</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a533a836d795041adcb69b944cfe9c61f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a533a836d795041adcb69b944cfe9c61f">&#9670;&nbsp;</a></span>uDataTrainTarget</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float * uDataTrainTarget</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a671f41e5af40f231220fc90d958eb27b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a671f41e5af40f231220fc90d958eb27b">&#9670;&nbsp;</a></span>uFit</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float* uFit</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>pointers of vectors of training and test fitness values at generation g and assignment in the GPU </p>
+
+</div>
+</div>
+<a id="a6da0d301cb34f302256638670a7b1af2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6da0d301cb34f302256638670a7b1af2">&#9670;&nbsp;</a></span>uFitNew</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float * uFitNew</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac3e8d601be52581117f807630ce965d3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac3e8d601be52581117f807630ce965d3">&#9670;&nbsp;</a></span>uFitTest</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float * uFitTest</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>this block contains the pointer of vectors for the input data and target values ​​and assignment in the GPU </p>
+
+</div>
+</div>
+<a id="a3887e0582380e5a7b2365ee6a51c95af"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3887e0582380e5a7b2365ee6a51c95af">&#9670;&nbsp;</a></span>uFitTestNew</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float * uFitTestNew</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>vectors that contain the semantics of an individual in the population, calculated in the training and test set in the g + 1 generation and its allocation in GPU </p>
+
+</div>
+</div>
+<a id="a3be2b7cb45503176eac5634a3274125d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3be2b7cb45503176eac5634a3274125d">&#9670;&nbsp;</a></span>uPushGenes</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int* uPushGenes</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a35d1b18a3960c662f8ffb920330c557e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35d1b18a3960c662f8ffb920330c557e">&#9670;&nbsp;</a></span>uSemanticRandomTrees</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float * uSemanticRandomTrees</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac51e6cbf8911229381b901130f148f85"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac51e6cbf8911229381b901130f148f85">&#9670;&nbsp;</a></span>uSemanticTestCases</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float * uSemanticTestCases</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>pointer of vectors that contain the semantics of an individual in the population, calculated with the training set and test in generation g and its allocation in GPU </p>
+
+</div>
+</div>
+<a id="a5c2ad0e948e20a0ba462b1d1ed04205a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5c2ad0e948e20a0ba462b1d1ed04205a">&#9670;&nbsp;</a></span>uSemanticTestCasesNew</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float * uSemanticTestCasesNew</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a32ac8b5a54dd5133a2837aac510832c1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a32ac8b5a54dd5133a2837aac510832c1">&#9670;&nbsp;</a></span>uSemanticTestRandomTrees</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float * uSemanticTestRandomTrees</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afa03ff391facaab8dc7c60ba47d962a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa03ff391facaab8dc7c60ba47d962a9">&#9670;&nbsp;</a></span>uSemanticTrainCases</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float* uSemanticTrainCases</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af7b2f94d09417db3c188aea153d83761"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af7b2f94d09417db3c188aea153d83761">&#9670;&nbsp;</a></span>uSemanticTrainCasesNew</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float* uSemanticTrainCasesNew</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="af44520c78b9a85480eb275928bacbad6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af44520c78b9a85480eb275928bacbad6">&#9670;&nbsp;</a></span>uStackInd</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float* uStackInd</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>auxiliary pointer vectors for the interpreter and calculate the semantics for the populations and assignment in the GPU </p>
+
+</div>
+</div>
+<a id="a4f7c270de7686aa5ae7c3a5f6d61ddf1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f7c270de7686aa5ae7c3a5f6d61ddf1">&#9670;&nbsp;</a></span>vectorTraces</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="_gsgp_cuda_8h.html#a9d6caa62b0d171762992c07785d6f197">entry</a>* vectorTraces</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>This block contains the vectors of pointers to store the structure to keep track of mutation and survival and space allocation in the GPU </p>
+
+</div>
+</div>
+<a id="a4929f7becf992d9e6af7f05b60ec363d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4929f7becf992d9e6af7f05b60ec363d">&#9670;&nbsp;</a></span>vectorTracesMem</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">long int vectorTracesMem</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Variable that stores the size in bytes of the structure to store the survival record </p>
 
 </div>
 </div>

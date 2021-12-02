@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['populationsize_115',['populationSize',['../structcfg__.html#ae8d24427036d34b3a7d21d7a59ff05ed',1,'cfg_']]]
+  ['hinitialpopulation_192',['hInitialPopulation',['../_gsgp_cuda_8h.html#ac6c122d311db32725ef98bad659570be',1,'GsgpCuda.h']]],
+  ['hrandomtrees_193',['hRandomTrees',['../_gsgp_cuda_8h.html#ac8e35bc9463d27efd96f506bf53eac7c',1,'GsgpCuda.h']]]
 ];

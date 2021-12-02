@@ -1,2 +1,355 @@
 \hypertarget{_gsgp_cuda_8cu}{}\doxysection{Gsgp\+Cuda.\+cu File Reference}
 \label{_gsgp_cuda_8cu}\index{GsgpCuda.cu@{GsgpCuda.cu}}
+
+
+file containing the main with the geometric semantic genetic programming algorithm  
+
+
+{\ttfamily \#include \char`\"{}Gsgp\+Cuda.\+cpp\char`\"{}}\newline
+Include dependency graph for Gsgp\+Cuda.\+cu\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{_gsgp_cuda_8cu_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+file containing the main with the geometric semantic genetic programming algorithm 
+
+\begin{DoxyAuthor}{Author}
+Jose Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+created on 25/01/2020
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{_gsgp_cuda_8cu_a3c04138a5bfe5d72780bb7e82a18e627}\label{_gsgp_cuda_8cu_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{GsgpCuda.cu@{GsgpCuda.cu}!main@{main}}
+\index{main@{main}!GsgpCuda.cu@{GsgpCuda.cu}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+$<$ Initialization of the seed for the generation of random numbers
+
+$<$ reading the parameters of the algorithm
+
+$<$ Select a G\+PU device
+
+$<$ Name of the train file
+
+$<$ Name of the test file
+
+$<$ Name of output files
+
+$<$ Name of the file trace of best model
+
+$<$ Name of the file with unsseen test instances
+
+$<$ Name of the file to output values
+
+$<$ Name of file for save the output files$\ast$/
+
+std\+::string la (path\+Trace);
+
+std\+::string log\+Path (config.\+log\+Path); /$\ast$ Path of directory for data files and log files generated in execution
+
+$<$ Name of file for save the initial population ~\newline
+
+
+$<$ name of file for save the random trees
+
+Counting the number of rows and variables of the train file
+
+$<$ Variable that stores maximum depth for individuals
+
+$<$ Variable that stores size in bytes of the number of individuals in the initial population
+
+$<$ Variable that stores twice the size in bytes of an initial population to store random numbers
+
+$<$ Variable that stores size in bytes for initial population
+
+$<$ Variable storing twice the initial population of individuals to generate random positions
+
+$<$ Variable that stores the size in bytes of semantics for the entire population with training data
+
+$<$ Variable that stores the size in bytes the size of the training data
+
+$<$ Variable that stores training data elements
+
+$<$ Variable that stores the size in bytes of the structure to store the survival record
+
+$<$ Name of file for save the initial population ~\newline
+
+
+$<$ name of file for save the random trees
+
+$<$ Variables that store the time in milliseconds between the events mark1 and mark2.
+
+$<$ Variable name structure responsible for indicating the run
+
+$<$ Variable name structure responsible for indicating the file extension
+
+$<$ Variable that stores file name matching
+
+$<$ pointer to the time\+Execution1 file that contains the time consumed by the different algorithm modules
+
+$<$ Variable used to create a start mark and a stop mark to create events
+
+$<$ function that initializes the start event
+
+$<$ function that initializes the stop event
+
+$<$ C\+U\+DA\textquotesingle{}s random number library uses curand\+State\+\_\+t to keep track of the seed value we will store a random state for every thread
+
+$<$ allocate space on the G\+PU for the random states
+
+$<$ heuristic function used to choose a good block size is to aim at high occupancy
+
+$<$ round up according to array size
+
+$<$ invoke the G\+PU to initialize all of the random states
+
+$<$ pointer to the file fitnesstrain.\+csv containing the training fitness of the best individual at each generation
+
+$<$ the handle to the cu\+B\+L\+AS library context
+
+$<$ initialized using the function and is explicitly passed to every subsequent library function call
+
+load set data train $\ast$$\ast$/
+
+$<$ round up according to array size
+
+$<$ this section declares and initializes the Variables for the events and captures the time elapsed in the initialization of the initial population in the G\+PU
+
+invokes the G\+PU to initialize the initial population
+
+$<$return the initial population of the device to the host$\ast$/ cuda\+Memcpy(h\+Initial\+Population, d\+Initial\+Population, size\+Mem\+Population, cuda\+Memcpy\+Device\+To\+Host); ~\newline
+ save\+Individuals(log\+Path,h\+Initial\+Population, name\+Population, individual\+Length,config.\+population\+Size); ~\newline
+
+
+/$\ast$!$<$ invokes the G\+PU to initialize the random trees$\ast$/ initialize\+Population$<$$<$$<$ grid\+Size, block\+Size $>$$>$$>$(d\+Random\+Trees, nvar, individual\+Length, states, config.\+max\+Random\+Constant,4,config.\+function\+Ratio, config.\+variable\+Ratio); ~\newline
+ cuda\+Error\+Check(\char`\"{}initialize\+Population\char`\"{}); ~\newline
+ /$\ast$!$<$return the initial population of the device to the host$\ast$/ cuda\+Memcpy(h\+Random\+Trees, d\+Random\+Trees,size\+Mem\+Population, cuda\+Memcpy\+Device\+To\+Host); ~\newline
+ save\+Individuals(log\+Path,h\+Random\+Trees, name\+Random\+Trees,individual\+Length,config.\+population\+Size);
+
+cuda\+Event\+\_\+t start\+Compute\+Semantics, stop\+Compute\+Semantics; /$\ast$!$<$ This section declares and initializes the Variables for the events and captures the time elapsed in the interpretation of the initial population in the G\+PU
+
+$<$ heuristic function used to choose a good block size is to aim at high occupancy
+
+$<$ round up according to array size
+
+$<$ invokes the G\+PU to interpret the initial population with data train
+
+$<$ invokes the G\+PU to interpret the random trees with data train
+
+$<$ memory is deallocated for training data and auxiliary vectors for the interpreter
+
+$<$ invokes the G\+PU to calculate the error (R\+M\+SE) the initial population
+
+$<$ function is necessary so that the C\+PU does not continue with the execution of the program and allows to capture the fitness
+
+$<$ writing the training fitness of the best individual on the file fitnesstrain.\+csv
+
+$<$ main G\+S\+GP cycle
+
+$<$ register execution time
+
+$<$ initializes the random number generator
+
+$<$ invokes the G\+PU to initialize the random positions of the random trees
+
+$<$ initializes the random number generator
+
+$<$ invokes the G\+PU to initialize the random positions of the random trees
+
+$<$ invokes the G\+PU to calculate the error (R\+M\+SE) the new population
+
+$<$ set byte values
+
+$<$ this section performs survival by updating the semantic and fitness vectors respectively
+
+$<$ at the end of the execution to deallocate memory
+
+$<$ writing the time execution for stages the algorithm
+
+$<$ all device allocations are removed
+
+$<$ this section is for the case when the user wants to run the algorithm with the training and test files
+
+$<$ Variable that stores maximum depth for individuals
+
+$<$ Variable that stores size in bytes for initial population
+
+$<$ Variable that stores twice the size in bytes of an initial population to store random numbers
+
+$<$ Variable that stores size in bytes of the number of individuals in the initial population
+
+$<$ Variable storing twice the initial population of individuals to generate random positions
+
+$<$ Variable that stores the size in bytes of semantics for the entire population with training data
+
+$<$ Variable that stores the size in bytes of semantics for the entire population with test data
+
+$<$ Variable that stores the size in bytes the size of the training data
+
+$<$ Variable that stores the size in bytes the size of the test data
+
+$<$ Variable that stores training data elements
+
+$<$ Variable that stores test data elements
+
+$<$ Variable that stores the size in bytes of the structure to store the survival record
+
+$<$ Variables that store the time in milliseconds between the events mark1 and mark2.
+
+$<$ Variable name structure responsible for indicating the run
+
+$<$ Variable name structure responsible for indicating the file extension
+
+$<$ Variable that stores file name matching
+
+$<$ pointer to the time\+Execution1 file that contains the time consumed by the different algorithm modules
+
+$<$ Variable used to create a start mark and a stop mark to create events
+
+$<$ function that initializes the start event
+
+$<$ function that initializes the stop event
+
+$<$ C\+U\+DA\textquotesingle{}s random number library uses curand\+State\+\_\+t to keep track of the seed value we will store a random state for every thread
+
+$<$ allocate space on the G\+PU for the random states
+
+$<$ heuristic function used to choose a good block size is to aim at high occupancy
+
+$<$ round up according to array size
+
+$<$ invoke the G\+PU to initialize all of the random states
+
+$<$ pointer to the file fitnesstrain.\+csv containing the training fitness of the best individual at each generation
+
+$<$ pointer to the file fitnesstest.\+csv containing the test fitness of the best individual at each generation
+
+$<$ the handle to the cu\+B\+L\+AS library context
+
+$<$ initialized using the function and is explicitly passed to every subsequent library function call
+
+$<$ load set data train and test
+
+$<$ round up according to array size
+
+$<$ this section declares and initializes the Variables for the events and captures the time elapsed in the initialization of the initial population in the G\+PU
+
+invokes the G\+PU to initialize the initial population
+
+$<$return the initial population of the device to the host$\ast$/ cuda\+Memcpy(h\+Initial\+Population, d\+Initial\+Population, size\+Mem\+Population, cuda\+Memcpy\+Device\+To\+Host); ~\newline
+ save\+Individuals(log\+Path,h\+Initial\+Population, name\+Population, individual\+Length,config.\+population\+Size); ~\newline
+
+
+/$\ast$!$<$ invokes the G\+PU to initialize the random trees$\ast$/ initialize\+Population$<$$<$$<$ grid\+Size, block\+Size $>$$>$$>$(d\+Random\+Trees, nvar, individual\+Length, states, config.\+max\+Random\+Constant,4,config.\+function\+Ratio, config.\+variable\+Ratio); ~\newline
+ cuda\+Error\+Check(\char`\"{}initialize\+Population\char`\"{}); ~\newline
+
+
+/$\ast$!$<$return the initial population of the device to the host$\ast$/ cuda\+Memcpy(h\+Random\+Trees, d\+Random\+Trees,size\+Mem\+Population, cuda\+Memcpy\+Device\+To\+Host); ~\newline
+ save\+Individuals(log\+Path,h\+Random\+Trees, name\+Random\+Trees,individual\+Length,config.\+population\+Size); ~\newline
+
+
+cuda\+Event\+\_\+t start\+Compute\+Semantics, stop\+Compute\+Semantics; /$\ast$!$<$ This section declares and initializes the Variables for the events and captures the time elapsed in the interpretation of the initial population in the G\+PU
+
+$<$ heuristic function used to choose a good block size is to aim at high occupancy
+
+$<$ round up according to array size
+
+$<$ invokes the G\+PU to interpret the initial population with data train
+
+$<$ invokes the G\+PU to interpret the random trees with data train
+
+$<$ invokes the G\+PU to interpret the initial population with data train
+
+$<$ invokes the G\+PU to interpret the random trees with data test
+
+$<$ memory is deallocated for training data and auxiliary vectors for the interpreter
+
+$<$ invokes the G\+PU to calculate the error (R\+M\+SE) the initial population
+
+$<$ invokes the G\+PU to calculate the error (R\+M\+SE) the initial population
+
+$<$ function is necessary so that the C\+PU does not continue with the execution of the program and allows to capture the fitness
+
+$<$ writing the training fitness of the best individual on the file fitnesstrain.\+csv
+
+$<$ writing the test fitness of the best individual on the file fitnesstest.\+csv
+
+$<$ main G\+S\+GP cycle
+
+$<$ register execution time
+
+$<$ initializes the random number generator
+
+$<$ invokes the G\+PU to initialize the random positions of the random trees
+
+$<$ initializes the random number generator
+
+$<$ invokes the G\+PU to initialize the random positions of the random trees
+
+$<$ invokes the G\+PU to calculate the error (R\+M\+SE) the new population
+
+$<$ this section makes use of the isamin de cublas function to determine the position of the best individual of the new population
+
+$<$ this section makes use of the isamin de cublas function to determine the position of the worst individual of the new population
+
+$<$ geometric semantic mutation with semantic test
+
+$<$ invokes the G\+PU to calculate the error (R\+M\+SE) the new population
+
+$<$ set byte values
+
+$<$ this section performs survival by updating the semantic and fitness vectors respectively
+
+$<$ writing the test fitness of the best individual on the file fitnesstest.\+csv
+
+$<$ at the end of the execution to deallocate memory
+
+$<$ writing the time execution for stages the algorithm
+
+$<$ all device allocations are removed
+
+$<$ Variable that stores maximum depth for individuals
+
+$<$ Variable that stores size in bytes for initial population
+
+$<$ Variable that stores size in bytes of the number of individuals in the initial population
+
+$<$ This vector pointers to store the individuals of the initial population and random trees
+
+$<$ Variable that stores the size in bytes the initial population
+
+$<$ Variable that stores the size in bytes the initial population
+
+$<$return the initial population of the device to the host$\ast$/ cuda\+Memcpy(d\+Initial\+Population, init\+Population, size\+Mem\+Population, cuda\+Memcpy\+Host\+To\+Device); cuda\+Memcpy(d\+Random\+Trees, random\+Tress, size\+Mem\+Population, cuda\+Memcpy\+Host\+To\+Device);
+
+int size\+Data\+Test = sizeof(float)$\ast$(nrow\+Test$\ast$nvar); /$\ast$!$<$ Variable that stores the size in bytes the size of the test data
+
+$<$ Variable that stores the size in bytes the size of the target data
+
+$<$ This vector pointers to store the individuals of the test data and target data
+
+$<$ Reserve memory on host
+
+$<$ Reserve memory on host
+
+$<$ Variable that stores the size in bytes of semantics for the entire population with test data
+
+$<$ pointer of vectors that contain the semantics of an individual in the population, calculated with the training set and test in generation g and its allocation in G\+PU
+
+$<$ heuristic function used to choose a good block size is to aim at high occupancy
+
+$<$ round up according to array size
+
+$<$ invokes the G\+PU to interpret the initial population with data train
+
+$<$ Create file for saved results of best model with the unseen data

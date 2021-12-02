@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['newindividual_110',['newIndividual',['../structentry__.html#aa1d655fb76c65dbee9b799fd56d1af3e',1,'entry_']]],
-  ['nrow_111',['nrow',['../_gsgp_cuda_8h.html#a8d2a2743f9e24ba875ac91d07fadf1d4',1,'GsgpCuda.h']]],
-  ['nrowtest_112',['nrowTest',['../_gsgp_cuda_8h.html#ab86d8b12b023b979a3961e312547803e',1,'GsgpCuda.h']]],
-  ['number_113',['number',['../structentry__.html#ae4b922df64892c78429f45d28ffa5826',1,'entry_']]],
-  ['nvar_114',['nvar',['../_gsgp_cuda_8h.html#a659c08382b54340ded81efe36fcb6106',1,'GsgpCuda.h']]]
+  ['gridsize_190',['gridSize',['../_gsgp_cuda_8h.html#a4b16bb042891838996c6db35e71e951b',1,'GsgpCuda.h']]],
+  ['gridsizetest_191',['gridSizeTest',['../_gsgp_cuda_8h.html#a7ee03039c58442d5c813540afa9c1e3a',1,'GsgpCuda.h']]]
 ];

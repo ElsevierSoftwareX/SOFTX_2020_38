@@ -1,2 +1,124 @@
 \hypertarget{test_initial_population_8cu}{}\doxysection{test\+Initial\+Population.\+cu File Reference}
 \label{test_initial_population_8cu}\index{testInitialPopulation.cu@{testInitialPopulation.cu}}
+
+
+file containing the main with the geometric semantic genetic programming algorithm  
+
+
+{\ttfamily \#include \char`\"{}Gsgp\+Cuda.\+cpp\char`\"{}}\newline
+{\ttfamily \#include $<$cstdio$>$}\newline
+{\ttfamily \#include $<$ostream$>$}\newline
+Include dependency graph for test\+Initial\+Population.\+cu\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{test_initial_population_8cu_a780cb33de32b71bfdc0b39796de3c6b8}{test}} (float $\ast$individuals, int size\+Max\+Depth, int size\+Population)
+\begin{DoxyCompactList}\small\item\em Function that tests the individuals of the population. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{test_initial_population_8cu_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+file containing the main with the geometric semantic genetic programming algorithm 
+
+\begin{DoxyDate}{Date}
+created on 25/01/2020
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{test_initial_population_8cu_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{test_initial_population_8cu_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{testInitialPopulation.cu@{testInitialPopulation.cu}!main@{main}}
+\index{main@{main}!testInitialPopulation.cu@{testInitialPopulation.cu}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+$<$ initialization of the seed for the generation of random numbers
+
+$<$ select a G\+PU device
+
+$<$ size of the population, number of candidate solutions
+
+$<$ variable thar stores maximum depth for individuals
+
+$<$ variable that stores size in bytes for initial population
+
+$<$ variables that store the execution configuration for a kernel in the G\+PU
+
+$<$ C\+U\+DA\textquotesingle{}s random number library uses curand\+State\+\_\+t to keep track of the seed value we will store a random state for every thread
+
+$<$ allocate space on the G\+PU for the random states
+
+$<$ heuristic function used to choose a good block size is to aim at high occupancy
+
+$<$ round up according to array size
+
+$<$ invoke the G\+PU to initialize all of the random states
+
+$<$ This block contains the vectors of pointers to store the population and random trees and space allocation in the G\+PU
+
+$<$ allocate space on the C\+PU for the h\+Initial\+Population
+
+$<$ allocate space on the C\+PU for the h\+Random\+Trees
+
+$<$ allocate space on the G\+PU for the d\+Random\+Trees
+
+$<$ allocate space on the G\+PU for the d\+Initial\+Population
+
+$<$ invokes the G\+PU to initialize the initial population
+
+$<$return the initial population of the device to the host
+
+$<$ invokes the G\+PU to initialize the initial population
+
+$<$return the initial population of the device to the host
+
+$<$ all device allocations are removed\mbox{\Hypertarget{test_initial_population_8cu_a780cb33de32b71bfdc0b39796de3c6b8}\label{test_initial_population_8cu_a780cb33de32b71bfdc0b39796de3c6b8}} 
+\index{testInitialPopulation.cu@{testInitialPopulation.cu}!test@{test}}
+\index{test@{test}!testInitialPopulation.cu@{testInitialPopulation.cu}}
+\doxysubsubsection{\texorpdfstring{test()}{test()}}
+{\footnotesize\ttfamily void test (\begin{DoxyParamCaption}\item[{float $\ast$}]{individuals,  }\item[{int}]{size\+Max\+Depth,  }\item[{int}]{size\+Population }\end{DoxyParamCaption})}
+
+
+
+Function that tests the individuals of the population. 
+
+This file contains the test for the kernel that initializes the individuals on G\+PU.
+
+
+\begin{DoxyParams}{Parameters}
+{\em float} & $\ast$individuals\+: This vector pointers to store the individuals of the population. \\
+\hline
+{\em int} & size\+Max\+Depth\+: This variable stores the maximum depth of the individuals. \\
+\hline
+{\em int} & size\+Population\+: This variable contains the number of individuals that exist in the population. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\begin{DoxyDate}{Date}
+05/12/2020 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em float} & individuals\+: vector pointers to store the individuals of the initial population. \\
+\hline
+{\em int} & size\+Max\+Depth\+: Variable thar stores maximum depth for individuals. \\
+\hline
+{\em int} & size\+Population\+: Size of the population, number of candidate solutions \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\begin{DoxyDate}{Date}
+5/12/2020 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+Jose Manuel Muñoz Contreras 
+\end{DoxyAuthor}

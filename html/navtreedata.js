@@ -24,13 +24,13 @@
 */
 var NAVTREE =
 [
-  [ "GsgpCuda", "index.html", [
+  [ "Gsgp-CUDA", "index.html", [
     [ "Geometric Semantic Genetic Programming into GPU", "md__readme.html", [
       [ "Parameters:", "md__readme.html#autotoc_md1", null ],
       [ "Data Description:", "md__readme.html#autotoc_md2", null ],
       [ "Software code languajes, tools, and services used", "md__readme.html#autotoc_md3", null ],
       [ "Compilation requirements, operating enviroments & dependencies", "md__readme.html#autotoc_md4", null ],
-      [ "How to test best model", "md__readme.html#autotoc_md5", null ],
+      [ "How to make new predictions (inference) with the best model found", "md__readme.html#autotoc_md5", null ],
       [ "How to run unit tests for the main GsgpCUDA kernels", "md__readme.html#autotoc_md6", null ],
       [ "Documentation:", "md__readme.html#autotoc_md7", null ]
     ] ],
@@ -48,7 +48,8 @@ var NAVTREE =
         [ "All", "globals.html", null ],
         [ "Functions", "globals_func.html", null ],
         [ "Variables", "globals_vars.html", null ],
-        [ "Typedefs", "globals_type.html", null ]
+        [ "Typedefs", "globals_type.html", null ],
+        [ "Macros", "globals_defs.html", null ]
       ] ]
     ] ]
   ] ]

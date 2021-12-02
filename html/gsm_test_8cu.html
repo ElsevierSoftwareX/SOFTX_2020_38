@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>GsgpCuda: gsmTest.cu File Reference</title>
+<title>Gsgp-CUDA: gsmTest.cu File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,10 +25,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">GsgpCuda
-   &#160;<span id="projectnumber">1.0</span>
+   <div id="projectname">Gsgp-CUDA
+   &#160;<span id="projectnumber">2.0</span>
    </div>
-   <div id="projectbrief">This  is a C/C++/CUDA implementation of a geometric semantic genetic programming algorithm.</div>
+   <div id="projectbrief">This is a C/C++/CUDA implementation of a geometric semantic genetic programming algorithm.</div>
   </td>
  </tr>
  </tbody>
@@ -83,12 +83,368 @@ $(document).ready(function(){initNavTree('gsm_test_8cu.html',''); initResizable(
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#define-members">Macros</a> &#124;
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">gsmTest.cu File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+<div class="textblock"><code>#include &quot;<a class="el" href="_gsgp_cuda_8cpp.html">GsgpCuda.cpp</a>&quot;</code><br />
+<code>#include &lt;cstdio&gt;</code><br />
+<code>#include &lt;cstdlib&gt;</code><br />
+<code>#include &lt;ostream&gt;</code><br />
+<code>#include &lt;stack&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for gsmTest.cu:</div>
+<div class="dyncontent">
+<div class="center"><img src="gsm_test_8cu__incl.png" border="0" usemap="#agsm_test_8cu" alt=""/></div>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="define-members"></a>
+Macros</h2></td></tr>
+<tr class="memitem:af6dbb904da0749afa81efc8d36b891a5"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gsm_test_8cu.html#af6dbb904da0749afa81efc8d36b891a5">frand</a>()&#160;&#160;&#160;((double) rand() / (RAND_MAX))</td></tr>
+<tr class="memdesc:af6dbb904da0749afa81efc8d36b891a5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Macro used to generate a random number.  <a href="gsm_test_8cu.html#af6dbb904da0749afa81efc8d36b891a5">More...</a><br /></td></tr>
+<tr class="separator:af6dbb904da0749afa81efc8d36b891a5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a1512f3435f9492efeb3f7367b9f1b571"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gsm_test_8cu.html#a1512f3435f9492efeb3f7367b9f1b571">exampleSemantics</a> (float *semantic, int sizeIndividuals, int <a class="el" href="_gsgp_cuda_8h.html#a8d2a2743f9e24ba875ac91d07fadf1d4">nrow</a>)</td></tr>
+<tr class="memdesc:a1512f3435f9492efeb3f7367b9f1b571"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function initializes with random numbers between 0 and 1 the semantics for initial population and random trees.  <a href="gsm_test_8cu.html#a1512f3435f9492efeb3f7367b9f1b571">More...</a><br /></td></tr>
+<tr class="separator:a1512f3435f9492efeb3f7367b9f1b571"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f0995fd0bd4f8449b26524e0c38f00b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gsm_test_8cu.html#a2f0995fd0bd4f8449b26524e0c38f00b">printSemantics</a> (float *semantic, int sizeIndividualsIndi, int <a class="el" href="_gsgp_cuda_8h.html#a8d2a2743f9e24ba875ac91d07fadf1d4">nrow</a>)</td></tr>
+<tr class="memdesc:a2f0995fd0bd4f8449b26524e0c38f00b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function only prints the semantic values that exist in the pointer vectors it receives.  <a href="gsm_test_8cu.html#a2f0995fd0bd4f8449b26524e0c38f00b">More...</a><br /></td></tr>
+<tr class="separator:a2f0995fd0bd4f8449b26524e0c38f00b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a63dc5c56f4e0ae5adc0560e7876ea5ca"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gsm_test_8cu.html#a63dc5c56f4e0ae5adc0560e7876ea5ca">omsCPU</a> (float *initialPopSemantic, float *randomTreesSemantic, float *newOffspringSemantic, int sizePopulation, int <a class="el" href="_gsgp_cuda_8h.html#a8d2a2743f9e24ba875ac91d07fadf1d4">nrow</a>, double ms, float *index)</td></tr>
+<tr class="memdesc:a63dc5c56f4e0ae5adc0560e7876ea5ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">The GSM operator is basically a vector addition operation, that can be performed independently for each semantic element STi,j. However, it is necessary to select the semantics of two random trees R u and R v , and a random mutation step ms.  <a href="gsm_test_8cu.html#a63dc5c56f4e0ae5adc0560e7876ea5ca">More...</a><br /></td></tr>
+<tr class="separator:a63dc5c56f4e0ae5adc0560e7876ea5ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aae7b81b486be77d36f57372d8eb3c4fc"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gsm_test_8cu.html#aae7b81b486be77d36f57372d8eb3c4fc">testSemantic</a> (float *cpuSemantic, float *gpuSemantic, int sizeIndividuals, int <a class="el" href="_gsgp_cuda_8h.html#a8d2a2743f9e24ba875ac91d07fadf1d4">nrow</a>)</td></tr>
+<tr class="memdesc:aae7b81b486be77d36f57372d8eb3c4fc"><td class="mdescLeft">&#160;</td><td class="mdescRight">This function compares the semantics obtained in the GPU against a semantics obtained in the CPU to verify that the operations within the kernel executed in the GPU are correct.  <a href="gsm_test_8cu.html#aae7b81b486be77d36f57372d8eb3c4fc">More...</a><br /></td></tr>
+<tr class="separator:aae7b81b486be77d36f57372d8eb3c4fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="gsm_test_8cu.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
+<tr class="memdesc:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This file contains the test for the kernel that initializes the individuals on GPU.  <a href="gsm_test_8cu.html#ae66f6b31b5ad750f1fe042a706a4e3d4">More...</a><br /></td></tr>
+<tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Macro Definition Documentation</h2>
+<a id="af6dbb904da0749afa81efc8d36b891a5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af6dbb904da0749afa81efc8d36b891a5">&#9670;&nbsp;</a></span>frand</h2>
 
-<p><a href="gsm_test_8cu_source.html">Go to the source code of this file.</a></p>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define frand</td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td>&#160;&#160;&#160;((double) rand() / (RAND_MAX))</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Macro used to generate a random number. </p>
+
+</div>
+</div>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a1512f3435f9492efeb3f7367b9f1b571"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1512f3435f9492efeb3f7367b9f1b571">&#9670;&nbsp;</a></span>exampleSemantics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void exampleSemantics </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>semantic</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sizeIndividuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nrow</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function initializes with random numbers between 0 and 1 the semantics for initial population and random trees. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">float</td><td>*semantic:This vector of pointers contains the semantics of the initial population or random trees as the case may be. </td></tr>
+    <tr><td class="paramname">int</td><td>*sizeIndividuals: This variable contains the number of individuals that exist in the initial population. </td></tr>
+    <tr><td class="paramname">int</td><td>*nrow: This variable contains the number of fitness cases. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>05/12/2020 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
+
+</div>
+</div>
+<a id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This file contains the test for the kernel that initializes the individuals on GPU. </p>
+<dl class="section return"><dt>Returns</dt><dd>int: 0 if the program ends without errors </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>5/12/2020 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Jose Manuel Muñoz Contreras </dd></dl>
+<p>&lt; initialization of the seed for the generation of random sizeIndividualsbers</p>
+<p>&lt; select a GPU device</p>
+<p>&lt; size of the population, number of candidate solutions</p>
+<p>&lt; variable containing the number of rows (instances) of the training dataset</p>
+<p>&lt; variable that stores the size in bytes of semantics for the entire population with training data</p>
+<p>&lt; variable that stores training data elements</p>
+<p>&lt; variable that stores twice the size in bytes of an initial population to store random numbers</p>
+<p>&lt; variable storing twice the initial population of individuals to generate random positions</p>
+<p>&lt; variable that stores the size in bytes of the structure to store the mutation record</p>
+<p>&lt; This block contains the vectors of pointers to store the structure to keep track of mutation and survival and space allocation in the GPU</p>
+<p>&lt; This block contains the vectors of pointers to store the structure to keep track of mutation and survival and space allocation in the GPU</p>
+<p>&lt; variables that store the execution configuration for a kernel in the GPU</p>
+<p>&lt; heuristic function used to choose a good block size is to aim at high occupancy</p>
+<p>&lt; round up according to array size</p>
+<p>&lt; allocate space on the CPU for the cpuSemanticInitialPopulation</p>
+<p>&lt; allocate space on the CPU for the cpuRandomTrees</p>
+<p>&lt; allocate space on the CPU for the cpuNewSemanticsOffsprings</p>
+<p>&lt; allocate space on the GPU for the hostNewSemanticsOffsprings</p>
+<p>&lt; Invoke the function to initialize the random semantics for the initial population.</p>
+<p>&lt; Invoke the function print the random semantics for the initial population.</p>
+<p>&lt; Invoke the function to initialize the random values semantics for the random trees.</p>
+<p>&lt; Invoke the function print the random semantics for the the random trees.</p>
+<p>&lt; allocate space on the GPU for the gpuSemanticInitialPopulation</p>
+<p>&lt; allocate space on the GPU for the gpuRandomTrees</p>
+<p>&lt; allocate space on the GPU for the gpuNewSemanticsOffsprings</p>
+<p>&lt; This instruction makes a copy of a vector of pointers from CPU to GPU.</p>
+<p>&lt; This instruction makes a copy of a vector of pointers from CPU to GPU.</p>
+<p>&lt; CUDA's random number library uses curandState_t to keep track of the seed value we will store a random state for every thread</p>
+<p>&lt; allocate space on the GPU for the random states</p>
+<p>&lt; heuristic function used to choose a good block size is to aim at high occupancy</p>
+<p>&lt; round up according to array size</p>
+<p>&lt; invoke the GPU to initialize all of the random states</p>
+<p>&lt; vector pointers to save random positions of random trees and allocation in GPU</p>
+<p>&lt; heuristic function used to choose a good block size is to aim at high occupancy</p>
+<p>&lt; round up according to array size</p>
+<p>&lt; heuristic function used to choose a good block size is to aim at high occupancy</p>
+<p>&lt; round up according to array size</p>
+<p>&lt; geometric semantic mutation with semantic train</p>
+<p>&lt; This instruction makes a copy of a vector of pointers from CPU to GPU.</p>
+<p>&lt; all device allocations are removed</p>
+
+</div>
+</div>
+<a id="a63dc5c56f4e0ae5adc0560e7876ea5ca"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a63dc5c56f4e0ae5adc0560e7876ea5ca">&#9670;&nbsp;</a></span>omsCPU()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void omsCPU </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>initialPopSemantic</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>randomTreesSemantic</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>newOffspringSemantic</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sizePopulation</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nrow</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">double&#160;</td>
+          <td class="paramname"><em>ms</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>index</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>The GSM operator is basically a vector addition operation, that can be performed independently for each semantic element STi,j. However, it is necessary to select the semantics of two random trees R u and R v , and a random mutation step ms. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">float</td><td>*initialPopSemantic: This vector of pointers contains the semantics of the initial population </td></tr>
+    <tr><td class="paramname">float</td><td>*randomTreesSemantic: This vector of pointers contains the semantics of the random trees </td></tr>
+    <tr><td class="paramname">float</td><td>*newOffspringSemantic: This vector of pointers will store the semantics of the new offspring </td></tr>
+    <tr><td class="paramname">int</td><td>sizePopulation: This variable contains the number of individuals that the population has </td></tr>
+    <tr><td class="paramname">int</td><td>nrow: Variable containing the number of rows (instances) of the training dataset </td></tr>
+    <tr><td class="paramname">double</td><td>ms: This variable stores a random value that causes a disturbance in the sematics of an individual </td></tr>
+    <tr><td class="paramname">int</td><td>generation: Number of generation </td></tr>
+    <tr><td class="paramname">float</td><td>*indexRandomTrees: This pointer stores the indexes randomly for mutation </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>05/12/2020 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
+
+</div>
+</div>
+<a id="a2f0995fd0bd4f8449b26524e0c38f00b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f0995fd0bd4f8449b26524e0c38f00b">&#9670;&nbsp;</a></span>printSemantics()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void printSemantics </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>semantic</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sizeIndividualsIndi</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>nrow</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function only prints the semantic values that exist in the pointer vectors it receives. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">float</td><td>*semantic:This vector of pointers contains the semantics of the initial population or random trees as the case may be. </td></tr>
+    <tr><td class="paramname">int</td><td>*sizeIndividuals: This variable contains the number of individuals that exist in the initial population. </td></tr>
+    <tr><td class="paramname">int</td><td>*nrow: This variable contains the number of fitness cases. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>05/12/2020 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
+
+</div>
+</div>
+<a id="aae7b81b486be77d36f57372d8eb3c4fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aae7b81b486be77d36f57372d8eb3c4fc">&#9670;&nbsp;</a></span>testSemantic()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void testSemantic </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>hostSemanticTrainCases</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>cpuSemantic</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>num</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>dept</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This function compares the semantics obtained in the GPU against a semantics obtained in the CPU to verify that the operations within the kernel executed in the GPU are correct. </p>
+<p>This function determines and compares if the semantics on GPU and CPU are identical.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">float</td><td>*cpuSemantic:This vector of pointers contains the semantics of the new individuals resulting from the initial population and random trees, calculated in CPU. </td></tr>
+    <tr><td class="paramname">float</td><td>*gpuSemantic:This vector of pointers contains the semantics of the new individuals resulting from the initial population and random trees, calculated in GPU. </td></tr>
+    <tr><td class="paramname">int</td><td>*sizeIndividuals: This variable contains the number of individuals that exist in the initial population. </td></tr>
+    <tr><td class="paramname">int</td><td>*nrow: This variable contains the number of fitness cases. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>05/12/2020 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">float</td><td>*hostSemanticTrainCases:This vector of pointers contains the semantics of the initial population or random trees as the case may be. </td></tr>
+    <tr><td class="paramname">float</td><td>*cpuSemantic:This vector of pointers contains the semantics of the initial population or random trees as the case may be. </td></tr>
+    <tr><td class="paramname">int</td><td>num: This variable contains the number of individuals that exist in the initial population. </td></tr>
+    <tr><td class="paramname">int</td><td>depth: This variable thar stores maximum depth for individuals </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>05/12/2020 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

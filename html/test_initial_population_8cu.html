@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.20"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>GsgpCuda: testInitialPopulation.cu File Reference</title>
+<title>Gsgp-CUDA: testInitialPopulation.cu File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -25,10 +25,10 @@
  <tbody>
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
-   <div id="projectname">GsgpCuda
-   &#160;<span id="projectnumber">1.0</span>
+   <div id="projectname">Gsgp-CUDA
+   &#160;<span id="projectnumber">2.0</span>
    </div>
-   <div id="projectbrief">This  is a C/C++/CUDA implementation of a geometric semantic genetic programming algorithm.</div>
+   <div id="projectbrief">This is a C/C++/CUDA implementation of a geometric semantic genetic programming algorithm.</div>
   </td>
  </tr>
  </tbody>
@@ -83,12 +83,133 @@ $(document).ready(function(){initNavTree('test_initial_population_8cu.html','');
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
 <div class="title">testInitialPopulation.cu File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p><a href="test_initial_population_8cu_source.html">Go to the source code of this file.</a></p>
+<p>file containing the main with the geometric semantic genetic programming algorithm  
+<a href="#details">More...</a></p>
+<div class="textblock"><code>#include &quot;<a class="el" href="_gsgp_cuda_8cpp.html">GsgpCuda.cpp</a>&quot;</code><br />
+<code>#include &lt;cstdio&gt;</code><br />
+<code>#include &lt;ostream&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for testInitialPopulation.cu:</div>
+<div class="dyncontent">
+<div class="center"><img src="test_initial_population_8cu__incl.png" border="0" usemap="#atest_initial_population_8cu" alt=""/></div>
+</div>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a780cb33de32b71bfdc0b39796de3c6b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_initial_population_8cu.html#a780cb33de32b71bfdc0b39796de3c6b8">test</a> (float *individuals, int sizeMaxDepth, int sizePopulation)</td></tr>
+<tr class="memdesc:a780cb33de32b71bfdc0b39796de3c6b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Function that tests the individuals of the population.  <a href="test_initial_population_8cu.html#a780cb33de32b71bfdc0b39796de3c6b8">More...</a><br /></td></tr>
+<tr class="separator:a780cb33de32b71bfdc0b39796de3c6b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="test_initial_population_8cu.html#ae66f6b31b5ad750f1fe042a706a4e3d4">main</a> ()</td></tr>
+<tr class="separator:ae66f6b31b5ad750f1fe042a706a4e3d4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>file containing the main with the geometric semantic genetic programming algorithm </p>
+<dl class="section date"><dt>Date</dt><dd>created on 25/01/2020</dd></dl>
+</div><h2 class="groupheader">Function Documentation</h2>
+<a id="ae66f6b31b5ad750f1fe042a706a4e3d4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae66f6b31b5ad750f1fe042a706a4e3d4">&#9670;&nbsp;</a></span>main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int main </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>&lt; initialization of the seed for the generation of random numbers</p>
+<p>&lt; select a GPU device</p>
+<p>&lt; size of the population, number of candidate solutions</p>
+<p>&lt; variable thar stores maximum depth for individuals</p>
+<p>&lt; variable that stores size in bytes for initial population</p>
+<p>&lt; variables that store the execution configuration for a kernel in the GPU</p>
+<p>&lt; CUDA's random number library uses curandState_t to keep track of the seed value we will store a random state for every thread</p>
+<p>&lt; allocate space on the GPU for the random states</p>
+<p>&lt; heuristic function used to choose a good block size is to aim at high occupancy</p>
+<p>&lt; round up according to array size</p>
+<p>&lt; invoke the GPU to initialize all of the random states</p>
+<p>&lt; This block contains the vectors of pointers to store the population and random trees and space allocation in the GPU</p>
+<p>&lt; allocate space on the CPU for the hInitialPopulation</p>
+<p>&lt; allocate space on the CPU for the hRandomTrees</p>
+<p>&lt; allocate space on the GPU for the dRandomTrees</p>
+<p>&lt; allocate space on the GPU for the dInitialPopulation</p>
+<p>&lt; invokes the GPU to initialize the initial population</p>
+<p>&lt;return the initial population of the device to the host</p>
+<p>&lt; invokes the GPU to initialize the initial population</p>
+<p>&lt;return the initial population of the device to the host</p>
+<p>&lt; all device allocations are removed</p>
+
+</div>
+</div>
+<a id="a780cb33de32b71bfdc0b39796de3c6b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a780cb33de32b71bfdc0b39796de3c6b8">&#9670;&nbsp;</a></span>test()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void test </td>
+          <td>(</td>
+          <td class="paramtype">float *&#160;</td>
+          <td class="paramname"><em>individuals</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sizeMaxDepth</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>sizePopulation</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Function that tests the individuals of the population. </p>
+<p>This file contains the test for the kernel that initializes the individuals on GPU.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">float</td><td>*individuals: This vector pointers to store the individuals of the population. </td></tr>
+    <tr><td class="paramname">int</td><td>sizeMaxDepth: This variable stores the maximum depth of the individuals. </td></tr>
+    <tr><td class="paramname">int</td><td>sizePopulation: This variable contains the number of individuals that exist in the population. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>05/12/2020 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">float</td><td>individuals: vector pointers to store the individuals of the initial population. </td></tr>
+    <tr><td class="paramname">int</td><td>sizeMaxDepth: Variable thar stores maximum depth for individuals. </td></tr>
+    <tr><td class="paramname">int</td><td>sizePopulation: Size of the population, number of candidate solutions </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>void </dd></dl>
+<dl class="section date"><dt>Date</dt><dd>5/12/2020 </dd></dl>
+<dl class="section author"><dt>Author</dt><dd>Jose Manuel Muñoz Contreras </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

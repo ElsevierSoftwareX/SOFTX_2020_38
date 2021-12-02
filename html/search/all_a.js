@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['saveindividuals_49',['saveIndividuals',['../_gsgp_cuda_8cpp.html#a6c5d1be84ec27b9c191cd63a0ecded09',1,'saveIndividuals(std::string path, float *hInitialPopulation, std::string namePopulation, int sizeMaxDepthIndividual, int populationSize):&#160;GsgpCuda.cpp'],['../_gsgp_cuda_8h.html#a4d31979dbc400ebafec99c299db8be47',1,'saveIndividuals(std::string path, float *Individuals, std::string namePopulation, int maxDepth, int sizePopulation):&#160;GsgpCuda.cpp']]],
-  ['savetrace_50',['saveTrace',['../_gsgp_cuda_8cpp.html#a9d579ebd2713b78d9374006a9e27e35e',1,'saveTrace(std::string name, std::string path, entry *structSurvivor, int generation, int populationSize):&#160;GsgpCuda.cpp'],['../_gsgp_cuda_8h.html#a5c9d4e48e5ef83d4c60b1f108641260c',1,'saveTrace(std::string path, entry *x, int generation, int populationSize):&#160;GsgpCuda.h'],['../_gsgp_cuda_8h.html#a9d579ebd2713b78d9374006a9e27e35e',1,'saveTrace(std::string name, std::string path, entry *structSurvivor, int generation, int populationSize):&#160;GsgpCuda.cpp']]],
-  ['savetracecomplete_51',['saveTraceComplete',['../_gsgp_cuda_8cpp.html#ad48e430ba97b355354b25cc3b8c3adfe',1,'saveTraceComplete(std::string path, entry *structSurvivor, int generation, int populationSize):&#160;GsgpCuda.cpp'],['../_gsgp_cuda_8h.html#af1f98b169175a64c96985976b8a6b1cb',1,'saveTraceComplete(std::string path, entry *structSurvivor, int generation, int populationSize):&#160;GsgpCuda.cpp']]],
-  ['secondparent_52',['secondParent',['../structentry__.html#a4fec71a25ad72de29f2f028231c1be69',1,'entry_']]],
-  ['sigmoid_53',['sigmoid',['../_gsgp_cuda_8cpp.html#a86a361f9f62d54f600cebb5612b660fc',1,'sigmoid(float n):&#160;GsgpCuda.cpp'],['../_gsgp_cuda_8h.html#aac4615221ef46543cb25d4807e0b42d2',1,'sigmoid(float n):&#160;GsgpCuda.cpp']]]
+  ['newindividual_63',['newIndividual',['../structentry__.html#aa1d655fb76c65dbee9b799fd56d1af3e',1,'entry_']]],
+  ['nrow_64',['nrow',['../_gsgp_cuda_8h.html#a8d2a2743f9e24ba875ac91d07fadf1d4',1,'GsgpCuda.h']]],
+  ['nrowtest_65',['nrowTest',['../_gsgp_cuda_8h.html#ab86d8b12b023b979a3961e312547803e',1,'GsgpCuda.h']]],
+  ['number_66',['number',['../structentry__.html#ae4b922df64892c78429f45d28ffa5826',1,'entry_']]],
+  ['numbergenerations_67',['numberGenerations',['../structcfg__.html#ae5cddb4078df26292437f80ca38ee4bf',1,'cfg_']]],
+  ['nvar_68',['nvar',['../_gsgp_cuda_8h.html#a659c08382b54340ded81efe36fcb6106',1,'GsgpCuda.h']]]
 ];

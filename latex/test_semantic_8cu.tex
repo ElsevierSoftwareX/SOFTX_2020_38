@@ -1,2 +1,306 @@
 \hypertarget{test_semantic_8cu}{}\doxysection{test\+Semantic.\+cu File Reference}
 \label{test_semantic_8cu}\index{testSemantic.cu@{testSemantic.cu}}
+
+
+This file contains the test for parallel interpreter that is used to decode the GP individuals.  
+
+
+{\ttfamily \#include \char`\"{}Gsgp\+Cuda.\+cpp\char`\"{}}\newline
+{\ttfamily \#include $<$cstdio$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$ostream$>$}\newline
+{\ttfamily \#include $<$stack$>$}\newline
+Include dependency graph for test\+Semantic.\+cu\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{test_semantic_8cu_a51021d5e1264e0851a87e3fe403eb20d}{individuals\+Test}} (float $\ast$case\+Test, int case\+Option, int depth, int num\+Indi, int \mbox{\hyperlink{_gsgp_cuda_8h_a659c08382b54340ded81efe36fcb6106}{nvar}})
+\begin{DoxyCompactList}\small\item\em This function initializes the individuals in the population depending on the case, they can be addition, subtraction, multiplication and division. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test_semantic_8cu_aa8ae90db1c53e9d06b6122fdb2264c1f}{reset\+Indi}} (float $\ast$case\+Test, int num\+Indi, int depth)
+\begin{DoxyCompactList}\small\item\em This function initializes all elements of the individual to 0. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test_semantic_8cu_ae94af3503fb3f0687ae5832b976f9bc9}{fitness\+Cases}} (float $\ast$fit\+Cases, int \mbox{\hyperlink{_gsgp_cuda_8h_a8d2a2743f9e24ba875ac91d07fadf1d4}{nrow}})
+\begin{DoxyCompactList}\small\item\em This function only generates an aptitude case to test individuals. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test_semantic_8cu_a58802765eea2a18311ad4839ec9c9db8}{imprime\+Individuals}} (float $\ast$case\+Test, int num\+Indi, int depth)
+\begin{DoxyCompactList}\small\item\em This function initializes with random numbers between 0 and 1 the semantics for initial population and random trees. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test_semantic_8cu_a32132b70a7cb7fd7bcae2d27bcd7a119}{imprime\+Semantic}} (float $\ast$dev\+Semantic\+Train\+Cases, int num\+Indi, int depth)
+\begin{DoxyCompactList}\small\item\em This function print the semantic of the initial population. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test_semantic_8cu_a437d4cfa4d8eaa8ec4b05856fcaad5cf}{clean}} (stack$<$ float $>$ as)
+\item 
+void \mbox{\hyperlink{test_semantic_8cu_ab59679eec3aae3bb786e04eaa2fbe50e}{intre\+Semantic\+C\+PU}} (float $\ast$initi\+Pop, float $\ast$Out\+Semantic, float $\ast$data, int \mbox{\hyperlink{_gsgp_cuda_8h_a8d2a2743f9e24ba875ac91d07fadf1d4}{nrow}}, int depth, int num\+Indi)
+\begin{DoxyCompactList}\small\item\em This function interprets the generated individuals in C\+PU to obtain their semantics. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{test_semantic_8cu_a7e1014d1be7b1bc646a919340d2f2deb}{test\+Semantic}} (float $\ast$host\+Semantic\+Train\+Cases, float $\ast$cpu\+Semantic, int num, int dept)
+\item 
+int \mbox{\hyperlink{test_semantic_8cu_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+This file contains the test for parallel interpreter that is used to decode the GP individuals. 
+
+\begin{DoxyDate}{Date}
+created on 05/12/2020 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{test_semantic_8cu_a437d4cfa4d8eaa8ec4b05856fcaad5cf}\label{test_semantic_8cu_a437d4cfa4d8eaa8ec4b05856fcaad5cf}} 
+\index{testSemantic.cu@{testSemantic.cu}!clean@{clean}}
+\index{clean@{clean}!testSemantic.cu@{testSemantic.cu}}
+\doxysubsubsection{\texorpdfstring{clean()}{clean()}}
+{\footnotesize\ttfamily void clean (\begin{DoxyParamCaption}\item[{stack$<$ float $>$}]{as }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{test_semantic_8cu_ae94af3503fb3f0687ae5832b976f9bc9}\label{test_semantic_8cu_ae94af3503fb3f0687ae5832b976f9bc9}} 
+\index{testSemantic.cu@{testSemantic.cu}!fitnessCases@{fitnessCases}}
+\index{fitnessCases@{fitnessCases}!testSemantic.cu@{testSemantic.cu}}
+\doxysubsubsection{\texorpdfstring{fitnessCases()}{fitnessCases()}}
+{\footnotesize\ttfamily void fitness\+Cases (\begin{DoxyParamCaption}\item[{float $\ast$}]{fit\+Cases,  }\item[{int}]{nrow }\end{DoxyParamCaption})}
+
+
+
+This function only generates an aptitude case to test individuals. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em float} & $\ast$fit\+Cases\+:This vector of pointers contains the instances to train or fitnes cases. \\
+\hline
+{\em int} & $\ast$nrow\+: This variable contains the number of fitness cases. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\begin{DoxyDate}{Date}
+05/12/2020 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
+\end{DoxyAuthor}
+\mbox{\Hypertarget{test_semantic_8cu_a58802765eea2a18311ad4839ec9c9db8}\label{test_semantic_8cu_a58802765eea2a18311ad4839ec9c9db8}} 
+\index{testSemantic.cu@{testSemantic.cu}!imprimeIndividuals@{imprimeIndividuals}}
+\index{imprimeIndividuals@{imprimeIndividuals}!testSemantic.cu@{testSemantic.cu}}
+\doxysubsubsection{\texorpdfstring{imprimeIndividuals()}{imprimeIndividuals()}}
+{\footnotesize\ttfamily void imprime\+Individuals (\begin{DoxyParamCaption}\item[{float $\ast$}]{case\+Test,  }\item[{int}]{num\+Indi,  }\item[{int}]{depth }\end{DoxyParamCaption})}
+
+
+
+This function initializes with random numbers between 0 and 1 the semantics for initial population and random trees. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em float} & $\ast$case\+Test\+:This vector of pointers contains the indivuduals of the initial population. \\
+\hline
+{\em int} & $\ast$num\+Indi\+: This variable contains the number of individuals that exist in the initial population. \\
+\hline
+{\em int} & $\ast$depth\+: Variable thar stores maximum depth for individuals. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\begin{DoxyDate}{Date}
+05/12/2020 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
+\end{DoxyAuthor}
+\mbox{\Hypertarget{test_semantic_8cu_a32132b70a7cb7fd7bcae2d27bcd7a119}\label{test_semantic_8cu_a32132b70a7cb7fd7bcae2d27bcd7a119}} 
+\index{testSemantic.cu@{testSemantic.cu}!imprimeSemantic@{imprimeSemantic}}
+\index{imprimeSemantic@{imprimeSemantic}!testSemantic.cu@{testSemantic.cu}}
+\doxysubsubsection{\texorpdfstring{imprimeSemantic()}{imprimeSemantic()}}
+{\footnotesize\ttfamily void imprime\+Semantic (\begin{DoxyParamCaption}\item[{float $\ast$}]{case\+Test,  }\item[{int}]{num\+Indi,  }\item[{int}]{depth }\end{DoxyParamCaption})}
+
+
+
+This function print the semantic of the initial population. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em float} & $\ast$dev\+Semantic\+Train\+Cases\+:This vector of pointers contains the semantic of the initial population. \\
+\hline
+{\em int} & $\ast$num\+Indi\+: This variable contains the number of individuals that exist in the initial population. \\
+\hline
+{\em int} & $\ast$depth\+: Variable thar stores maximum depth for individuals. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\begin{DoxyDate}{Date}
+05/12/2020 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
+\end{DoxyAuthor}
+\mbox{\Hypertarget{test_semantic_8cu_a51021d5e1264e0851a87e3fe403eb20d}\label{test_semantic_8cu_a51021d5e1264e0851a87e3fe403eb20d}} 
+\index{testSemantic.cu@{testSemantic.cu}!individualsTest@{individualsTest}}
+\index{individualsTest@{individualsTest}!testSemantic.cu@{testSemantic.cu}}
+\doxysubsubsection{\texorpdfstring{individualsTest()}{individualsTest()}}
+{\footnotesize\ttfamily void individuals\+Test (\begin{DoxyParamCaption}\item[{float $\ast$}]{case\+Test,  }\item[{int}]{case\+Option,  }\item[{int}]{depth,  }\item[{int}]{num\+Indi,  }\item[{int}]{nvar }\end{DoxyParamCaption})}
+
+
+
+This function initializes the individuals in the population depending on the case, they can be addition, subtraction, multiplication and division. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em float} & $\ast$case\+Test\+: vector pointers to store the individuals of the initial population \\
+\hline
+{\em int} & case\+Option\+: This variable determines what type of individuals will be generated \\
+\hline
+{\em int} & depth\+: Variable thar stores maximum depth for individuals \\
+\hline
+{\em int} & $\ast$num\+Indi\+: This variable contains the number of individuals that exist in the initial population. \\
+\hline
+{\em int} & $\ast$nrow\+: This variable contains the number of fitness cases. \\
+\hline
+{\em int} & $\ast$nvar\+: This variable contains the number of variable in problem. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\begin{DoxyDate}{Date}
+05/12/2020 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
+\end{DoxyAuthor}
+\mbox{\Hypertarget{test_semantic_8cu_ab59679eec3aae3bb786e04eaa2fbe50e}\label{test_semantic_8cu_ab59679eec3aae3bb786e04eaa2fbe50e}} 
+\index{testSemantic.cu@{testSemantic.cu}!intreSemanticCPU@{intreSemanticCPU}}
+\index{intreSemanticCPU@{intreSemanticCPU}!testSemantic.cu@{testSemantic.cu}}
+\doxysubsubsection{\texorpdfstring{intreSemanticCPU()}{intreSemanticCPU()}}
+{\footnotesize\ttfamily void intre\+Semantic\+C\+PU (\begin{DoxyParamCaption}\item[{float $\ast$}]{initi\+Pop,  }\item[{float $\ast$}]{Out\+Semantic,  }\item[{float $\ast$}]{data,  }\item[{int}]{nrow,  }\item[{int}]{depth,  }\item[{int}]{num\+Indi }\end{DoxyParamCaption})}
+
+
+
+This function interprets the generated individuals in C\+PU to obtain their semantics. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em float} & $\ast$initi\+Pop\+: This vector pointers to store the individuals of the initial population. \\
+\hline
+{\em flot} & $\ast$\+Out\+Semantic\+: vector pointers to store the semantics of each individual in the population. \\
+\hline
+{\em float} & $\ast$data\+: This pointer vector containing training or test data. \\
+\hline
+{\em int} & $\ast$nrow\+: This variable contains the number of fitness cases. \\
+\hline
+{\em int} & depth\+: This variable thar stores maximum depth for individuals \\
+\hline
+{\em int} & num\+Indi\+: This variable contains the number of individuals that exist in the initial population. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\begin{DoxyDate}{Date}
+05/12/2020 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
+\end{DoxyAuthor}
+\mbox{\Hypertarget{test_semantic_8cu_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{test_semantic_8cu_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{testSemantic.cu@{testSemantic.cu}!main@{main}}
+\index{main@{main}!testSemantic.cu@{testSemantic.cu}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+$<$ initialization of the seed for the generation of random numbers
+
+$<$ select a G\+PU device
+
+$<$ variable that stores maximum depth for individuals
+
+$<$ size of the population, number of candidate solutions
+
+$<$ variable containing the number of rows (instances) of the training dataset
+
+$<$ variable that stores size in bytes for initial population
+
+$<$ variable that stores size in bytes of the number of individuals in the initial population
+
+$<$ variable that stores size in bytes for initial population
+
+$<$ variable that stores the size in bytes of semantics for the entire population with training data
+
+$<$ variable that stores the size in bytes of fitness cases
+
+$<$ variables that store the execution configuration for a kernel in the G\+PU
+
+$<$ heuristic function used to choose a good block size is to aim at high occupancy
+
+$<$ round up according to array size
+
+$<$ allocate space on the C\+PU for the host\+Semantic\+Train\+Cases
+
+$<$ allocate space on the C\+PU for the cpu\+Semantics
+
+$<$ allocate space on the G\+PU for the dev\+Semantic\+Train\+Cases
+
+$<$ allocate space on the G\+PU for the case\+Test
+
+$<$ allocate space on the G\+PU for the dev\+Case\+Test
+
+$<$ allocate space on the C\+PU for the training\+Test
+
+$<$ allocate space on the C\+PU for the devtraining\+Test
+
+$<$ auxiliary pointer vectors for the interpreter and calculate the semantics for the populations and assignment in the G\+PU
+
+$<$ allocate space on the G\+PU for the u\+Push\+Genes
+
+$<$ allocate space on the C\+PU for the u\+Stack\+Ind
+
+$<$This function only generates an aptitude case to test individuals.$>$
+
+$<$ This instruction makes a copy of a vector of pointers from C\+PU to G\+PU.
+
+$<$This function initializes the individuals in the population depending on the case, they can be addition, subtraction, multiplication and division.$>$
+
+$<$This function that decodes each individual and evaluates it over all fitness cases,$>$
+
+$<$ This instruction makes a copy of a vector of pointers from C\+PU to G\+PU.
+
+$<$ The Compute\+Semantics kernel is an interpreter, that decodes each individual and evaluates it over all fitness cases,$>$
+
+$<$ This instruction makes a copy of a vector of pointers from G\+PU to C\+PU.
+
+$<$This function initializes all elements of the individual to 0.$>$
+
+$<$This function determines and compares if the semantics on G\+PU and C\+PU are identical.$>$
+
+$<$ all device allocations are removed\mbox{\Hypertarget{test_semantic_8cu_aa8ae90db1c53e9d06b6122fdb2264c1f}\label{test_semantic_8cu_aa8ae90db1c53e9d06b6122fdb2264c1f}} 
+\index{testSemantic.cu@{testSemantic.cu}!resetIndi@{resetIndi}}
+\index{resetIndi@{resetIndi}!testSemantic.cu@{testSemantic.cu}}
+\doxysubsubsection{\texorpdfstring{resetIndi()}{resetIndi()}}
+{\footnotesize\ttfamily void reset\+Indi (\begin{DoxyParamCaption}\item[{float $\ast$}]{case\+Test,  }\item[{int}]{num\+Indi,  }\item[{int}]{depth }\end{DoxyParamCaption})}
+
+
+
+This function initializes all elements of the individual to 0. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em float} & $\ast$case\+Test\+: This vector of pointers contains the semantics of the initial population or random trees as the case may be. \\
+\hline
+{\em int} & $\ast$num\+Indi\+: This variable contains the number of individuals that exist in the initial population. \\
+\hline
+{\em int} & $\ast$depth\+: Variable thar stores maximum depth for individuals. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\begin{DoxyDate}{Date}
+05/12/2020 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
+\end{DoxyAuthor}
+\mbox{\Hypertarget{test_semantic_8cu_a7e1014d1be7b1bc646a919340d2f2deb}\label{test_semantic_8cu_a7e1014d1be7b1bc646a919340d2f2deb}} 
+\index{testSemantic.cu@{testSemantic.cu}!testSemantic@{testSemantic}}
+\index{testSemantic@{testSemantic}!testSemantic.cu@{testSemantic.cu}}
+\doxysubsubsection{\texorpdfstring{testSemantic()}{testSemantic()}}
+{\footnotesize\ttfamily void test\+Semantic (\begin{DoxyParamCaption}\item[{float $\ast$}]{host\+Semantic\+Train\+Cases,  }\item[{float $\ast$}]{cpu\+Semantic,  }\item[{int}]{num,  }\item[{int}]{dept }\end{DoxyParamCaption})}
+

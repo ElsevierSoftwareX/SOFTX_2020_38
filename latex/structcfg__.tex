@@ -7,11 +7,15 @@
 \doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-int \mbox{\hyperlink{structcfg___a4025a2ada86fcea97c896e67fc41b44f}{max\+Number\+Generations}}
+int \mbox{\hyperlink{structcfg___ae5cddb4078df26292437f80ca38ee4bf}{number\+Generations}}
 \item 
 int \mbox{\hyperlink{structcfg___ae8d24427036d34b3a7d21d7a59ff05ed}{population\+Size}}
 \item 
-int \mbox{\hyperlink{structcfg___a7f1046b639b1e6307d10949a2bf5ed35}{max\+Depth}}
+int \mbox{\hyperlink{structcfg___adbdabc3252d5facd9badac22a1018945}{max\+Individual\+Length}}
+\item 
+float \mbox{\hyperlink{structcfg___a77eb2b026556fc697d2b519be796d3a9}{function\+Ratio}}
+\item 
+float \mbox{\hyperlink{structcfg___aef2786e84be5d644575dc082fe0173cf}{variable\+Ratio}}
 \item 
 int \mbox{\hyperlink{structcfg___ae24c1b4a8ab9fe8571ccf931748fa4d3}{max\+Random\+Constant}}
 \item 
@@ -19,43 +23,24 @@ char \mbox{\hyperlink{structcfg___a7eaaeb784b7b8455ac58cadcc244efd8}{log\+Path}}
 \end{DoxyCompactItemize}
 
 
-\doxysubsection{Detailed Description}
-
-
-Definition at line 107 of file Gsgp\+Cuda.\+h.
-
-
-
 \doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{structcfg___a77eb2b026556fc697d2b519be796d3a9}\label{structcfg___a77eb2b026556fc697d2b519be796d3a9}} 
+\index{cfg\_@{cfg\_}!functionRatio@{functionRatio}}
+\index{functionRatio@{functionRatio}!cfg\_@{cfg\_}}
+\doxysubsubsection{\texorpdfstring{functionRatio}{functionRatio}}
+{\footnotesize\ttfamily float cfg\+\_\+\+::function\+Ratio}
+
 \mbox{\Hypertarget{structcfg___a7eaaeb784b7b8455ac58cadcc244efd8}\label{structcfg___a7eaaeb784b7b8455ac58cadcc244efd8}} 
 \index{cfg\_@{cfg\_}!logPath@{logPath}}
 \index{logPath@{logPath}!cfg\_@{cfg\_}}
 \doxysubsubsection{\texorpdfstring{logPath}{logPath}}
 {\footnotesize\ttfamily char cfg\+\_\+\+::log\+Path\mbox{[}100\mbox{]}}
 
-
-
-Definition at line 112 of file Gsgp\+Cuda.\+h.
-
-\mbox{\Hypertarget{structcfg___a7f1046b639b1e6307d10949a2bf5ed35}\label{structcfg___a7f1046b639b1e6307d10949a2bf5ed35}} 
-\index{cfg\_@{cfg\_}!maxDepth@{maxDepth}}
-\index{maxDepth@{maxDepth}!cfg\_@{cfg\_}}
-\doxysubsubsection{\texorpdfstring{maxDepth}{maxDepth}}
-{\footnotesize\ttfamily int cfg\+\_\+\+::max\+Depth}
-
-maximum depth of a newly created individual 
-
-Definition at line 110 of file Gsgp\+Cuda.\+h.
-
-\mbox{\Hypertarget{structcfg___a4025a2ada86fcea97c896e67fc41b44f}\label{structcfg___a4025a2ada86fcea97c896e67fc41b44f}} 
-\index{cfg\_@{cfg\_}!maxNumberGenerations@{maxNumberGenerations}}
-\index{maxNumberGenerations@{maxNumberGenerations}!cfg\_@{cfg\_}}
-\doxysubsubsection{\texorpdfstring{maxNumberGenerations}{maxNumberGenerations}}
-{\footnotesize\ttfamily int cfg\+\_\+\+::max\+Number\+Generations}
-
-number of generations of the G\+S\+GP algorithm 
-
-Definition at line 108 of file Gsgp\+Cuda.\+h.
+\mbox{\Hypertarget{structcfg___adbdabc3252d5facd9badac22a1018945}\label{structcfg___adbdabc3252d5facd9badac22a1018945}} 
+\index{cfg\_@{cfg\_}!maxIndividualLength@{maxIndividualLength}}
+\index{maxIndividualLength@{maxIndividualLength}!cfg\_@{cfg\_}}
+\doxysubsubsection{\texorpdfstring{maxIndividualLength}{maxIndividualLength}}
+{\footnotesize\ttfamily int cfg\+\_\+\+::max\+Individual\+Length}
 
 \mbox{\Hypertarget{structcfg___ae24c1b4a8ab9fe8571ccf931748fa4d3}\label{structcfg___ae24c1b4a8ab9fe8571ccf931748fa4d3}} 
 \index{cfg\_@{cfg\_}!maxRandomConstant@{maxRandomConstant}}
@@ -63,9 +48,11 @@ Definition at line 108 of file Gsgp\+Cuda.\+h.
 \doxysubsubsection{\texorpdfstring{maxRandomConstant}{maxRandomConstant}}
 {\footnotesize\ttfamily int cfg\+\_\+\+::max\+Random\+Constant}
 
-
-
-Definition at line 111 of file Gsgp\+Cuda.\+h.
+\mbox{\Hypertarget{structcfg___ae5cddb4078df26292437f80ca38ee4bf}\label{structcfg___ae5cddb4078df26292437f80ca38ee4bf}} 
+\index{cfg\_@{cfg\_}!numberGenerations@{numberGenerations}}
+\index{numberGenerations@{numberGenerations}!cfg\_@{cfg\_}}
+\doxysubsubsection{\texorpdfstring{numberGenerations}{numberGenerations}}
+{\footnotesize\ttfamily int cfg\+\_\+\+::number\+Generations}
 
 \mbox{\Hypertarget{structcfg___ae8d24427036d34b3a7d21d7a59ff05ed}\label{structcfg___ae8d24427036d34b3a7d21d7a59ff05ed}} 
 \index{cfg\_@{cfg\_}!populationSize@{populationSize}}
@@ -73,9 +60,11 @@ Definition at line 111 of file Gsgp\+Cuda.\+h.
 \doxysubsubsection{\texorpdfstring{populationSize}{populationSize}}
 {\footnotesize\ttfamily int cfg\+\_\+\+::population\+Size}
 
-size of the population, number of candidate solutions 
-
-Definition at line 109 of file Gsgp\+Cuda.\+h.
+\mbox{\Hypertarget{structcfg___aef2786e84be5d644575dc082fe0173cf}\label{structcfg___aef2786e84be5d644575dc082fe0173cf}} 
+\index{cfg\_@{cfg\_}!variableRatio@{variableRatio}}
+\index{variableRatio@{variableRatio}!cfg\_@{cfg\_}}
+\doxysubsubsection{\texorpdfstring{variableRatio}{variableRatio}}
+{\footnotesize\ttfamily float cfg\+\_\+\+::variable\+Ratio}
 
 
 

@@ -1,2 +1,286 @@
 \hypertarget{gsm_test_8cu}{}\doxysection{gsm\+Test.\+cu File Reference}
 \label{gsm_test_8cu}\index{gsmTest.cu@{gsmTest.cu}}
+{\ttfamily \#include \char`\"{}Gsgp\+Cuda.\+cpp\char`\"{}}\newline
+{\ttfamily \#include $<$cstdio$>$}\newline
+{\ttfamily \#include $<$cstdlib$>$}\newline
+{\ttfamily \#include $<$ostream$>$}\newline
+{\ttfamily \#include $<$stack$>$}\newline
+Include dependency graph for gsm\+Test.\+cu\+:
+% FIG 0
+\doxysubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{gsm_test_8cu_af6dbb904da0749afa81efc8d36b891a5}{frand}}()~((double) rand() / (R\+A\+N\+D\+\_\+\+M\+AX))
+\begin{DoxyCompactList}\small\item\em Macro used to generate a random number. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{gsm_test_8cu_a1512f3435f9492efeb3f7367b9f1b571}{example\+Semantics}} (float $\ast$semantic, int size\+Individuals, int \mbox{\hyperlink{_gsgp_cuda_8h_a8d2a2743f9e24ba875ac91d07fadf1d4}{nrow}})
+\begin{DoxyCompactList}\small\item\em This function initializes with random numbers between 0 and 1 the semantics for initial population and random trees. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{gsm_test_8cu_a2f0995fd0bd4f8449b26524e0c38f00b}{print\+Semantics}} (float $\ast$semantic, int size\+Individuals\+Indi, int \mbox{\hyperlink{_gsgp_cuda_8h_a8d2a2743f9e24ba875ac91d07fadf1d4}{nrow}})
+\begin{DoxyCompactList}\small\item\em This function only prints the semantic values that exist in the pointer vectors it receives. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{gsm_test_8cu_a63dc5c56f4e0ae5adc0560e7876ea5ca}{oms\+C\+PU}} (float $\ast$initial\+Pop\+Semantic, float $\ast$random\+Trees\+Semantic, float $\ast$new\+Offspring\+Semantic, int size\+Population, int \mbox{\hyperlink{_gsgp_cuda_8h_a8d2a2743f9e24ba875ac91d07fadf1d4}{nrow}}, double ms, float $\ast$index)
+\begin{DoxyCompactList}\small\item\em The G\+SM operator is basically a vector addition operation, that can be performed independently for each semantic element S\+Ti,j. However, it is necessary to select the semantics of two random trees R u and R v , and a random mutation step ms. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{gsm_test_8cu_aae7b81b486be77d36f57372d8eb3c4fc}{test\+Semantic}} (float $\ast$cpu\+Semantic, float $\ast$gpu\+Semantic, int size\+Individuals, int \mbox{\hyperlink{_gsgp_cuda_8h_a8d2a2743f9e24ba875ac91d07fadf1d4}{nrow}})
+\begin{DoxyCompactList}\small\item\em This function compares the semantics obtained in the G\+PU against a semantics obtained in the C\+PU to verify that the operations within the kernel executed in the G\+PU are correct. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{gsm_test_8cu_ae66f6b31b5ad750f1fe042a706a4e3d4}{main}} ()
+\begin{DoxyCompactList}\small\item\em This file contains the test for the kernel that initializes the individuals on G\+PU. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Macro Definition Documentation}
+\mbox{\Hypertarget{gsm_test_8cu_af6dbb904da0749afa81efc8d36b891a5}\label{gsm_test_8cu_af6dbb904da0749afa81efc8d36b891a5}} 
+\index{gsmTest.cu@{gsmTest.cu}!frand@{frand}}
+\index{frand@{frand}!gsmTest.cu@{gsmTest.cu}}
+\doxysubsubsection{\texorpdfstring{frand}{frand}}
+{\footnotesize\ttfamily \#define frand(\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})~((double) rand() / (R\+A\+N\+D\+\_\+\+M\+AX))}
+
+
+
+Macro used to generate a random number. 
+
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{gsm_test_8cu_a1512f3435f9492efeb3f7367b9f1b571}\label{gsm_test_8cu_a1512f3435f9492efeb3f7367b9f1b571}} 
+\index{gsmTest.cu@{gsmTest.cu}!exampleSemantics@{exampleSemantics}}
+\index{exampleSemantics@{exampleSemantics}!gsmTest.cu@{gsmTest.cu}}
+\doxysubsubsection{\texorpdfstring{exampleSemantics()}{exampleSemantics()}}
+{\footnotesize\ttfamily void example\+Semantics (\begin{DoxyParamCaption}\item[{float $\ast$}]{semantic,  }\item[{int}]{size\+Individuals,  }\item[{int}]{nrow }\end{DoxyParamCaption})}
+
+
+
+This function initializes with random numbers between 0 and 1 the semantics for initial population and random trees. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em float} & $\ast$semantic\+:This vector of pointers contains the semantics of the initial population or random trees as the case may be. \\
+\hline
+{\em int} & $\ast$size\+Individuals\+: This variable contains the number of individuals that exist in the initial population. \\
+\hline
+{\em int} & $\ast$nrow\+: This variable contains the number of fitness cases. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\begin{DoxyDate}{Date}
+05/12/2020 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
+\end{DoxyAuthor}
+\mbox{\Hypertarget{gsm_test_8cu_ae66f6b31b5ad750f1fe042a706a4e3d4}\label{gsm_test_8cu_ae66f6b31b5ad750f1fe042a706a4e3d4}} 
+\index{gsmTest.cu@{gsmTest.cu}!main@{main}}
+\index{main@{main}!gsmTest.cu@{gsmTest.cu}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This file contains the test for the kernel that initializes the individuals on G\+PU. 
+
+\begin{DoxyReturn}{Returns}
+int\+: 0 if the program ends without errors 
+\end{DoxyReturn}
+\begin{DoxyDate}{Date}
+5/12/2020 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+Jose Manuel Muñoz Contreras 
+\end{DoxyAuthor}
+$<$ initialization of the seed for the generation of random size\+Individualsbers
+
+$<$ select a G\+PU device
+
+$<$ size of the population, number of candidate solutions
+
+$<$ variable containing the number of rows (instances) of the training dataset
+
+$<$ variable that stores the size in bytes of semantics for the entire population with training data
+
+$<$ variable that stores training data elements
+
+$<$ variable that stores twice the size in bytes of an initial population to store random numbers
+
+$<$ variable storing twice the initial population of individuals to generate random positions
+
+$<$ variable that stores the size in bytes of the structure to store the mutation record
+
+$<$ This block contains the vectors of pointers to store the structure to keep track of mutation and survival and space allocation in the G\+PU
+
+$<$ This block contains the vectors of pointers to store the structure to keep track of mutation and survival and space allocation in the G\+PU
+
+$<$ variables that store the execution configuration for a kernel in the G\+PU
+
+$<$ heuristic function used to choose a good block size is to aim at high occupancy
+
+$<$ round up according to array size
+
+$<$ allocate space on the C\+PU for the cpu\+Semantic\+Initial\+Population
+
+$<$ allocate space on the C\+PU for the cpu\+Random\+Trees
+
+$<$ allocate space on the C\+PU for the cpu\+New\+Semantics\+Offsprings
+
+$<$ allocate space on the G\+PU for the host\+New\+Semantics\+Offsprings
+
+$<$ Invoke the function to initialize the random semantics for the initial population.
+
+$<$ Invoke the function print the random semantics for the initial population.
+
+$<$ Invoke the function to initialize the random values semantics for the random trees.
+
+$<$ Invoke the function print the random semantics for the the random trees.
+
+$<$ allocate space on the G\+PU for the gpu\+Semantic\+Initial\+Population
+
+$<$ allocate space on the G\+PU for the gpu\+Random\+Trees
+
+$<$ allocate space on the G\+PU for the gpu\+New\+Semantics\+Offsprings
+
+$<$ This instruction makes a copy of a vector of pointers from C\+PU to G\+PU.
+
+$<$ This instruction makes a copy of a vector of pointers from C\+PU to G\+PU.
+
+$<$ C\+U\+DA\textquotesingle{}s random number library uses curand\+State\+\_\+t to keep track of the seed value we will store a random state for every thread
+
+$<$ allocate space on the G\+PU for the random states
+
+$<$ heuristic function used to choose a good block size is to aim at high occupancy
+
+$<$ round up according to array size
+
+$<$ invoke the G\+PU to initialize all of the random states
+
+$<$ vector pointers to save random positions of random trees and allocation in G\+PU
+
+$<$ heuristic function used to choose a good block size is to aim at high occupancy
+
+$<$ round up according to array size
+
+$<$ heuristic function used to choose a good block size is to aim at high occupancy
+
+$<$ round up according to array size
+
+$<$ geometric semantic mutation with semantic train
+
+$<$ This instruction makes a copy of a vector of pointers from C\+PU to G\+PU.
+
+$<$ all device allocations are removed\mbox{\Hypertarget{gsm_test_8cu_a63dc5c56f4e0ae5adc0560e7876ea5ca}\label{gsm_test_8cu_a63dc5c56f4e0ae5adc0560e7876ea5ca}} 
+\index{gsmTest.cu@{gsmTest.cu}!omsCPU@{omsCPU}}
+\index{omsCPU@{omsCPU}!gsmTest.cu@{gsmTest.cu}}
+\doxysubsubsection{\texorpdfstring{omsCPU()}{omsCPU()}}
+{\footnotesize\ttfamily void oms\+C\+PU (\begin{DoxyParamCaption}\item[{float $\ast$}]{initial\+Pop\+Semantic,  }\item[{float $\ast$}]{random\+Trees\+Semantic,  }\item[{float $\ast$}]{new\+Offspring\+Semantic,  }\item[{int}]{size\+Population,  }\item[{int}]{nrow,  }\item[{double}]{ms,  }\item[{float $\ast$}]{index }\end{DoxyParamCaption})}
+
+
+
+The G\+SM operator is basically a vector addition operation, that can be performed independently for each semantic element S\+Ti,j. However, it is necessary to select the semantics of two random trees R u and R v , and a random mutation step ms. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em float} & $\ast$initial\+Pop\+Semantic\+: This vector of pointers contains the semantics of the initial population \\
+\hline
+{\em float} & $\ast$random\+Trees\+Semantic\+: This vector of pointers contains the semantics of the random trees \\
+\hline
+{\em float} & $\ast$new\+Offspring\+Semantic\+: This vector of pointers will store the semantics of the new offspring \\
+\hline
+{\em int} & size\+Population\+: This variable contains the number of individuals that the population has \\
+\hline
+{\em int} & nrow\+: Variable containing the number of rows (instances) of the training dataset \\
+\hline
+{\em double} & ms\+: This variable stores a random value that causes a disturbance in the sematics of an individual \\
+\hline
+{\em int} & generation\+: Number of generation \\
+\hline
+{\em float} & $\ast$index\+Random\+Trees\+: This pointer stores the indexes randomly for mutation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\begin{DoxyDate}{Date}
+05/12/2020 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
+\end{DoxyAuthor}
+\mbox{\Hypertarget{gsm_test_8cu_a2f0995fd0bd4f8449b26524e0c38f00b}\label{gsm_test_8cu_a2f0995fd0bd4f8449b26524e0c38f00b}} 
+\index{gsmTest.cu@{gsmTest.cu}!printSemantics@{printSemantics}}
+\index{printSemantics@{printSemantics}!gsmTest.cu@{gsmTest.cu}}
+\doxysubsubsection{\texorpdfstring{printSemantics()}{printSemantics()}}
+{\footnotesize\ttfamily void print\+Semantics (\begin{DoxyParamCaption}\item[{float $\ast$}]{semantic,  }\item[{int}]{size\+Individuals\+Indi,  }\item[{int}]{nrow }\end{DoxyParamCaption})}
+
+
+
+This function only prints the semantic values that exist in the pointer vectors it receives. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em float} & $\ast$semantic\+:This vector of pointers contains the semantics of the initial population or random trees as the case may be. \\
+\hline
+{\em int} & $\ast$size\+Individuals\+: This variable contains the number of individuals that exist in the initial population. \\
+\hline
+{\em int} & $\ast$nrow\+: This variable contains the number of fitness cases. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\begin{DoxyDate}{Date}
+05/12/2020 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
+\end{DoxyAuthor}
+\mbox{\Hypertarget{gsm_test_8cu_aae7b81b486be77d36f57372d8eb3c4fc}\label{gsm_test_8cu_aae7b81b486be77d36f57372d8eb3c4fc}} 
+\index{gsmTest.cu@{gsmTest.cu}!testSemantic@{testSemantic}}
+\index{testSemantic@{testSemantic}!gsmTest.cu@{gsmTest.cu}}
+\doxysubsubsection{\texorpdfstring{testSemantic()}{testSemantic()}}
+{\footnotesize\ttfamily void test\+Semantic (\begin{DoxyParamCaption}\item[{float $\ast$}]{host\+Semantic\+Train\+Cases,  }\item[{float $\ast$}]{cpu\+Semantic,  }\item[{int}]{num,  }\item[{int}]{dept }\end{DoxyParamCaption})}
+
+
+
+This function compares the semantics obtained in the G\+PU against a semantics obtained in the C\+PU to verify that the operations within the kernel executed in the G\+PU are correct. 
+
+This function determines and compares if the semantics on G\+PU and C\+PU are identical.
+
+
+\begin{DoxyParams}{Parameters}
+{\em float} & $\ast$cpu\+Semantic\+:This vector of pointers contains the semantics of the new individuals resulting from the initial population and random trees, calculated in C\+PU. \\
+\hline
+{\em float} & $\ast$gpu\+Semantic\+:This vector of pointers contains the semantics of the new individuals resulting from the initial population and random trees, calculated in G\+PU. \\
+\hline
+{\em int} & $\ast$size\+Individuals\+: This variable contains the number of individuals that exist in the initial population. \\
+\hline
+{\em int} & $\ast$nrow\+: This variable contains the number of fitness cases. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\begin{DoxyDate}{Date}
+05/12/2020 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em float} & $\ast$host\+Semantic\+Train\+Cases\+:This vector of pointers contains the semantics of the initial population or random trees as the case may be. \\
+\hline
+{\em float} & $\ast$cpu\+Semantic\+:This vector of pointers contains the semantics of the initial population or random trees as the case may be. \\
+\hline
+{\em int} & num\+: This variable contains the number of individuals that exist in the initial population. \\
+\hline
+{\em int} & depth\+: This variable thar stores maximum depth for individuals \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+void 
+\end{DoxyReturn}
+\begin{DoxyDate}{Date}
+05/12/2020 
+\end{DoxyDate}
+\begin{DoxyAuthor}{Author}
+José Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith 
+\end{DoxyAuthor}
