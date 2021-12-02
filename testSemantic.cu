@@ -214,7 +214,7 @@ void intreSemanticCPU(float *initiPop, float *OutSemantic, float *data, int nrow
         out=0;
         clean(a);
         a = stack<float>();
-        clear(a);
+        clean(a);
         if (a.empty()) {
             for (int i=0; i<numIndi; i++) {
                 for (int j=0; j<depth; j++) {

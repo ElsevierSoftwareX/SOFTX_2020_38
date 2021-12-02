@@ -818,9 +818,7 @@ int main(int argc, char **argv){
         
         evaluate_data(pathTrace, config.numberGenerations, hSemanticCases, hSemanticRandomTrees, OUT, config.logPath, nrowTest, nvar);
         
-        printf("Validacion \n");
-        validacion(outFile, unssenDataTestTarget,  nrowTest);
-    
+        
         free(unssenDataTest); 
         free(unssenDataTestTarget);
         free(initPopulation);
