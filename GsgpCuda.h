@@ -16,6 +16,7 @@
 
 //! \file   GsgpCuda.h
 //! \brief  File containing the definition of the modules (kernels) used to create the population of individuals, evaluate them, the search operator and read data
+//! \author Jose Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 //! \date   created on 25/01/2020
 
 #include <iostream>
@@ -125,63 +126,167 @@ int nvar;
    float mutStep;     /*!< variable containing the mutation step of the semantic mutation */
 }entry;
 
+/// variable that stores the length (number of genes) of an individual
 int individualLength = 0;
 
-int gridSize,minGridSize,blockSize; /*!< Variables that store the execution configuration for a kernel in the GPU*/
+/// Variable that configures the mesh for launching a kernel with maximum resources.
+int gridSize;
 
-int sizeMemIndividuals; /*!< Variable that stores the size of the memory for the individuals in the GPU*/
+/// Variable that configures the mesh for launching a kernel with minimum resources.
+int minGridSize;
 
-int sizeMemPopulation; /*!< Variable that stores the size of the memory for the population in the GPU*/
+/// Variable that store the number of thread for execution configuration for a kernel in the GPU
+int blockSize; 
 
-int twoSizeMemPopulation; /*!< Variable that stores twice the size in bytes of an initial population to store random numbers*/
+/// Variable that stores the size of the memory for the individuals in the GPU
+int sizeMemIndividuals; 
 
-long int twoSizePopulation; /*!< Variable storing twice the initial population of individuals to generate random positions*/
+/// Variable that stores the size of the memory for the individuals in the GPU
+int sizeMemPopulation; 
 
-long int sizeMemSemanticTrain; /*!< Variable that stores the size in bytes of semantics for the entire population with training data*/
+/// Variable that stores the size in bytes of the memory for the initial population to store random numbers
+int twoSizeMemPopulation; 
 
-long int sizeMemSemanticTest; /*!< Variable that stores the size in bytes of semantics for the entire population with test data*/
+/// Variable storing twice the initial population of individuals to generate random positions
+long int twoSizePopulation; 
 
-long int sizeMemDataTrain; /*!< Variable that stores the size in bytes the size of the training data*/
+/// Variable that stores the size in bytes of semantics for the entire population with training data
+long int sizeMemSemanticTrain;
 
-long int sizeMemDataTest = sizeof(float)*(nrowTest*nvar); /*!< Variable that stores the size in bytes the size of the test data*/
+/// Variable that stores the size in bytes of semantics for the entire population with test data
+long int sizeMemSemanticTest; 
 
-long int sizeElementsSemanticTest = (config.populationSize*nrowTest); /*!< Variable that stores test data elements*/
+/// Variable that stores the size in bytes of semantics for the entire population with training data
+long int sizeMemDataTrain;
 
-int gridSizeTest,minGridSizeTest,blockSizeTest; /*!< Variables that store the execution configuration for a kernel in the GPU*/
+/// Variable that stores the size in bytes of semantics for the entire population with test data
+long int sizeMemDataTest = sizeof(float)*(nrowTest*nvar);
 
-long int sizeElementsSemanticTrain ; /*!< Variable that stores training data elements*/
+/// Variable that stores the size in bytes of semantics for the entire population with test data
+long int sizeElementsSemanticTest = (config.populationSize*nrowTest);
 
-long int vectorTracesMem ; /*!< Variable that stores the size in bytes of the structure to store the survival record*/
+/// Variables that store the execution configuration for a kernel in the GPU
+int gridSizeTest;
 
-float *dInitialPopulation,*dRandomTrees,*hInitialPopulation,*hRandomTrees;  /*!< This block contains the vectors of pointers to store the population and random trees and space allocation in the GPU*/
+/// Variables that store the execution configuration for a kernel in the GPU
+int minGridSizeTest;
 
-entry  *vectorTraces; /*!< This block contains the vectors of pointers to store the structure to keep track of mutation and survival and space allocation in the GPU*/
+/// Variables that store the execution configuration for a kernel in the GPU
+int blockSizeTest;
 
-float *uDataTrain, *uDataTrainTarget, *uDataTest, *uDataTestTarget, *uFitTest ;  /*!< this block contains the pointer of vectors for the input data and target values ​​and assignment in the GPU*/
+/// Variable that stores training data elements
+long int sizeElementsSemanticTrain ; 
 
-float *uFit; /*!< pointers of vectors of training and test fitness values at generation g and assignment in the GPU*/
+/// Variable that stores the size in bytes of the structure to store the survival record
+long int vectorTracesMem ; 
 
-float *uSemanticTrainCases, *uSemanticRandomTrees, *uSemanticTestRandomTrees, *uSemanticTestCases; /*!< pointer of vectors that contain the semantics of an individual in the population, calculated with the training set and test in generation g and its allocation in GPU*/
+/// Variable contains the vectors of pointers to store the population and space allocation in the GPU
+float *dInitialPopulation;
 
-float *uStackInd; /*!< auxiliary pointer vectors for the interpreter and calculate the semantics for the populations and assignment in the GPU*/
+/// Variable contains the vectors of pointers to store the random trees and space allocation in the GPU
+float *dRandomTrees;
 
-int   *uPushGenes;
+/// Variable contains the vectors of pointers to store the population and space allocation in the CPU
+float *hInitialPopulation;
 
-int result,incx1=1,indexBestIndividual; /*!< this section makes use of the isamin de cublas function to determine the position of the best individual*/
+/// Variable contains the vectors of pointers to store the random trees and space allocation in the CPU
+float *hRandomTrees;
 
-float *indexRandomTrees; /*!< vector of pointers to save random positions of random trees and allocation in GPU*/   
+/// This block contains the vectors of pointers to store the structure to keep track of mutation and survival and space allocation in the GPU
+entry  *vectorTraces;
 
-float *mutationStep; /*!< vector of pointers to save the mutation step of the semantic mutation and allocation in GPU*/
+/// Variable for the input data train and assignment in the GPU
+float *uDataTrain;
 
-/*!< this section makes use of the isamin de cublas function to determine the position of the best individual of the new population*/
-int resultBestOffspring,incxBestOffspring=1,indexBestOffspring;
+/// Variable for the input target train values ​​and assignment in the GPU
+float *uDataTrainTarget;
 
-/*!< this section makes use of the isamin de cublas function to determine the position of the worst individual of the new population*/
-int resultWorst,incxWorst=1,indexWorstOffspring;
+/// Variable for the input data test and assignment in the GPU
+float *uDataTest;
 
-float *tempSemantic,*tempFitnes,*tempSemanticTest,*tempFitnesTest; /*!< temporal Variables to perform the movement of pointers in survival*/
+/// Variable for the input target test values ​​and assignment in the GPU
+float *uDataTestTarget;
 
-float *uSemanticTrainCasesNew, *uFitNew, *uSemanticTestCasesNew, *uFitTestNew; /*!< vectors that contain the semantics of an individual in the population, calculated in the training and test set in the g + 1 generation and its allocation in GPU*/
+/// pointers of vectors of test fitness values at generation g and assignment in the GPU
+float *uFitTest;
+
+/// pointers of vectors of train fitness values at generation g and assignment in the GPU
+float *uFit;
+
+/// pointer of vectors that contain the semantics of an individual in the population, calculated with the training set and test in generation g and its allocation in GPU
+float *uSemanticTrainCases;
+
+/// pointer of vectors that contain the semantics of an individual in the population, calculated with the training set and test in generation g and its allocation in GPU
+float *uSemanticRandomTrees;
+
+/// pointer of vectors that contain the semantics of an individual in the population, calculated with the testing set and test in generation g and its allocation in GPU
+float *uSemanticTestRandomTrees;
+
+/// pointer of vectors that contain the semantics of an individual in the population, calculated with the testing set and test in generation g and its allocation in GPU
+float *uSemanticTestCases;
+
+/// auxiliary pointer vectors for the interpreter and calculate the semantics for the populations and assignment in the GPU
+float *uStackInd;
+
+/// auxiliary pointer vectors for the interpreter and calculate the semantics for the populations and assignment in the GPU
+int *uPushGenes;
+
+/// this section makes use of the isamin de cublas function to determine the position of the best individual
+int result;
+
+/// this section makes use of the isamin de cublas function to determine the position of the best individual
+int incx1=1;
+
+/// this section makes use of the isamin de cublas function to determine the position of the best individual
+int indexBestIndividual;
+
+/// vector of pointers to save random positions of random trees and allocation in GPU
+float *indexRandomTrees;
+
+/// vector of pointers to save the mutation step of the semantic mutation and allocation in GPU
+float *mutationStep;
+
+/// this variable makes use of the isamin de cublas function to determine the position of the best individual of the new population
+int resultBestOffspring;
+
+/// this variable makes use of the isamin de cublas function to determine the position of the best individual of the new population
+int incxBestOffspring=1;
+
+/// this variable makes use of the isamin de cublas function to determine the position of the best individual of the new population
+int indexBestOffspring;
+
+/// this variable makes use of the isamin de cublas function to determine the position of the worst individual of the new population
+int resultWorst;
+
+/// this variable makes use of the isamin de cublas function to determine the position of the worst individual of the new population
+int incxWorst=1;
+
+/// this variable makes use of the isamin de cublas function to determine the position of the worst individual of the new population
+int indexWorstOffspring;
+
+/// temporal Variables to perform the movement of pointers in survival
+float *tempSemantic;
+
+/// temporal Variables to perform the movement of pointers in survival
+float *tempFitnes;
+
+/// temporal Variables to perform the movement of pointers in survival
+float *tempSemanticTest;
+
+/// temporal Variables to perform the movement of pointers in survival
+float *tempFitnesTest;
+
+/// vectors that contain the semantics of an individual in the population, calculated in the training set in the g + 1 generation and its allocation in GPU
+float *uSemanticTrainCasesNew;
+
+/// vectors that contain the semantics of an individual in the population, calculated in the training set in the g + 1 generation and its allocation in GPU
+float *uFitNew;
+
+/// vectors that contain the semantics of an individual in the population, calculated in the test set in the g + 1 generation and its allocation in GPU
+float *uSemanticTestCasesNew;
+
+/// vectors that contain the semantics of an individual in the population, calculated in the test set in the g + 1 generation and its allocation in GPU
+float *uFitTestNew;
 
 /*!
 * \fn       __global__ void init(unsigned int seed, curandState_t* states)

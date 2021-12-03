@@ -818,7 +818,6 @@ int main(int argc, char **argv){
         
         evaluate_data(pathTrace, config.numberGenerations, hSemanticCases, hSemanticRandomTrees, OUT, config.logPath, nrowTest, nvar);
         
-        
         free(unssenDataTest); 
         free(unssenDataTestTarget);
         free(initPopulation);

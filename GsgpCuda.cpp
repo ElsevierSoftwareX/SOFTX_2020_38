@@ -17,6 +17,7 @@
 
 //! \file     GsgpCuda.cpp
 //! \brief    file containing the definition of the modules (kernels) used to create the population of individuals, evaluate them, the search operator and read data
+//! \author   Jose Manuel Muñoz Contreras, Leonardo Trujillo, Daniel E. Hernandez, Perla Juárez Smith
 //! \date     created on 25/01/2020
 
 #include "GsgpCuda.h"
