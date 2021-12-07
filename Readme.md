@@ -35,7 +35,7 @@ nvcc -std=c++11 -O0 GsgpCuda.cu -o GsgpCuda.x  -lcublas
 
 To run gsgpCuda it is necessary to add a name for the output file generation, as shown in the example.
 
-./GsgpCuda.x -train_data <train_file_name>.txt -test_data <test_file_name>.txt -output_model <model_name>
+./GsgpCuda.x -train_data <train_file_name>.txt [-test_data <test_file_name>.txt] -output_model <model_name>
 
 <train_file_name>.txt: This file must contain the training data used to compute fitness and given in a format of space-seperated values with n columns, where the first n-1 columns are the input features and the last column is the target variable.
 <test_file_name>.txt:  This file must contain the test data used to evalaute the best individual at each generation. this data does not influence the evolutionary/training process, and must be given in the same format as the training data.
